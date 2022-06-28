@@ -3,21 +3,49 @@ package com.camping.service;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.camping.dao.MemberDao;
 import com.camping.dto.GoodsDto;
+import com.camping.dto.MemberDto;
 
 @Service
 public class MemberService {
 
 	@Autowired
 	MemberDao mdao;
+	
+	@Autowired
+	private HttpServletRequest request;
+	
+	@Autowired
+	private HttpSession session;
+	
+	// 회원가입
+	public ModelAndView memberJoin(MemberDto member, RedirectAttributes ra) {
+		System.out.println("MemberService.memberJoin()호출");
+		ModelAndView mav = new ModelAndView();
+		
+		// 주소 처리
+		member.setMaddr( member.getMpostcode()+"_"+member.getMaddress()+"_"+member.getMdetailaddr()+"_"+member.getMextraaddr() );
+		
+		// 이메일 처리 
+		member.setMemail( member.getMemailid()+"@"+member.getMemaildomain() );
+		
+		int joinResult = mdao.insertMemberJoin(member);
+		ra.addFlashAttribute("msg", "회원가입이 완료되었습니다!");
+		mav.setViewName("redirect:/");
+		return mav;
+	}	
 	
 	// 회원가입 아이디 중복 체크
 	public String memberIdCheck(String inputId) {
@@ -166,7 +194,11 @@ public class MemberService {
 		 */
 		
 		return null;
-	}	
+	}
+
+	
+
+	
 	
 }
 

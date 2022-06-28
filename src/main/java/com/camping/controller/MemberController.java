@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.camping.dto.MemberDto;
 import com.camping.service.MemberService;
@@ -30,6 +31,16 @@ public class MemberController {
 	  public String memberLoginForm() {
 		System.out.println("회원가입 페이지 이동");
 		return "member/MemberJoinForm";
+	}
+	
+	// 회원가입
+	@RequestMapping(value = "/memberJoin")
+	public ModelAndView memberJoin(MemberDto member, RedirectAttributes ra){
+		System.out.println("회원가입 요청");
+		System.out.println(member);
+		
+		mav = msvc.memberJoin(member, ra);
+		return mav;
 	}
 	
 	// 로그인 페이지 이동

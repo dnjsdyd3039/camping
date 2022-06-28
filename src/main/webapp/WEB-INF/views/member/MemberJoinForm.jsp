@@ -15,8 +15,8 @@
 	href="${pageContext.request.contextPath }/resources/member/img/favicon.ico">
 
 <!-- CSS here -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/member/css/bootstrap.min.css">
+<link rel="stylesheet" 
+    href="${pageContext.request.contextPath }/resources/member/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/member/css/owl.carousel.min.css">
 <link rel="stylesheet"

@@ -46,67 +46,74 @@ public class MemberService {
 		
 		ArrayList<GoodsDto> goodsList = new ArrayList<GoodsDto>();
 		
-		for(int i = 0; i < goodsList_div.size()-2; i++) { // 카테고리별
+		for(int i = 0; i < goodsList_div.size()-2; i++) { 
 			String detailUrl ="https://www.ocamall.com" + goodsList_div.eq(i).attr("href");
-			System.out.println(detailUrl);
+//			System.out.println(detailUrl);
 			GoodsDto goodsInfo = new GoodsDto();	
 			// 상품코드 생성
 			// 테이블 조회 앞에 두글자 자르고 최대값 + 1
 			
-			//1. 캠핑코드 생성 (select )
-			String maxgdCode = mdao.MaxGdcode(); // 캠핑 코드 최대값 생성
-		    String gcode = "GD";
-					if(maxgdCode == null) {
-						gcode = gcode + "001";
-					} else {
-						//maxMvCode = maxMvCode.split("MV")[1];
-						maxgdCode = maxgdCode.substring(2); // 'MV002' >> '002' 
-						int codeNum = Integer.parseInt(maxgdCode) + 1;
-						if( codeNum < 10) {
-							gcode = gcode + "00" + codeNum;
-						} else if(codeNum < 100) {
-							gcode = gcode + "0" + codeNum;
-						} else {
-							gcode = gcode + codeNum;
-						}
-					}
-					goodsInfo.setGcode(gcode);
-//					goodsList.get(i).setGcode(gcode);
 					//2 insert 캠핑 정보 등록
 					
 					// 카데고리 입력 (태그위치 따서)
 					Document categorydoc = Jsoup.connect(detailUrl).get();
-					Elements gcategory = categorydoc.select("div.bcate");
-				//	System.out.println("gcategory :"+ gcategory.size());
 					
-					Elements ggg = categorydoc.select("div.textWrap p.companyName");
-					Elements aaa = categorydoc.select("div.imgWrap img.MS_prod_img_m");
-					Elements ccc = categorydoc.select("div.fr strong.sellPrice");
+//		            Elements gcategoryList = categorydoc.select("div.cate-wrap div.bcate"); // 카테고리
+		            String gcategory = categorydoc.select("div.cate-wrap div.bcate").text();		            
+					Elements ggg = categorydoc.select("div.textWrap p.companyName"); // 상품이름
+					Elements aaa = categorydoc.select("div.imgWrap img.MS_prod_img_m"); // 상품이미지
+					Elements ccc = categorydoc.select("div.fr strong.sellPrice"); // 상품가격
 					// 상품별
 					for(int z = 0; z < ggg.size(); z++) {
-					//	Elements goods = categorydoc.select("div.item-wrap");	
+						
+						//1. 캠핑코드 생성 (select )
+						String maxgdCode = mdao.MaxGdcode(); // 캠핑 코드 최대값 생성
+						String gcode = "GD";
+						if(maxgdCode == null) {
+							gcode = gcode + "001";
+						} else {
+							//maxMvCode = maxMvCode.split("MV")[1];
+							maxgdCode = maxgdCode.substring(2); // 'MV002' >> '002' 
+							int codeNum = Integer.parseInt(maxgdCode) + 1;
+							if( codeNum < 10) {
+								gcode = gcode + "00" + codeNum;
+							} else if(codeNum < 100) {
+								gcode = gcode + "0" + codeNum;
+							} else {
+								gcode = gcode + codeNum;
+							}
+						}
+						goodsInfo.setGcode(gcode);
+//					goodsList.get(i).setGcode(gcode);
+						
+						// 카테고리
+//						String gcategory = gcategoryList.select("div.bcate").eq(z).text();
+					    goodsInfo.setGcategory(gcategory);
+//					    System.out.println("gcategory :"+gcategory);
+											
 						// 이름
 						String gname = ggg.select("p.companyName").eq(z).text();
 					    goodsInfo.setGname(gname);
-					    System.out.println("gname :"+gname);
+//					    System.out.println("gname :"+gname);
 					    
 						// 상품정보(이미지)
 					    String gimage = aaa.select("img.MS_prod_img_m").eq(z).attr("src");
 					    goodsInfo.setGimage(gimage);
-					    System.out.println("gimage :"+gimage);
+//					    System.out.println("gimage :"+gimage);
 					    
 					    // 상품가격
 					    String gprice = ccc.select("strong.sellPrice").eq(z).text();
-					    goodsInfo.setGname(gprice);
-					    System.out.println("gprice :"+gprice);
+					    goodsInfo.setGprice(gprice);
+//					    System.out.println("gprice :"+gprice);
 					    
+					    goodsList.add(goodsInfo);
 					}
 					// 상품상세정보(이미지)	>> goodsListWrap안에있는 링크를 detailUrl2 >> 해당 주소의 이미지위치 따서
 					//															>> 여러장이면 @붙여서 나누자
   
 			}
 			
-		
+		System.out.println(goodsList);
 		//Elements goodsList_ol = goodsList_div.eq(0).select("ul");
 		
 		/*

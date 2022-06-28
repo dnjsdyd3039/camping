@@ -24,12 +24,6 @@ public class MemberService {
 	@Autowired
 	MemberDao mdao;
 	
-	@Autowired
-	private HttpServletRequest request;
-	
-	@Autowired
-	private HttpSession session;
-	
 	// 회원가입
 	public ModelAndView memberJoin(MemberDto member, RedirectAttributes ra) {
 		System.out.println("MemberService.memberJoin()호출");

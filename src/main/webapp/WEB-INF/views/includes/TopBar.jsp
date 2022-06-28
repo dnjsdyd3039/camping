@@ -2,71 +2,47 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- Navbar Start -->
-<div class="container-fluid nav-bar bg-transparent">
-<script src="https://kit.fontawesome.com/a6d95e01a9.js" crossorigin="anonymous"></script>
-	<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-		<a href="main"
-			class="navbar-brand d-flex align-items-center text-center">
-			<div class="icon p-2 me-2">
-				<img class="img-fluid"
-					src="${pageContext.request.contextPath }/resources/img/public_FILL0_wght400_GRAD0_opsz48.png"
-					alt="Icon" style="width: 30px; height: 30px;">
-			</div>
-			<h1 class="m-0 text-primary">캐밀리!</h1>
-		</a>
-		<button type="button" class="navbar-toggler" data-bs-toggle="collapse"
-			data-bs-target="#navbarCollapse">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarCollapse">
-			<div class="navbar-nav ms-auto">
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle"
-						data-bs-toggle="dropdown">여행지</a>
-					<div class="dropdown-menu rounded-0 m-0">
-						<a href="property-list.html" class="dropdown-item">관광지</a> <a
-							href="property-agent.html" class="dropdown-item">축제</a> <a
-							href="property-type.html" class="dropdown-item">숙박</a> <a
-							href="property-agent.html" class="dropdown-item">음식</a>
-					</div>
-				</div>
-				<!-- <a href="about.html" class="nav-item nav-link">About</a> -->
-				<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle"
-						data-bs-toggle="dropdown">게시판</a>
-					<div class="dropdown-menu rounded-0 m-0">
-						<a href="property-list.html" class="dropdown-item">여행후기</a> <a
-							href="property-type.html" class="dropdown-item">음식후기</a> <a
-							href="property-agent.html" class="dropdown-item">숙박후기</a> <a
-							href="property-agent.html" class="dropdown-item">축제후기</a>
-					</div>
-				</div>
-				<div class="nav-item dropdown">
-					<a href="campingShow" class="nav-link dropdown-toggle"
-						data-bs-toggle="dropdown">캠핑용품</a>
-					<div class="dropdown-menu rounded-0 m-0">
-						<a href="campingShow" class="dropdown-item">스토리즈</a> <a
-							href="404.html" class="dropdown-item">기타용품</a>
-					</div>
-				</div>
-				<a href="contact.html" class="nav-item nav-link">Contact</a>
-			</div>
-			<!-- 회원가입 아이콘 -->
-			<div class="nav-item dropdown">
-				<a href="#" class="nav-link dropdown-toggle"
-					data-bs-toggle="dropdown"><i class="fa-regular fa-circle-user"
-					style="font-size: 30px;"></i></a>
-				<div class="dropdown-menu rounded-0 m-0">
-				
-					<a href="memberInfo" class="dropdown-item">내정보</a> 
-					
-					<a href="memberJoinForm" class="dropdown-item">회원가입</a> 
-					<a href="memberLoginForm" class="dropdown-item">로그인</a>
-				</div>
-			</div>
+<!-- main-menu Start -->
+		<header class="top-area">
+			<div class="header-area">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="logo">
+								<a href="index.html">
+									케밀<span>리</span>
+								</a>
+							</div><!-- /.logo-->
+						</div><!-- /.col-->
+						<div class="col-sm-10">
+							<div class="main-menu">
+							
+								<!-- Brand and toggle get grouped for better mobile display -->
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+										<i class="fa fa-bars"></i>
+									</button><!-- / button-->
+								</div><!-- /.navbar-header-->
+								<div class="collapse navbar-collapse">		  
+									<ul class="nav navbar-nav navbar-right">
+										<li class="smooth-menu"><a href="#home">home</a></li>
+										<li class="smooth-menu"><a href="#gallery">Destination</a></li>
+										<li class="smooth-menu"><a href="#pack">Packages </a></li>
+										<li class="smooth-menu"><a href="#spo">Special Offers</a></li>
+										<li class="smooth-menu"><a href="#blog">blog</a></li>
+										<li class="smooth-menu"><a href="#subs">subscription</a></li>
+										<li>
+											<a class="book-btn" href="memberJoinForm">book now
+											</a>
+										</li><!--/.project-btn--> 
+									</ul>
+								</div><!-- /.navbar-collapse -->
+							</div><!-- /.main-menu-->
+						</div><!-- /.col-->
+					</div><!-- /.row -->
+					<div class="home-border"></div><!-- /.home-border-->
+				</div><!-- /.container-->
+			</div><!-- /.header-area -->
 
-		</div>
-	</nav>
-</div>
-<!-- Navbar End -->
+		</header><!-- /.top-area-->
+		<!-- main-menu End -->

@@ -2,236 +2,123 @@
 <%@ page session="true"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
-<meta charset="utf-8">
-<title>Makaan - Real Estate HTML Template</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> App landing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath }/resources/member/img/favicon.ico">
 
-<!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
-
-<!-- Google Web Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
-	rel="stylesheet">
-
-<!-- Icon Font Stylesheet -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-	rel="stylesheet">
-
-<!-- Libraries Stylesheet -->
-<link
-	href="${pageContext.request.contextPath }/resources/lib/animate/animate.min.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath }/resources/lib/owlcarousel/assets/owl.carousel.min.css"
-	rel="stylesheet">
-
-<!-- Customized Bootstrap Stylesheet -->
-<link
-	href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Template Stylesheet -->
-<link href="${pageContext.request.contextPath }/resources/css/style.css"
-	rel="stylesheet">
-
-<!-- fontawesome Stylesheet -->
-<script src="https://kit.fontawesome.com/d70fa0d402.js"
-	crossorigin="anonymous"></script>
+	<!-- CSS here -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/slicknav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/flaticon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/progressbar_barfiller.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/gijgo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/animate.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/animated-headline.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/magnific-popup.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/themify-icons.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/slick.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/nice-select.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/member/css/style.css">
 </head>
-
 <body>
-	<div class="container-xxl bg-white p-0">
-
-		<!-- Topbar -->
-		<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
-		<!-- End of Topbar -->
-
-		<section class="vh-100" style="background-color: #EFFDF5;">
-			<div class="container h-100">
-				<div
-					class="row d-flex justify-content-center align-items-center h-100">
-					<div class="col-lg-12 col-xl-11">
-						<div class="card text-black" style="border-radius: 25px;">
-							<div class="card-body p-md-5">
-								<div class="row justify-content-center">
-									<div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
-										<p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">로그인</p>
-
-										<form class="mx-1 mx-md-4">
-
-											<div class="d-flex flex-row align-items-center mb-4">
-												<div class="form-outline flex-fill mb-0">
-													<i class="fas fa-user fa-lg me-1 fa-fw"></i> <label
-														class="form-label" for="form3Example1c">아이디</label> <input
-														type="text" id="form3Example1c" class="form-control" />
-												</div>
-											</div>
-
-											<div class="d-flex flex-row align-items-center mb-4">
-												<div class="form-outline flex-fill mb-0">
-													<i class="fas fa-envelope fa-lg me-1 fa-fw"></i> <label
-														class="form-label" for="form3Example3c">비밀번호</label> <input
-														type="password" id="form3Example3c" class="form-control" />
-												</div>
-											</div>
-
-											<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-												<button type="button" class="btn btn-primary btn-lg">로그인</button>
-											</div>
-
-											<div class="text-center">
-												<p>
-													회원이 아니신가요? <a href="memberJoinForm">회원가입</a>
-												</p>
-												<p>or sign up with:</p>
-												<button type="button" class="btn btn-link btn-floating mx-1">
-													<i class="fab fa-facebook-f"></i>
-												</button>
-
-												<button type="button" class="btn btn-link btn-floating mx-1">
-													<i class="fab fa-google"></i>
-												</button>
-
-												<button type="button" class="btn btn-link btn-floating mx-1">
-													<i class="fab fa-twitter"></i>
-												</button>
-
-												<button type="button" class="btn btn-link btn-floating mx-1">
-													<i class="fab fa-github"></i>
-												</button>
-											</div>
-
-										</form>
-									</div>
-									<div
-										class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-										<img
-											src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-											class="img-fluid" alt="Sample image">
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+    <!-- ? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="${pageContext.request.contextPath }/resources/member/img/logo/loder.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start-->
 
 
+<main class="login-body" data-vide-bg="${pageContext.request.contextPath }/resources/member/img/login-bg.mp4">
+    <!-- Login Admin -->
+    <form class="form-default" action="login-bg.mp4" method="POST">
+        
+        <div class="login-form">
+            <!-- logo-login -->
+            <div class="logo-login">
+                <a href="index.html"><img src="${pageContext.request.contextPath }/resources/member/img/logo/loder.png" alt=""></a>
+            </div>
+            <h2>Login Here</h2>
+            <div class="form-input">
+                <label for="name">Email</label>
+                <input  type="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-input">
+                <label for="name">Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-input pt-30">
+                <input type="submit" name="submit" value="login">
+            </div>
+            
+            <!-- Forget Password -->
+            <a href="#" class="forget">Forget Password</a>
+            <!-- Forget Password -->
+            <a href="register.html" class="registration">Registration</a>
+        </div>
+    </form>
+    <!-- /end login form -->
+</main>
 
 
+    <script src="${pageContext.request.contextPath }/resources/member/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.slicknav.min.js"></script>
 
-	</div>
-	<!-- Footer Start -->
-	<div
-		class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn"
-		data-wow-delay="0.1s">
-		<div class="container py-5">
-			<div class="row g-5">
-				<div class="col-lg-3 col-md-6">
-					<h5 class="text-white mb-4">Get In Touch</h5>
-					<p class="mb-2">
-						<i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA
-					</p>
-					<p class="mb-2">
-						<i class="fa fa-phone-alt me-3"></i>+012 345 67890
-					</p>
-					<p class="mb-2">
-						<i class="fa fa-envelope me-3"></i>info@example.com
-					</p>
-					<div class="d-flex pt-2">
-						<a class="btn btn-outline-light btn-social" href=""><i
-							class="fab fa-twitter"></i></a> <a
-							class="btn btn-outline-light btn-social" href=""><i
-							class="fab fa-facebook-f"></i></a> <a
-							class="btn btn-outline-light btn-social" href=""><i
-							class="fab fa-youtube"></i></a> <a
-							class="btn btn-outline-light btn-social" href=""><i
-							class="fab fa-linkedin-in"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<h5 class="text-white mb-4">Quick Links</h5>
-					<a class="btn btn-link text-white-50" href="">About Us</a> <a
-						class="btn btn-link text-white-50" href="">Contact Us</a> <a
-						class="btn btn-link text-white-50" href="">Our Services</a> <a
-						class="btn btn-link text-white-50" href="">Privacy Policy</a> <a
-						class="btn btn-link text-white-50" href="">Terms & Condition</a>
-				</div>
+    <!-- Video bg -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.vide.js"></script>
 
-				<div class="col-lg-3 col-md-6">
-					<h5 class="text-white mb-4">Newsletter</h5>
-					<p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-					<div class="position-relative mx-auto" style="max-width: 400px;">
-						<input class="form-control bg-transparent w-100 py-3 ps-4 pe-5"
-							type="text" placeholder="Your email">
-						<button type="button"
-							class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="copyright">
-				<div class="row">
-					<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-						&copy; <a class="border-bottom" href="#">Your Site Name</a>, All
-						Right Reserved.
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/animated.headline.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.magnific-popup.js"></script>
 
-						<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-						Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML
-							Codex</a>
-					</div>
-					<div class="col-md-6 text-center text-md-end">
-						<div class="footer-menu">
-							<a href="">Home</a> <a href="">Cookies</a> <a href="">Help</a> <a
-								href="">FQAs</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Footer End -->
+    <!-- Date Picker -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/gijgo.min.js"></script>
+    <!-- Nice-select, sticky -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.nice-select.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.sticky.js"></script>
+    <!-- Progress -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.barfiller.js"></script>
+    
+    <!-- counter , waypoint,Hover Direction -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.countdown.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/hover-direction-snake.min.js"></script>
 
-
-	<!-- Back to Top -->
-	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
-		class="bi bi-arrow-up"></i></a>
-
-
-	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/lib/wow/wow.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/lib/easing/easing.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/lib/waypoints/waypoints.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/lib/owlcarousel/owl.carousel.min.js"></script>
-
-	<!-- Template Javascript -->
-	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-
-</body>
-
+    <!-- contact js -->
+    <script src="${pageContext.request.contextPath }/resources/member/js/contact.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.form.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/mail-script.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/jquery.ajaxchimp.min.js"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="${pageContext.request.contextPath }/resources/member/js/plugins.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/member/js/main.js"></script>
+    
+    </body>
 </html>

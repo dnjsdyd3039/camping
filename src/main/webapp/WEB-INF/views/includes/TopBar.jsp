@@ -9,7 +9,7 @@
 					<div class="row">
 						<div class="col-sm-2">
 							<div class="logo">
-								<a href="index.html">
+								<a href="${pageContext.request.contextPath }/">
 									케밀<span>리</span>
 								</a>
 							</div><!-- /.logo-->
@@ -32,7 +32,7 @@
 										<li class="smooth-menu"><a href="#blog">blog</a></li>
 										<li class="smooth-menu"><a href="#subs">subscription</a></li>
 										<li>
-											<a class="book-btn" href="memberJoinForm">book now
+											<a class="book-btn" href="memberJoinForm">회원가입
 											</a>
 										</li><!--/.project-btn--> 
 									</ul>

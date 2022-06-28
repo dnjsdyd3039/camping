@@ -7,12 +7,12 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>App landing</title>
+<title>회원가입</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="manifest" href="site.webmanifest">
 <link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath }/resources/member/img/favicon.ico">
+	href="${pageContext.request.contextPath }/resources/member/img/favicon.ico"> 
 
 <!-- CSS here -->
 <link rel="stylesheet"
@@ -43,9 +43,10 @@
 	href="${pageContext.request.contextPath }/resources/member/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/member/css/style.css">
+	
 </head>
 <!-- ? Preloader Start -->
-<div id="preloader-active">
+ <div id="preloader-active">
 	<div class="preloader d-flex align-items-center justify-content-center">
 		<div class="preloader-inner position-relative">
 			<div class="preloader-circle"></div>
@@ -56,12 +57,10 @@
 			</div>
 		</div>
 	</div>
-</div>
-<!-- Preloader Start-->
+</div>  
 
 
 <!-- Register -->
-
 <main class="login-body"
 	data-vide-bg="${pageContext.request.contextPath }/resources/member/img/login-bg.mp4">
 	<!-- Login Admin -->
@@ -69,34 +68,42 @@
 
 		<div class="login-form">
 			<!-- logo-login -->
-			<div class="logo-login">
+			<%-- <div class="logo-login">
 				<a href="index.html"><img
 					src="${pageContext.request.contextPath }/resources/member/img/logo/loder.png"
 					alt=""></a>
-			</div>
-			<h2>Registration Here</h2>
+			</div> --%>
+			<h2>회원가입</h2>
 
 			<div class="form-input">
-				<label for="name">Full name</label> <input type="text" name="name"
-					placeholder="Full name">
+				<label for="name">아이디</label> <input type="text" name="name"
+					placeholder="아이디">
 			</div>
 			<div class="form-input">
-				<label for="name">Email Address</label> <input type="email"
-					name="email" placeholder="Email Address">
+				<label for="name">비밀번호</label> <input type="text"
+					name="email" placeholder="비밀번호">
 			</div>
 			<div class="form-input">
-				<label for="name">Password</label> <input type="password"
-					name="password" placeholder="Password">
+				<label for="name">이름</label> <input type="text"
+					name="password" placeholder="이름">
 			</div>
 			<div class="form-input">
-				<label for="name">Confirm Password</label> <input type="password"
-					name="password" placeholder="Confirm Password">
+				<label for="name">이메일</label> <input type="email"
+					name="password" placeholder="이메일">
+			</div>
+			<div class="form-input">
+				<label for="name">생년월일</label> <input type="date"
+					name="password">
+			</div>
+			<div class="form-input">
+				<label for="name">주소</label> <input type="text"
+					name="password">
 			</div>
 			<div class="form-input pt-30">
-				<input type="submit" name="submit" value="Registration">
+				<input type="submit" name="submit" value="회원가입">
 			</div>
 			<!-- Forget Password -->
-			<a href="memberLoginForm" class="registration">login</a>
+			<a href="memberLoginForm" class="registration">로그인</a>
 		</div>
 	</form>
 	<!-- /end login form -->

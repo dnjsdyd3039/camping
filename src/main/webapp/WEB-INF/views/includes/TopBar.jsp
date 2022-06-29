@@ -36,10 +36,10 @@
 					<a href="#" class="nav-link dropdown-toggle"
 						data-bs-toggle="dropdown">게시판</a>
 					<div class="dropdown-menu rounded-0 m-0">
-						<a href="property-list.html" class="dropdown-item">여행후기</a> <a
-							href="property-type.html" class="dropdown-item">음식후기</a> <a
-							href="property-agent.html" class="dropdown-item">숙박후기</a> <a
-							href="property-agent.html" class="dropdown-item">축제후기</a>
+						<a href="property-list.html" class="dropdown-item">공지게시판</a> <a
+							href="boardList" class="dropdown-item">자유게시판</a> <a
+							href="property-agent.html" class="dropdown-item">질문게시판</a> <a
+							href="property-agent.html" class="dropdown-item">건의게시판</a>
 					</div>
 				</div>
 				<div class="nav-item dropdown">

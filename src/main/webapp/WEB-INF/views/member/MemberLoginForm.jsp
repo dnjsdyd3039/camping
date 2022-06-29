@@ -77,7 +77,7 @@
 												<div class="form-outline flex-fill mb-0">
 													<i class="fas fa-user fa-lg me-1 fa-fw"></i> <label
 														class="form-label" for="form3Example1c">아이디</label> <input
-														type="text" id="form3Example1c" class="form-control" />
+														type="text" id="inputMid" class="form-control" name="mid"/>
 												</div>
 											</div>
 
@@ -85,12 +85,12 @@
 												<div class="form-outline flex-fill mb-0">
 													<i class="fas fa-envelope fa-lg me-1 fa-fw"></i> <label
 														class="form-label" for="form3Example3c">비밀번호</label> <input
-														type="password" id="form3Example3c" class="form-control" />
+														type="password" id="inputMpw" class="form-control" name="mpw"/>
 												</div>
 											</div>
 
 											<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-												<button type="button" class="btn btn-primary btn-lg">로그인</button>
+												<button type="submit" class="btn btn-primary btn-lg">로그인</button>
 											</div>
 
 											<div class="text-center">
@@ -231,7 +231,15 @@
 
 	<!-- Template Javascript -->
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if( checkMsg.length > 0 ){
+			alert(checkMsg);
+		}
+	</script>
+	
 	<!-- 네이버 로그인 스크립트 -->
 	<script
 		src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
@@ -241,7 +249,7 @@
 	<script
 		src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
 		charset="utf-8"></script>
-
+	
 	<script>
 		var naverLogin = new naver.LoginWithNaverId({
 			clientId : "_w0UhJEgyVNiKPh_6u9m", //내 애플리케이션 정보에 cliendId를 입력해줍니다.

@@ -223,7 +223,8 @@ public class MemberService {
 				}
 				
 			System.out.println(goodsList);
-		
+			System.out.println(goodsList);
+			System.out.println(goodsList);
 		return null;
 	}	
 	

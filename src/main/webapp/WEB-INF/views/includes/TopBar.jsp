@@ -9,7 +9,8 @@
 			<div class="row">
 				<div class="col-sm-2">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath }/"> <span>캐밀리</span>
+						<a href="${pageContext.request.contextPath }/"> 
+						캐<span>밀리</span>
 						</a>
 					</div>
 					<!-- /.logo-->
@@ -34,7 +35,7 @@
 								<li class="smooth-menu"><a href="#pack">Packages </a></li>
 								<li class="smooth-menu"><a href="#spo">Special Offers</a></li>
 								<li class="smooth-menu"><a href="#blog">blog</a></li>
-								<li class="smooth-menu"><a href="#subs">subscription</a></li>
+								<li class="menu"><a href="campingShow">캠핑용품</a></li>
 								<li><a class="book-btn" href="memberJoinForm">회원가입 </a></li>
 								<!--/.project-btn-->
 							</ul>

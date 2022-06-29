@@ -30,7 +30,7 @@ public class MemberService {
 		ModelAndView mav = new ModelAndView();
 		
 		// 주소 처리
-		member.setMaddr( member.getMpostcode()+"_"+member.getMaddress()+"_"+member.getMdetailaddr()+"_"+member.getMextraaddr() );
+		member.setMaddr( member.getMpostcode()+"_"+member.getMaddress()+"_"+member.getMdetailAddr()+"_"+member.getMextraAddr() );
 		
 		// 이메일 처리 
 		member.setMemail( member.getMemailid()+"@"+member.getMemaildomain() );

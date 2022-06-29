@@ -19,8 +19,8 @@ public class MemberDto {
     
     private String maddress;      // 주소
     private String mpostcode;     // 우편번호
-    private String mextraaddr;    // 참고항목
-    private String mdetailaddr;   // 상세주소
+    private String mextraAddr;    // 참고항목
+    private String mdetailAddr;   // 상세주소
     
     private String memailid;       // 이메일아이디
     private String memaildomain;   // 이메일도메인

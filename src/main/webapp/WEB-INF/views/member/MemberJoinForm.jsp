@@ -43,7 +43,9 @@
 	href="${pageContext.request.contextPath }/resources/member/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/member/css/style.css">
-
+<!--style.css-->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/style.css" />
 </head>
 <!-- ? Preloader Start -->
 <div id="preloader-active">
@@ -98,6 +100,8 @@
 				<input type="text" id="emailid" name="memailid"> 
 				@ 
 				<input type="text" id="emaildomain" name="memaildomain"> 
+				<input type="button" class="btn" onclick="" value="이메일인증">
+				<input type="text" > 
 				<select	id="domainSelect">
 					<option value="">직접입력</option>
 					<option value="naver.com">네이버</option>
@@ -305,10 +309,10 @@
 				success : function(result){
 					console.log("result : " + result);
 					if( result == "OK" ){
-						$("#idCheckMsg").text("사용가능한 아이디!").css("color","green");
+						$("#idCheckMsg").text("사용가능한 아이디입니다!").css("color","green");
 						inputIdCheck = true;
 					} else {
-						$("#idCheckMsg").text("이미 사용중인 아이디!").css("color","red");
+						$("#idCheckMsg").text("이미 사용중인 아이디입니다!").css("color","red");
 						inputIdCheck = false;
 					}
 				}

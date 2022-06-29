@@ -22,4 +22,11 @@ SELECT MAX(GCODE)
 FROM GOODS
 </select>
 
+<select id="memberLogin" resultType="com.camping.dto.memberDto">
+SELECT MID, MPW, MNAME, MTEL, MEMAIL, TO_CHAR(MBIRTH, 'YYYY-MM-DD'), MADDR, MSTATE, MRANK
+FROM MEMBERS
+WHERE MID = #{mid} AND MPW = #{mpw}
+</select>
+
+
 </mapper>

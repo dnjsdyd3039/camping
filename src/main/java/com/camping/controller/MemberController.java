@@ -62,13 +62,22 @@ public class MemberController {
 		ModelAndView mav = msvc.memberJoin(member,ra);
 		return mav;
 	}
-	
-	
+		
 	// 로그인 페이지 이동
 	@RequestMapping (value ="/memberLoginForm")
 	  	public String MemberLoginForm() {
 		System.out.println("로그인 페이지 이동");
 		return "member/MemberLoginForm";
+	}
+	
+	// 로그인
+	@RequestMapping (value = "/memberLogin")
+		public ModelAndView memberLogin(MemberDto member, RedirectAttributes ra) {
+		System.out.println("로그인 요청");
+		System.out.println("loginId : " + member.getMid());
+		System.out.println("loginPw : " + member.getMpw());
+		ModelAndView mav = msvc.memberLogin(member, ra);
+		return mav;
 	}
 
 	// 내정보 페이지 이동

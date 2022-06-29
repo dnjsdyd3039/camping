@@ -1890,13 +1890,7 @@
 	<script
 		src="${pageContext.request.contextPath }/resources/assets/js/custom.js"></script>
 
-	<script type="text/javascript">
-		var checkMsg = '${msg}';
-		console.log(checkMsg.length);
-		if (checkMsg.length > 0) {
-			alert(checkMsg);
-		}
-	</script>
+
 </body>
 
 </html>

@@ -223,7 +223,7 @@ public class MemberService {
 				}
 				
 			System.out.println(goodsList);
-			System.out.println("테스트01");
+			
 		return null;
 	}	
 	

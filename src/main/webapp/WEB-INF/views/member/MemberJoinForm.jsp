@@ -161,11 +161,11 @@
 												</div>
 											</div>
 
+											<div class="form-group row">
 											<div class="col-12 mb-3 mb-sm-0">
 												<label for="inputMaddress" class="text-lg font-weight-bold">주소</label>
 												<div style="color: red; font-size: 13px" class="Np"></div>
 											</div>
-											<div class="form-group row">
 
 												<div class="col-sm-6 mb-3 mb-sm-0">
 													<input type="text" class="form-control form-control-user"

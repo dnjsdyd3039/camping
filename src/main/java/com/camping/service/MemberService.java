@@ -242,7 +242,9 @@ public class MemberService {
 			System.out.println(loginResult);
 			if(loginResult != null) {
 				String memberState  = loginResult.getMstate().substring(2);
-				if(memberState == "00") {
+				System.out.println(memberState);
+				int memberState2 = Integer.parseInt(memberState); 
+				if(memberState2 == 00) {
 					ra.addFlashAttribute("msg", "이용이 정지된 회원입니다.");
 					mav.setViewName("redirect:/memberLoginForm");
 				} else {
@@ -250,14 +252,24 @@ public class MemberService {
 					System.out.println("로그인 성공");
 					session.setAttribute("loginId", loginResult.getMid());
 					ra.addFlashAttribute("msg", "로그인 되었습니다");
-					mav.setViewName("redirect:/");
-					
+					mav.setViewName("redirect:/");					
 				}
 			} else {
 				// 로그인 실패
+				System.out.println("로그인 실패");
 				ra.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
 				mav.setViewName("redirect:/memberLoginForm");
 			}
+			return mav;
+		}
+		
+		// 로그아웃
+		public ModelAndView memberLogout(RedirectAttributes ra) {
+			System.out.println("MemberService.memberLogout() 호출");
+			ModelAndView mav = new ModelAndView();
+			session.invalidate();// session 초기화
+			ra.addFlashAttribute("msg", "로그아웃 되었습니다.");
+			mav.setViewName("redirect:/");
 			return mav;
 		}	
 	

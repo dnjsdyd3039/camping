@@ -58,11 +58,17 @@
 					data-bs-toggle="dropdown"><i class="fa-regular fa-circle-user"
 					style="font-size: 30px;"></i></a>
 				<div class="dropdown-menu rounded-0 m-0">
-				
-					<a href="memberInfo" class="dropdown-item">내정보</a> 
-					
-					<a href="memberJoinForm" class="dropdown-item">회원가입</a> 
-					<a href="memberLoginForm" class="dropdown-item">로그인</a>
+									
+					<c:choose>
+						<c:when test="${sessionScope.loginId == null}">
+							<a href="memberJoinForm" class="dropdown-item">회원가입</a> 
+							<a href="memberLoginForm" class="dropdown-item">로그인</a>
+						</c:when>
+						<c:otherwise>
+							<a href="memberInfo" class="dropdown-item">내정보</a> 
+							<a href="memberLogout" class="dropdown-item">로그아웃</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 

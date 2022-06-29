@@ -79,7 +79,14 @@ public class MemberController {
 		ModelAndView mav = msvc.memberLogin(member, ra);
 		return mav;
 	}
-
+	
+	// 로그아웃
+	@RequestMapping (value = "/memberLogout")
+		public ModelAndView memberLogout(RedirectAttributes ra) {
+		System.out.println("로그아웃 요청");
+		ModelAndView mav = msvc.memberLogout(ra);
+		return mav;
+	}
 	// 내정보 페이지 이동
 	@RequestMapping(value = "/memberInfo")
 		public String MemberInfo() {

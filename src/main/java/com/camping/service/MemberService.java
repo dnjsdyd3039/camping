@@ -89,6 +89,7 @@ public class MemberService {
 	                "<br>" + 
 	                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
 	        
+	        String num = Integer.toString(checkNum);
             
 	        try {
 	            MimeMessage message = mailSender.createMimeMessage();
@@ -99,13 +100,14 @@ public class MemberService {
 	            helper.setText(content,true);
 	            mailSender.send(message);
 	            System.out.println("메세지 전송 완료");
+	            return num;
+	            
 	        }catch(Exception e) {
 	            e.printStackTrace();
 	            System.out.println("메세지 전송 실패");
+	            return null;
 	        }
 	        
-	        String num = Integer.toString(checkNum);
-		return num;
 	}
 	
 		// 캠핑 용품 페이지 이동
@@ -192,6 +194,7 @@ public class MemberService {
 						    String gprice = ccc.select("strong.sellPrice").eq(z).text();
 						    goodsInfo.setGprice(gprice);
 //						    System.out.println("gprice :"+gprice);
+						    
 						    
 						  //1. 캠핑코드 생성 (select )
 						    String maxgdCode = mdao.MaxGdcode(); // 캠핑 코드 최대값 생성

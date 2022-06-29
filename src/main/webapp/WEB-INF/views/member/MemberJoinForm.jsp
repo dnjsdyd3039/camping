@@ -532,9 +532,13 @@ $(".mail_check_button").click(function(){
     	url : "mailCheck",
     	data : { "email" : email},
     	success :function(data){
-    		alert("인증번호가 전송되었습니다!");
     		console.log("data : " + data);
+    		if(data.length == 0){
+    			alert("인증번호 전송에 실패하였습니다!");
+    		} else{
+    		alert("인증번호가 전송되었습니다!");
     		checkNum = data;
+    		}
     		
 $("#inputCheckNum").focusout(function(){
           
@@ -550,19 +554,25 @@ $("#inputCheckNum").focusout(function(){
         checkEmail = "NO";
     }
     
+    if($("#inputCheckNum").val() == ""){
+    	$("#checkMsg").text("인증번호를 다시 확인해주세요.").css("color","red")
+    }
+    
+ 
+    
 });
     $("#emailid").change(function(){
     	console.log("이메일 변경");
     	checkNum = "";
     	checkEmail = "NO";
-    	$("#checkMsg").html("인증번호를 다시 확인해주세요.").css("color","red")
+    	$("#checkMsg").text("").css("color","red")
     })
     
     $("#emaildomain").change(function(){
     	console.log("이메일 변경");
     	checkNum = "";
     	checkEmail = "NO";
-    	$("#checkMsg").html("인증번호를 다시 확인해주세요.").css("color","red")
+    	$("#checkMsg").text("").css("color","red")
     })  
     	}
     	

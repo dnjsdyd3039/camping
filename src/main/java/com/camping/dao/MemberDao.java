@@ -12,6 +12,9 @@ public interface MemberDao {
 
 	// xml 캠핑 코드 최대값
 	String MaxGdcode();
+
+	// 로그인
+	MemberDto memberLogin(MemberDto member);
 	
 	
 	

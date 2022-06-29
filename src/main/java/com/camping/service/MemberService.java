@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,6 +30,9 @@ public class MemberService {
 
 	@Autowired
 	MemberDao mdao;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@Autowired
     private JavaMailSender mailSender;
@@ -225,7 +230,34 @@ public class MemberService {
 			System.out.println(goodsList);
 			
 		return null;
-	}	
+	}
+		
+		// 로그인
+		public ModelAndView memberLogin(MemberDto member, RedirectAttributes ra) {
+			System.out.println("MemberService.memberLogin() 호출");
+			MemberDto loginResult = mdao.memberLogin(member);
+			ModelAndView mav = new ModelAndView();
+			System.out.println(loginResult);
+			if(loginResult != null) {
+				String memberState  = loginResult.getMstate().substring(2);
+				if(memberState == "00") {
+					ra.addFlashAttribute("msg", "이용이 정지된 회원입니다.");
+					mav.setViewName("redirect:/memberLoginForm");
+				} else {
+				// 로그인 성공
+					System.out.println("로그인 성공");
+					session.setAttribute("loginId", loginResult.getMid());
+					ra.addFlashAttribute("msg", "로그인 되었습니다");
+					mav.setViewName("redirect:/");
+					
+				}
+			} else {
+				// 로그인 실패
+				ra.addFlashAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다");
+				mav.setViewName("redirect:/memberLoginForm");
+			}
+			return mav;
+		}	
 	
 }
 

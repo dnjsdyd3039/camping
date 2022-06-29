@@ -17,6 +17,7 @@ public class MemberDto {
     private int mkakaokey;        // 카카오 아이디키
     private String mnaverkey;     // 네이버 아이디키
     
+    
     private String maddress;      // 주소
     private String mpostcode;     // 우편번호
     private String mextraAddr;    // 참고항목

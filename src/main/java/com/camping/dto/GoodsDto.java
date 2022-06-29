@@ -13,4 +13,3 @@ public class GoodsDto {
   private String gcategory;   // 상품카테고리
   
 }
-

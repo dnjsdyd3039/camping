@@ -99,7 +99,11 @@
 								</ul>
 							</li>
 							<li>
-								<a href="product.html">게시판</a>
+								<a href="index.html">후기</a>
+								<ul class="sub-menu">
+									<li><a href="index.html">캠핑장 후기</a></li>
+									<li><a href="home-02.html">캠핑용품 후기</a></li>						
+								</ul>
 							</li>
 
 							<li class="label1" data-label1="hot">

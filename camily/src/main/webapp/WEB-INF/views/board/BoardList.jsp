@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -217,6 +220,7 @@
 							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
 								2
 							</a>
+						<a class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10" href="boardList">글작성</a> 
 						</div>
 					</div>
 				</div>

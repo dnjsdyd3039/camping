@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Blog</title>
+	<title>후기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -407,7 +407,7 @@
 							<div class="p-t-32">
 								<h4 class="p-b-15">
 									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										The Great Big List of Men’s Gifts for the Holidays 
+										The Great Big List of Menâs Gifts for the Holidays 
 									</a>
 								</h4>
 

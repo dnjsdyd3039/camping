@@ -70,13 +70,10 @@
 
 							<div class="p-t-32">
 								<h4 class="p-b-15">
-<<<<<<< HEAD
-									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										인천송도 국제 캠핑장 
-=======
+								
 									<a href="boardDetail" class="ltext-108 cl2 hov-cl1 trans-04">
-										8 Inspiring Ways to Wear Dresses in the Winter
->>>>>>> ing
+										인천송도 국제 캠핑장 
+									
 									</a>
 								</h4>
 
@@ -102,7 +99,7 @@
 									</span>
 
 									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
+										상세보기
 
 										<i class="fa fa-long-arrow-right m-l-9"></i>
 									</a>
@@ -167,7 +164,6 @@
 						<div class="p-b-63">
 							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
 								<img src="${pageContext.request.contextPath}/resources/images/blog-06.jpg" alt="IMG-BLOG">
-
 								<div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
 										16
@@ -225,11 +221,9 @@
 							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
 								2
 							</a>
-<<<<<<< HEAD
+
 						<a class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10" href="boardwrite">글작성</a> 
-=======
-						<a class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10" href="BoardWrite">글작성</a> 
->>>>>>> ing
+			
 						</div>
 					</div>	
 				</div>

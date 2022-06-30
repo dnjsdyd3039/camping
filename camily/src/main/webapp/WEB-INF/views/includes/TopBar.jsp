@@ -66,7 +66,7 @@
 							<li>
 								<a href="product.html">리뷰</a>
 								<ul class="sub-menu">
-									<li><a href="index.html">캠핑장 리뷰</a></li>
+									<li><a href="boardList">캠핑장 리뷰</a></li>
 									<li><a href="home-02.html">상품 리뷰</a></li>
 								</ul>
 							</li>
@@ -196,7 +196,14 @@
 					</span>
 				</li>
 				<li>
-					<a href="product.html">게시판</a>
+					<a href="index.html">리뷰</a>
+					<ul class="sub-menu-m">
+						<li><a href="boardList">캠핑장 리뷰</a></li>
+						<li><a href="home-02.html">캠핑용품 리뷰</a></li>
+					</ul>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
 				</li>
 
 				<li>

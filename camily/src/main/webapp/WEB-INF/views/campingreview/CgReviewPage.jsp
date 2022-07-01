@@ -55,7 +55,11 @@
 						<!-- item blog -->
 						<div class="p-b-63">						
 							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
+<<<<<<< HEAD
 							<a href="cgreviewdetailpage" class="hov-img0 how-pos5-parent">
+=======
+							<a href="cgreviewdetail" class="hov-img0 how-pos5-parent">
+>>>>>>> ing2
 								<img src="${pageContext.request.contextPath}/resources/images/캠핑1.jpg" alt="IMG-BLOG">	
 								<div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
@@ -71,7 +75,11 @@
 							<div class="p-t-32">
 								<h4 class="p-b-15">
 								
+<<<<<<< HEAD
 									<a href="cgreviewdetailpage" class="ltext-108 cl2 hov-cl1 trans-04">
+=======
+									<a href="cgreviewdetail" class="ltext-108 cl2 hov-cl1 trans-04">
+>>>>>>> ing2
 										인천송도 국제 캠핑장 
 									
 									</a>
@@ -100,7 +108,11 @@
 										</span>
 									</span>
 
+<<<<<<< HEAD
 									<a href="cgreviewdetailpage" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+=======
+									<a href="cgreviewdetail" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+>>>>>>> ing2
 										상세보기
 
 										<i class="fa fa-long-arrow-right m-l-9"></i>

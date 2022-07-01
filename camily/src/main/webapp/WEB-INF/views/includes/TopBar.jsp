@@ -66,8 +66,8 @@
 							<li>
 								<a href="product.html">후기</a>
 								<ul class="sub-menu">
-									<li><a href="boardList">캠핑장 후기</a></li>
-									<li><a href="home-02.html">상품 후기</a></li>
+									<li><a href="cgreviewpage">캠핑장 후기</a></li>
+									<li><a href="goreviewpage">상품 후기</a></li>
 								</ul>
 							</li>
 
@@ -198,8 +198,8 @@
 				<li>
 					<a href="index.html">후기</a>
 					<ul class="sub-menu-m">
-						<li><a href="boardList">캠핑장 후기</a></li>
-						<li><a href="home-02.html">캠핑용품 후기</a></li>
+						<li><a href="cgreviewpage">캠핑장 후기</a></li>
+						<li><a href="goreviewpage">캠핑용품 후기</a></li>
 					</ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>

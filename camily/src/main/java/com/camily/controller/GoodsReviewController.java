@@ -8,10 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class GoodsReviewController {
 	
 	@RequestMapping(value="/goreviewpage")
-	public String boardList() {
+	public String goreviewpage() {
 		System.out.println("게시판 이동 요청");
 		
-		return "GoReview/GoReviewPage";
+		return "GoodsReview/GoReviewPage";
 	}
 	
 	@RequestMapping(value="/goreviewdetail")

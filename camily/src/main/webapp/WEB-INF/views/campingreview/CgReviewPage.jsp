@@ -43,7 +43,7 @@
 		<h2 class="ltext-105 cl0 txt-center">
 			캠핑장 후기 게시판
 		</h2>
-	</section>	
+	</section> 
 
 
 	<!-- Content page -->
@@ -53,7 +53,7 @@
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 						<!-- item blog -->
-						<div class="p-b-63">
+						<div class="p-b-63">						
 							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
 							<a href="cgreviewdetailpage" class="hov-img0 how-pos5-parent">
 								<img src="${pageContext.request.contextPath}/resources/images/캠핑1.jpg" alt="IMG-BLOG">	

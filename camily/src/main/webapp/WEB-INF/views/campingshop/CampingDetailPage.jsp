@@ -127,251 +127,199 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
+<!-- Cart 끝 -->
+	
+	<!-- breadcrumb 시작 -->
+	<div class="container" style="margin-top: 100px">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+				전체메뉴
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
 
-		
+			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+				${campingDetail.gcategory }
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
 
-	<!-- Slider -->
-	<section class="section-slide" style="margin-top: 100px;">
-		<div class="wrap-slick1">
-			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(https://img.campingtalk.me/camp/1/16481846836431269_L.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-								<span class="ltext-101 cl2 respon2" style="color: white; text-shadow:1px 1px 1px #000;">
-									이제 대새는 차박!
-								</span>
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" style="color: white; text-shadow:1px 1px 1px #000;">
-									대한민국 차박캠핑장
-								</h2>
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									보러가기
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick1" style="background-image: url(https://img.campingtalk.me/camp/1/16481847793309434_L.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-								<span class="ltext-101 cl2 respon2" style="color: white; text-shadow:1px 1px 1px #000;">
-									먼곳은 힘들어, 그렇다면?
-								</span>
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" style="color: white; text-shadow:1px 1px 1px #000;">
-									서울근교 캠핑장
-								</h2>
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									보러가기
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick1" style="background-image: url(https://img.campingtalk.me/camp/1/16369629664355194_L.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
-								<span class="ltext-101 cl2 respon2" style="color: white; text-shadow:1px 1px 1px #000;">
-									캠핑은 처음이라.. 잘 모른다면?
-								</span>
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" style="color: white; text-shadow:1px 1px 1px #000;">
-									몸만 가면 되는 글램핑
-								</h2>
-							</div>
-								
-							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									보러가기
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<span class="stext-109 cl4">
+			    ${campingDetail.gname }
+			</span>
 		</div>
-	</section>
-
-
-	<!-- Banner -->
-	<div class="sec-banner bg0 p-t-80 p-b-50">
+	</div>
+	<!-- breadcrumb 끝 -->
+	
+	<!-- Product Detail -->
+	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="${pageContext.request.contextPath}/resources/images/banner-01.jpg" alt="IMG-BANNER">
+				<div class="col-md-6 col-lg-7 p-b-30">
+					<div class="p-l-25 p-r-30 p-lr-0-lg">
+						<div class="wrap-slick3 flex-sb flex-w">
+							<div class="wrap-slick3-dots"></div>
+							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Women
-								</span>
+							<div class="slick3 gallery-lb">
+							  
+								<div class="item-slick3" data-thumb="${campingDetail.gimage }">
+									<div class="wrap-pic-w pos-relative">
+										<img src="${campingDetail.gimage }" alt="IMG-PRODUCT">
 
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+											<i class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
 
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
+								<div class="item-slick3" data-thumb="${campingDetail.gsideimage }">
+									<div class="wrap-pic-w pos-relative">
+										<img src="${campingDetail.gsideimage }" alt="IMG-PRODUCT">
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
+											<i class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
+
+								<div class="item-slick3" data-thumb="${campingDetail.gbackimage }">
+									<div class="wrap-pic-w pos-relative">
+										<img src="${campingDetail.gbackimage }" alt="IMG-PRODUCT">
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
+											<i class="fa fa-expand"></i>
+										</a>
+									</div>
 								</div>
 							</div>
-						</a>
+						</div>
 					</div>
 				</div>
+				<div class="col-md-6 col-lg-5 p-b-30">
+				 <div class="p-r-50 p-t-5 p-lr-0-lg">
+			
+						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+						   ${campingDetail.gname }
+						</h4>
+						<span class="mtext-106 cl2">
+						$: ${campingDetail.gprice }원 
+						</span>
 
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="${pageContext.request.contextPath}/resources/images/banner-02.jpg" alt="IMG-BANNER">
+						<p class="stext-102 cl3 p-t-23">
+							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+						</p>
+						
+						<!-- 구매페이지 전송 -->
+					    <form action="campingpurchase" method="post">
+                        <input type="hidden" name="gcode" value="${campingDetail.gcode }">                            
+						<div class="p-t-33">
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-204 flex-w flex-m respon6-next">
+									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+											<i class="fs-16 zmdi zmdi-minus"></i>
+										</div>
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="gamount" value="1">
+										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+											<i class="fs-16 zmdi zmdi-plus"></i>
+										</div>
+									</div>
 
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Men
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									Spring 2018
-								</span>
-							</div>
-
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
+									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1">
+								        구매하기
+									</button>
 								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-					<!-- Block1 -->
-					<div class="block1 wrap-pic-w">
-						<img src="${pageContext.request.contextPath}/resources/images/banner-03.jpg" alt="IMG-BANNER">
-
-						<a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-							<div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Accessories
-								</span>
-
-								<span class="block1-info stext-102 trans-04">
-									New Trend
-								</span>
+							</div>	
+						</div>
+								 </form>
+                 
+						<!--  -->
+						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+							<div class="flex-m bor9 p-r-10 m-r-11">
+								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+									<i class="zmdi zmdi-favorite"></i>
+								</a>
 							</div>
 
-							<div class="block1-txt-child2 p-b-4 trans-05">
-								<div class="block1-link stext-101 cl0 trans-09">
-									Shop Now
-								</div>
-							</div>
-						</a>
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+								<i class="fa fa-facebook"></i>
+							</a>
+
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+								<i class="fa fa-twitter"></i>
+							</a>
+
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+								<i class="fa fa-google-plus"></i>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
+
+			<div class="bor10 m-t-50 p-t-43 p-b-40">
+			<img src="${campingDetail.gdetailimage }" alt="" >
+			</div>
+
+		</div>
+	</section>
+	
+	
+	
+			<!-- Load more -->
+			<div class="flex-c-m flex-w w-full p-t-45">
+				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					위로가기(◦'⌣'◦)
+				</a>
+			</div>
+			
+		<!-- Pagination 시작 -->
+		  <div class="flex-l-m flex-w w-full p-t-10 m-lr--7" style="margin-left: auto;">
+			<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
+				1
+			</a>
+
+			<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7" style="margin-top: auto; margin-right: auto;">
+				2
+		    </a>
+		  </div>
+		<!-- Pagination 종료 -->
+		</div>
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
 				<!-- p-b-50  : : 패팅 바텀 50px-->
+				<div  class="col-sm-6 col-lg-3">
+						<a href="#" class="logo">
+						<img style="margin:0 auto;" src="${pageContext.request.contextPath}/resources/images/icons/logo-03.jpg" alt="IMG-LOGO">
+					</a>				
+				</div>
 				<div class="col-sm-6 col-lg-3 ">
 					<h4 class="stext-301 cl0 p-b-30">
-						팀 소개 <br>
-						팀장 : 김종윤
+						팀 소개
 					</h4>
-
-					 <ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박준범
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								김두성
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박시환
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								정해성
-							</a>
-						</li>
-						
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								조아용
-							</a>
-						</li>						
-						
-					</ul> 
+					<h6 class="stext-301 cl0 ">팀명 및 서비스 제공 : CAMILY</h6>
+					<h6 class="stext-301 cl0 ">팀장 : 김종윤</h6>
+					<h6 class="stext-301 cl0 ">팀원 : 김두성 | 정해성 | 조항영</h6>
+					<h6 class="stext-301 cl0 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;박준범 | 박시환</h6>
+					
 				</div>
 
 				<div class="col-sm-6 col-lg-3">
 					<h4 class="stext-301 cl0 p-b-30">
-						캠핑장 제휴문의
+						회사 정보
 					</h4>
-
-					<ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								김종윤
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박시환 
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								정해성
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박준범
-							</a>
-						</li>
-					</ul>
+					<h6 class="stext-301 cl0">인천 미추홀구 매소홀로488번길 6-32 태승빌딩 5층(1층 홈플러스) 인천일보아카데미</h6>
+					<h6 class="stext-301 cl0">032-876-3332</h6>
+					<h6 class="stext-301 cl0">campingcamily@gmail.com</h6>
+					
+				
 				</div>
-
-				<div class="col-sm-6 col-lg-3">
+				
+				<div class="col-sm-6 col-lg-3 text-center">
 					<h4 class="stext-301 cl0 p-b-30">
 						상품제휴 / 광고문의
 					</h4>
@@ -380,74 +328,32 @@
 						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
 					</p> -->
 
-					<div class="p-t-27">
+					<div class="p-t-27 text-center">
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-facebook"></i>
+							<i class="fa fa-facebook" style="font-size:30px"></i>
 						</a>
 
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-instagram"></i>
+							<i class="fa fa-instagram" style="font-size:30px"></i>
 						</a>
 
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
+							<i class="fa fa-pinterest-p" style="font-size:30px"></i>
 						</a>
 					</div>
 				</div>
-
-				<!-- <div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						Newsletter
-					</h4>
-
-					<form>
-						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
-							<div class="focus-input1 trans-04"></div>
-						</div>
-
-						<div class="p-t-18">
-							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribe
-							</button>
-						</div>
-					</form>
-				</div> -->
+				
+				
 			</div>
-
-			<!-- <div class="p-t-40">
-				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
-					</a>
-
-					<a href="#" class="m-all-1">
-						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
-					</a>
-				</div>
-
-			</div> -->
+        <br>
 			<p class="stext-107 cl6 txt-center">
 				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by CAMILY
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 			</p>
 		</div>
 	</footer>
-
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
@@ -474,7 +380,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+									<div class="item-slick3" data-thumb="" >
 										<div class="wrap-pic-w pos-relative">
 											<img src="${pageContext.request.contextPath}/resources/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
@@ -484,7 +390,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+									<div class="item-slick3" data-thumb="${pageContext.request.contextPath}/resources/images/product-detail-02.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="${pageContext.request.contextPath}/resources/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
@@ -511,41 +417,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
+								상품이름 :
 							</h4>
 
 							<span class="mtext-106 cl2">
-								$58.79
+								상품가격 :
 							</span>
 
 							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+								상품설명 :
 							</p>
 							
-							<!--  -->
-							<div class="p-t-33">
+							<!-- 모듈 창 -->
+							<div class="p-t-33">								
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
-										Size
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Size S</option>
-												<option>Size M</option>
-												<option>Size L</option>
-												<option>Size XL</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Color
+										추가하기
 									</div>
 
 									<div class="size-204 respon6-next">

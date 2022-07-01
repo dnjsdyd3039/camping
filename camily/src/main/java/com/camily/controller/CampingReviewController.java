@@ -11,7 +11,7 @@ public class CampingReviewController {
 	public String cgreviewpage() {
 		System.out.println("캠핑장 리뷰사이트 이동요청");
 		
-		return "CampingReview/CgReviewPage";
+		return "campingreview/CgReviewPage";
 	}
 	
 	@RequestMapping(value="/cgreviewdetail")

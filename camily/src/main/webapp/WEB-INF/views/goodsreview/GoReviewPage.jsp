@@ -41,7 +41,7 @@
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('resources/images/bg-02.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
-			후기 게시판
+			캠핑용품 후기 게시판
 		</h2>
 	</section>	
 
@@ -56,14 +56,14 @@
 						<div class="p-b-63">
 							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
 							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/캠핑1.jpg" alt="IMG-BLOG">	
+								<img src="${pageContext.request.contextPath}/resources/images/캠핑용품.jpg" alt="IMG-BLOG">	
 								<div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
-										30
+										1
 									</span>
 
 									<span class="stext-109 cl3 txt-center">
-										6월 2022
+										7월 2022
 									</span>
 								</div>
 							</a>
@@ -72,7 +72,7 @@
 								<h4 class="p-b-15">
 								
 									<a href="boardDetail" class="ltext-108 cl2 hov-cl1 trans-04">
-										인천송도 국제 캠핑장 
+										리맥스캠프 우드 롤 테이블 L 접이식 
 									
 									</a>
 								</h4>
@@ -94,7 +94,7 @@
 										</span>
 
 										<span>
-											3 Comments
+											13 Comments
 										</span>
 									</span>
 

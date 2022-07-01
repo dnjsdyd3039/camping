@@ -11,7 +11,7 @@ public class GoodsReviewController {
 	public String goreviewpage() {
 		System.out.println("게시판 이동 요청");
 		
-		return "GoodsReview/GoReviewPage";
+		return "goodsreview/GoReviewPage";
 	}
 	
 	@RequestMapping(value="/goreviewdetail")

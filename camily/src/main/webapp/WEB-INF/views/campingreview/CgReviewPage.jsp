@@ -41,7 +41,7 @@
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('resources/images/bg-02.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
-			후기 게시판
+			캠핑장 후기 게시판
 		</h2>
 	</section>	
 

@@ -211,7 +211,7 @@
 				</li>
 
 				<li>
-					<a href="blog.html">FAQ</a>
+					<a href="boardList">FAQ</a>
 				</li>
 
 				<li>

@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>후기</title>
+	<title>Blog Detail</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -37,202 +37,100 @@
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 
-
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('resources/images/bg-02.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">
-			캠핑장 후기 게시판
-		</h2>
-	</section>	
-
-
 	<!-- Content page -->
-	<section class="bg0 p-t-62 p-b-60">
+	<section class="bg0 p-t-52 p-b-20">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
-						<!-- item blog -->
-						<div class="p-b-63">
-							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
-							<a href="cgreviewdetailpage" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/캠핑1.jpg" alt="IMG-BLOG">	
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										30
-									</span>
+						
+						<h4 class="ltext-109 cl2 p-b-28">
+								남편과 1박2일 송도 국제 캠핑장 이용후기~ 
+							</h4>
+						
+						<div class="p-t-32">
+							<span class="flex-w flex-m stext-111 cl2 p-b-19">
+								<span>
+									<span class="cl4">By</span> 조항영  
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
 
-									<span class="stext-109 cl3 txt-center">
-										6월 2022
-									</span>
+								<span>
+									2022-07-01
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
+
+								<span>
+									송도,캠핑,서울근교  
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
+
+								<span>
+									3 댓글
+								</span>
+							</span>						
+							<p class="stext-117 cl6 p-b-26">
+								인천 송도국제 캠핑장은 나라에서 운영하는 캠핑장이라 일반 사설 캠핑장에 비해 이용요금도 저렴합니다.<br> 
+								이용요금도 저렴하고 시설도 아주 깨끗하게 관리가 잘 되어 있는 캠핑장 이였습니다.<br>
+								캠핑장 이용요금은 A 구역은 평일 15,000원, 주말은 20,000원 입니다.<br> 
+								성수기는 따로 없습니다.<br> 
+								B 구역은 평일 20,000원, 주말은 25,000원 입니다.<br>
+								카라반 사이트는 별도로 있는데요... 평일 20,000원, 주말 25,000원 입니다.<br>
+								추가 인원인 1인당 4,000원씩 받고 있으며 최대 6인까지 한 사이트에 입장이 가능 합니다.
+							</p>						
+						</div>
+
+						<div class="flex-w flex-t p-t-16">
+							<span class="size-216 stext-116 cl8 p-t-4">
+								Tags
+							</span>
+
+							<div class="flex-w size-217">
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									송도
+								</a>
+
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									캠핑
+								</a>
+								
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									서울근교
+								</a>
+							</div>
+						</div>
+
+						<!--  -->
+						<div class="p-t-40">
+							<h5 class="mtext-113 cl2 p-b-12">
+								댓글
+							</h5>						
+
+							<form>
+								
+								<div class="bor19 size-218 m-b-20">
+									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name">
 								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-								
-									<a href="cgreviewdetailpage" class="ltext-108 cl2 hov-cl1 trans-04">
-										인천송도 국제 캠핑장 
-									
-									</a>
-								</h4>
-
-								
-								<h6 class="p-b-15">															
-										남편과 1박2일 송도 국제 캠핑장 이용후기~  											
-								</h6>	
 							
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> 조항영  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											2명  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											3 댓글
-										</span>
-									</span>
-
-									<a href="cgreviewdetailpage" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										상세보기
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
+								<div class="bor19 m-b-20">
+									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="댓글작성하기..."></textarea>
 								</div>
-							</div>
+
+								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+									댓글작성
+								</button>
+							</form>
 						</div>
-
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/blog-05.jpg" alt="IMG-BLOG">
-
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										18
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										The Great Big List of Menâs Gifts for the Holidays 
-									</a>
-								</h4>
-
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/blog-06.jpg" alt="IMG-BLOG">
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										16
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										5 Winter-to-Spring Fashion Trends to Try Now
-									</a>
-								</h4>
-
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Pagination -->
-						<div class="flex-l-m flex-w w-full p-t-10 m-lr--7">
-							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-								1
-							</a>
-
-							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-								2
-							</a>					 			
-						</div>
-					</div>	
-				</div>				
+					</div>
+				</div>
+			  </div>
 			</div>
-		</div>
 	</section>	
 	
-	<!-- footer -->	
+		
+
+	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
-	
 
 
 	<!-- Back to top -->

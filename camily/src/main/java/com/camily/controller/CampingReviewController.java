@@ -14,11 +14,17 @@ public class CampingReviewController {
 		return "campingreview/CgReviewPage";
 	}
 	
-	@RequestMapping(value="/cgreviewdetail")
-	public ModelAndView cgreviewdetail() {
-		System.out.println("게시판 상세글 조회");		
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping(value="/cgreviewdetailpage")
+	public String cgreviewdetailpage() {
+		System.out.println("캠핑장 리뷰 상세페이지 이동요청");
 		
-		return mav;
+		return "campingreview/CgReviewDetailPage";
 	}
+	
+	/*
+	 * @RequestMapping(value="/cgreviewdetail") public ModelAndView cgreviewdetail()
+	 * { System.out.println("게시판 상세글 조회"); ModelAndView mav = new ModelAndView();
+	 * 
+	 * return mav; }
+	 */
 }

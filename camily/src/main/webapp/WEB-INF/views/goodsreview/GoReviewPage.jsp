@@ -47,16 +47,16 @@
 
 
 	<!-- Content page -->
-	<section class="bg0 p-t-62 p-b-60">
+	<section class="bg0 p-t-62 p-b-60" >
 		<div class="container">
-			<div class="row">
+			<div class="row" >
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 						<!-- item blog -->
 						<div class="p-b-63">
 							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
-							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/캠핑용품.jpg" alt="IMG-BLOG" style="width: 500px; height: 500px;">	
+							<a href="goreviewdetailpage" class="hov-img0 how-pos5-parent">
+								<img src="${pageContext.request.contextPath}/resources/images/캠핑용품.jpg" alt="IMG-BLOG" style="width: 825px; height: 618px;">	
 								<div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
 										1
@@ -71,7 +71,7 @@
 							<div class="p-t-32">
 								<h4 class="p-b-15">
 								
-									<a href="boardDetail" class="ltext-108 cl2 hov-cl1 trans-04">
+									<a href="goreviewdetailpage" class="ltext-108 cl2 hov-cl1 trans-04">
 										리맥스캠프 우드 롤 테이블 L 접이식 
 									
 									</a>
@@ -87,18 +87,13 @@
 											<span class="cl4">By</span> 조항영  
 											<span class="cl12 m-l-4 m-r-6">|</span>
 										</span>
-
+										
 										<span>
-											2명  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											13 Comments
+											13 댓글
 										</span>
 									</span>
 
-									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+									<a href="goreviewdetailpage" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
 										상세보기
 
 										<i class="fa fa-long-arrow-right m-l-9"></i>

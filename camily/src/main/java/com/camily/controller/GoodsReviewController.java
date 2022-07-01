@@ -9,16 +9,22 @@ public class GoodsReviewController {
 	
 	@RequestMapping(value="/goreviewpage")
 	public String goreviewpage() {
-		System.out.println("게시판 이동 요청");
+		System.out.println("캠핑용품 리뷰 페이지 이동 요청");
 		
 		return "goodsreview/GoReviewPage";
 	}
 	
-	@RequestMapping(value="/goreviewdetail")
-	public ModelAndView goreviewdetail() {
-		System.out.println("게시판 상세글 조회");		
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping(value="/goreviewdetailpage")
+	public String goreviewdetailpage() {
+		System.out.println("캠핑용품 리뷰 상세페이지 이동요청");
 		
-		return mav;
+		return "goodsreview/GoReviewDetailPage";
 	}
+	
+	/*
+	 * @RequestMapping(value="/goreviewdetail") public ModelAndView goreviewdetail()
+	 * { System.out.println("게시판 상세글 조회"); ModelAndView mav = new ModelAndView();
+	 * 
+	 * return mav; }
+	 */
 }

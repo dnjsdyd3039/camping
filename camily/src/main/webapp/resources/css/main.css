@@ -317,6 +317,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*------------------------------------------------------------------
 [ Logo ]*/
 .logo {
+	  z-index: 1000;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -355,7 +356,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
-  display: flex;
+  display: flex; 
   align-items: center;
 }
 

@@ -56,7 +56,7 @@
 						<div class="p-b-63">
 							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
 							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/캠핑용품.jpg" alt="IMG-BLOG">	
+								<img src="${pageContext.request.contextPath}/resources/images/캠핑용품.jpg" alt="IMG-BLOG" style="width: 500px; height: 500px;">	
 								<div class="flex-col-c-m size-123 bg9 how-pos5">
 									<span class="ltext-107 cl2 txt-center">
 										1

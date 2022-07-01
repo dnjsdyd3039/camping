@@ -239,7 +239,7 @@ input[type=number] {
 							</ul></li>
 						<li><a href="product.html">리뷰</a>
 							<ul class="sub-menu">
-								<li><a href="index.html">캠핑장 리뷰</a></li>
+								<li><a href="cgreviewpage">캠핑장 리뷰</a></li>
 								<li><a href="home-02.html">상품 리뷰</a></li>
 							</ul></li>
 

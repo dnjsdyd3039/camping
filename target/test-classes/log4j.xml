@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.camping.controller">
+	<logger name="com.camily.controller">
 		<level value="info" />
 	</logger>
 	

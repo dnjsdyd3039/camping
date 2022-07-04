@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.camily.dao.CampingShopDao" >
+ <select id="campingShop" resultType="com.camily.dto.CampingShopDto">
+   SELECT*
+   FROM GOODS
+ </select>
+ 
+ <select id="campingDetail" resultType="com.camily.dto.CampingShopDto">
+   SELECT* 
+   FROM GOODS
+   WHERE GCODE = #{gcode}
+ </select>
+  
+ <select id="campingpurchase" resultType="com.camily.dto.CampingShopDto">
+   SELECT* 
+   FROM GOODS
+   WHERE GCODE = #{gcode}
+ </select>
+  
+</mapper>
+
+    
+
+
+
+
+ 
+  

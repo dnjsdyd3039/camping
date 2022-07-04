@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.camily.dao.MemberDao" >
+
+<select id="memberIdCheck" resultType="String">
+ SELECT MID
+ FROM MEMBERS
+ WHERE MID = #{inputId}
+</select>
+
+<insert id="memberJoin" >
+ INSERT INTO MEMBERS(MID, MPW, MNAME, MTEL, MEMAIL, MBIRTH, MADDR, MSTATE, MRANK) 
+ VALUES(#{mid}, #{mpw}, #{mname}, #{mtel}, #{memail}, #{mbirth}, #{maddr}, 'GN01', 'NEW')
+</insert>
+
+<select id="selectMemberLogin" resultType="com.camily.dto.MemberDto">
+ SELECT MID FROM MEMBERS WHERE MID = #{mid} AND MPW = #{mpw}
+</select>
+
+<select id="selectMemberInfo" resultType="com.camily.dto.MemberDto">
+ SELECT MID, MPW, MNAME, MTEL, MEMAIL, MADDRESS, MBIRTH FROM MEMBERS WHERE MID = #{loginId}
+</select>
+
+</mapper>

@@ -8,6 +8,6 @@ public class BoardController {
 
 	@GetMapping("write")
 	public String boardWrite() {
-		return "board/boardWrite";
+		return "board/BoardWrite";
 	}
 }

@@ -49,8 +49,8 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 <!-- include summernote css/js-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
 <!-- include summernote-ko-KR -->
 <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
 <title>글쓰기</title>
@@ -58,13 +58,32 @@
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote({
- 	    	placeholder: 'content',
+ 	    	placeholder: '내용을 작성하세요',
 	        minHeight: 370,
 	        maxHeight: null,
 	        focus: true, 
 	        lang : 'ko-KR'
 	  });
 	});
+</script>
+
+<script>
+$('.summernote').summernote({
+	  toolbar: [
+		    // [groupName, [list of button]]
+		    ['fontname', ['fontname']],
+		    ['fontsize', ['fontsize']],
+		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+		    ['color', ['forecolor','color']],
+		    ['table', ['table']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']],
+		    ['insert',['picture','link','video']],
+		    ['view', ['fullscreen', 'help']]
+		  ],
+		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+});
 </script>
 </head>
 <body class="animsition">
@@ -123,9 +142,6 @@ $(document).ready(function() {
 
 	<!--===============================================================================================-->
 	<script
-		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script
 		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
 	<script
@@ -164,6 +180,7 @@ $(document).ready(function() {
 			})
 		});
 	</script>
+	
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 

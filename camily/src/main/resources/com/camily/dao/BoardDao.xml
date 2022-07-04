@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.camily.dao.CampingShopDao" >
+
+<!-- 게시판 insert -->
+<insert id="insertBoard" parameterType="com.camily.dao.BoardDao">
+
+	<selectKey keyProperty="seq" order="BEFORE" resultType="int">
+		SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+	INSERT INTO BOARDS (bocode, bomid, botitle, bocontent)
+				VALUES (#{seq}, #{writer}, #{title}, #{content})
+</insert>
+
+
+
+</mapper>

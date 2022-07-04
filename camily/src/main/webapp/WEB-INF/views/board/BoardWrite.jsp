@@ -59,32 +59,30 @@
 $(document).ready(function() {
 	  $('#summernote').summernote({
  	    	placeholder: '내용을 작성하세요',
-	        minHeight: 370,
-	        maxHeight: null,
+	        minHeight: 400,
+	        maxHeight: 400,
 	        focus: true, 
-	        lang : 'ko-KR'
+	        lang : 'ko-KR',
+	        toolbar: [
+    		    // [groupName, [list of button]]
+    		    ['fontname', ['fontname']],
+    		    ['fontsize', ['fontsize']],
+    		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+    		    ['color', ['forecolor','color']],
+    		    ['table', ['table']],
+    		    ['para', ['ul', 'ol', 'paragraph']],
+    		    ['height', ['height']],
+    		    ['insert',['picture','link','video']],
+    		    ['view', ['fullscreen', 'help']]
+    		  ],
+    	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+    	fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+
 	  });
 	});
 </script>
 
-<script>
-$('.summernote').summernote({
-	  toolbar: [
-		    // [groupName, [list of button]]
-		    ['fontname', ['fontname']],
-		    ['fontsize', ['fontsize']],
-		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-		    ['color', ['forecolor','color']],
-		    ['table', ['table']],
-		    ['para', ['ul', 'ol', 'paragraph']],
-		    ['height', ['height']],
-		    ['insert',['picture','link','video']],
-		    ['view', ['fullscreen', 'help']]
-		  ],
-		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-});
-</script>
+
 </head>
 <body class="animsition">
 
@@ -105,8 +103,8 @@ $('.summernote').summernote({
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<h2 style="text-align: center;">글 작성</h2>
-					<br> <br>
-					<div style="width: 60%; margin: auto;">
+					<br> 
+					<div style="width: 100%; margin: auto;">
 						<form method="post" action="/write">
 							<input type="text" name="writer" style="width: 20%;"
 								placeholder="작성자" /><br> <input type="text" name="title"

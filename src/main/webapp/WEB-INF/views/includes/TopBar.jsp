@@ -228,7 +228,7 @@ input[type=number] {
 				<!-- Menu desktop -->
 				<div class="menu-desktop">
 					<ul class="main-menu">
-						<li><a href="index.html">캠핑장</a>
+						<li><a href="campingList">캠핑장</a>
 
 							<ul class="sub-menu">
 								<li><a href="index.html">오토캠핑장</a></li>
@@ -346,7 +346,7 @@ input[type=number] {
 		</ul>
 
 		<ul class="main-menu-m">
-			<li><a href="index.html">캠핑장</a>
+			<li><a href="campingList">캠핑장</a>
 				<ul class="sub-menu-m">
 					<li><a href="index.html">Homepage 1</a></li>
 					<li><a href="home-02.html">Homepage 2</a></li>

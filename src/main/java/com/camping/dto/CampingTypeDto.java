@@ -1,4 +1,4 @@
-package com.camily.dto;
+package com.camping.dto;
 
 import lombok.Data;
 

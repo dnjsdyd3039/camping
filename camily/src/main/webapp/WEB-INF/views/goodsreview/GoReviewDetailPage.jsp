@@ -106,12 +106,7 @@
 								댓글
 							</h5>						
 
-							<form>
-								
-								<div class="bor19 size-218 m-b-20">
-									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name">
-								</div>
-							
+							<form>																					
 								<div class="bor19 m-b-20">
 									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="댓글작성하기..."></textarea>
 								</div>

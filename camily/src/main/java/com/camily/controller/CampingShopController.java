@@ -36,7 +36,7 @@ public class CampingShopController {
 	}
 	
 	// 캠핑용품 구매 페이지 이동 요청
-	@RequestMapping(value="/	")
+	@RequestMapping(value="/campingpurchase")
 	public ModelAndView campingpurchase(String gcode, String gamount) {
 		System.out.println("gcode :"+gcode);
 		System.out.println("gamount :"+gamount);

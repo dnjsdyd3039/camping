@@ -52,8 +52,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
-
 <script src="https://kit.fontawesome.com/e9a5166904.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="animsition">
 
@@ -591,7 +591,5 @@
 	</script>
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
-
 </body>
 </html>

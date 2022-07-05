@@ -237,16 +237,16 @@ input[type=number] {
 								<li><a href="home-02.html">Homepage 2</a></li>
 								<li><a href="home-03.html">Homepage 3</a></li>
 							</ul></li>
-						<li><a href="product.html">리뷰</a>
+						<li><a href="product.html">후기</a>
 							<ul class="sub-menu">
-								<li><a href="index.html">캠핑장 리뷰</a></li>
-								<li><a href="home-02.html">상품 리뷰</a></li>
+								<li><a href="cgreviewpage">캠핑장 후기</a></li>
+								<li><a href="goreviewpage">캠핑용품 후기</a></li>
 							</ul></li>
 
 						<li class="label1" data-label1="hot"><a
 							href="shoping-cart.html">이벤트</a></li>
 
-						<li><a href="blog.html">FAQ</a></li>
+						<li><a href="boardList">FAQ</a></li>
 
 						<li><a href="about.html">캠핑TIP</a></li>
 
@@ -358,12 +358,18 @@ input[type=number] {
 				</ul> <span class="arrow-main-menu-m"> <i
 					class="fa fa-angle-right" aria-hidden="true"></i>
 			</span></li>
-			<li><a href="product.html">게시판</a></li>
+			<li><a href="index.html">후기</a>
+				<ul class="sub-menu-m">
+					<li><a href="cgreviewpage">캠핑장 후기</a></li>
+					<li><a href="goreviewpage">캠핑용품 후기</a></li>					
+				</ul> <span class="arrow-main-menu-m"> <i
+					class="fa fa-angle-right" aria-hidden="true"></i>
+			</span></li>
 
 			<li><a href="shoping-cart.html" class="label1 rs1"
 				data-label1="hot">이벤트</a></li>
 
-			<li><a href="blog.html">FAQ</a></li>
+			<li><a href="boardList">FAQ</a></li>
 
 			<li><a href="about.html">캠핑TIP</a></li>
 

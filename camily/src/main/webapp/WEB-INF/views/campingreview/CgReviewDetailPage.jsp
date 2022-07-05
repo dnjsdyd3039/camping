@@ -62,12 +62,12 @@
 
 								<span>
 									송도,캠핑,서울근교  
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
+									<span class="cl12 m-l-4 m-r-6">|</span>									
+								</span>	
+								
 								<span>
 									3 댓글
-								</span>
+								</span>							
 							</span>						
 							<p class="stext-117 cl6 p-b-26">
 								인천 송도국제 캠핑장은 나라에서 운영하는 캠핑장이라 일반 사설 캠핑장에 비해 이용요금도 저렴합니다.<br> 
@@ -98,20 +98,17 @@
 									서울근교
 								</a>
 							</div>
-						</div>
-
+						</div>											
+																	
 						<!--  -->
 						<div class="p-t-40">
+							
 							<h5 class="mtext-113 cl2 p-b-12">
 								댓글
-							</h5>						
-
-							<form>
-								
-								<div class="bor19 size-218 m-b-20">
-									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name">
-								</div>
-							
+							</h5>	
+												                   										
+							<hr>
+							<form>																						
 								<div class="bor19 m-b-20">
 									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="댓글작성하기..."></textarea>
 								</div>

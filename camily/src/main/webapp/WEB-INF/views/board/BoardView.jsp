@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>후기</title>
+	<title>BoardView</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -37,203 +37,81 @@
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 
-
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('resources/images/bg-02.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">
-			캠핑장 후기 게시판
-		</h2>
-	</section> 
-
-
 	<!-- Content page -->
-	<section class="bg0 p-t-62 p-b-60">
+	<section class="bg0 p-t-52 p-b-20">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
-						<!-- item blog -->
-						<div class="p-b-63">						
-							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
+						
+						<h4 class="ltext-109 cl2 p-b-28">
+								게시판 테스트 
+							</h4>
+						
+						<div class="p-t-32">
+							<span class="flex-w flex-m stext-111 cl2 p-b-19">
+								<span>
+									<span class="cl4">${boardView.bomid }</span>
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
 
-							<a href="cgreviewdetailpage" class="hov-img0 how-pos5-parent">
+								<span>
+									${boardView.bodate }
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
 
-								<img src="${pageContext.request.contextPath}/resources/images/캠핑1.jpg" alt="IMG-BLOG">	
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										30
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										6월 2022
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-								
-
-									<a href="cgreviewdetailpage" class="ltext-108 cl2 hov-cl1 trans-04">
-
-										인천송도 국제 캠핑장 
-									
-									</a>
-								</h4>
-
-								
-								<h6 class="p-b-15">															
-										남편과 1박2일 송도 국제 캠핑장 이용후기~  											
-								</h6>	
+								<span>
+									조회수 31
+								</span>
+							</span>						
+							<p class="stext-117 cl6 p-b-26">
+								${boardView.bocontents }
+							</p>						
+						</div>											
+																	
+						<!--  -->
+						<div class="p-t-40">
 							
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> 조항영  
-											<span class="cl12 m-l-4 m-r-6">|</span>										
-										</span>	
-										
-										<span>
-											3 댓글
-										</span>								 										
-									</span>
-
-
-									<a href="cgreviewdetailpage" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-
-										상세보기
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
+							<h5 class="mtext-113 cl2 p-b-12">
+								댓글
+							</h5>		
+							<hr>					
+							<div id="replyList">
+								<ol class="replyList">
+									<c:forEach items="${replyList }" var="reply"> 
+										<li>
+											<p>
+											${reply.rpmid }<br>
+											${reply.rpdate }
+											</p>
+											
+											<p>${reply.rpcontents }</p>	
+											<br>																													
+										</li>																									
+									</c:forEach>
+								</ol>																					
+							</div>											                   										
+							<hr>
+							<form method="post" action="replyWrite">																						
+								<div class="bor19 m-b-20">
+									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="reply_rpcontents" placeholder="댓글작성하기..."></textarea>
 								</div>
-							</div>
+								
+								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04" type="submit">
+									댓글작성
+								</button>
+							</form>
 						</div>
-
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/blog-05.jpg" alt="IMG-BLOG">
-
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										18
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										The Great Big List of Menâs Gifts for the Holidays 
-									</a>
-								</h4>
-
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/blog-06.jpg" alt="IMG-BLOG">
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										16
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										5 Winter-to-Spring Fashion Trends to Try Now
-									</a>
-								</h4>
-
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Pagination -->
-						<div class="flex-l-m flex-w w-full p-t-10 m-lr--7">
-							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-								1
-							</a>
-
-							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-								2
-							</a>					 			
-						</div>
-					</div>	
-				</div>				
+					</div>
+				</div>
+			  </div>
 			</div>
-		</div>
 	</section>	
 	
-	<!-- footer -->	
+		
+
+	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
-	
 
 
 	<!-- Back to top -->

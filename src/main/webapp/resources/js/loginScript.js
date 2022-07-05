@@ -7,13 +7,6 @@ function memberLogin() {
     $("#LoginModal").modal('show');
 }
 
-$('.modal').on('hidden.bs.modal', function (e) {
-    console.log("모달창 초기화!");
-    $("#joinForm")[0].reset();
-    $("#idCheckMsg").text("");
-    $("#pwCheckMsg").text("");
-});
-
 // 다음 주소api
 function sample6_execDaumPostcode() {
     new daum.Postcode({

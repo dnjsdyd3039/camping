@@ -8,8 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.camily.dao.CampingDao;
 import com.camily.dto.CampingDto;
-import com.camily.dto.CampingTypeDto;
+import com.camily.dto.CampingRoomDto;
 import com.camily.dto.PageDto;
+import com.camily.dto.ReservationDto;
+import com.google.gson.Gson;
 
 @Service
 public class CampingService {
@@ -92,12 +94,26 @@ public class CampingService {
 		ModelAndView mav = new ModelAndView();
 		CampingDto campingInfo = cdao.campingView(cacode);
 		System.out.println(campingInfo);
-		ArrayList<CampingTypeDto> campingTypeList = cdao.campingTypeList(cacode);
-		System.out.println(campingTypeList);
+		ArrayList<CampingRoomDto> campingRoomTypeList = cdao.campingRoomTypeList(cacode);
+		ArrayList<CampingRoomDto> campingRoomList = cdao.campingRoomList(cacode);
+		System.out.println(campingRoomList);
 		mav.addObject("campingInfo", campingInfo);
-		mav.addObject("campingTypeList", campingTypeList);
+		mav.addObject("campingRoomList", campingRoomList);
+		mav.addObject("campingRoomTypeList", campingRoomTypeList);
 		mav.setViewName("camping/CampingView");
 		return mav;
 	}
 
+	public String checkRoomType(String cacode, String startday, String endday) {
+		System.out.println("CampingService.checkRoomType() 호출");
+		Gson gson = new Gson();
+		ArrayList<ReservationDto> totalType = cdao.getTotalType();
+		ArrayList<ReservationDto> reserveType = cdao.getReserveType(cacode, startday, endday);
+		
+		
+		return null;
+	}
+
+	
+	
 }

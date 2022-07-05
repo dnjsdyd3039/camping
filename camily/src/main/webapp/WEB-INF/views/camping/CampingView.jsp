@@ -7,8 +7,6 @@
 	<title>Home</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -39,25 +37,28 @@
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->	
-
-
-<!-- datepicker -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script>
-	$( function() {
-		$( "#datepicker" ).datepicker({
-		altField: "#alternate",
-		dayNames: [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" ],
-		dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
-		monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
-		monthNamesShort: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ],
-		dateFormat: "yy-mm-dd",
-		altFormat: "yy-mm-dd"
-	});
-	} );
-</script>
-
+    <!-- datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<style type="text/css">
+        .dp-highlight .ui-state-default {
+          background: #484;
+          color: #FFF;
+        }
+        .ui-datepicker.ui-datepicker-multi  {
+          width: 100% !important;
+        }
+        .ui-datepicker-multi .ui-datepicker-group {
+        float:none;
+        }
+        #datepicker {
+          height: 300px;
+          overflow-x: scroll;
+        }
+		.ui-widget { font-size: 100% }
+		.ui-datepicker{
+			width: 100%;
+		}
+</style>
 </head>
 <body class="animsition">
 	
@@ -216,6 +217,13 @@
 						
 						<!--  -->
 						<div class="p-t-33">
+							<!-- 예약 날짜 선택 -->
+							<div class="p-b-10">
+								<input type="hidden" id="startday" size="10">
+								<input type="hidden" id="endday" size="10" >
+								<div class="datepicker"></div>
+							</div>
+							<!-- 해당 날짜에 가능한 객실 타입목록 표시 -->
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
 									객실타입
@@ -225,15 +233,35 @@
 									<div class="rs1-select2 bor8 bg0">
 										<select class="js-select2" name="time">
 											<option>캠핑장 선택</option>
-											<c:forEach items="${campingTypeList}" var="campingType">
-												<option>${campingType.ctname}</option>											
+											<c:forEach items="${campingRoomTypeList}" var="campingRoomType">
+												<option>${campingRoomType.crname}</option>											
 											</c:forEach>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>
 							</div>
+							
+							<!-- 해당 타입의 가능한 객실 번호 표시 -->
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-203 flex-c-m respon6">
+									객실번호
+								</div>
 
+								<div class="size-204 respon6-next">
+									<div class="rs1-select2 bor8 bg0">
+										<select class="js-select2" name="time">
+											<option>객실번호 선택</option>
+											<c:forEach items="${campingRoomList}" var="campingRoom">
+												<option>${campingRoom.crnum}</option>											
+											</c:forEach>
+										</select>
+										<div class="dropDownSelect2"></div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 인원선택 -->
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
 									인원
@@ -244,16 +272,15 @@
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+										<input id="people" class="mtext-104 cl3 txt-center num-product" type="number" name="people" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
 							</div>
-							
-							<div id="datepicker"></div>
-							
+
+							<!-- 예약하기 버튼 -->
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" onclick="campingReservation()">
@@ -262,7 +289,7 @@
 								</div>
 							</div>	
 						</div>
-
+						
 						
 					</div>
 				</div>
@@ -295,21 +322,21 @@
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm">
 										<!-- Review -->
-										<c:forEach items="${campingTypeList}" var="campingType">
+										<c:forEach items="${campingRoomTypeList}" var="campingRoomType">
 											<div class="flex-w flex-t p-b-68">
 												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-													<img src="${campingType.ctimage}" alt="객실사진">
+													<img src="${campingRoomType.crimage}" alt="객실사진">
 												</div>
 	
 												<div class="size-207">
 													<div class="flex-w flex-sb-m p-b-17">
 														<span class="mtext-107 cl2 p-r-20">
-															${campingType.ctname}
+															${campingRoomType.crname}
 														</span>
 													</div>
 	
 													<p class="stext-102 cl6">
-														가격 : ${campingType.ctprice}
+														가격 : ${campingRoomType.crprice}
 													</p>
 												</div>
 											</div>
@@ -491,8 +518,62 @@
 	<script>
 		function campingReservation(){
 			console.log("예약하기 버튼 클릭");
-			//location.href = "campingReservation";
+			var dates = $("#dates").val();
+			var type = $("#type").val();
+			var people = $("#people").val();
+			console.log("dates : " + dates);
+			console.log("type : " + type);
+			console.log("people : " + people);
+			location.href = "campingReservation?dates=" + dates + "&type=" + type + "&people="+people;
 		}
 	</script>
 </body>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript">
+$(".datepicker").datepicker({
+	minDate: 0,
+	numberOfMonths: [1,1],
+	beforeShowDay: function(date) {
+		var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#startday").val());
+		var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#endday").val());
+		return [true, date1 && ((date.getTime() == date1.getTime()) || (date2 && date >= date1 && date <= date2)) ? "dp-highlight" : ""];
+	},
+	onSelect: function(dateText, inst) {
+		var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#startday").val());
+		var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#endday").val());
+		if (!date1 || date2) {
+			$("#startday").val(dateText);
+			$("#endday").val("");
+            $(this).datepicker();
+		} else {
+			$("#endday").val(dateText);
+			checkRoomType();
+            $(this).datepicker();
+		}
+	}
+});
+</script>
+<script type="text/javascript">
+	function checkRoomType() {
+		var cacode = '${campingInfo.cacode}';
+		console.log("cacode : " + cacode);
+		var startday = $("#startday").val();
+		console.log("startday : " + startday);
+		var endday = $("#endday").val();
+		console.log("endday : " + endday);
+		if(startday < endday){
+			$.ajax({
+				type : "get",
+				url : "checkRoomType",
+				data : {"cacode" : cacode, "startday" : startday, "endday" : endday},
+				dataType : "json",
+				async : false,
+				success : function(result){
+
+				}
+			})
+		}
+		
+	}
+</script>
 </html>

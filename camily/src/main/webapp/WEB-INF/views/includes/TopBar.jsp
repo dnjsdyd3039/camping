@@ -2,7 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 회원관련 모달 -->
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/loginScript.js"></script>
+<script type="text/javascript">
+	$('.modal').on('hidden.bs.modal', function (e) {
+	    console.log("모달창 초기화!");
+	    $("#joinForm")[0].reset();
+	    $("#idCheckMsg").text("");
+	    $("#pwCheckMsg").text("");
+	});
+</script>
 <!-- 다음 우편번호 서비스 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
 
@@ -109,7 +118,7 @@ input[type=number] {
 								class="form-control validate" placeholder="이메일" name="memail">
 						</div>
 						<div class="md-form mb-3">
-							<input type="date" id="orangeForm-pass"
+							<input type="date" id="inputMbirth"
 								class="form-control validate" name="mbirth">
 						</div>
 						<div class="row">
@@ -173,12 +182,12 @@ input[type=number] {
 					<div class="modal-body mx-3">
 
 						<div class="md-form mb-3">
-							<input type="email" id="orangeForm-email"
+							<input type="email" id=loginMid
 								class="form-control validate" placeholder="아이디" name="">
 						</div>
 
 						<div class="md-form mb-3">
-							<input type="text" id="orangeForm-pass"
+							<input type="text" id="loginMpw"
 								class="form-control validate" placeholder="비밀번호" name="">
 						</div>
 						<div class="md-form mb-1 text-center">
@@ -228,13 +237,7 @@ input[type=number] {
 				<!-- Menu desktop -->
 				<div class="menu-desktop">
 					<ul class="main-menu">
-						<li><a href="index.html">캠핑장</a>
-
-							<ul class="sub-menu">
-								<li><a href="index.html">오토캠핑장</a></li>
-								<li><a href="home-02.html">글램핑</a></li>
-								<li><a href="home-03.html">Homepage 3</a></li>
-							</ul></li>
+						<li><a href="campingList">캠핑장</a></li>
 						<li><a href="index.html">캠핑용품</a>
 							<ul class="sub-menu">
 								<li><a href="index.html">Homepage 1</a></li>
@@ -346,14 +349,7 @@ input[type=number] {
 		</ul>
 
 		<ul class="main-menu-m">
-			<li><a href="index.html">캠핑장</a>
-				<ul class="sub-menu-m">
-					<li><a href="index.html">Homepage 1</a></li>
-					<li><a href="home-02.html">Homepage 2</a></li>
-					<li><a href="home-03.html">Homepage 3</a></li>
-				</ul> <span class="arrow-main-menu-m"> <i
-					class="fa fa-angle-right" aria-hidden="true"></i>
-			</span></li>
+			<li><a href="campingList">캠핑장</a></li>
 			<li><a href="index.html">캠핑용품</a>
 				<ul class="sub-menu-m">
 					<li><a href="index.html">Homepage 1</a></li>

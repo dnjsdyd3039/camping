@@ -17,6 +17,22 @@
  VALUES(#{mid}, #{mpw}, #{mname}, #{mtel}, #{memail}, #{mbirth}, #{maddr}, 'GN01', 'NEW')
 </insert>
 
+<select id="memberLogin" resultType="com.camily.dto.MemberDto">
+ SELECT MID FROM MEMBERS WHERE MID = #{mid} AND MPW = #{mpw}
+</select>
 
+<select id="selectMemberInfo" resultType="com.camily.dto.MemberDto">
+ SELECT MID, MPW, MNAME, MTEL, MEMAIL, MADDR, TO_CHAR(MBIRTH,'YYYY-MM-DD') AS MBIRTH FROM MEMBERS WHERE MID = #{loginId}
+</select>
+
+<select id="selectLoginPw" resultType="String">
+ SELECT MPW FROM MEMBERS WHERE MID = #{loginId} 
+</select>
+
+<update id="updateMemberPw">
+ UPDATE MEMBERS
+ SET MPW = #{modifyPw}
+ WHERE MID = #{loginId}
+</update>
 
 </mapper>

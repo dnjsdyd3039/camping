@@ -14,15 +14,12 @@ public class MemberDto {
     private String maddr;         // 주소
     private String mstate;        // 회원상태
     private String mrank;         // 회원등급
+    
     private int mkakaokey;        // 카카오 아이디키
     private String mnaverkey;     // 네이버 아이디키
-    
     
     private String maddress;      // 주소
     private String mpostcode;     // 우편번호
     private String mextraAddr;    // 참고항목
     private String mdetailAddr;   // 상세주소
-    
-    private String memailid;       // 이메일아이디
-    private String memaildomain;   // 이메일도메인
 }

@@ -3,39 +3,53 @@
 	pageEncoding="UTF-8"%>
 	
 <style>
+/* 전화번호 input number 버튼 지우기*/
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* 생년월일 placeholder 적용 */
+.date_empty:before {
+  content: attr(data-placeholder);
+  width: calc(100%);
+}
 </style>
 	
 <header>
-
-
-
 	<!-- Header desktop -->
 	<div class="container-menu-desktop">
 		<!-- Topbar -->
 		<div class="top-bar">
 			<div class="content-topbar flex-sb-m h-full container">
-				<div class="left-top-bar">${sessionScope.loginId }님 환영합니다.</div>
+				<div class="left-top-bar">
+			<c:if test="${sessionScope.loginId != null }">
+				${sessionScope.loginId }님 환영합니다.
+			</c:if>
+				</div>
 
 				<div class="right-top-bar flex-w h-full">
 					<!-- <span class="flex-c-m trans-04 p-lr-25">
 							sessionId님 환영합니다.
 						</span> -->
 
-					<!-- <a href="#" class="flex-c-m trans-04 p-lr-25"
-						onclick="memberJoin();"> 회원가입 </a> <a href="#"
-						class="flex-c-m trans-04 p-lr-25" onclick="memberLogin();">
-						로그인 </a> -->
+					<c:choose>
+                        <c:when test="${sessionScope.loginId == null }">
+                        <a href="#" class="flex-c-m trans-04 p-lr-25" onclick="memberJoin();">회원가입</a>
+                        <a href="#" class="flex-c-m trans-04 p-lr-25" onclick="memberLogin();">로그인</a>
+                        </c:when>
+                        
+                        <c:otherwise>
+                        <a href="#" class="flex-c-m trans-04 p-lr-25" onclick="memberInfo('${sessionScope.loginId}')">내정보</a>
+                        <a href="memberLogout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
+                        </c:otherwise>
+                    </c:choose>	
 
 					<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -44,18 +58,6 @@ input[type=number] {
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							USD
 						</a> -->
-					<c:choose>
-                        <c:when test="${sessionScope.loginId == null }">
-                        <a href="#" class="flex-c-m trans-04 p-lr-25" onclick="memberJoin();">회원가입</a>
-                        <a href="#" class="flex-c-m trans-04 p-lr-25" onclick="memberLogin();">로그인</a>
-                        </c:when>
-                        
-                        <c:otherwise>
-                        <a href="#" class="flex-c-m trans-04 p-lr-25" onclick="memberInfo();">내정보</a>
-                        <a href="#" class="flex-c-m trans-04 p-lr-25" data-toggle="modal" data-target="#logoutModal">로그아웃</a>
-                        </c:otherwise>
-                    </c:choose>	
-						
 				</div>
 
 
@@ -65,7 +67,8 @@ input[type=number] {
 
 
 		<!-- 회원가입 모달 -->
-		<form action="memberJoin" method="post" id="joinForm" onsubmit="return memberCheck()">
+		<form action="memberJoin" method="post" id="joinForm"
+			onsubmit="return memberCheck()">
 		<div class="modal fade" id="JoinModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true"
 			style="z-index: 1200">
@@ -106,6 +109,7 @@ input[type=number] {
 						<div class="md-form mb-3">
 							<input type="text" id="inputMname" class="form-control validate"
 								placeholder="이름" name="mname">
+								<span id="nameCheckMsg" style="font-size:13px"></span>
 						</div>
 						<div class="md-form mb-3">
 							<input type="number" id="inputMtel" class="form-control validate"
@@ -116,8 +120,8 @@ input[type=number] {
 								class="form-control validate" placeholder="이메일" name="memail">
 						</div>
 						<div class="md-form mb-3">
-							<input type="date" id="orangeForm-pass"
-								class="form-control validate" name="mbirth">
+							<input type="date" id="inputBirth"
+								class="form-control validate date_empty placeholder-date" name="mbirth" data-placeholder="생년월일">
 						</div>
 						<div class="row">
 							<div class="col-sm-6 md-form mb-3">
@@ -157,72 +161,75 @@ input[type=number] {
 		
 		<!-- 로그인 모달 -->
 		<form action="memberLogin" method="post">
-			<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true"
-				style="z-index: 1200">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<button class="close text-right font-weight-bold mt-2 mr-2"
-							type="button" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">x&nbsp;</span>
-						</button>
-						<div class="modal-header text-center">
-							<a class="modal-title w-100 font-weight-bold"> <img
-								src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
-								alt="IMG-LOGO" style="width:50%">
-							</a>
-							<!-- <h4 class="modal-title w-100 font-weight-bold">회원가입</h4> -->
-							<!-- <button class="close" type="button" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button> -->
-	
-						</div>
-						<div class="modal-body mx-3">
-	
-							<div class="md-form mb-3">
-								<input type="text" class="form-control validate" id="inputMid" placeholder="아이디" name="mid">
-							</div>
-	
-							<div class="md-form mb-3">
-								<input type="password" id="inputMpw" class="form-control validate" placeholder="비밀번호" name="mpw">
-							</div>
-							<div class="md-form mb-1 text-center">
-								<button class="btn btn-dark" >로그인</button>
-								<br> <br> <a class="small" id="kakaoLoginBtn"></a>
-							</div>
-						</div>
-	
-						<!-- 	<div class="modal-footer d-flex justify-content-center">
-							<div class="md-form mb-3">
-								<a class="medium" id="kakaoLoginBtn"></a>
-							</div>
-	
-							
-						</div> -->
-	
-						<!-- <div class="md-form mb-1 text-center">
-							<a href="#"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-						</div> -->
-						<!-- <div class="modal-footer d-flex justify-content-center">
-							<button class="btn btn-dark">로그인</button>
-							<button class="btn btn-dark" type="button" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">취소</span>
-							</button>
-							
-						</div>
-						<div class="text-center">
-	                        <a class="small" id="kakaoLoginBtn"></a>
-	                    </div> -->
-	
+		<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true"
+			style="z-index: 1200">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<button class="close text-right font-weight-bold mt-2 mr-2"
+						type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x&nbsp;</span>
+					</button>
+					<div class="modal-header text-center">
+						<a class="modal-title w-100 font-weight-bold"> <img
+							src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
+							alt="IMG-LOGO" style="width:50%">
+						</a>
+						<!-- <h4 class="modal-title w-100 font-weight-bold">회원가입</h4> -->
+						<!-- <button class="close" type="button" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button> -->
+
 					</div>
+					<div class="modal-body mx-3">
+
+						<div class="md-form mb-3">
+							<input type="text" id="orangeForm-email"
+								class="form-control validate" placeholder="아이디" name="mid">
+						</div>
+
+						<div class="md-form mb-3">
+							<input type="password" id="orangeForm-pass"
+								class="form-control validate" placeholder="비밀번호" name="mpw" onkeyup="checkCapsLock(event)">
+						<span id="capslockCheckMsg"></span>
+						</div>
+						
+						<div class="md-form mb-1 text-center">
+							<button class="btn btn-dark">로그인</button>
+							<br> <br> <a class="small" id="kakaoLoginBtn"></a>
+						</div>
+					</div>
+
+					<!-- 	<div class="modal-footer d-flex justify-content-center">
+						<div class="md-form mb-3">
+							<a class="medium" id="kakaoLoginBtn"></a>
+						</div>
+
+						
+					</div> -->
+
+					<!-- <div class="md-form mb-1 text-center">
+						<a href="#"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+					</div> -->
+					<!-- <div class="modal-footer d-flex justify-content-center">
+						<button class="btn btn-dark">로그인</button>
+						<button class="btn btn-dark" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">취소</span>
+						</button>
+						
+					</div>
+					<div class="text-center">
+                        <a class="small" id="kakaoLoginBtn"></a>
+                    </div> -->
+
 				</div>
 			</div>
+		</div>
 		</form>
 		<!-- 로그인 모달 끝 -->
-	
+
 		<!-- 내정보 모달 -->
-		<form action="MemberInfo" method="post">
 		<div class="modal fade" id="InfoModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true"
 			style="z-index: 1200">
@@ -247,67 +254,53 @@ input[type=number] {
 					<div class="modal-body mx-3">
 						<div class="md-form mb-3">
 							<label class="small mb-1" for="mid">아이디</label>
-							<input class="form-control" id="inputMid" name="mid" type="text"  readonly="readonly" value="${memberInfo.mid }">
+							<input class="form-control" id="infoMid" name="mid" type="text"  readonly="readonly" >
 						</div>
-
 						<div class="md-form mb-3">
-							<label class="small mb-1" for="mpw">비밀번호</label>
-							<input class="form-control" id="inputMpw" name="mpw" type="password" readonly="readonly" value="${memberInfo.mpw }">
+							<!-- <label class="small mb-1" for="mpw">비밀번호</label>
+							<input class="form-control" id="inputMpw" name="mpw" type="password" readonly="readonly" > -->
+							<input type="button" id="modifyBtn" class="btn btn-dark btn-user btn-block" value="비밀번호 변경" onclick="openModifyInput();">
+							<input type="hidden" id="modifySubmitBtn" class="btn btn-dark btn-user btn-block" value="비밀번호 변경하기" onclick="modifyPw('${sessionScope.loginId}')">
+						</div>
+					    
+						<div class="md-form mb-3">
+							<input type="hidden" class="form-control modifyPw" id="loginPw" name="mpw" type="password" placeholder="현재 비밀번호">
+							<input type="hidden" class="form-control modifyPw" id="modifyPwInput" name="mpw" type="password" placeholder="새 비밀번호">
+							<input type="hidden" class="form-control modifyPw" id="modifyPwInputCheck" name="mpw" type="password" placeholder="새 비밀번호 확인">
+							<span id="modifyPwCheckMsg" style="font-size:13px"></span>
+						</div>
+						<div class="md-form mb-3">
+							<label class="small mb-1" >이름</label>
+							<input class="form-control" id="infoMname" name="mname" type="text" readonly="readonly" >
 						</div>
 						
 						<div class="md-form mb-3">
-							<label class="small mb-1" for="mname">이름</label>
-							<input class="form-control" id="inputMname" name="mname" type="text" readonly="readonly" value="${memberInfo.mname }">
-						</div>
-						
-						<div class="md-form mb-3">
-							<label class="small mb-1" for="mname">전화번호</label>
-							<input type="number" id="inputMtel" class="form-control validate" name="mtel">
+							<label class="small mb-1" >전화번호</label>
+							<input type="text" id="infoMtel" class="form-control validate" name="mtel" readonly="readonly">
 						</div>
 						<div class="md-form mb-3">
-							<input type="email" id="inputMemail"
-								class="form-control validate" placeholder="이메일" name="memail">
+							<label class="small mb-1" >이메일</label>
+							<input type="text" id="infoMemail"
+								class="form-control validate" placeholder="이메일" name="memail" readonly="readonly">
 						</div>
 						<div class="md-form mb-3">
-							<input type="date" id="orangeForm-pass"
-								class="form-control validate" name="mbirth">
-						</div>
-						<div class="row">
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="sample6_postcode"
-									class="form-control validate" placeholder="우편번호" name="mpostcode">
-							</div>
-							<div class="col-sm-6 md-form mb-3">
-								<input type="button" class="btn btn-dark btn-user btn-block"
-									onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-							</div>
+							<label class="small mb-1" >생년월일</label>
+							<input type="text" id="infoMbirth"
+								class="form-control validate" name="mbirth" readonly="readonly">
 						</div>
 						<div class="md-form mb-3">
-							<input type="text" id="sample6_address"
-								class="form-control validate" placeholder="주소" name="maddress">
-						</div>
-
-						<div class="row">
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="sample6_detailAddress"
-									class="form-control validate" placeholder="상세주소" name="mdetailAddr">
-							</div>
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="sample6_extraAddress"
-									class="form-control validate" placeholder="참고항목" name="mextraAddr">
-							</div>
+							<label class="small mb-1" >주소</label>
+							<input type="text" id="infoMaddr"
+								class="form-control validate" name="maddr" readonly="readonly">
 						</div>
 					</div>
-
 					<div class="modal-footer d-flex justify-content-center">
-						<button class="btn btn-dark" type="submit">회원가입</button>
+						<button class="btn btn-dark" type="submit">정보수정</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		</form>
 		<!-- 내정보 모달 끝 -->
-
 
 		<div class="wrap-menu-desktop">
 			<nav class="limiter-menu-desktop container">
@@ -416,7 +409,7 @@ input[type=number] {
 	<div class="menu-mobile">
 		<ul class="topbar-mobile">
 			<li>
-				<div class="left-top-bar">${sessionScope.loginId }</div>
+				<div class="left-top-bar">sessionId님 환영합니다.</div>
 			</li>
 
 			<li>

@@ -105,11 +105,12 @@ $(document).ready(function() {
 					<h2 style="text-align: center;">글 작성</h2>
 					<br> 
 					<div style="width: 100%; margin: auto;">
-						<form method="post" action="/write">
-							<input type="text" name="writer" style="width: 20%;"
-								placeholder="작성자" /><br> <input type="text" name="title"
+						<form method="post" action="write2">
+							<input type="text" name="bomid" style="width: 20%;"
+								placeholder="작성자" /><br> 
+								<input type="text" name="botitle"
 								style="width: 40%;" placeholder="제목" /> <br> <br>
-							<textarea id="summernote" name="content"></textarea>
+							<textarea id="summernote" name="bocontents"></textarea>
 							<input id="subBtn" type="button" value="글 작성"
 								style="float: right;" onclick="goWrite(this.form)" />
 						</form>
@@ -184,9 +185,9 @@ $(document).ready(function() {
 
 	<script>
 		function goWrite(form) {
-			var title = form.title.value;
-			var writer = form.writer.value;
-			var content = form.content.value;
+			var title = form.botitle.value;
+			var writer = form.bomid.value;
+			var content = form.bocontents.value;
 
 			if (title.trim() == '') {
 				alert("제목을 입력해주세요");

@@ -1,8 +1,9 @@
 package com.camily.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.camily.dto.BoardsDto;
 import com.camily.service.BoardService;
@@ -10,21 +11,21 @@ import com.camily.service.BoardService;
 @Controller
 public class BoardController {
 
+	@Autowired
+	BoardService bsvc;
 
 	@GetMapping("write")
 	public String boardWrite() {
+		System.out.println("BoardController.boardwrite()호출");
 		return "board/BoardWrite";
 	}
-	
-	@Override
-	public int insertBoard(BoardsDto bo) {
-		return mapper.insertBoard(bo);
+
+	@RequestMapping("write2")
+	public String boardWrite(BoardsDto bo) {
+		System.out.println("BoardController.boardwrite()호출");
+		System.out.println(bo);
+		int insertResult = bsvc.insertBoard(bo);
+		return "redirect:/detail?seq=" + bo.getBocode();
 	}
-	
-	@PostMapping("write")
-	public String write(BoardsDto bo) {
-		BoardService.insertBoard(bo);
-		return "redirect: /detail?seq="+ bo.getSeq();
-	}
-	
+
 }

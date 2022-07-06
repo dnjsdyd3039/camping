@@ -1,5 +1,10 @@
 package com.camily.dao;
 
-public class BoardDao {
-	int insertBoard(BoardsDto bd);
+import com.camily.dto.BoardsDto;
+
+public interface BoardDao {
+
+	int insertBoard(BoardsDto bo);
+	
+
 }

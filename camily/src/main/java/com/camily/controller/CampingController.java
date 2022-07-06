@@ -14,6 +14,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.camily.dto.CampingDto;
@@ -132,5 +133,21 @@ public class CampingController {
 		return "camping/CampingList";
 	}
 	
+	@RequestMapping("campingReservation")
+	public String campingReservation(String dates, String type, String people) {
+		System.out.println("캠핑장 예매페이지 이동");
+		System.out.println("dates : " + dates);
+		System.out.println("type : " + type);
+		System.out.println("people : " + people);
+		return "camping/CampingReservation";
+	}
+	
+	
+	@RequestMapping(value = "checkRoomType")
+	public @ResponseBody String checkRoomType(String cacode, String startday, String endday) {
+		System.out.println("예매가능 캠핑장 타입 ajax");
+		String a = csvc.checkRoomType(cacode, startday, endday);
+		return null;
+	}
 	
 }

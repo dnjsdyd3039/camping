@@ -1,25 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
-<style>
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-</style>
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- Header -->
 <header>
-
-
-
 	<!-- Header desktop -->
 	<div class="container-menu-desktop">
 		<!-- Topbar -->
@@ -36,181 +17,11 @@ input[type=number] {
 						onclick="memberJoin();"> 회원가입 </a> <a href="#"
 						class="flex-c-m trans-04 p-lr-25" onclick="memberLogin();">
 						로그인 </a>
-
-					<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a> -->
 				</div>
 
 
 			</div>
 		</div>
-
-
-
-		<!-- 회원가입 모달 -->
-		<form action="memberJoin" method="post" id="joinForm"
-			onsubmit="return memberCheck()">
-		<div class="modal fade" id="JoinModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true"
-			style="z-index: 1200">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<button class="close text-right font-weight-bold mt-2 mr-2"
-						type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">x&nbsp;</span>
-					</button>
-					<div class="modal-header text-center">
-						<a class="modal-title w-100 font-weight-bold"> <img
-							src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
-							alt="IMG-LOGO" style="width:35%">
-						</a>
-						<!-- <h4 class="modal-title w-100 font-weight-bold">회원가입</h4> -->
-						<!-- <button class="close" type="button" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button> -->
-
-					</div>
-					<div class="modal-body mx-3">
-						<div class="md-form mb-3">
-							<input type="text" id="inputMid" class="form-control validate"
-								placeholder="아이디" name="mid"  onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');">
-							<span id="idCheckMsg" style="font-size:13px"></span>
-						</div>
-
-						<div class="md-form mb-3">
-							<input type="password" id="inputMpw" class="form-control validate"
-								placeholder="비밀번호" name="mpw">
-						</div>
-						<div class="md-form mb-3">
-							<input type="password" id="inputMpwCheck" class="form-control validate"
-								placeholder="비밀번호 확인" >
-								<span id="pwCheckMsg" style="font-size:13px"></span>
-						</div>
-						<div class="md-form mb-3">
-							<input type="text" id="inputMname" class="form-control validate"
-								placeholder="이름" name="mname">
-						</div>
-						<div class="md-form mb-3">
-							<input type="number" id="inputMtel" class="form-control validate"
-								placeholder="전화번호 / 숫자만 입력해주세요" name="mtel">
-						</div>
-						<div class="md-form mb-3">
-							<input type="email" id="inputMemail"
-								class="form-control validate" placeholder="이메일" name="memail">
-						</div>
-						<div class="md-form mb-3">
-							<input type="date" id="orangeForm-pass"
-								class="form-control validate" name="mbirth">
-						</div>
-						<div class="row">
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="sample6_postcode"
-									class="form-control validate" placeholder="우편번호" name="mpostcode">
-							</div>
-							<div class="col-sm-6 md-form mb-3">
-								<input type="button" class="btn btn-dark btn-user btn-block"
-									onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-							</div>
-						</div>
-						<div class="md-form mb-3">
-							<input type="text" id="sample6_address"
-								class="form-control validate" placeholder="주소" name="maddress">
-						</div>
-
-						<div class="row">
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="sample6_detailAddress"
-									class="form-control validate" placeholder="상세주소" name="mdetailAddr">
-							</div>
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="sample6_extraAddress"
-									class="form-control validate" placeholder="참고항목" name="mextraAddr">
-							</div>
-						</div>
-					</div>
-
-					<div class="modal-footer d-flex justify-content-center">
-						<button class="btn btn-dark" type="submit">회원가입</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		</form>
-		<!-- 회원가입 모달 끝 -->
-		
-		<!-- 로그인 모달 -->
-		<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true"
-			style="z-index: 1200">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<button class="close text-right font-weight-bold mt-2 mr-2"
-						type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">x&nbsp;</span>
-					</button>
-					<div class="modal-header text-center">
-						<a class="modal-title w-100 font-weight-bold"> <img
-							src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
-							alt="IMG-LOGO" style="width:50%">
-						</a>
-						<!-- <h4 class="modal-title w-100 font-weight-bold">회원가입</h4> -->
-						<!-- <button class="close" type="button" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button> -->
-
-					</div>
-					<div class="modal-body mx-3">
-
-						<div class="md-form mb-3">
-							<input type="email" id="orangeForm-email"
-								class="form-control validate" placeholder="아이디" name="">
-						</div>
-
-						<div class="md-form mb-3">
-							<input type="text" id="orangeForm-pass"
-								class="form-control validate" placeholder="비밀번호" name="">
-						</div>
-						<div class="md-form mb-1 text-center">
-							<button class="btn btn-dark">로그인</button>
-							<br> <br> <a class="small" id="kakaoLoginBtn"></a>
-						</div>
-					</div>
-
-					<!-- 	<div class="modal-footer d-flex justify-content-center">
-						<div class="md-form mb-3">
-							<a class="medium" id="kakaoLoginBtn"></a>
-						</div>
-
-						
-					</div> -->
-
-					<!-- <div class="md-form mb-1 text-center">
-						<a href="#"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-					</div> -->
-					<!-- <div class="modal-footer d-flex justify-content-center">
-						<button class="btn btn-dark">로그인</button>
-						<button class="btn btn-dark" type="button" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">취소</span>
-						</button>
-						
-					</div>
-					<div class="text-center">
-                        <a class="small" id="kakaoLoginBtn"></a>
-                    </div> -->
-
-				</div>
-			</div>
-		</div>
-		<!-- 로그인 모달 끝 -->
-
-
 
 		<div class="wrap-menu-desktop">
 			<nav class="limiter-menu-desktop container">
@@ -224,29 +35,18 @@ input[type=number] {
 				<!-- Menu desktop -->
 				<div class="menu-desktop">
 					<ul class="main-menu">
-						<li><a href="index.html">캠핑장</a>
-
+						<li><a href="campingList">캠핑장</a></li>
+						<li><a href="campingShopPage">캠핑용품</a></li>
+						<li><a href="#">후기</a>
 							<ul class="sub-menu">
-								<li><a href="index.html">오토캠핑장</a></li>
-								<li><a href="home-02.html">글램핑</a></li>
-								<li><a href="home-03.html">Homepage 3</a></li>
-							</ul></li>
-						<li><a href="index.html">캠핑용품</a>
-							<ul class="sub-menu">
-								<li><a href="index.html">Homepage 1</a></li>
-								<li><a href="home-02.html">Homepage 2</a></li>
-								<li><a href="home-03.html">Homepage 3</a></li>
-							</ul></li>
-						<li><a href="product.html">리뷰</a>
-							<ul class="sub-menu">
-								<li><a href="index.html">캠핑장 리뷰</a></li>
-								<li><a href="home-02.html">상품 리뷰</a></li>
+								<li><a href="cgreviewpage">캠핑장 후기</a></li>
+								<li><a href="goreviewpage">캠핑용품 후기</a></li>
 							</ul></li>
 
 						<li class="label1" data-label1="hot"><a
 							href="shoping-cart.html">이벤트</a></li>
 
-						<li><a href="blog.html">FAQ</a></li>
+						<li><a href="boardList">FAQ</a></li>
 
 						<li><a href="about.html">캠핑TIP</a></li>
 
@@ -342,14 +142,7 @@ input[type=number] {
 		</ul>
 
 		<ul class="main-menu-m">
-			<li><a href="index.html">캠핑장</a>
-				<ul class="sub-menu-m">
-					<li><a href="index.html">Homepage 1</a></li>
-					<li><a href="home-02.html">Homepage 2</a></li>
-					<li><a href="home-03.html">Homepage 3</a></li>
-				</ul> <span class="arrow-main-menu-m"> <i
-					class="fa fa-angle-right" aria-hidden="true"></i>
-			</span></li>
+			<li><a href="campingList">캠핑장</a></li>
 			<li><a href="index.html">캠핑용품</a>
 				<ul class="sub-menu-m">
 					<li><a href="index.html">Homepage 1</a></li>
@@ -358,12 +151,18 @@ input[type=number] {
 				</ul> <span class="arrow-main-menu-m"> <i
 					class="fa fa-angle-right" aria-hidden="true"></i>
 			</span></li>
-			<li><a href="product.html">게시판</a></li>
+			<li><a href="index.html">후기</a>
+				<ul class="sub-menu-m">
+					<li><a href="cgreviewpage">캠핑장 후기</a></li>
+					<li><a href="goreviewpage">캠핑용품 후기</a></li>
+				</ul> <span class="arrow-main-menu-m"> <i
+					class="fa fa-angle-right" aria-hidden="true"></i>
+			</span></li>
 
 			<li><a href="shoping-cart.html" class="label1 rs1"
 				data-label1="hot">이벤트</a></li>
 
-			<li><a href="blog.html">FAQ</a></li>
+			<li><a href="boardList">FAQ</a></li>
 
 			<li><a href="about.html">캠핑TIP</a></li>
 
@@ -371,6 +170,7 @@ input[type=number] {
 		</ul>
 	</div>
 
+	
 	<!-- Modal Search -->
 	<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 		<div class="container-search-header">
@@ -391,49 +191,80 @@ input[type=number] {
 		</div>
 	</div>
 
-	<!-- 카카오 로그인 시작-->
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script>
-        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('37a626201cfce25befda4da6757d4ec6');
-
-        // SDK 초기화 여부를 판단합니다.
-        console.log(Kakao.isInitialized());
-    </script>
-
-	<script type="text/javascript">
-         Kakao.Auth.createLoginButton({
-		 container: '#kakaoLoginBtn',
-		 size: 'large',
-	     success: function(response) {
-			console.log(response);
-			// 사용자 정보 가져오기
-			Kakao.API.request({
-			  url: '/v2/user/me',
-			  success: function(res) {
-			    console.log(res);
-			    console.log("res.id : " + res.id);
-			    console.log("res.kakao_account.email : " + res.kakao_account.email);
-			    console.log("res.kakao_account.profile.nickname : " + res.kakao_account.profile.nickname);
-			    console.log("res.kakao_account.profile.profile_image_url : " + res.kakao_account.profile.profile_image_url);
-			    
-			    kakaoLogin(res.id, res.kakao_account.email, res.kakao_account.profile.nickname, res.kakao_account.profile.profile_image_url);
-			    //아이디, 이메일, 닉네임, 프로필
-			    //controller >> service 아이디로 회원정보 조회
-			    //조회되는 회원 정보가 있으면 로그인 처리 후 메인페이지로
-			    //조회되는 회원 정보가 없으면 아이디, 이메일, 닉네임, 프로필, 회원가입 처리 >> 로그인 페이지로
-			  },
-			  fail: function(error) {
-			    console.error(error)
-			  }
-			})
-	     },
-		 fail: function(error) {
-		  console.log(error);
-			},
-		 });
-		</script>
-	<!-- 카카오 로그인 끝-->
 
 </header>
+
+<!-- Cart -->
+<div class="wrap-header-cart js-panel-cart">
+	<div class="s-full js-hide-cart"></div>
+
+	<div class="header-cart flex-col-l p-l-65 p-r-25">
+		<div class="header-cart-title flex-w flex-sb-m p-b-8">
+			<span class="mtext-103 cl2"> Your Cart </span>
+
+			<div
+				class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+				<i class="zmdi zmdi-close"></i>
+			</div>
+		</div>
+
+		<div class="header-cart-content flex-w js-pscroll">
+			<ul class="header-cart-wrapitem w-full">
+				<li class="header-cart-item flex-w flex-t m-b-12">
+					<div class="header-cart-item-img">
+						<img
+							src="${pageContext.request.contextPath}/resources/images/item-cart-01.jpg"
+							alt="IMG">
+					</div>
+
+					<div class="header-cart-item-txt p-t-8">
+						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							White Shirt Pleat </a> <span class="header-cart-item-info"> 1
+							x $19.00 </span>
+					</div>
+				</li>
+
+				<li class="header-cart-item flex-w flex-t m-b-12">
+					<div class="header-cart-item-img">
+						<img
+							src="${pageContext.request.contextPath}/resources/images/item-cart-02.jpg"
+							alt="IMG">
+					</div>
+
+					<div class="header-cart-item-txt p-t-8">
+						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							Converse All Star </a> <span class="header-cart-item-info"> 1
+							x $39.00 </span>
+					</div>
+				</li>
+
+				<li class="header-cart-item flex-w flex-t m-b-12">
+					<div class="header-cart-item-img">
+						<img
+							src="${pageContext.request.contextPath}/resources/images/item-cart-03.jpg"
+							alt="IMG">
+					</div>
+
+					<div class="header-cart-item-txt p-t-8">
+						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							Nixon Porter Leather </a> <span class="header-cart-item-info">
+							1 x $17.00 </span>
+					</div>
+				</li>
+			</ul>
+
+			<div class="w-full">
+				<div class="header-cart-total w-full p-tb-40">Total: $75.00</div>
+
+				<div class="header-cart-buttons flex-w w-full">
+					<a href="shoping-cart.html"
+						class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						View Cart </a> <a href="shoping-cart.html"
+						class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+						Check Out </a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 

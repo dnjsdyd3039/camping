@@ -7,8 +7,6 @@
 	<title>Home</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -37,97 +35,35 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
-
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->	
+    <!-- datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<style type="text/css">
+        .dp-highlight .ui-state-default {
+          background: #484;
+          color: #FFF;
+        }
+        .ui-datepicker.ui-datepicker-multi  {
+          width: 100% !important;
+        }
+        .ui-datepicker-multi .ui-datepicker-group {
+        float:none;
+        }
+        #datepicker {
+          height: 300px;
+          overflow-x: scroll;
+        }
+		.ui-widget { font-size: 100% }
+		.ui-datepicker{
+			width: 100%;
+		}
+</style>
 </head>
 <body class="animsition">
 	
 	<!-- Header -->
 	<%@ include file="../includes/TopBar.jsp" %>
-
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
-
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-			
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="${pageContext.request.contextPath}/resources/images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="${pageContext.request.contextPath}/resources/images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="${pageContext.request.contextPath}/resources/images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
-				</ul>
-				
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60" style="margin-top: 100px;">
@@ -196,6 +132,13 @@
 						
 						<!--  -->
 						<div class="p-t-33">
+							<!-- 예약 날짜 선택 -->
+							<div class="p-b-10">
+								<input type="hidden" id="startday" size="10">
+								<input type="hidden" id="endday" size="10" >
+								<div class="datepicker"></div>
+							</div>
+							<!-- 해당 날짜에 가능한 객실 타입목록 표시 -->
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
 									객실타입
@@ -204,57 +147,64 @@
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
 										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Size S</option>
-											<option>Size M</option>
-											<option>Size L</option>
-											<option>Size XL</option>
+											<option>캠핑장 선택</option>
+											<c:forEach items="${campingRoomTypeList}" var="campingRoomType">
+												<option>${campingRoomType.crname}</option>											
+											</c:forEach>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>
 							</div>
-
+							
+							<!-- 해당 타입의 가능한 객실 번호 표시 -->
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-203 flex-c-m respon6">
-									인원
+									객실번호
 								</div>
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
 										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Red</option>
-											<option>Blue</option>
-											<option>White</option>
-											<option>Grey</option>
+											<option>객실번호 선택</option>
+											<c:forEach items="${campingRoomList}" var="campingRoom">
+												<option>${campingRoom.crnum}</option>											
+											</c:forEach>
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>
 							</div>
-
+							
+							<!-- 인원선택 -->
 							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+								<div class="size-203 flex-c-m respon6">
+									인원
+								</div>
+
+								<div class="wrap-num-product flex-w m-r-20 m-tb-10">
 										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+										<input id="people" class="mtext-104 cl3 txt-center num-product" type="number" name="people" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
+							</div>
 
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+							<!-- 예약하기 버튼 -->
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-204 flex-w flex-m respon6-next">
+									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" onclick="campingReservation()">
 										예약하기
 									</button>
 								</div>
 							</div>	
 						</div>
-
+						
 						
 					</div>
 				</div>
@@ -274,7 +224,7 @@
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#information" role="tab" onclick="drawMap('${campingInfo.calatitude}', '${campingInfo.calongitude}', '${campingInfo.caname}')">캠핑장 정보</a>
+							<a onclick="drawMap('${campingInfo.calatitude}', '${campingInfo.calongitude}', '${campingInfo.caname}')" class="nav-link" data-toggle="tab" href="#information" role="tab" >캠핑장 정보</a>
 						</li>
 					</ul>
 
@@ -287,24 +237,25 @@
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm">
 										<!-- Review -->
-										<div class="flex-w flex-t p-b-68">
-											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-												<img src="" alt="객실사진">
-											</div>
-
-											<div class="size-207">
-												<div class="flex-w flex-sb-m p-b-17">
-													<span class="mtext-107 cl2 p-r-20">
-														객실타입 A
-													</span>
-
+										<c:forEach items="${campingRoomTypeList}" var="campingRoomType">
+											<div class="flex-w flex-t p-b-68">
+												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+													<img src="${campingRoomType.crimage}" alt="객실사진">
 												</div>
-
-												<p class="stext-102 cl6">
-													객실타입 A입니다.
-												</p>
+	
+												<div class="size-207">
+													<div class="flex-w flex-sb-m p-b-17">
+														<span class="mtext-107 cl2 p-r-20">
+															${campingRoomType.crname}
+														</span>
+													</div>
+	
+													<p class="stext-102 cl6">
+														가격 : ${campingRoomType.crprice}
+													</p>
+												</div>
 											</div>
-										</div>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
@@ -345,151 +296,6 @@
 		</span>
 	</div>
 
-	<!-- Modal1 -->
-	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-		<div class="overlay-modal1 js-hide-modal1"></div>
-
-		<div class="container">
-			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="${pageContext.request.contextPath}/resources/images/icons/icon-close.png" alt="CLOSE">
-				</button>
-
-				<div class="row">
-					<div class="col-md-6 col-lg-7 p-b-30">
-						<div class="p-l-25 p-r-30 p-lr-0-lg">
-							<div class="wrap-slick3 flex-sb flex-w">
-								<div class="wrap-slick3-dots"></div>
-								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="">
-										<div class="wrap-pic-w pos-relative">
-											<img src="" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="">
-										<div class="wrap-pic-w pos-relative">
-											<img src="" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="">
-										<div class="wrap-pic-w pos-relative">
-											<img src="" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-5 p-b-30">
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
-							</h4>
-
-							<span class="mtext-106 cl2">
-								$58.79
-							</span>
-
-							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-							</p>
-							
-							<!--  -->
-							<div class="p-t-33">
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Size
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Size S</option>
-												<option>Size M</option>
-												<option>Size L</option>
-												<option>Size XL</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										Color
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Red</option>
-												<option>Blue</option>
-												<option>White</option>
-												<option>Grey</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-204 flex-w flex-m respon6-next">
-										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-											Add to cart
-										</button>
-									</div>
-								</div>	
-							</div>
-
-							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
@@ -624,5 +430,65 @@
 			});
 		}
 	</script>
+	<script>
+		function campingReservation(){
+			console.log("예약하기 버튼 클릭");
+			var dates = $("#dates").val();
+			var type = $("#type").val();
+			var people = $("#people").val();
+			console.log("dates : " + dates);
+			console.log("type : " + type);
+			console.log("people : " + people);
+			location.href = "campingReservation?dates=" + dates + "&type=" + type + "&people="+people;
+		}
+	</script>
 </body>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript">
+$(".datepicker").datepicker({
+	minDate: 0,
+	numberOfMonths: [1,1],
+	beforeShowDay: function(date) {
+		var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#startday").val());
+		var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#endday").val());
+		return [true, date1 && ((date.getTime() == date1.getTime()) || (date2 && date >= date1 && date <= date2)) ? "dp-highlight" : ""];
+	},
+	onSelect: function(dateText, inst) {
+		var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#startday").val());
+		var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#endday").val());
+		if (!date1 || date2) {
+			$("#startday").val(dateText);
+			$("#endday").val("");
+            $(this).datepicker();
+		} else {
+			$("#endday").val(dateText);
+			checkRoomType();
+            $(this).datepicker();
+		}
+	}
+});
+</script>
+<script type="text/javascript">
+	function checkRoomType() {
+		var cacode = '${campingInfo.cacode}';
+		console.log("cacode : " + cacode);
+		var startday = $("#startday").val();
+		console.log("startday : " + startday);
+		var endday = $("#endday").val();
+		console.log("endday : " + endday);
+		if(startday < endday){
+			$.ajax({
+				type : "get",
+				url : "checkRoomType",
+				data : {"cacode" : cacode, "startday" : startday, "endday" : endday},
+				dataType : "json",
+				async : false,
+				success : function(result){
+
+				}
+			})
+		}
+		
+	}
+</script>
 </html>

@@ -134,20 +134,23 @@ public class CampingController {
 	}
 	
 	@RequestMapping("campingReservation")
-	public String campingReservation(String dates, String type, String people) {
+	public ModelAndView campingReservation(String cacode, String startday, String endday, String roomSel, String numSel, String people) {
 		System.out.println("캠핑장 예매페이지 이동");
-		System.out.println("dates : " + dates);
-		System.out.println("type : " + type);
+		System.out.println("cacode : " + cacode);
+		System.out.println("startday : " + startday);
+		System.out.println("endday : " + endday);
+		System.out.println("roomSel : " + roomSel);
+		System.out.println("numSel : " + numSel);
 		System.out.println("people : " + people);
-		return "camping/CampingReservation";
+		return null;
 	}
 	
 	
 	@RequestMapping(value = "checkRoomType")
 	public @ResponseBody String checkRoomType(String cacode, String startday, String endday) {
 		System.out.println("예매가능 캠핑장 타입 ajax");
-		String a = csvc.checkRoomType(cacode, startday, endday);
-		return null;
+		String roomType_json = csvc.checkRoomType(cacode, startday, endday);
+		return roomType_json;
 	}
 	
 }

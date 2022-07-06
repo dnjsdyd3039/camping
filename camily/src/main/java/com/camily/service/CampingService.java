@@ -103,7 +103,7 @@ public class CampingService {
 		mav.setViewName("camping/CampingView");
 		return mav;
 	}
-/*
+
 	public String checkRoomType(String cacode, String startday, String endday) {
 		System.out.println("CampingService.checkRoomType() 호출");
 		Gson gson = new Gson();
@@ -111,13 +111,16 @@ public class CampingService {
 		ArrayList<ReservationDto> reserveType = cdao.getReserveList(cacode, startday, endday);
 		for (int i = 0; i < roomType.size(); i++) {
 			for (int j = 0; j < reserveType.size();j++) {
-				if (roomType[i])
+				if (roomType.get(i).getCrname().equals(reserveType.get(j).getRecrname()) && roomType.get(i).getCrnum().equals(reserveType.get(j).getRecrnum())) {
+					roomType.remove(i);
+				}
 			}
 		}
-		
-		return null;
+		System.out.println(roomType);
+		String roomType_json = gson.toJson(roomType);
+		return roomType_json;
 	}
-*/
+
 	
 	
 }

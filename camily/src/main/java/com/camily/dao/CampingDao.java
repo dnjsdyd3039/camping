@@ -33,7 +33,7 @@ public interface CampingDao {
 	@Select("SELECT DISTINCT CRNAME, CRPRICE, CRIMAGE FROM CAMPINGROOM WHERE CRCACODE = #{cacode}")
 	ArrayList<CampingRoomDto> campingRoomTypeList(String cacode);
 
-	@Select("SELECT RECRNAME, RECRNUM, REDAY FROM RESERVATION WHERE RECACODE = #{cacode} AND (REDAY BETWEEN #{startday} AND #{endday})")
-	ArrayList<ReservationDto> getReserveList(String cacode, String startday, String endday);
+	@Select("SELECT RECRNAME, RECRNUM, REDAY FROM RESERVATION WHERE RECACODE = #{cacode} AND (REDAY BETWEEN TO_DATE(#{startday}, 'MM/DD/YY') AND TO_DATE(#{endday}, 'MM/DD/YY'))")
+	ArrayList<ReservationDto> getReserveList(@Param("cacode") String cacode, @Param("startday") String startday, @Param("endday") String endday);
 
 }

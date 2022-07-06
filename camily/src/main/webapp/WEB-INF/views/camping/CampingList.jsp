@@ -55,7 +55,7 @@
 
 	<!-- Header -->
 	<%@ include file="../includes/TopBar.jsp" %>
-
+	<%@ include file="/WEB-INF/views/includes/Member.jsp"%>
 	<!-- Product -->
 	<div class="bg0 m-t-23 p-b-140" style="margin-top: 100px;">
 		<div class="container">

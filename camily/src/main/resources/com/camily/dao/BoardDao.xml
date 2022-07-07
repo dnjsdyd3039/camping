@@ -2,15 +2,19 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="com.camily.dao.BoardDao" >
 
-<!-- 게시판 insert -->
-<insert id="insertBoard" parameterType="com.camily.dao.BoardDao">
+<mapper namespace="com.camily.dao.BoardDao">
 
-	INSERT INTO BOARDS (BOCODE, BOMID, BOTITLE, BOCONTENTS)
-				VALUES (#{bocode}, #{bomid}, #{botitle}, #{bocontents})
-</insert>
+	<!-- 게시판 insert -->
+	<insert id="insertBoard">
+
+		INSERT INTO BOARDS (BOCODE, BOMID, BOTITLE, BOCONTENTS,BOTYPE,BODATE,BOSTATE)
+		VALUES (#{bocode}, #{bomid}, #{botitle}, #{bocontents},1,SYSDATE,1)
+	</insert>
+
+	<select id="getMaxBocode" resultType="int">
+		SELECT NVL(MAX(BOCODE),0) FROM BOARDS
+	</select>
 
 
 

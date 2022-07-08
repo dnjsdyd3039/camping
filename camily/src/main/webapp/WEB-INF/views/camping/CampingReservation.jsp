@@ -70,11 +70,11 @@
 									<div style="font-size: 20px;">${people}명</div>
 									
 									<input type="hidden" name="remid" value="${sessionScope.loginId}">
-									<input type="hidden" name="roomSel" value="${RoomInfo.crname}">
-									<input type="hidden" name="numSel" value="${RoomInfo.crnum}">
+									<input type="hidden" name="recrname" value="${RoomInfo.crname}">
+									<input type="hidden" name="recrnum" value="${RoomInfo.crnum}">
 									<input type="hidden" name="startday" value="${startday}">
 									<input type="hidden" name="endday" value="${endday}">
-									<input type="hidden" name="people" value="${people}">
+									<input type="hidden" name="repeople" value="${people}">
 								</div>
 							</div>
 							<hr>
@@ -87,22 +87,22 @@
 								<span style="color: red;">(*필수)</span>
 							</div>
 							<div class="bor8 m-b-20 how-pos4-parent">
-								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" id="mname" name="mname" placeholder="예약자 이름을 입력해주세요.">
+								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" id="remname" name="mname" placeholder="예약자 이름을 입력해주세요.">
 							</div>
 							<div>
 								<span>예약자 전화번호</span>
 								<span style="color: red;">(*필수)</span>
 							</div>
 							<div class="bor8 m-b-20 how-pos4-parent">
-								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" id="mtel" name="mtel" placeholder="010-0000-0000">
+								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" id="remtel" name="mtel" placeholder="010-0000-0000">
 							</div>
 							<div>예약자 이메일</div>
 							<div class="bor8 m-b-20 how-pos4-parent">
-								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" id="memail" name="memail" placeholder="예약자 이메일을 입력해주세요.">
+								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" id="rememail" name="memail" placeholder="예약자 이메일을 입력해주세요.">
 							</div>
 							<div>요청사항</div>
 							<div class="bor8 m-b-30">
-								<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg" placeholder="요청사항이 있으면 적어주시기 바랍니다."></textarea>
+								<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="rerequest" placeholder="요청사항이 있으면 적어주시기 바랍니다. (500자 이내)"></textarea>
 							</div>
 						</div>
 

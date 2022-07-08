@@ -4,23 +4,57 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.camily.dao.CampingShopDao" >
- <select id="campingShop" resultType="com.camily.dto.CampingShopDto">
+ <select id="campingShop" resultType="com.camily.dto.GoodsDto">
    SELECT*
    FROM GOODS
  </select>
  
- <select id="campingDetail" resultType="com.camily.dto.CampingShopDto">
+ <select id="campingDetail" resultType="com.camily.dto.GoodsDto">
    SELECT* 
    FROM GOODS
    WHERE GCODE = #{gcode}
  </select>
   
- <select id="campingpurchase" resultType="com.camily.dto.CampingShopDto">
+ <select id="campingpurchase" resultType="com.camily.dto.GoodsDto">
    SELECT* 
    FROM GOODS
    WHERE GCODE = #{gcode}
  </select>
   
+ <select id="addselect" resultType="com.camily.dto.MemberDto">
+   SELECT*
+   FROM MEMBERS
+   WHERE MID = #{loginId}
+ </select>
+ 
+ <insert id="goodsPurchase">
+   INSERT INTO GOODSORDER(GOCODE, GOMID, GOMADDR, GOGCODE, GOAMOUNT, GOPRICE, GONAME, GOIMAGE)
+   VALUES(#{gocode}, #{loginId}, #{addr}, #{gogcode}, #{gamount}, #{totalPrice}, #{gname}, #{gimage})
+ </insert>
+ 
+ <select id="MaxGocode" resultType="String">
+   SELECT MAX(GOCODE) 
+   FROM GOODSORDER
+ </select>
+ 
+ <select id="PurchaseList" resultType="com.camily.dto.GoodsOrderDto">
+   SELECT*
+   FROM GOODSORDER
+   WHERE GOMID = #{loginId}
+ </select>
+ 
+  <insert id="cartInsert">
+   INSERT INTO GOODSORDER(GOCODE, GOMID, GOGCODE, GOPRICE, GONAME, GOIMAGE, GOAMOUNT, GOSTATE)
+      VALUES(#{gocode}, #{loginId}, #{gcode}, #{gorice}, #{goname}, #{goimage}, 1, 1)
+ 
+  </insert>
+ 
+ <select id="getCampingInfo" resultType="com.camily.dto.GoodsDto">
+  SELECT*
+  FROM GOODS
+  WHERE GCODE = #{gcode}
+ </select>
+ 
 </mapper>
 
     

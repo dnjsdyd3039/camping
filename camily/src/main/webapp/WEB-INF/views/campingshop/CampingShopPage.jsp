@@ -232,10 +232,13 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="${pageContext.request.contextPath}/resources/icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="${pageContext.request.contextPath}/resources/icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-02.png" alt="ICON">
-								</a>
+								<c:choose>
+							    <c:when test="${sessionScope.loginId != null}">
+								<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,'${camping.gcode}')">
+										<img class="zmdi zmdi-shopping-cart" src="">
+								</button>
+								</c:when>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -244,120 +247,41 @@
 				  </c:forEach>
 			   </div>
 			  </div>
-		   <!-- paging 시작 -->
-		   <div class="flex-c-m flex-w w-full p-t-45">			
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">1</a>
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">2</a>
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">3</a> 
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">4</a>
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">5</a>   
-		   </div>
-		   <!-- paging 종료 -->
+				<!-- Pagination 시작 -->
+				<div class="flex-c-m flex-w w-full p-t-45" style="margin-top: auto; margin-right: auto;">
+					<c:choose>
+						<c:when test="${pageDto.page <= 1}">
+							<span>[이전]</span>
+						</c:when>
+						<c:otherwise>
+							<span><a href="campingList?page=${pageDto.page - 1}">[이전]</a></span>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach begin="${pageDto.startPage }" end="${pageDto.endPage }" var="num" step="1">
+						<c:choose>
+							<c:when test="${pageDto.page == num}">
+								<span><a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">${num}</a></span>
+							</c:when>
+							<c:otherwise>
+								<span><a href="campingList?page=${num}" class="flex-c-m how-pagination1 trans-04 m-all-7">${num}</a></span>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${pageDto.page >= pageDto.endPage}">
+							<span>[다음]</span>
+						</c:when>
+						<c:otherwise>
+							<span><a href="campingList?page=${pageDto.page + 1}">[다음]</a></span>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<!-- Pagination 종료 -->
 		</div>
-
-
+		
 	<!-- Footer -->
-	<footer class="bg3 p-t-75 p-b-32">
-		<div class="container">
-			<div class="row">
-				<!-- p-b-50  : : 패팅 바텀 50px-->
-				<div class="col-sm-6 col-lg-3 ">
-					<h4 class="stext-301 cl0 p-b-30">
-						팀 소개 <br>
-						팀장 : 김종윤
-					</h4>
-
-					 <ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박준범
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								김두성
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박시환
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								정해성
-							</a>
-						</li>
-						
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								조아용
-							</a>
-						</li>						
-						
-					</ul> 
-				</div>
-
-				<div class="col-sm-6 col-lg-3">
-					<h4 class="stext-301 cl0 p-b-30">
-						캠핑장 제휴문의
-					</h4>
-
-					<ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								김종윤
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박시환 
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								정해성
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박준범
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-sm-6 col-lg-3">
-					<h4 class="stext-301 cl0 p-b-30">
-						상품제휴 / 광고문의
-					</h4>
-
-					<div class="p-t-27">
-	     				<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-facebook"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-instagram"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
-						</a>
-					</div>
-				</div>
-			<p class="stext-107 cl6 txt-center">
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-			</p>
-		</div>
-	</footer>
+	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
+	<!-- End of Footer -->
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
@@ -365,6 +289,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
+
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if( checkMsg.length > 0 ){
+			alert(checkMsg);
+		}
+	</script>
+
 
 <!--===============================================================================================-->	
 	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -467,6 +400,27 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
 </body>
+
+<script type="text/javascript">
+ function cartInsert(thisval,gcode){
+	 var result = "";
+	 console.log("thisval :"+ thisval)
+	 console.log("gcode.length :"+ gcode.length);
+
+	 $.ajax({
+			type : "get",
+			url : "cartInsert",
+			data : { "gcode" :  gcode},
+			success : function(cartresult){
+				console.log("cartresult :"+ cartresult)
+				if(cartresult == 1){
+					result = ""
+				}
+			}
+			
+	 });
+ }
+</script>
+
 </html>

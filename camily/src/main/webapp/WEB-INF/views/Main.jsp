@@ -593,33 +593,71 @@
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
-
-    <!-- 모달 스크립트 끝-->
+	<!-- 경고창 표시 -->
 	<script type="text/javascript">
-	   
+  var checkMsg = '${msg}';
+  console.log(checkMsg.length);
+  if( checkMsg.length > 0 ){
+	  alert(checkMsg);
+  }
+</script>
+
+	<!-- 모달 스크립트 끝-->
+	<script type="text/javascript">
+	    /* 회원가입 모달 호출 */
 		function memberJoin(){
 			$("#JoinModal").modal('show');
 		}
-		
+		/* 로그인 모달 호출 */
 		function memberLogin(){
 			$("#LoginModal").modal('show');
+		}
+		/* 내 정보 모달 호출*/
+		function memberInfo(loginId){
+			$.ajax({
+				type : "get",
+				url : "memberInfo",
+				data : { "loginId" : loginId},
+				dataType : "json",
+				success: function(memberInfo){
+					console.log("내 정보 모달");
+					
+					 $("#infoMid").val(memberInfo.mid);
+					 $("#infoMname").val(memberInfo.mname);
+					 $("#infoMtel").val(memberInfo.mtel);
+					 $("#infoMemail").val(memberInfo.memail);
+					 $("#infoMbirth").val(memberInfo.mbirth);
+					 $("#infoMaddr").val(memberInfo.maddr);	
+				}
+				
+			})
+			$("#InfoModal").modal('show');
+			
 		}
 	
 		$('.modal').on('hidden.bs.modal', function (e) {
 			console.log("모달창 초기화!");
+			/* 회원가입 모달 초기화  */
 		    $("#joinForm")[0].reset();
-		    $("#idCheckMsg").text("");
+	        $("#idCheckMsg").text(""); 
 		    $("#pwCheckMsg").text("");
+		    $("#nameCheckMsg").text("");
+			/* 내정보 모달 초기화  */
+			$(".modifyPw").prop("type", "hidden");
+			$("#modifyBtn").prop("type", "button");
+			$("#modifySubmitBtn").prop("type", "hidden");
+		    $(".modifyPw").val("");
+		    $("#modifyPwCheckMsg").text("");
 		});
 		</script>
-		<!-- 모달 스크립트 끝  -->
-		
-		<!-- 다음 우편번호 서비스-->
+	<!-- 모달 스크립트 끝  -->
+
+	<!-- 다음 우편번호 서비스-->
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
-		<!-- 다음 주소api -->
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<!-- 다음 주소api -->
 	<script>
 		function sample6_execDaumPostcode() {
 			new daum.Postcode(
@@ -674,13 +712,13 @@
 						}
 					}).open();
 		}
-	</script>		
-		
+	</script>
+
 
 	<script type="text/javascript">
 	var inputIdCheck = false;
 	var inputpwCheck = false;
-	
+	var inputNameCheck = false;
     $(document).ready(function (){
 	
 	$("#inputMid").focusout(function(){
@@ -717,9 +755,9 @@
 	});
 });
 	/* 비밀번호 일치 확인*/
+    	var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}$/;
     $("#inputMpwCheck , #inputMpw").focusout(function(){
     	/* 비밀번호 정규식 */
-    	var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}$/;
     	var txt = $("#inputMpw").val();
     	if( !reg.test(txt) ) {
     		$("#pwCheckMsg").text("영문과 숫자를 포함한 6~10자리를 입력해주세요.").css("color","red")
@@ -739,11 +777,18 @@
     	} else {
     		$("#pwCheckMsg").text("")
     	}
-    	
+    	/* 아이디와 비밀번호가 같을 시 예외처리 */
+    	if($("#inputMid").val() == $("#inputMpw").val() ){
+    		$("#pwCheckMsg").text("아이디와 비밀번호는 동일할 수 없습니다.").css("color","red")
+    		inputpwCheck = false;
+    	}
     });
 	
-	
-	
+    $("#inputMname").change(function(){
+    	if( $("#inputMname").val().length <= 5){
+    		$("#nameCheckMsg").text("");
+    	}
+    });
 	function memberCheck() {
 		/* 아이디 입력 확인 */
 		if( !inputIdCheck ){
@@ -765,25 +810,31 @@
 			$("#inputMname").focus();
 			return false;
 		}
+		/* 이름 길이 확인 */
+		if( $("#inputMname").val().length > 5){
+			$("#nameCheckMsg").text("이름은 5글자 이하만 입력 가능합니다.").css("color","red");
+			$("#inputMname").focus();
+			return false;
+		} 
 		
 		/* 전화번호 입력 확인 */
-		if( $("#inputTel").val().length == 0 ){
+		if( $("#inputMtel").val().length == 0 ){
 			alert("전화번호를 입력 해주세요!");
-			$("#inputTel").focus();
+			$("#inputMtel").focus();
 			return false;
 		}
 		
 		/* 이메일 입력 확인 */
-		if( $("#email").val().length == 0 ){
+		if( $("#inputMemail").val().length == 0 ){
 			alert("이메일를 입력 해주세요!");
-			$("#email").focus();
+			$("#inputMemail").focus();
 			return false;
 		}
 		
 		/* 생년월일 입력 확인 */
-		if( $("#inputDate").val().length == 0 ){
+		if( $("#inputBirth").val().length == 0 ){
 			alert("생년원일을 입력 해주세요!");
-			$("#inputDate").focus();
+			$("#inputBirth").focus();
 			return false;
 		}
 		
@@ -808,6 +859,7 @@
 			return false;
 		}
 		
+		
 		if (checkEmail == "NO"){
 			alert("이메일 인증을 확인해주세요!");
 			$("#inputCheckNum").focus();
@@ -816,7 +868,113 @@
 		
 	}
 	
+	
+		
  </script>
+	<!-- 생년월일 placeholder 적용  -->
+	<script type="text/javascript">
+$("input[type=date].placeholder-date").on("change", (e) => {
+	  const target = $(e.target);
+	  if (target.val() == "") target.addClass("date_empty");
+	  else target.removeClass("date_empty");
+	});
+</script>
+
+<script type="text/javascript">
+function checkCapsLock(event)  {
+	  if (event.getModifierState("CapsLock")) {
+	    $("#capslockCheckMsg").text("Caps Lock이 켜져 있습니다.").css("color","red")
+	  }else {
+		  $("#capslockCheckMsg").text("")
+	  }
+	}
+
+</script>
+
+<script type="text/javascript">
+function openModifyInput(){
+	console.log("비밀번호 변경폼 호출")
+	$(".modifyPw").removeAttr("type");
+	/* $("#modifyBtn").val("비밀번호 변경하기") */
+	$("#modifyBtn").prop("type", "hidden");
+	$("#modifySubmitBtn").prop("type", "button");
+	
+}
+
+/* 비밀번호 변경 스크립트 */
+ 
+    $("#modifyPwInput , #modifyPwInputCheck").focusout(function(){
+    	var txt = $("#modifyPwInput").val();
+    	if( !reg.test(txt) ) {
+    		$("#modifyPwCheckMsg").text("영문과 숫자를 포함한 6~10자리를 입력해주세요.").css("color","red")
+    		modifyPwCheck = false;
+    	} else {
+    		$("#modifyPwCheckMsg").text("")
+    	}
+    });
+
+var modifyPwCheck = true;
+function modifyPw(loginId){
+var modifyPassword = $("#modifyPwInput").val();
+	$.ajax({
+		type : "get",
+		url : "modifyPwCheck",
+		data : { "loginId" : loginId },
+		success : function(loginPw){
+			console.log("비밀번호 변경 호출");
+			console.log("현재 비밀번호 : " + loginPw);
+			
+			if( $("#loginPw").val() != loginPw ){
+				alert("현재 비밀번호가 일치하지 않습니다.")
+				$("#loginPw").focus();
+				modifyPwCheck = false;
+			} else if( $("#modifyPwInput").val() != $("#modifyPwInputCheck").val() ){
+	    		/* $("#modifyPwCheckMsg").text("비밀번호가 일치하지 않습니다.").css("color","red") */
+	    		alert("비밀번호가 일치하지 않습니다.")
+	    		modifyPwCheck = false;
+	    	} else if( $("#modifyPwInput").val() == loginId || $("#modifyPwInputCheck").val() == loginId){
+				console.log("아이디와 비밀번호 동일");
+				alert("아이디와 비밀번호는 동일할 수 없습니다.")
+				modifyPwCheck = false;
+			} else {
+				modifyPwCheck = true;
+			}
+			
+			
+	    	if( modifyPwCheck ){
+	    		console.log("비밀번호 변경 허용");
+	    		console.log(modifyPassword);
+	    		$.ajax({
+	    			type : "get",
+	    			url : "modifyMemberPw",
+	    			data : { "loginId" : loginId, "modifyPw" : modifyPassword },
+	    			success : function(result){
+	    				console.log("updateResult : " + result)
+	    				
+	    				if (result > 0){
+	    					console.log("비밀번호 변경 완료");
+	    					alert("비밀번호가 변경되었습니다.");
+	    					$(".modifyPw").prop("type","hidden");
+	    					$("#modifyBtn").prop("type", "button");
+	    					$("#modifySubmitBtn").prop("type", "hidden");
+	    					
+	    					$("#InfoModal").modal('hide');
+	    					
+	    				} else {
+	    					$("#MemberModifyForm")[0].reset();
+	    					alert("비밀번호 변경에 실패하였습니다.")
+	    				}
+	    			}
+	    			
+	    			
+	    		})
+	    		
+	    	}
+		}
+	});
+}
+</script>
+
 
 
 </body>

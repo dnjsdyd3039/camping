@@ -76,7 +76,6 @@ $(document).ready(function() {
     		    ['view', ['fullscreen', 'help']]
     		  ],
     	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-    	fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 
 	  });
 	});
@@ -106,12 +105,11 @@ $(document).ready(function() {
 					<br> 
 					<div style="width: 100%; margin: auto;">
 						<form method="post" action="write2">
-							<input type="text" name="bomid" style="width: 20%;"
-								placeholder="작성자" /><br> 
-								<input type="text" name="botitle"
-								style="width: 40%;" placeholder="제목" /> <br> <br>
+							
+							<input type="text" name="botitle" style="width: 40%;" placeholder="제목" /> <br>
 							<textarea id="summernote" name="bocontents"></textarea>
-							<input id="subBtn" type="button" value="글 작성"
+							<br>
+							<input id="subBtn" type="button" class="btn btn-info pull-right" value="글 작성"
 								style="float: right;" onclick="goWrite(this.form)" />
 						</form>
 					</div>
@@ -186,17 +184,14 @@ $(document).ready(function() {
 	<script>
 		function goWrite(form) {
 			var title = form.botitle.value;
-			var writer = form.bomid.value;
 			var content = form.bocontents.value;
+			
 
 			if (title.trim() == '') {
 				alert("제목을 입력해주세요");
 				return false;
 			}
-			if (writer.trim() == '') {
-				alert("작성자를 입력해주세요");
-				return false;
-			}
+			
 			if (content.trim() == '') {
 				alert("내용을 입력해주세요");
 				return false;

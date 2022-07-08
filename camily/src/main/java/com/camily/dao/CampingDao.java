@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.camily.dto.CampingDto;
+import com.camily.dto.CampingRoomDto;
+import com.camily.dto.ReservationDto;
 
 public interface CampingDao {
 
@@ -24,5 +26,14 @@ public interface CampingDao {
 
 	@Select("SELECT COUNT(*) FROM CAMPING")
 	int getCampTotalCount();
+
+	@Select("SELECT * FROM CAMPINGROOM WHERE CRCACODE = #{cacode} ORDER BY LPAD(CRNUM, 2, '0')")
+	ArrayList<CampingRoomDto> campingRoomList(String cacode);
+
+	@Select("SELECT DISTINCT CRNAME, CRPRICE, CRIMAGE FROM CAMPINGROOM WHERE CRCACODE = #{cacode}")
+	ArrayList<CampingRoomDto> campingRoomTypeList(String cacode);
+
+	@Select("SELECT RECRNAME, RECRNUM, REDAY FROM RESERVATION WHERE RECACODE = #{cacode} AND (REDAY BETWEEN TO_DATE(#{startday}, 'YYYY-MM-DD') AND TO_DATE(#{endday}, 'YYYY-MM-DD'))")
+	ArrayList<ReservationDto> getReserveList(@Param("cacode") String cacode, @Param("startday") String startday, @Param("endday") String endday);
 
 }

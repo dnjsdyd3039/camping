@@ -18,67 +18,91 @@ public class MemberController {
 
 	@Autowired
 	MemberService msvc;
-	
-	  @Autowired
-	  private JavaMailSender mailSender;
-	
+
+	@Autowired
+	private JavaMailSender mailSender;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
 
 	// 메인 페이지 이동
 	@RequestMapping(value = "/main")
-		public String main() {
+	public String main() {
 		System.out.println("메인 페이지 이동");
 		return "main";
 	}
 
-	// 회원가입 페이지 이동
-	@RequestMapping(value = "/memberJoinForm")
-		public String memberLoginForm() {
-		System.out.println("회원가입 페이지 이동");
-		return "member/MemberJoinForm";
-	}
-	
-	// 회원가입 이메일 인증
-	@RequestMapping(value="/mailCheck")
-	public @ResponseBody String mailCheck(String email, RedirectAttributes ra) {
-		System.out.println("이메일 인증 요청");
-		
-		String checkNum = msvc.emailCheck(email, ra);
-     
-		return checkNum;
-	}
-		
-	
-    // 회원가입
-	@RequestMapping (value ="/memberJoin")
-		public ModelAndView memberJoin(MemberDto member, RedirectAttributes ra) {
-		System.out.println("회원가입 요청");
-		ModelAndView mav = msvc.memberJoin(member,ra);
-		return mav;
-	}
-	
-	
-	// 로그인 페이지 이동
-	@RequestMapping (value ="/memberLoginForm")
-	  	public String MemberLoginForm() {
-		System.out.println("로그인 페이지 이동");
-		return "member/MemberLoginForm";
-	}
-
-	// 내정보 페이지 이동
-	@RequestMapping(value = "/memberInfo")
-		public String MemberInfo() {
-		System.out.println("내정보 페이지 이동");
-		return "member/MemberInfo";
-	}
-
 	// 회원가입 아이디 중복 체크
 	@RequestMapping(value = "/memberIdCheck")
-		public @ResponseBody String memberIdCheck(String inputId) {
+	public @ResponseBody String memberIdCheck(String inputId) {
 		System.out.println("inputId : " + inputId);
 		// memberIdCheck 서비스 호출
 		String memberIdCheck = msvc.memberIdCheck(inputId);
-
+		
 		return memberIdCheck;
 	}
+	
+	// 회원가입 이메일 인증
+	@RequestMapping(value = "/mailCheck")
+	public @ResponseBody String mailCheck(String email, RedirectAttributes ra) {
+		System.out.println("이메일 인증 요청");
+
+		String checkNum = msvc.emailCheck(email, ra);
+
+		return checkNum;
+	}
+
+	// 회원가입
+	@RequestMapping(value = "/memberJoin")
+	public ModelAndView memberJoin(MemberDto member, RedirectAttributes ra) {
+		System.out.println("회원가입 요청");
+		ModelAndView mav = msvc.memberJoin(member, ra);
+		return mav;
+	}
+
+
+	// 로그인 처리
+	@RequestMapping(value = "/memberLogin")
+	public ModelAndView memberLogin(String mid, String mpw, RedirectAttributes ra) {
+		System.out.println("로그인 요청");
+		ModelAndView mav = msvc.memberLogin(mid, mpw, ra);
+		return mav;
+	}
+	
+	// 로그아웃 처리
+	@RequestMapping(value = "/memberLogout")
+	public ModelAndView memberLogout(RedirectAttributes ra) {
+		System.out.println("로그아웃 요청");
+		ModelAndView mav = msvc.memberLogout(ra);
+		return mav;
+	}
+	
+	// 내 정보 조회
+	@RequestMapping(value = "/memberInfo")
+	public @ResponseBody String MemberInfo(String loginId) {
+		System.out.println("내정보 페이지 이동");
+		System.out.println("내정보 확인 ID : " + loginId);
+		String memberInfo = msvc.getMemberInfo(loginId);
+		return memberInfo;
+	}
+	// 비밀번호 변경시 현재 비밀번호 확인
+	@RequestMapping(value ="/modifyPwCheck")
+	public @ResponseBody String modifyPwCheck(String loginId) {
+		System.out.println("현재 비밀번호 확인 요청");
+		String loginPw = msvc.getloginPw(loginId);
+		return loginPw;
+	}
+	
+	@RequestMapping(value ="/modifyMemberPw")
+	public @ResponseBody String modifyMemberPw(String loginId, String modifyPw) {
+		System.out.println("비밀번호 변경 요청");
+		
+		String pwUpdateResult = msvc.modifyMemberPw(loginId,modifyPw);
+		return pwUpdateResult;
+	}
+	@RequestMapping(value ="/deleteMember")
+	public ModelAndView deleteMember() {
+		System.out.println("회원 탈퇴 요청");
+		return null;
+	}
+
 }

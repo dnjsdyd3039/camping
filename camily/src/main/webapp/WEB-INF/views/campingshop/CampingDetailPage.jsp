@@ -496,6 +496,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if( checkMsg.length > 0 ){
+			alert(checkMsg);
+		}
+	</script>
 
 <!--===============================================================================================-->	
 	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>

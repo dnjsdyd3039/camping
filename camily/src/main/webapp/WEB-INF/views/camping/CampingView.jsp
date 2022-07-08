@@ -156,7 +156,7 @@
 						</p>
 
 						<!--  -->
-						<form action="campingReservation" method="post">
+						<form action="campingReservationPage" method="post">
 							<input type="hidden" name="cacode" value="${campingInfo.cacode}">
 							<div class="p-t-33">
 								<!-- 예약 날짜 선택 -->
@@ -210,7 +210,7 @@
 
 										<input id="people" class="mtext-104 cl3 txt-center num-product" type="number"
 											name="people" value="1">
-
+											
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
@@ -220,7 +220,7 @@
 								<!-- 예약하기 버튼 -->
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-204 flex-w flex-m respon6-next">
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" onclick="campingReservation()">예약하기</button>
+										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">예약하기</button>
 									</div>
 								</div>
 							</div>

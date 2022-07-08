@@ -1,6 +1,10 @@
 package com.camily.service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.camily.dao.CampingDao;
 import com.camily.dto.CampingDto;
 import com.camily.dto.CampingRoomDto;
+import com.camily.dto.MemberDto;
 import com.camily.dto.PageDto;
 import com.camily.dto.ReservationDto;
 import com.google.gson.Gson;
@@ -18,6 +23,9 @@ public class CampingService {
 
 	@Autowired
 	private CampingDao cdao;
+	
+	@Autowired
+	private HttpSession session;
 	
 	public void campingListInput(ArrayList<CampingDto> campingList) {
 		System.out.println("CampingService.campingListInput() 호출");
@@ -120,7 +128,82 @@ public class CampingService {
 		String roomType_json = gson.toJson(roomType);
 		return roomType_json;
 	}
-
 	
+	public ModelAndView campingReservationPage(String cacode, String startday, String endday, String roomSel, String numSel, int people) {
+		System.out.println("CampingService.campingReservationPage() 호출");
+		ModelAndView mav = new ModelAndView();
+		CampingDto campingInfo = cdao.campingView(cacode);
+		CampingRoomDto RoomInfo = new CampingRoomDto();
+		RoomInfo = cdao.getRoomInfo(cacode, roomSel, numSel);
+		mav.addObject("caname", campingInfo.getCaname());
+		mav.addObject("RoomInfo", RoomInfo);
+		startday = startday.substring(6,10) + "-" + startday.substring(0,2) + "-" + startday.substring(3,5);
+		mav.addObject("startday", startday);
+		endday = endday.substring(6,10) + "-" + endday.substring(0,2) + "-" + endday.substring(3,5);
+		mav.addObject("endday", endday);
+		int totalPrice = 0;
+		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(0,4)), Integer.parseInt(startday.substring(5,7)), Integer.parseInt(startday.substring(8,10))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(0,4)), Integer.parseInt(endday.substring(5,7)), Integer.parseInt(endday.substring(8,10)))); date = date.plusDays(1)) {
+			DayOfWeek dayOfWeek = date.getDayOfWeek();
+			int dayOfWeekNumber = dayOfWeek.getValue();
+			System.out.println(date);
+			System.out.println(dayOfWeekNumber);
+			if(dayOfWeekNumber == 5 || dayOfWeekNumber == 6) {
+				totalPrice += Integer.parseInt(RoomInfo.getCrprice())  * 1.2;
+			}else {
+				totalPrice += Integer.parseInt(RoomInfo.getCrprice());				
+			}
+		}
+		System.out.println(totalPrice);
+		mav.addObject("totalPrice", totalPrice);
+		mav.addObject("people", people);
+		mav.setViewName("camping/CampingReservation");
+		return mav;
+	}
+	
+	public ModelAndView campingReservation(String cacode, String startday, String endday, String roomSel, String numSel, int people) {
+		System.out.println("CampingService.campingReservation() 호출");
+		String loginId = (String) session.getAttribute("loginId");
+		System.out.println("loginId : " + loginId);
+		ReservationDto reservationInfo = new ReservationDto();
+		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(6,10)), Integer.parseInt(startday.substring(0,2)), Integer.parseInt(startday.substring(3,5))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(6,10)), Integer.parseInt(endday.substring(0,2)), Integer.parseInt(endday.substring(3,5)))); date = date.plusDays(1)){
+			String maxRecode = cdao.getmaxrecode();
+			String reCode = "";
+			if(maxRecode == null) {
+				reCode = "RE001";
+			}else {
+				int intMaxRecode = Integer.parseInt(maxRecode.substring(2)) + 1;
+				if(intMaxRecode < 10) {
+					reCode = "RE00" + intMaxRecode;
+				}else if(intMaxRecode < 100){
+					reCode = "RE0" + intMaxRecode;
+				}else if(intMaxRecode <1000) {
+					reCode = "RE" + intMaxRecode;
+				}else {
+					System.out.println("범위 초과");
+				}
+			}
+			reservationInfo.setRecode(reCode);
+			reservationInfo.setRecacode(cacode);
+			reservationInfo.setRemid(loginId);
+			reservationInfo.setRepeople(people);
+			reservationInfo.setRecrname(roomSel);
+			reservationInfo.setRecrnum(numSel);
+			System.out.println(date.toString());
+			
+			reservationInfo.setReday(date.toString());
+			System.out.println(reservationInfo);
+			
+		}
+		return null;
+	}
+
+	// 내정보 불러오기 >> 회원가입쪽과 비교해서 같은 함수 존재시 제거?
+	public String getMyInfo(String loginId) {
+		System.out.println("CampingService.campingReservation() 호출");
+		MemberDto memberInfo = cdao.getMyInfo(loginId);
+		Gson gson = new Gson();
+		String myInfo_json = gson.toJson(memberInfo);
+		return myInfo_json;
+	}
 	
 }

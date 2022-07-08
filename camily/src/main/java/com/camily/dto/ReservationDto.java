@@ -8,6 +8,9 @@ public class ReservationDto {
 	private String recode;
 	private String recacode;
 	private String remid;
+	private String remtel;
+	private String rememail;
+	private String rerequest;
 	private int repeople;
 	private String recrname;
 	private String recrnum;

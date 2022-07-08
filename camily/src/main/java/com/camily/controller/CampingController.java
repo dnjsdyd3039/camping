@@ -133,16 +133,24 @@ public class CampingController {
 		return "camping/CampingList";
 	}
 	
-	@RequestMapping("campingReservation")
-	public ModelAndView campingReservation(String cacode, String startday, String endday, String roomSel, String numSel, String people) {
-		System.out.println("캠핑장 예매페이지 이동");
+	@RequestMapping(value =  "campingReservation")
+	public ModelAndView campingReservation(String cacode, String startday, String endday, String roomSel, String numSel, int people) {
+		System.out.println("캠핑 예약호출");
 		System.out.println("cacode : " + cacode);
 		System.out.println("startday : " + startday);
 		System.out.println("endday : " + endday);
 		System.out.println("roomSel : " + roomSel);
 		System.out.println("numSel : " + numSel);
 		System.out.println("people : " + people);
-		return null;
+		ModelAndView mav = csvc.campingReservation(cacode, startday, endday, roomSel, numSel, people);
+		return mav;
+	}
+	
+	@RequestMapping(value = "campingReservationPage")
+	public ModelAndView campingReservationPage(String cacode, String startday, String endday, String roomSel, String numSel, int people) {
+		System.out.println("캠핑장 예약페이지 이동");
+		ModelAndView mav = csvc.campingReservationPage(cacode, startday, endday, roomSel, numSel, people);
+		return mav;
 	}
 	
 	
@@ -153,4 +161,10 @@ public class CampingController {
 		return roomType_json;
 	}
 	
+	@RequestMapping(value = "getMyInfo")
+	public @ResponseBody String getMyInfo(String loginId) {
+		System.out.println("내정보 ajax");
+		String myInfo_json = csvc.getMyInfo(loginId);
+		return myInfo_json;
+	}
 }

@@ -38,14 +38,5 @@ public class BoardController {
 		ModelAndView mav = bsvc.replyWrite(reply);
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
-	@GetMapping("write")
-	public String boardWrite() {
-		return "board/boardWrite";
-	}
+			
 }

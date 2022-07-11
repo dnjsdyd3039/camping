@@ -41,9 +41,9 @@
 <body class="animsition">
 
     <!-- Topbar -->
-	<%@ include file="/WEB-INF/views/includes/TopBar.jsp" %>
+	  <%@ include file="/WEB-INF/views/includes/TopBar.jsp" %>
     <!-- End of Topbar -->
-
+	
 	<!-- breadcrumb 시작 -->
 	<div class="container" style="margin-top: 100px">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -133,15 +133,21 @@
 										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="gamount" value="1">
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="gamount" readonly="readonly" value="1" id="diamoubt">
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
-
+                                    <div class="row">
+                                    <button type="button" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1" 
+                                            onclick="shoppingbasket('${campingDetail.gcode }','${campingDetail.gname }','${campingDetail.gimage }',
+                                            '${campingDetail.gprice }')">
+								        장바구니
+								    </button>									
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1">
 								        구매하기
 									</button>
+									</div>
 								</div>
 							</div>	
 						</div>
@@ -294,9 +300,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="" >
+									<div class="item-slick3" data-thumb="${campingDetail.gimage }" >
 										<div class="wrap-pic-w pos-relative">
-											<img src="${pageContext.request.contextPath}/resources/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+											<img src="${campingDetail.gimage }" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 												<i class="fa fa-expand"></i>
@@ -304,9 +310,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="${pageContext.request.contextPath}/resources/images/product-detail-02.jpg">
+									<div class="item-slick3" data-thumb="${campingDetail.gsideimage }">
 										<div class="wrap-pic-w pos-relative">
-											<img src="${pageContext.request.contextPath}/resources/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+											<img src="${campingDetail.gsideimage }" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
 												<i class="fa fa-expand"></i>
@@ -314,9 +320,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+									<div class="item-slick3" data-thumb="${campingDetail.gbackimage }">
 										<div class="wrap-pic-w pos-relative">
-											<img src="${pageContext.request.contextPath}/resources/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+											<img src="${campingDetail.gbackimage }" alt="IMG-PRODUCT">
 
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
 												<i class="fa fa-expand"></i>
@@ -410,6 +416,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if( checkMsg.length > 0 ){
+			alert(checkMsg);
+		}
+	</script>
 
 <!--===============================================================================================-->	
 	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -514,4 +528,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
+
+<script type="text/javascript">
+function shoppingbasket(dicode,diname,diimage,diprice){
+	var diamount = "";
+	diamount = $("#diamoubt").val();
+	
+	console.log("diamout :"+ diamount);
+	console.log("dicode :"+ dicode);
+	console.log("diname :"+ diname);
+	console.log("diimage :"+ diimage);
+	console.log("diprice :"+ diprice);
+	if( diamount != 0 && diamount <= 5 ){
+	location.href="shoppingbasket?dicode="+dicode+"&diname="+diname+"&diimage="+diimage+"&diamount="+diamount+"&diprice="+diprice;
+	} else {
+		alert("제품은 하나 이상 구매하셔야 하고 1인당 제한 수량은 5개 이하입니다.")
+	}
+}
+
+</script>
+
 </html>

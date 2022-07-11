@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -134,194 +134,55 @@
 		</div>
 	</div>
 	<!-- Cart 끝 -->
-	
-	<!-- breadcrumb 시작-->
-	<div class="container" style="margin-top: 100px">
-		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<span class="stext-109 cl4">
-				Shoping Cart
-			</span>
-		</div>
-	</div>
-	<!-- breadcrumb 끝-->
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" action="goodsPurchase" method="post">
-		<div class="container">
+	<form class="bg0 p-t-75 p-b-85" action="totalpurchase" method="post">
 			<div class="row">
-				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-					<div class="m-l-25 m-r--38 m-lr-0-xl">
-						<div class="wrap-table-shopping-cart">
 							<table class="table-shopping-cart">
 								<tr class="table_head">
-									<th class="column-1">상품정보</th>
-									<th class="column-2"></th>
-									<th class="column-3">상품가격</th>
-									<th class="column-4">상품수량</th>
-									<th class="column-5">총금액</th>
+									<th class="column-1" style="width: 200px; font-size: 10px; padding-left: 30px;">상품명(옵션)</th>
+									<th class="column-2" style="width: 200px; font-size: 10px; text-align: right;">판매가</th>
+									<th class="column-3">수량</th>
+									<th class="column-4">총주문금액(적립예정)</th>
+									<th class="column-5">주문관리</th>
+									<th class="column-6">
+									</th>
 								</tr>
-
-								<tr class="table_row">
+			          <c:forEach items="${detailinformation }" var="information">
+								<tr class="table_row">								
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="${campingpurchase.gimage }" alt="IMG">
+											<img src="${information.diimage }" alt="IMG">
 										</div>
 									</td>
-									<td class="column-2">${campingpurchase.gname }</td>
-									<td class="column-3">${campingpurchase.gprice }</td>
-									<td class="column-4">${campingpurchase.gamount }개</td>
-									<td class="column-5" >${totalPrice}</td> <!-- 총 가격 -->
-								</tr>
-							</table>
-						</div>
-
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
-									
-								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-									Apply coupon
-								</div>
-							</div>
-
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<h4 class="mtext-109 cl2 p-b-30">
-							구매 정보
-						</h4>
-
-						<div class="flex-w flex-t bor12 p-b-13">
-							<div class="size-208">
-								<span class="stext-110 cl2">
-									가격:
-								</span>
-							</div>
-
-							<div class="size-209">
-								<span class="mtext-110 cl2">
-									${campingpurchase.gprice } 원
-								</span>
-							</div>
-						</div>
-
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									배송기간:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-									이 제품은 중국산이여서 3일정도 걸립니다.
-								</p>					
-							</div>
-						</div>
-						
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									주문 수량:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-								  ${campingpurchase.gamount }
-								</p>					
-							</div>
-						</div>
-						
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									상품 소재:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-								  ${campingpurchase.gcontents }
-								</p>					
-							</div>
-						</div>
-						
-						<div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									배송비:
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									 공짜
-								</span>
-							</div>
-						</div>	
-
-						<div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									Total:
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									 ${totalPrice} 원
-								</span>
-							</div>
-						</div>	
-												
-					</div>
-				</div>
-			</div>
-		</div>
-						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">구매자아이디</th>
-									<th class="column-2"> 
-									<button type="button" class="cl0 size-60 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" 
-									onclick="addCheck()">주소변경</button>&nbsp;&nbsp;&nbsp; 기본주소 :&nbsp;${addselect.maddr }</th>
-									<th class="column-3"></th>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">${sessionScope.loginId }</td>
-									<td class="column-2"><input value="${addselect.maddr }" readonly="readonly" id="newadd" class="size-209 p-r-18 p-r-0-sm w-full-ssm"></td>
-									<td class="column-3"> 
-									<button type="submit" class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기!</button>
-									<input type="hidden" name="loginId" value="${sessionScope.loginId }">
-									<input type="hidden" name="addr" id="newdd" value="${addselect.maddr }">
-									<input type="hidden" name="gogcode" value="${campingpurchase.gcode }">
-									<input type="hidden" name="gamount" value="${campingpurchase.gamount }">
-									<input type="hidden" name="totalPrice" value="${totalPrice}">
-									<input type="hidden" name="gname" value="${campingpurchase.gname }">
-									<input type="hidden" name="gimage" value="${campingpurchase.gimage }">
+									<td class="column-2">${information.diprice }</td>
+									<td class="column-3">${information.diamount }</td>
+									<td class="column-4" >${information.ditotalprice }</td> <!-- 총 가격 -->
+									<th class="column-5">
+									<a href="deletepoket?dicode=${information.dicode }" class="flex-c-m stext-20 cl5 size-20 bg2 bor1 hov-btn1 p-lr-15 trans-04">삭제하기</a>
+									</th>								
+									<td class="column-6">									                                   
+                                      <input readonly="readonly"value="${information.diaddr }" id="${information.dicode}1" class="size-209 p-r-18 p-r-0-sm w-full-ssm">
+										<button type="button" class="cl0 size-60 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" 
+									onclick="addCheck('${information.dicode}')">주소변경</button>
 									</td>
-								</tr>
+									<th>
+									 <input type="hidden" value="${sessionScope.loginId }"     name="dimid">
+									 <input type="hidden" value="${information.diaddr }" id="${information.dicode}2"       name="diaddr">
+									 <input type="hidden" value="${information.dicode }"       name="dicode">
+									 <input type="hidden" value="${information.diamount }"     name="diamount">
+									 <input type="hidden" value="${information.ditotalprice }" name="ditotalprice">
+									 <input type="hidden" value="${information.diname }"       name="diname">
+									 <input type="hidden" value="${information.diimage }"      name="diimage">
+									</th>
+								 </tr>
+							</c:forEach>
 							</table>
-						</div>
+				</div>
 						
 	<!-- Load more -->
-	<div class="flex-c-m flex-w w-full p-t-45">
-		<a href="#"
-			class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-			위로가기(◦'⌣'◦)</a>
+	<div class="flex-c-m flex-w w-full p-t-45" >
+		<button class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" type="submit">주문하기</button>
 	</div>	
 	</form>
 	
@@ -369,7 +230,7 @@
 									class="form-control validate" placeholder="참고항목" name="mextraAddr">
 							</div>
 						</div>
-						
+						<input type="hidden" id = checkdicode>
 						<div class="md-form mb-1 text-center">
 							<button class="btn btn-dark" onclick="addChange()">주소 변경</button>
 						</div>
@@ -666,8 +527,8 @@
 </body>
 
 	<script type="text/javascript">
-	   
-		function addCheck(){
+		function addCheck(dicode){
+			$("#checkdicode").val(dicode);
 			$("#addCheck").modal('show');
 		}
 		
@@ -752,24 +613,20 @@
 		 console.log("detailAddress2 :"+ detailAddress2);
 		 console.log("extraAddress :"+ extraAddress);
 		 console.log("total :"+ total);
+		
+		 var dicode = $("#checkdicode").val();
+		 console.log(dicode);
+		 console.log(dicode + "1");
+		 console.log(dicode + "2");
 		 
-		 $(newadd).val(total);
-		 $(newdd).val(total);
+		 $("#"+dicode+"1").val(total);
+		 $("#"+dicode+"2").val(total);
 		 $("#addCheck").modal("hide");
 		 
 		
 	 }
 	
 	</script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 </html>

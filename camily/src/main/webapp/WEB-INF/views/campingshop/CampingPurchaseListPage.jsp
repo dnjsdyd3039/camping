@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+z	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -59,104 +59,32 @@
 	<!-- Topbar -->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 	<!-- End of Topbar -->
-
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2"> Your Cart </span>
-
-				<div
-					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/item-cart-01.jpg"
-								alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat </a> <span class="header-cart-item-info"> 1
-								x $19.00 </span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/item-cart-02.jpg"
-	      						alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star </a> <span class="header-cart-item-info"> 1
-								x $39.00 </span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/item-cart-03.jpg"
-								alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather </a> <span class="header-cart-item-info">
-								1 x $17.00 </span>
-						</div>
-					</li>
-				</ul>
-
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">Total: $75.00</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart </a> <a href="shoping-cart.html"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out </a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Cart 끝 -->
 	
 	<!-- breadcrumb 시작-->
 	<div class="container" style="margin-top: 100px">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
+				캠핑목록
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
 			<span class="stext-109 cl4">
-				Shoping Cart
+                구매목록					
 			</span>
 		</div>
 	</div>
 	<!-- breadcrumb 끝-->
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" action="goodsPurchase" method="post">
+	<form class="bg0 p-t-75 p-b-85" action="#" method="post">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
-					<div class="m-l-25 m-r--38 m-lr-0-xl">
+				<div class="" >
+					<div class="">
 						<div class="wrap-table-shopping-cart">
+						
+                            <c:forEach items="${PurchaseList }" var="Purchase">
+                            
 							<table class="table-shopping-cart">
 								<tr class="table_head">
 									<th class="column-1">상품정보</th>
@@ -164,159 +92,34 @@
 									<th class="column-3">상품가격</th>
 									<th class="column-4">상품수량</th>
 									<th class="column-5">총금액</th>
+									<th class="column-6">주문주소</th>
+									<th class="column-7"></th>
 								</tr>
-
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="${campingpurchase.gimage }" alt="IMG">
+											<img src="${Purchase.goimage }" alt="IMG">
 										</div>
 									</td>
-									<td class="column-2">${campingpurchase.gname }</td>
-									<td class="column-3">${campingpurchase.gprice }</td>
-									<td class="column-4">${campingpurchase.gamount }개</td>
-									<td class="column-5" >${totalPrice}</td> <!-- 총 가격 -->
+									<td class="column-2">${Purchase.goname }</td>
+									<td class="column-3">${Purchase.goprice }</td>
+									<td class="column-4">총 : ${Purchase.goamount }개</td>
+									<td class="column-5">총 : ${Purchase.goprice}원</td> <!-- 총 가격 -->
+									<td class="column-6">${Purchase.gomaddr }</td>
+									<th class="column-7" > 
+									<button style="margin-top: 100px"
+									 class="flex-c-m stext-101 cl5 size-80 bg2 bor1 hov-btn1 p-lr-15 trans-04">후기</button>
+									</th>
 								</tr>
 							</table>
+								</c:forEach>
 						</div>
-
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
-									
-								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-									Apply coupon
-								</div>
-							</div>
-
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart
-							</div>
-						</div>
+	
 					</div>
 				</div>
 
-				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-						<h4 class="mtext-109 cl2 p-b-30">
-							구매 정보
-						</h4>
-
-						<div class="flex-w flex-t bor12 p-b-13">
-							<div class="size-208">
-								<span class="stext-110 cl2">
-									가격:
-								</span>
-							</div>
-
-							<div class="size-209">
-								<span class="mtext-110 cl2">
-									${campingpurchase.gprice } 원
-								</span>
-							</div>
-						</div>
-
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									배송기간:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-									이 제품은 중국산이여서 3일정도 걸립니다.
-								</p>					
-							</div>
-						</div>
-						
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									주문 수량:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-								  ${campingpurchase.gamount }
-								</p>					
-							</div>
-						</div>
-						
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
-							<div class="size-208 w-full-ssm">
-								<span class="stext-110 cl2">
-									상품 소재:
-								</span>
-							</div>
-
-							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-								<p class="stext-111 cl6 p-t-2">
-								  ${campingpurchase.gcontents }
-								</p>					
-							</div>
-						</div>
-						
-						<div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									배송비:
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									 공짜
-								</span>
-							</div>
-						</div>	
-
-						<div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									Total:
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									 ${totalPrice} 원
-								</span>
-							</div>
-						</div>	
-												
-					</div>
-				</div>
 			</div>
-		</div>
-						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">구매자아이디</th>
-									<th class="column-2"> 
-									<button type="button" class="cl0 size-60 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" 
-									onclick="addCheck()">주소변경</button>&nbsp;&nbsp;&nbsp; 기본주소 :&nbsp;${addselect.maddr }</th>
-									<th class="column-3"></th>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">${sessionScope.loginId }</td>
-									<td class="column-2"><input value="${addselect.maddr }" readonly="readonly" id="newadd" class="size-209 p-r-18 p-r-0-sm w-full-ssm"></td>
-									<td class="column-3"> 
-									<button type="submit" class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기!</button>
-									<input type="hidden" name="loginId" value="${sessionScope.loginId }">
-									<input type="hidden" name="addr" id="newdd" value="${addselect.maddr }">
-									<input type="hidden" name="gogcode" value="${campingpurchase.gcode }">
-									<input type="hidden" name="gamount" value="${campingpurchase.gamount }">
-									<input type="hidden" name="totalPrice" value="${totalPrice}">
-									<input type="hidden" name="gname" value="${campingpurchase.gname }">
-									<input type="hidden" name="gimage" value="${campingpurchase.gimage }">
-									</td>
-								</tr>
-							</table>
-						</div>
-						
+		</div>				
 	<!-- Load more -->
 	<div class="flex-c-m flex-w w-full p-t-45">
 		<a href="#"
@@ -324,64 +127,6 @@
 			위로가기(◦'⌣'◦)</a>
 	</div>	
 	</form>
-	
-    <!-- 주소확인 모달 시작 -->
-    <div class="modal fade" id="addCheck" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true"
-			style="z-index: 1200">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<button class="close text-right font-weight-bold mt-2 mr-2"
-						type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">x&nbsp;</span>
-					</button>
-					<div class="modal-header text-center">
-						<a class="modal-title w-100 font-weight-bold"> <img
-							src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
-							alt="IMG-LOGO" style="width:50%">
-						</a>
-						
-					</div>
-					<div class="modal-body mx-3">
-
-						<div class="row">
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="postcode"
-									class="form-control validate" placeholder="우편번호" name="mpostcode">
-							</div>
-							<div class="col-sm-6 md-form mb-3">
-								<input type="button" class="btn btn-dark btn-user btn-block"
-									onclick="sample6_DaumPostcode()" value="우편번호 찾기">
-							</div>
-						</div>
-						<div class="md-form mb-3">
-							<input type="text" id="address"
-								class="form-control validate" placeholder="주소" name="maddress">
-						</div>
-
-						<div class="row">
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="detailAddress"
-									class="form-control validate" placeholder="상세주소" name="mdetailAddr">
-							</div>
-							<div class="col-sm-6 md-form mb-3">
-								<input type="text" id="extraAddress"
-									class="form-control validate" placeholder="참고항목" name="mextraAddr">
-							</div>
-						</div>
-						
-						<div class="md-form mb-1 text-center">
-							<button class="btn btn-dark" onclick="addChange()">주소 변경</button>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<!-- 주소확인 모달 끝 -->
-    
-	
-
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
 	<!-- End of Footer -->
@@ -665,111 +410,5 @@
 
 </body>
 
-	<script type="text/javascript">
-	   
-		function addCheck(){
-			$("#addCheck").modal('show');
-		}
 		
-		</script>
-		
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
-		<!-- 다음 주소api -->
-	<script>
-		function sample6_DaumPostcode() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-							var addr = ''; // 주소 변수
-							var extraAddr = ''; // 참고항목 변수
-
-							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-								addr = data.roadAddress;
-							} else { // 사용자가 지번 주소를 선택했을 경우(J)
-								addr = data.jibunAddress;
-							}
-
-							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-							if (data.userSelectedType === 'R') {
-								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-								// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-								if (data.bname !== ''
-										&& /[동|로|가]$/g.test(data.bname)) {
-									extraAddr += data.bname;
-								}
-								// 건물명이 있고, 공동주택일 경우 추가한다.
-								if (data.buildingName !== ''
-										&& data.apartment === 'Y') {
-									extraAddr += (extraAddr !== '' ? ', '
-											+ data.buildingName
-											: data.buildingName);
-								}
-								// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-								if (extraAddr !== '') {
-									extraAddr = ' (' + extraAddr + ')';
-								}
-								// 조합된 참고항목을 해당 필드에 넣는다.
-								document.getElementById("extraAddress").value = extraAddr;
-
-							} else {
-								document.getElementById("extraAddress").value = '';
-							}
-
-							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							document.getElementById('postcode').value = data.zonecode;
-							document.getElementById("address").value = addr;
-							// 커서를 상세주소 필드로 이동한다.
-							document.getElementById("detailAddress")
-									.focus();
-						}
-					}).open();
-		}
-	</script>		
-		
-	<script type="text/javascript">
-	
-	 function addChange(){
-		 
-		 var total = "";
-		 
-		 var postcode2 = $(postcode).val();
-		 total = total +  "(" + postcode2 + ")"; 
-		 var address2 = $(address).val();
-		 total = total + " " +address2;
-		 var detailAddress2 = $(detailAddress).val();
-		 total = total + " " + detailAddress2;
-         var extraAddress2 = $(extraAddress).val();
-         total = total + " " + extraAddress2;
-         
-		 console.log("postcode2 :"+ postcode2);
-		 console.log("address2 :"+ address2);
-		 console.log("detailAddress2 :"+ detailAddress2);
-		 console.log("extraAddress :"+ extraAddress);
-		 console.log("total :"+ total);
-		 
-		 $(newadd).val(total);
-		 $(newdd).val(total);
-		 $("#addCheck").modal("hide");
-		 
-		
-	 }
-	
-	</script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </html>

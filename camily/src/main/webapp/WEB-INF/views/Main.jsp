@@ -151,7 +151,7 @@
 								data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-101 cl2 respon2"
 									style="color: white; text-shadow: 1px 1px 1px #000;"> 이제
-									대새는 차박! </span>
+									대세는 차박! </span>
 							</div>
 
 							<div class="layer-slick1 animated visible-false"

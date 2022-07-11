@@ -1,7 +1,6 @@
 package com.camily.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.camily.dto.MemberDto;
 
@@ -24,14 +23,5 @@ public interface MemberDao {
 	
     // 비밀번호 변경 
 	int updateMemberPw(@Param("loginId") String loginId, @Param("modifyPw") String modifyPw);
-    
-	// 회원탈퇴 (mstate 99로 업데이트)
-	int deleteMember(@Param("loginId") String loginId, @Param("mState") String mState);
-    
-	// 아이디 찾기
-	String selectFindId(@Param("email") String email, @Param("name") String name);
-	
-    // 비밀번호 찾기(비밀번호 변경)
-	int findPwModifyPw(@Param("mid") String mid,@Param("newPw") String newPw, RedirectAttributes ra);
 	
 }

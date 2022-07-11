@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camily.dao.CampingDao">
+
+	<select id="getMyReservationList" resultType="com.camily.dto.ReservationDto">
+		SELECT DISTINCT CANAME, CRPRICE, RECODE, RECACODE, REMID, REMNAME, REMTEL, REMEMAIL, REREQUEST, REPEOPLE, RECRNAME, RECRNUM FROM RESERVATION 
+		INNER JOIN CAMPING ON CACODE = RECACODE
+		INNER JOIN CAMPINGROOM ON CRNAME = RECRNAME AND CRNUM = RECRNUM
+		WHERE REMID = #{loginId}
+	</select>
+	
+	<select id="getMyReservationInfo" resultType="com.camily.dto.ReservationDto">
+		SELECT DISTINCT CANAME, CRPRICE, CRIMAGE, RECODE, RECACODE, REMID, REMNAME, REMTEL, REMEMAIL, REREQUEST, REPEOPLE, RECRNAME, RECRNUM FROM RESERVATION 
+		INNER JOIN CAMPING ON CACODE = RECACODE
+		INNER JOIN CAMPINGROOM ON CRNAME = RECRNAME AND CRNUM = RECRNUM
+		WHERE REMID = #{loginId}
+		AND RECODE = #{recode}
+	</select>
+	
+</mapper>

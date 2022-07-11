@@ -134,7 +134,7 @@ public class CampingController {
 	}
 	
 	@RequestMapping(value =  "campingReservation")
-	public ModelAndView campingReservation(String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remtel, String rememail, String rerequest) {
+	public ModelAndView campingReservation(String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remname, String remtel, String rememail, String rerequest) {
 		System.out.println("캠핑 예약호출");
 		System.out.println("recacode : " + recacode);
 		System.out.println("remid : " + remid);
@@ -146,7 +146,7 @@ public class CampingController {
 		System.out.println("remtel : " + remtel);
 		System.out.println("rememail : " + rememail);
 		System.out.println("rerequest : " + rerequest);
-		ModelAndView mav = csvc.campingReservation(recacode, remid, recrname, recrnum, startday, endday, repeople, remtel, rememail, rerequest);
+		ModelAndView mav = csvc.campingReservation(recacode, remid, recrname, recrnum, startday, endday, repeople, remname, remtel, rememail, rerequest);
 		return mav;
 	}
 	
@@ -171,4 +171,31 @@ public class CampingController {
 		String myInfo_json = csvc.getMyInfo(loginId);
 		return myInfo_json;
 	}
+	
+	// member로 이동
+	@RequestMapping(value = "myReservationList")
+	public ModelAndView myReservationList() {
+		System.out.println("내 캠핑장 예약내역 페이지 이동");
+		ModelAndView mav = csvc.myReservationList();
+		return mav;
+	}
+	
+	@RequestMapping(value = "myReservation")
+	public ModelAndView myReservation(String recode) {
+		System.out.println("내 캠핑장 예약내영 상세보기 페이지 이동");
+		ModelAndView mav = csvc.myReservation(recode);
+		return mav;
+	}
+	
+	@RequestMapping(value = "changeReserveMsg")
+	public @ResponseBody String changeReserveMsg(String recode, String remname, String remtel, String rememail, String rerequest) {
+		System.out.println("캠핑 예약 내용 수정");
+		System.out.println(remname);
+		System.out.println(remtel);
+		System.out.println(rememail);
+		System.out.println(rerequest);
+		String Updateresult = csvc.changeReserveMsg(recode, remname, remtel, rememail, rerequest);
+		return Updateresult;
+	}
+	
 }

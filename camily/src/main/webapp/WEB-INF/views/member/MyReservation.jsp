@@ -1,11 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>캠핑장 예약</title>
+	<title>Shoping Cart</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -32,71 +31,71 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-
 </head>
 <body class="animsition">
 	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 	<!-- End TopBar-->
 	
+	<!-- breadcrumb -->
+	<div class="container">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<span class="stext-109 cl4">
+				Shoping Cart
+			</span>
+		</div>
+	</div>
 	
-	<!-- c:set >> 사용할 변수선언 -->
-    <c:set var="today" value="<%=new Date() %>"></c:set>
-    
 	<!-- Shoping Cart -->
-	<form action="campingReservation" method="post" class="bg0 p-t-75 p-b-85" id="campingReservationForm">
+	<form action="campingReservation" method="post" class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="bor10 p-lr-40 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="mtext-109 cl2 p-b-30 p-t-30" style="font-weight: bold;">${caname}</div>
+							<div class="mtext-109 cl2 p-b-30 p-t-30" style="font-weight: bold;">${myReservationInfo.caname}</div>
 							<div class="row">
 								<div class="col-xl-5 m-lr-auto m-b-50">
-									<img src="${RoomInfo.crimage}" alt="캠핑장 이미지" width="100%">
+									<img src="${myReservationInfo.crimage}" alt="캠핑장 이미지" width="100%">
 								</div>
 								<div class="col-xl-7 m-lr-auto m-b-50">
-									<div style="font-size: 25px; font-weight: bold;">${RoomInfo.crname}</div>
-									<div style="font-size: 20px;">${RoomInfo.crnum}</div>
-									<div style="font-size: 20px;"><span>${startday}</span> ~ <span>${endday}</span></div>
-									<div style="font-size: 20px;">${people}명</div>
-									
-									<input type="hidden" name="recacode" value="${cacode}">
-									<input type="hidden" name="remid" value="${sessionScope.loginId}">
-									<input type="hidden" name="recrname" value="${RoomInfo.crname}">
-									<input type="hidden" name="recrnum" value="${RoomInfo.crnum}">
-									<input type="hidden" name="startday" value="${startday}">
-									<input type="hidden" name="endday" value="${endday}">
-									<input type="hidden" name="repeople" value="${people}">
+									<div style="font-size: 25px; font-weight: bold;">${myReservationInfo.recrname}</div>
+									<div style="font-size: 20px;">${myReservationInfo.recrnum}</div>
+									<div style="font-size: 20px;"><span>${myReservationInfo.startday}</span> ~ <span>${myReservationInfo.endday}</span></div>
+									<div style="font-size: 20px;">${myReservationInfo.repeople}명</div>
 								</div>
 							</div>
 							<hr>
 							<div class="mtext-110 cl2 p-b-30">
 								<span style="font-weight: bold;">예약자 정보</span> 
-								<button class="btn btn-danger" type="button" onclick="myInfo()" style="float: right; font-size: 15px;">내 정보와 동일</button>
+								<button class="btn btn-danger" type="button" onclick="myInfo('${myReservationInfo.recode}')" style="float: right; font-size: 15px;" value="1" id="changeInfo">수정하기</button>
 							</div>
 							<div>
 								<span>예약자 이름</span>
 								<span style="color: red;">(*필수)</span>
 							</div>
 							<div class="bor8 m-b-20 how-pos4-parent">
-								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name="remname" id="mname" placeholder="예약자 이름을 입력해주세요.">
+								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name="remname" id="mname" placeholder="예약자 이름을 입력해주세요." value="${myReservationInfo.remname}" disabled="disabled">
 							</div>
 							<div>
 								<span>예약자 전화번호</span>
 								<span style="color: red;">(*필수)</span>
 							</div>
 							<div class="bor8 m-b-20 how-pos4-parent">
-								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name="remtel" id="mtel" placeholder="010-0000-0000">
+								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name="remtel" id="mtel" placeholder="010-0000-0000" value="${myReservationInfo.remtel}" disabled="disabled">
 							</div>
 							<div>예약자 이메일</div>
 							<div class="bor8 m-b-20 how-pos4-parent">
-								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name="rememail" id="memail" placeholder="예약자 이메일을 입력해주세요.">
+								<input class="stext-111 cl2 plh3 size-116 p-l-30 p-r-30" type="text" name="rememail" id="memail" placeholder="예약자 이메일을 입력해주세요." value="${myReservationInfo.rememail}" disabled="disabled">
 							</div>
 							<div>요청사항</div>
 							<div class="bor8 m-b-30">
-								<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="rerequest" placeholder="요청사항이 있으면 적어주시기 바랍니다. (500자 이내)"></textarea>
+								<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="rerequest" id="request" placeholder="요청사항이 있으면 적어주시기 바랍니다. (500자 이내)" value="${myReservationInfo.rerequest}" disabled="disabled"></textarea>
 							</div>
 						</div>
 
@@ -163,14 +162,13 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									${totalPrice}원
-									<input type="hidden" name="totalprice" id="totalprice" value="${totalPrice}">
+									${myReservationInfo.totalprice}원
 								</span>
 							</div>
 						</div>
 
-						<button type="button" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" onclick="requestPay()">
-							예약하기
+						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							예약 취소하기
 						</button>
 					</div>
 				</div>
@@ -231,61 +229,44 @@
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </body>
 <script type="text/javascript">
-	function myInfo() {
-		var loginId = '${sessionScope.loginId}'	// session loginId값
-		$.ajax({
+	function myInfo(recode) {
+		if($("#changeInfo").val() == 1){
+			$("#mname").removeAttr("disabled");
+			$("#mtel").removeAttr("disabled");
+			$("#memail").removeAttr("disabled");
+			$("#request").removeAttr("disabled");
+			$("#changeInfo").val(0);
+			$("#changeInfo").text("수정완료");
+		}else{
+			$.ajax({
 				type: "get",
-				url: "getMyInfo",
+				url: "changeReserveMsg",
 				data: {
-					"loginId": loginId
+					"recode" : recode,
+					"remname": $("#mname").val(),
+					"remtel" : $("#mtel").val(),
+					"rememail" : $("#memail").val(),
+					"rerequest" : $("#request").val()
 				},
 				dataType: "json",
 				async: false,
 				success: function (result) {
 					console.log(result);
-					if(result != null){
+					if(result == "OK"){
 						$("#mname").val(result.mname);
 						$("#mtel").val(result.mtel);
 						$("#memail").val(result.memail);
+						$("#rerequest").val(result.request);
 					}
 				}
 			});
-	}
-</script>
-<script>IMP.init('imp25108731') </script>
-<script>
-function requestPay() {
-    // IMP.request_pay(param, callback) 결제창 호출
-    IMP.request_pay({ // param
-        pg: "html5_inicis",
-        pay_method: "card",
-        merchant_uid: "ORD20180131-0000011",
-        name: "camily - ${caname}",
-        amount: $("#totalprice").val(),
-        buyer_email: $("#memail").val(),
-        buyer_name: $("#mname").val(),
-        buyer_tel: $("#mtel").val(),
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181"
-    }, function(rsp) {
-    	if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-            // jQuery로 HTTP 요청
-            jQuery.ajax({
-                url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                data: {
-                    imp_uid: rsp.imp_uid,
-                    merchant_uid: rsp.merchant_uid
-                }
-            }).done(function (data) {
-              // 가맹점 서버 결제 API 성공시 로직
-			  $("#campingReservationForm").submit();
-            })
-          } else {
-            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-          }
-        });
+			$("#mname").attr("disabled", "disabled");
+			$("#mtel").attr("disabled", "disabled");
+			$("#memail").attr("disabled", "disabled");
+			$("#request").attr("disabled", "disabled");
+			$("#changeInfo").val(1);
+			$("#changeInfo").text("수정하기");
+		}
 	}
 </script>
 </html>

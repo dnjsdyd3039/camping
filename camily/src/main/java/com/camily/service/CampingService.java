@@ -142,18 +142,8 @@ public class CampingService {
 		mav.addObject("startday", startday);
 		endday = endday.substring(6,10) + "-" + endday.substring(0,2) + "-" + endday.substring(3,5);
 		mav.addObject("endday", endday);
-		int totalPrice = 0;
-		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(0,4)), Integer.parseInt(startday.substring(5,7)), Integer.parseInt(startday.substring(8,10))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(0,4)), Integer.parseInt(endday.substring(5,7)), Integer.parseInt(endday.substring(8,10)))); date = date.plusDays(1)) {
-			DayOfWeek dayOfWeek = date.getDayOfWeek();
-			int dayOfWeekNumber = dayOfWeek.getValue();
-			System.out.println(date);
-			System.out.println(dayOfWeekNumber);
-			if(dayOfWeekNumber == 5 || dayOfWeekNumber == 6) {
-				totalPrice += Integer.parseInt(RoomInfo.getCrprice())  * 1.2;
-			}else {
-				totalPrice += Integer.parseInt(RoomInfo.getCrprice());				
-			}
-		}
+		int totalPrice = totalPrice(startday, endday, RoomInfo.getCrprice());
+		
 		System.out.println(totalPrice);
 		mav.addObject("totalPrice", totalPrice);
 		mav.addObject("people", people);
@@ -161,28 +151,29 @@ public class CampingService {
 		return mav;
 	}
 	
-	public ModelAndView campingReservation(String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remtel, String rememail, String rerequest) {
+	public ModelAndView campingReservation(String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remname, String remtel, String rememail, String rerequest) {
 		System.out.println("CampingService.campingReservation() 호출");
+		ModelAndView mav = new ModelAndView();
 		String loginId = (String) session.getAttribute("loginId");
 		System.out.println("loginId : " + loginId);
 		ReservationDto reservationInfo = new ReservationDto();
-		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(0,4)), Integer.parseInt(startday.substring(5,7)), Integer.parseInt(startday.substring(8,10))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(0,4)), Integer.parseInt(endday.substring(5,7)), Integer.parseInt(endday.substring(8,10)))); date = date.plusDays(1)) {
-			String maxRecode = cdao.getmaxrecode();
-			String reCode = "";
-			if(maxRecode == null) {
-				reCode = "RE001";
+		String maxRecode = cdao.getmaxrecode();
+		String reCode = "";
+		if(maxRecode == null) {
+			reCode = "RE001";
+		}else {
+			int intMaxRecode = Integer.parseInt(maxRecode.substring(2)) + 1;
+			if(intMaxRecode < 10) {
+				reCode = "RE00" + intMaxRecode;
+			}else if(intMaxRecode < 100){
+				reCode = "RE0" + intMaxRecode;
+			}else if(intMaxRecode <1000) {
+				reCode = "RE" + intMaxRecode;
 			}else {
-				int intMaxRecode = Integer.parseInt(maxRecode.substring(2)) + 1;
-				if(intMaxRecode < 10) {
-					reCode = "RE00" + intMaxRecode;
-				}else if(intMaxRecode < 100){
-					reCode = "RE0" + intMaxRecode;
-				}else if(intMaxRecode <1000) {
-					reCode = "RE" + intMaxRecode;
-				}else {
-					System.out.println("범위 초과");
-				}
+				System.out.println("범위 초과");
 			}
+		}
+		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(0,4)), Integer.parseInt(startday.substring(5,7)), Integer.parseInt(startday.substring(8,10))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(0,4)), Integer.parseInt(endday.substring(5,7)), Integer.parseInt(endday.substring(8,10)))); date = date.plusDays(1)) {
 			reservationInfo.setRecode(reCode);
 			reservationInfo.setRecacode(recacode);
 			reservationInfo.setRemid(loginId);
@@ -190,15 +181,21 @@ public class CampingService {
 			reservationInfo.setRecrname(recrname);
 			reservationInfo.setRecrnum(recrnum);
 			reservationInfo.setRemid(remid);
+			reservationInfo.setRemname(remname);
 			reservationInfo.setRemtel(remtel);
+			reservationInfo.setRememail(rememail);
+			if(rerequest == null) {
+				rerequest = "";
+			}
 			reservationInfo.setRerequest(rerequest);
 			System.out.println(date.toString());
 			
 			reservationInfo.setReday(date.toString());
 			System.out.println(reservationInfo);
-			
+			cdao.campingReservation(reservationInfo);
 		}
-		return null;
+		mav.setViewName("redirect:/");
+		return mav;
 	}
 
 	// 내정보 불러오기 >> 회원가입쪽과 비교해서 같은 함수 존재시 제거?
@@ -208,6 +205,85 @@ public class CampingService {
 		Gson gson = new Gson();
 		String myInfo_json = gson.toJson(memberInfo);
 		return myInfo_json;
+	}
+
+	public ModelAndView myReservationList() {
+		System.out.println("CampingService.myReservationList() 호출");
+		ModelAndView mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginId");
+		if(loginId == null) {
+			mav.setViewName("redirect:/");
+		}else {
+			ArrayList<ReservationDto> myReservationList = cdao.getMyReservationList(loginId);
+			for (int i = 0; i < myReservationList.size(); i++) {
+				String startday = cdao.getStartday(myReservationList.get(i).getRecode());
+				LocalDate endday_date = cdao.getEndday(myReservationList.get(i).getRecode());
+				endday_date = endday_date.plusDays(1);
+				String endday = endday_date.toString();
+				myReservationList.get(i).setStartday(startday);
+				myReservationList.get(i).setEndday(endday);
+				int totalPrice = totalPrice(startday, endday, myReservationList.get(i).getCrprice());
+				myReservationList.get(i).setTotalprice(totalPrice);
+			}
+//			System.out.println(myReservationList);
+			mav.addObject("myReservationList", myReservationList);
+			mav.setViewName("member/MyReservationList");			
+		}
+		return mav;
+	}
+	
+	// 예약금액 계산 method
+	private int totalPrice(String startday, String endday, String roomPrice) {
+		int totalPrice = 0;
+		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(0,4)), Integer.parseInt(startday.substring(5,7)), Integer.parseInt(startday.substring(8,10))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(0,4)), Integer.parseInt(endday.substring(5,7)), Integer.parseInt(endday.substring(8,10)))); date = date.plusDays(1)) {
+			DayOfWeek dayOfWeek = date.getDayOfWeek();
+			int dayOfWeekNumber = dayOfWeek.getValue();
+			System.out.println(date);
+			System.out.println(dayOfWeekNumber);
+			if(dayOfWeekNumber == 5 || dayOfWeekNumber == 6) {
+				totalPrice += Integer.parseInt(roomPrice)  * 1.2;
+			}else {
+				totalPrice += Integer.parseInt(roomPrice);				
+			}
+		}
+		return totalPrice;
+	}
+
+	public ModelAndView myReservation(String recode) {
+		System.out.println("CampingService.myReservation() 호출");
+		ModelAndView mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginId");
+		System.out.println("loginId : " + loginId);
+		System.out.println("recode : " + recode);
+		if(loginId == null) {
+			mav.setViewName("redirect:/");
+		}else {
+			ReservationDto myReservationInfo = cdao.getMyReservationInfo(loginId, recode);
+			String startday = cdao.getStartday(recode);
+			LocalDate endday_date = cdao.getEndday(recode);
+			endday_date = endday_date.plusDays(1);
+			String endday = endday_date.toString();
+			myReservationInfo.setStartday(startday);
+			myReservationInfo.setEndday(endday);
+			int totalPrice = totalPrice(startday, endday, myReservationInfo.getCrprice());
+			myReservationInfo.setTotalprice(totalPrice);
+			System.out.println(myReservationInfo);
+			mav.addObject("myReservationInfo", myReservationInfo);
+			mav.setViewName("member/MyReservation");
+		}
+		return mav;
+	}
+
+	public String changeReserveMsg(String recode, String remname, String remtel, String rememail, String rerequest) {
+		System.out.println("CampingService.changeReserveMsg() 호출");
+		int updateResult = cdao.changeReserveMsg(recode, remname, remtel, rememail, rerequest);
+		String result = "";
+		if(updateResult > 0) {
+			result = "OK";
+		}else {
+			result = "NG";
+		}
+		return result;
 	}
 	
 }

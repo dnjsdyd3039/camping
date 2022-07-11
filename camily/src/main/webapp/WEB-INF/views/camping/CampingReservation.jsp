@@ -52,7 +52,7 @@
 	</div>
 	
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<form action="campingReservation" method="post" class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -69,6 +69,7 @@
 									<div style="font-size: 20px;"><span>${startday}</span> ~ <span>${endday}</span></div>
 									<div style="font-size: 20px;">${people}명</div>
 									
+									<input type="hidden" name="recacode" value="${cacode}">
 									<input type="hidden" name="remid" value="${sessionScope.loginId}">
 									<input type="hidden" name="recrname" value="${RoomInfo.crname}">
 									<input type="hidden" name="recrnum" value="${RoomInfo.crnum}">

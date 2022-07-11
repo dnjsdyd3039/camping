@@ -135,6 +135,7 @@ public class CampingService {
 		CampingDto campingInfo = cdao.campingView(cacode);
 		CampingRoomDto RoomInfo = new CampingRoomDto();
 		RoomInfo = cdao.getRoomInfo(cacode, roomSel, numSel);
+		mav.addObject("cacode", cacode);
 		mav.addObject("caname", campingInfo.getCaname());
 		mav.addObject("RoomInfo", RoomInfo);
 		startday = startday.substring(6,10) + "-" + startday.substring(0,2) + "-" + startday.substring(3,5);
@@ -160,12 +161,12 @@ public class CampingService {
 		return mav;
 	}
 	
-	public ModelAndView campingReservation(String cacode, String startday, String endday, String roomSel, String numSel, int people) {
+	public ModelAndView campingReservation(String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remtel, String rememail, String rerequest) {
 		System.out.println("CampingService.campingReservation() 호출");
 		String loginId = (String) session.getAttribute("loginId");
 		System.out.println("loginId : " + loginId);
 		ReservationDto reservationInfo = new ReservationDto();
-		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(6,10)), Integer.parseInt(startday.substring(0,2)), Integer.parseInt(startday.substring(3,5))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(6,10)), Integer.parseInt(endday.substring(0,2)), Integer.parseInt(endday.substring(3,5)))); date = date.plusDays(1)){
+		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(0,4)), Integer.parseInt(startday.substring(5,7)), Integer.parseInt(startday.substring(8,10))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(0,4)), Integer.parseInt(endday.substring(5,7)), Integer.parseInt(endday.substring(8,10)))); date = date.plusDays(1)) {
 			String maxRecode = cdao.getmaxrecode();
 			String reCode = "";
 			if(maxRecode == null) {
@@ -183,11 +184,14 @@ public class CampingService {
 				}
 			}
 			reservationInfo.setRecode(reCode);
-			reservationInfo.setRecacode(cacode);
+			reservationInfo.setRecacode(recacode);
 			reservationInfo.setRemid(loginId);
-			reservationInfo.setRepeople(people);
-			reservationInfo.setRecrname(roomSel);
-			reservationInfo.setRecrnum(numSel);
+			reservationInfo.setRepeople(repeople);
+			reservationInfo.setRecrname(recrname);
+			reservationInfo.setRecrnum(recrnum);
+			reservationInfo.setRemid(remid);
+			reservationInfo.setRemtel(remtel);
+			reservationInfo.setRerequest(rerequest);
 			System.out.println(date.toString());
 			
 			reservationInfo.setReday(date.toString());

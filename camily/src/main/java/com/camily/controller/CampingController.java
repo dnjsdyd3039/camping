@@ -134,15 +134,19 @@ public class CampingController {
 	}
 	
 	@RequestMapping(value =  "campingReservation")
-	public ModelAndView campingReservation(String cacode, String startday, String endday, String roomSel, String numSel, int people) {
+	public ModelAndView campingReservation(String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remtel, String rememail, String rerequest) {
 		System.out.println("캠핑 예약호출");
-		System.out.println("cacode : " + cacode);
+		System.out.println("recacode : " + recacode);
+		System.out.println("remid : " + remid);
+		System.out.println("recrname : " + recrname);
+		System.out.println("recrnum : " + recrnum);
 		System.out.println("startday : " + startday);
 		System.out.println("endday : " + endday);
-		System.out.println("roomSel : " + roomSel);
-		System.out.println("numSel : " + numSel);
-		System.out.println("people : " + people);
-		ModelAndView mav = csvc.campingReservation(cacode, startday, endday, roomSel, numSel, people);
+		System.out.println("repeople : " + repeople);
+		System.out.println("remtel : " + remtel);
+		System.out.println("rememail : " + rememail);
+		System.out.println("rerequest : " + rerequest);
+		ModelAndView mav = csvc.campingReservation(recacode, remid, recrname, recrnum, startday, endday, repeople, remtel, rememail, rerequest);
 		return mav;
 	}
 	

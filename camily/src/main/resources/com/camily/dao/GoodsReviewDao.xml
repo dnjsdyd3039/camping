@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camily.dao.GoodsReviewDao">
+
+<select id="selectGoodsReviewList" resultType="com.camily.dto.GoodsReviewDto">
+	SELECT GORVCODE, GORVMID, GORVGCODE, GORVTITLE, GORVCONTENTS, TO_CHAR(GODATE,
+		'YYYY-MM-DD')AS GODATE, GORVLIKE
+		FROM GOODSREVIEW
+		ORDER BY GORVCODE
+</select>
+
+<insert id="insertGoodsReview">
+	INSERT INTO GOODSREVIEW(GORVCODE, GORVMID, GORVGCODE, GORVTITLE, GORVCONTENTS, GODATE, GORVLIKE)
+	VALUES(#{gorvcode}, #{gorvmid}, #{gorvgcode}, #{gorvtitle}, #{gorvcontents}, SYSDATE, #{gorvlike})
+</insert>
+
+
+
+
+
+
+</mapper>

@@ -53,46 +53,42 @@
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 						<!-- item blog -->
+						
+						<c:forEach items="${goodsList }" var="goods"> 
 						<div class="p-b-63">
-							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
+							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.${goods.gorvcode }</span>
 							<a href="goreviewdetailpage" class="hov-img0 how-pos5-parent">
 								<img src="${pageContext.request.contextPath}/resources/images/캠핑용품.jpg" alt="IMG-BLOG" style="width: 825px; height: 618px;">	
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										1
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										7월 2022
-									</span>
-								</div>
+								
 							</a>
-
+	
 							<div class="p-t-32">
 								<h4 class="p-b-15">
 								
 									<a href="goreviewdetailpage" class="ltext-108 cl2 hov-cl1 trans-04">
-										리맥스캠프 우드 롤 테이블 L 접이식 
+										 
 									
 									</a>
 								</h4>
 
-								<!-- <p class="stext-117 cl6">
-									
-								</p> -->
+								<p class="stext-117 cl6">
+									${goods.gorvtitle }
+								</p>
 
 								<div class="flex-w flex-sb-m p-t-18">
 									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
 										<span>
-											<span class="cl4">By</span> 조항영  
+											<span class="cl4"></span>${goods.gorvmid } 
 											<span class="cl12 m-l-4 m-r-6">|</span>
 										</span>
-										
 										<span>
-											13 댓글
+											<span class="cl4">${goods.godate }</span> 
+											<span class="cl12 m-l-4 m-r-6">|</span>
+										</span>
+										<span>
+											${goods.gorvlike }
 										</span>
 									</span>
-
 									<a href="goreviewdetailpage" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
 										상세보기
 
@@ -101,6 +97,7 @@
 								</div>
 							</div>
 						</div>
+						</c:forEach> 		
 
 						<!-- item blog -->
 						<div class="p-b-63">

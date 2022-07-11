@@ -31,6 +31,18 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+<style type="text/css">
+	#bobtn{
+		text-align:right;
+	
+	
+	
+	}
+
+
+
+</style>
+
 </head>
 <body class="animsition">
 	
@@ -45,7 +57,7 @@
 					<div class="p-r-45 p-r-0-lg">
 						
 						<h4 class="ltext-109 cl2 p-b-28">
-								게시판 테스트 
+								${boardView.botitle } 
 							</h4>
 						
 						<div class="p-t-32">
@@ -66,16 +78,20 @@
 							</span>						
 							<p class="stext-117 cl6 p-b-26">
 								${boardView.bocontents }
-							</p>						
+							</p>
+							<div id="bobtn">
+							<a class="btn btn-outline-success" href="boardModify?bocode=${boardView.bocode }">수정</a>
+							<a class="btn btn-outline-success" href="boardDelete?bocode=${boardView.bocode }">삭제</a>	
+							</div>						
 						</div>											
 																	
 						<!--  -->
 						<div class="p-t-40">
 							
+							<hr>					
 							<h5 class="mtext-113 cl2 p-b-12">
 								댓글
 							</h5>		
-							<hr>					
 							<div id="replyList">
 								<ol class="replyList">
 									<c:forEach items="${replyList }" var="reply"> 
@@ -86,21 +102,31 @@
 											</p>
 											
 											<p>${reply.rpcontents }</p>	
-											<br>																													
+											<br>
+											<div>				
+												<button type="button" class="btn btn-outline-success" data-rno="${reply.rpcode }">수정</button>
+												<button type="button" class="btn btn-outline-success" data-rno="${reply.rpcode }">삭제</button>
+											</div>																													
 										</li>																									
 									</c:forEach>
 								</ol>																					
-							</div>											                   										
+							</div>		
+																                   										
 							<hr>
-							<form method="post" action="replyWrite">																						
+							<form method="post" action="replyWrite">								
+									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="hidden" name="rpcode" id="rpcode">	
+									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="hidden" name="rpdate" id="rpdate">													<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="hidden" name="rpmid" id="rpmid">
+									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="hidden" name="rpmid" id="rpmid">
+								<c:if test="${sessionScope.loginId != null }">																												
 								<div class="bor19 m-b-20">
-									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="reply_rpcontents" placeholder="댓글작성하기..."></textarea>
+									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="rpcontents" id="rpcontents" placeholder="댓글작성하기..."></textarea>
 								</div>
 								
 								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04" type="submit">
 									댓글작성
 								</button>
-							</form>
+								</c:if>
+							</form>								
 						</div>
 					</div>
 				</div>
@@ -159,6 +185,14 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	
+	<script type="text/javascript">
+ 	 var checkMsg = '${msg}';
+ 	 console.log(checkMsg.length);
+ 	 if( checkMsg.length > 0 ){
+		  alert(checkMsg);
+ 	 }
+	</script>
 
 </body>
 </html>

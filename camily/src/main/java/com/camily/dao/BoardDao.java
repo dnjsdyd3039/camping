@@ -12,10 +12,17 @@ public interface BoardDao {
 
 	ArrayList<BoardDto> selectBoardList();
 
-	BoardDto selectBoardView(String bocode);
+	BoardDto selectBoardView(int bocode);
 
-	ArrayList<ReplyDto> selectReplyList(String bocode);
+	ArrayList<ReplyDto> selectReplyList(int bocode);
 
-	void insertReply(ReplyDto reply);
+	int insertBoard(BoardDto bo);
 
+	int getMaxBocode();
+
+	void deleteBoard(int bocode);
+
+	
+
+	
 }

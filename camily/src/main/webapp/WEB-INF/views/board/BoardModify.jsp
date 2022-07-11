@@ -51,53 +51,35 @@
 
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92"
 		style="background-image: url('resources/images/bg-02.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">게시판</h2>
+		<h2 class="ltext-105 cl0 txt-center">게시글 수정</h2>
 	</section>
 
-	<!-- Content page -->
-	<section class="bg0 p-t-52 p-b-20">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-lg-9 p-b-80">
-					<div class="p-r-0-lg">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>작성일</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${boardList}" var="boardList">
-								<tr>
-									<td>${boardList.bocode }</td>
-									<td><a href="boardView?bocode=${boardList.bocode }">${boardList.botitle }</a></td>
-									<td>${boardList.bomid }</td>
-									<td>${boardList.bodate }</td>
-									<td>36</td>
-								</tr>
-								</c:forEach>						
-							</tbody>
-						</table>
-						<hr>
-						<c:if test="${sessionScope.loginId != null }">
-						<button class="btn btn-info pull-right" onclick="location.href='/controller/write'">글작성</button>
-						</c:if>
-						<!-- Pagination -->
-						<div class="flex-l-m flex-w w-full p-t-10 m-lr--7">
-							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-								1 </a> <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-								2 </a>
-						</div>
-
-					</div>
-				</div>
-			</div>
+	<div class="container col-md-6">		    
+		<form action="boardModify"  method="post">        
+		<div class="form-group">
+			<label for="exampleFormControlInput1">제목</label>            
+			<input	type="text" class="form-control" id="exampleFormControlInput1" name="title" value="${board.botitle }">        
 		</div>
-	</section>
+		        
+		<div class="form-group">
+			    <label for="exampleFormControlInput1">작성자</label>            
+				<input type="text" class="form-control" id="exampleFormControlInput1"
+				name="cre_id" value="${board.bomid }" readonly>        
+		</div>
+		        
+		<div class="form-group">
+			    <label for="exampleFormControlTextarea1">내용</label>            
+				<textarea class="form-control" id="exampleFormControlTextarea1"
+				rows="10" name="contents">${board.bocontents }</textarea>
+			        
+		</div>
+	       
+		<input type="hidden" name="idx" value="${board.bocode }">        
+		<button type="submit" class="btn btn-info">수정하기</button>
+		<button type="button" class="btn btn-secondary">뒤로가기</button>
+		    
+		</form>
+	</div>
 
 
 
@@ -157,14 +139,14 @@
 	</script>
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	
+
 	<script type="text/javascript">
- 	 var checkMsg = '${msg}';
- 	 console.log(checkMsg.length);
- 	 if( checkMsg.length > 0 ){
-		  alert(checkMsg);
- 	 }
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if (checkMsg.length > 0) {
+			alert(checkMsg);
+		}
 	</script>
-	
+
 </body>
 </html>

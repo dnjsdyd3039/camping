@@ -14,8 +14,9 @@ public class GoodsOrderDto {
 	private String goname;    // 상품 이름
 	private String goimage;   // 상품 이미지
 	
-	private String gostate; // 상품 상태
-
+	private String gostate;   // 상품 상태
+    private String godate;    // 주문 일자 
+	
 	public String getGocode() {
 		return gocode;
 	}

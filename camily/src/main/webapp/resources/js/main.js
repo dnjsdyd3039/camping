@@ -215,13 +215,19 @@
     /*==================================================================
     [ +/- num product ]*/
     $('.btn-num-product-down').on('click', function(){
+        var min_value_product = Number($(this).next().attr("min"));
         var numProduct = Number($(this).next().val());
-        if(numProduct > 0) $(this).next().val(numProduct - 1);
+        if(numProduct > min_value_product){
+            $(this).next().val(numProduct - 1);
+        }
     });
 
     $('.btn-num-product-up').on('click', function(){
+        var max_value_product = Number($(this).prev().attr("max"));;
         var numProduct = Number($(this).prev().val());
-        $(this).prev().val(numProduct + 1);
+        if(numProduct < max_value_product){
+            $(this).prev().val(numProduct + 1);
+        } 
     });
 
     /*==================================================================

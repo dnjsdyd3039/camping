@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +32,11 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 
 </head>
 <body class="animsition">
@@ -40,10 +44,13 @@
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 	<!-- End TopBar-->
 	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
+	
 	
 	<!-- c:set >> 사용할 변수선언 -->
     <c:set var="today" value="<%=new Date() %>"></c:set>
-    
 	<!-- Shoping Cart -->
 	<form action="campingReservation" method="post" class="bg0 p-t-75 p-b-85" id="campingReservationForm">
 		<div class="container">
@@ -62,6 +69,7 @@
 									<div style="font-size: 20px;"><span>${startday}</span> ~ <span>${endday}</span></div>
 									<div style="font-size: 20px;">${people}명</div>
 									
+									<input type="hidden" name="recode" id="recode">
 									<input type="hidden" name="recacode" value="${cacode}">
 									<input type="hidden" name="remid" value="${sessionScope.loginId}">
 									<input type="hidden" name="recrname" value="${RoomInfo.crname}">
@@ -191,10 +199,6 @@
 		</span>
 	</div>
 
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -255,37 +259,57 @@
 <script>IMP.init('imp25108731') </script>
 <script>
 function requestPay() {
-    // IMP.request_pay(param, callback) 결제창 호출
-    IMP.request_pay({ // param
-        pg: "html5_inicis",
-        pay_method: "card",
-        merchant_uid: "ORD20180131-0000011",
-        name: "camily - ${caname}",
-        amount: $("#totalprice").val(),
-        buyer_email: $("#memail").val(),
-        buyer_name: $("#mname").val(),
-        buyer_tel: $("#mtel").val(),
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181"
-    }, function(rsp) {
-    	if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-            // jQuery로 HTTP 요청
-            jQuery.ajax({
-                url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                data: {
-                    imp_uid: rsp.imp_uid,
-                    merchant_uid: rsp.merchant_uid
-                }
-            }).done(function (data) {
-              // 가맹점 서버 결제 API 성공시 로직
-			  $("#campingReservationForm").submit();
-            })
-          } else {
-            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-          }
-        });
+	var recode = "";
+	$.ajax({
+		type: "get",
+		url: "getRecode",
+		async: false,
+		success: function(result){
+			console.log(result);
+			recode = result;
+			$("#recode").val(recode);
+		}
+	});
+	$("#campingReservationForm").submit();
+	
+	/*
+	if(recode.length > 0){
+		// IMP.request_pay(param, callback) 결제창 호출
+		IMP.request_pay({ // param
+			pg: "html5_inicis",
+			pay_method: "card",
+			merchant_uid: recode,
+			name: "camily - ${caname}",
+			amount: $("#totalprice").val(),
+			buyer_email: $("#memail").val(),
+			buyer_name: $("#mname").val(),
+			buyer_tel: $("#mtel").val()// ,
+//			buyer_addr: "서울특별시 강남구 신사동",
+//			buyer_postcode: "01181"
+		}, function(rsp) {
+			if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+				$("#campingReservationForm").submit();
+				// jQuery로 HTTP 요청
+//				jQuery.ajax({
+//					url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
+//					method: "POST",
+//					headers: { "Content-Type": "application/json" },
+//					data: {
+//						imp_uid: rsp.imp_uid,
+//						merchant_uid: rsp.merchant_uid
+//					}
+//				}).done(function (data) {
+//				  // 가맹점 서버 결제 API 성공시 로직
+//				})
+			  } else {
+				alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+			  }
+			});
+		}
+	*/
+
+
+
 	}
 </script>
 </html>

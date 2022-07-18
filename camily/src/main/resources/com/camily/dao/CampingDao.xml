@@ -20,4 +20,35 @@
 		AND RECODE = #{recode}
 	</select>
 	
+	<select id="getCampTotalCount" resultType="int">
+		SELECT COUNT(*) FROM CAMPING
+			<where>
+				<if test="type.length > 0">
+			    	AND CATYPE LIKE '%'||#{type}||'%'
+			    </if>
+			    <if test="searchKeyword.length > 0">
+					AND CANAME LIKE '%'||#{searchKeyword}||'%'
+				</if>
+			</where>
+	</select>
+	
+	<select id="getCampingList" resultType="com.camily.dto.CampingDto">
+		SELECT * 
+		FROM ( 	SELECT ROWNUM RN, CAMPING.*
+		       		FROM ( 	SELECT CAMPING.*, CA.CRPRICE FROM CAMPING
+		             			LEFT OUTER JOIN ( SELECT C.CACODE, MIN(TO_NUMBER(CR.CRPRICE)) AS CRPRICE
+		                    	FROM CAMPING C
+		              			LEFT OUTER JOIN CAMPINGROOM CR ON C.CACODE = CR.CRCACODE
+		                       	GROUP BY C.CACODE ) CA ON CAMPING.CACODE = CA.CACODE
+		            <where>
+			            <if test="type.length > 0">
+			       			AND CATYPE LIKE '%'||#{type}||'%'
+			       		</if>
+			       		<if test="searchKeyword.length > 0">
+							AND CANAME LIKE '%'||#{searchKeyword}||'%'
+						</if>
+					</where>
+		      		ORDER BY CAMPING.CACODE) CAMPING)
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
 </mapper>

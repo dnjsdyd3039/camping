@@ -34,8 +34,13 @@
 </head>
 <body class="animsition">
 	
-	<!-- Header -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 
 	<!-- Content page -->
 	<section class="bg0 p-t-52 p-b-20">

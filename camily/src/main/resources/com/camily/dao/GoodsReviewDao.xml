@@ -5,21 +5,53 @@
 
 <mapper namespace="com.camily.dao.GoodsReviewDao">
 
-<select id="selectGoodsReviewList" resultType="com.camily.dto.GoodsReviewDto">
-	SELECT GORVCODE, GORVMID, GORVGCODE, GORVTITLE, GORVCONTENTS, TO_CHAR(GODATE,
-		'YYYY-MM-DD')AS GODATE, GORVLIKE
-		FROM GOODSREVIEW
+	<select id="selectGoodsReviewList"
+		resultType="com.camily.dto.GoodsReviewDto">
+		SELECT GONAME, GORVCODE, GORVMID, GORVGCODE, GORVTITLE,
+		GORVCONTENTS, TO_CHAR(GORVDATE,
+		'YYYY-MM-DD')AS GORVDATE, GORVLIKE,
+		GO.GOIMAGE
+		FROM GOODSORDER GO INNER JOIN GOODSREVIEW GR
+		ON GR.GORVGOCODE = GO.GOCODE
 		ORDER BY GORVCODE
-</select>
+	</select>
 
-<insert id="insertGoodsReview">
-	INSERT INTO GOODSREVIEW(GORVCODE, GORVMID, GORVGCODE, GORVTITLE, GORVCONTENTS, GODATE, GORVLIKE)
-	VALUES(#{gorvcode}, #{gorvmid}, #{gorvgcode}, #{gorvtitle}, #{gorvcontents}, SYSDATE, #{gorvlike})
-</insert>
+	<select id="selectGoodsReviewDetail"
+		resultType="com.camily.dto.GoodsReviewDto">
+		SELECT GORVCODE, GORVMID, GORVGCODE, GORVTITLE,
+		GORVCONTENTS,
+		TO_CHAR(GORVDATE,
+		'YYYY-MM-DD')AS GORVDATE, GORVLIKE
+		FROM
+		GOODSREVIEW
+		WHERE GORVCODE
+		= #{gorvcode}
+	</select>
 
+	<select id="getMaxCgcode" resultType="int">
+		SELECT NVL(MAX(GORVCODE),0)
+		FROM GOODSREVIEW
+	</select>
 
+	<insert id="insertGoodsReview">
+		INSERT INTO GOODSREVIEW(GORVCODE, GORVMID, GORVGCODE,
+		GORVTITLE,
+		GORVCONTENTS, GORVDATE, GORVLIKE, GORVGOCODE,GOIMAGE)
+		VALUES(#{gorvcode}, #{gorvmid}, #{gorvgcode}, #{gorvtitle},
+		#{gorvcontents}, SYSDATE, 1, #{gorvgocode}, #{goimage})
+	</insert>
 
+	<delete id="deleteGoodsReview">
+		DELETE FROM GOODSREVIEW WHERE GORVCODE = #{gorvcode}
+	</delete>
 
-
-
+	<select id="selectGoodsReview" resultType="com.camily.dto.GoodsReviewDto">
+		SELECT * FROM GOODSREVIEW WHERE GORVCODE = #{gorvcode}
+	</select>
+	
+	<update id="updateGoodsReview">
+		UPDATE GOODSREVIEW
+		SET GORVTITLE = #{gorvtitle}, GORVCONTENTS = #{gorvcontents}
+		WHERE GORVCODE = #{gorvcode}
+	</update>
 </mapper>

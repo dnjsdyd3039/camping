@@ -4,12 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>게시판</title>
+<title>Camily - 게시글수정</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-<link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/resources/images/icons/favicon.png" />
+<link rel="icon" type="image/png" href="images/icons/favicon.png" />
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
@@ -42,49 +41,94 @@
 	href="${pageContext.request.contextPath}/resources/css/util.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main.css">
-<!--===============================================================================================-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<!-- include summernote css/js-->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
+<!-- include summernote-ko-KR -->
+<script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
+<title>글쓰기</title>
+
+<script>
+$(document).ready(function() {
+	  $('#summernote').summernote({
+ 	    	placeholder: '내용을 작성하세요',
+	        minHeight: 400,
+	        maxHeight: 400,
+	        focus: true, 
+	        lang : 'ko-KR',
+	        toolbar: [
+    		    // [groupName, [list of button]]
+    		    ['fontname', ['fontname']],
+    		    ['fontsize', ['fontsize']],
+    		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+    		    ['color', ['forecolor','color']],
+    		    ['table', ['table']],
+    		    ['para', ['ul', 'ol', 'paragraph']],
+    		    ['height', ['height']],
+    		    ['insert',['picture','link','video']],
+    		    ['view', ['fullscreen', 'help']]
+    		  ],
+    	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+
+	  });
+	});
+</script>
+
+
 </head>
 <body class="animsition">
 
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 
+
+	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92"
 		style="background-image: url('resources/images/bg-02.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">게시글 수정</h2>
+		<h2 class="ltext-105 cl0 txt-center">자유게시판</h2>
 	</section>
 
-	<div class="container col-md-6">		    
-		<form action="boardModify"  method="post">        
-		<div class="form-group">
-			<label for="exampleFormControlInput1">제목</label>            
-			<input	type="text" class="form-control" id="exampleFormControlInput1" name="title" value="${board.botitle }">        
-		</div>
-		        
-		<div class="form-group">
-			    <label for="exampleFormControlInput1">작성자</label>            
-				<input type="text" class="form-control" id="exampleFormControlInput1"
-				name="cre_id" value="${board.bomid }" readonly>        
-		</div>
-		        
-		<div class="form-group">
-			    <label for="exampleFormControlTextarea1">내용</label>            
-				<textarea class="form-control" id="exampleFormControlTextarea1"
-				rows="10" name="contents">${board.bocontents }</textarea>
-			        
-		</div>
-	       
-		<input type="hidden" name="idx" value="${board.bocode }">        
-		<button type="submit" class="btn btn-info">수정하기</button>
-		<button type="button" class="btn btn-secondary">뒤로가기</button>
-		    
-		</form>
-	</div>
+
+	<!-- Content page -->
+	<section class="bg0 p-t-62 p-b-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-lg-9 p-b-80">
+					<h2 style="text-align: center;">게시글 수정</h2>
+					<br> 
+					<div style="width: 100%; margin: auto;">
+						<form method="post" action="boardModifyForm">
+							<input type="hidden" name="bocode" value="${board.bocode }">
+							<input type="hidden" name="bomid" value="${board.bomid }">
+							<input type="text" name="botitle" value="${board.botitle }" style="width: 40%;"/> <br>
+							<textarea id="summernote"  name="bocontents">${board.bocontents}</textarea>
+							<br>
+							<input id="subBtn" type="button" class="btn btn-info pull-right" value="글 작성"
+								style="float: right;" onclick="goWrite(this.form)" />
+						</form>
+					</div>
 
 
+					<div class="p-r-45 p-r-0-lg">
+						<!-- item blog -->
+						<div class="p-b-63"></div>
+					</div>
+				</div>
 
-	<!-- Footer -->
+			</div>
+		</div>
+	</section>
+
+	<!-- footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
+
 
 
 	<!-- Back to top -->
@@ -94,9 +138,6 @@
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
 	<script
 		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
@@ -137,9 +178,29 @@
 			})
 		});
 	</script>
+	
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
+	<script>
+		function goWrite(form) {
+			var title = form.botitle.value;
+			var content = form.bocontents.value;
+			
+
+			if (title.trim() == '') {
+				alert("제목을 입력해주세요");
+				return false;
+			}
+			
+			if (content.trim() == '') {
+				alert("내용을 입력해주세요");
+				return false;
+			}
+			form.submit();
+		}
+	</script>
+	
 	<script type="text/javascript">
 		var checkMsg = '${msg}';
 		console.log(checkMsg.length);
@@ -147,6 +208,5 @@
 			alert(checkMsg);
 		}
 	</script>
-
 </body>
 </html>

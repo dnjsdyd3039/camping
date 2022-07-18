@@ -11,9 +11,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.camily.dao.CampingShopDao;
 import com.camily.dto.CampingDetailInformationDto;
+import com.camily.dto.CampingDto;
 import com.camily.dto.GoodsDto;
 import com.camily.dto.GoodsOrderDto;
 import com.camily.dto.MemberDto;
+import com.camily.dto.PageDto;
 import com.google.gson.Gson;
 
 @Service
@@ -26,16 +28,14 @@ public class CampingShopService {
 	private CampingShopDao cdao;
 	
 	ArrayList<GoodsDto> cgvMvList = new ArrayList<GoodsDto>();
-	// 캠핑 용품 이동 페이지
+		// 캠핑 용품 이동 페이지
 	public ModelAndView campingShopPage() {
 		System.out.println("campingShopPage.CampingShopPage() 호출");	
 		ModelAndView mav = new ModelAndView();
-		
+			
 		// SELECT 캠핑 용품 
-		ArrayList<GoodsDto> campingShop = cdao.campingShop();
-		
-	    session.setAttribute("shopList", campingShop);
-	    
+		ArrayList<GoodsDto> campingShop = cdao.getCampingList2();
+					
 		mav.addObject("campingShop", campingShop);
 		mav.setViewName("campingshop/CampingShopPage");	
 		return mav;
@@ -149,17 +149,48 @@ public class CampingShopService {
 		return mav;
 	}
 	
-	// 구매내역 보기 Select
-	public ModelAndView CampingPurchaseListPage() {
+	// 구매내역 보기 Select 페이징처리
+	public ModelAndView CampingPurchaseListPage(String page) {
 		 System.out.println("CampingShopService.CampingPurchaseListPage() 호출");
-		 ModelAndView mav = new ModelAndView();
+		 
+		 int selPage = 1;
+			if(page != null) {
+				selPage = Integer.parseInt(page);
+			}
+			int campTotalCount = cdao.getCampTotalCount2();
+			
+			int pageCount = 3; // 보여줄 개수
+			int pageNumCount = 5; // 밑에 페이지 개수
+			int startRow = 1 + (selPage - 1) * pageCount;
+			int endRow = selPage * pageCount;
+			if (endRow > campTotalCount) {
+				endRow = campTotalCount;
+			}
+			System.out.println("startRow : " + startRow);
+			System.out.println("endRow : " + endRow);
+			
+			int maxPage = (int)( Math.ceil(  (double)campTotalCount/pageCount  ) );			
+			int startPage = (int)(( Math.ceil((double)selPage/pageNumCount)) - 1) * pageNumCount + 1;
+			int endPage = startPage + pageNumCount - 1;
+			
+			if( endPage > maxPage ) {
+				endPage = maxPage;
+			}
+			PageDto pageDto = new PageDto();
+			pageDto.setPage(selPage);
+			pageDto.setMaxPage(maxPage);
+			pageDto.setStartPage(startPage);
+			pageDto.setEndPage(endPage);
 		 
 		 String loginId = (String) session.getAttribute("loginId");
 		 System.out.println("loginId :"+ loginId);
 		 
-		 ArrayList<GoodsOrderDto> PurchaseList = cdao.PurchaseList(loginId); // 해당하는 아이디의 구매내역 값 출력	    	 
+		 ArrayList<GoodsOrderDto> PurchaseList = cdao.PurchaseList(loginId,startRow,endRow); // 해당하는 아이디의 구매내역 값 출력	
+		 ModelAndView mav = new ModelAndView();
+		 
 		 System.out.println("PurchaseList :"+ PurchaseList);
 		 mav.addObject("PurchaseList", PurchaseList);
+		 mav.addObject("pageDto", pageDto);
 		 mav.setViewName("campingshop/CampingPurchaseListPage"); // 페이지 이동
 		 
 		return mav;
@@ -214,6 +245,18 @@ public class CampingShopService {
 		String cartselect_json = gson.toJson(cartselect);
         return cartselect_json;
 	}
+	
+	// 찜삭제 (DELETE) ajax
+		public String calldibs(String gocode) {
+			System.out.println("CampingShopService.calldibs() 호출");
+			String loginId = (String) session.getAttribute("loginId");	
+			
+			// (DELETE) 찜목록 dao 호출
+			int calldibs = cdao.calldibs(gocode,loginId);
+		    System.err.println("calldibs :"+calldibs);	
+		        
+			return calldibs+"";
+		}
     
 	// 장바구니 추가!
 	public ModelAndView shoppingbasket(RedirectAttributes ra, String dicode, String diname, String diimage, String diamount, String diprice) {
@@ -352,6 +395,8 @@ public class CampingShopService {
 				
 		return deleteph+"";
 	}
+    
+	
     
 
 	

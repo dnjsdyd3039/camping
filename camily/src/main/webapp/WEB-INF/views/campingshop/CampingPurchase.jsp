@@ -9,142 +9,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-<link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/resources/images/icons/favicon.png" />
+<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png" />
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/slick/slick.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/util.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>	
+<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 </head>
 <body class="animsition">
 
-	<!-- Topbar -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
-	<!-- End of Topbar -->
-
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2"> Your Cart </span>
-
-				<div
-					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/item-cart-01.jpg"
-								alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat </a> <span class="header-cart-item-info"> 1
-								x $19.00 </span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/item-cart-02.jpg"
-	      						alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star </a> <span class="header-cart-item-info"> 1
-								x $39.00 </span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/item-cart-03.jpg"
-								alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather </a> <span class="header-cart-item-info">
-								1 x $17.00 </span>
-						</div>
-					</li>
-				</ul>
-
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">Total: $75.00</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart </a> <a href="shoping-cart.html"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out </a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Cart 끝 -->
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 	
 	<!-- breadcrumb 시작-->
-	<div class="container" style="margin-top: 100px">
+	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
+			<a href="#" class="stext-109 cl8 hov-cl1 trans-04">
+				상품구매
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
-
+                ${campingpurchase.gname }
 			<span class="stext-109 cl4">
-				Shoping Cart
+				
 			</span>
 		</div>
 	</div>
@@ -267,7 +183,7 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									 공짜
+									 무료
 								</span>
 							</div>
 						</div>	
@@ -303,8 +219,12 @@
 								<tr class="table_row">
 									<td class="column-1">${sessionScope.loginId }</td>
 									<td class="column-2"><input value="${addselect.maddr }" readonly="readonly" id="newadd" class="size-209 p-r-18 p-r-0-sm w-full-ssm"></td>
-									<td class="column-3"> 
+									<td class="column-3">
 									<button type="submit" class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기!</button>
+									<button type="button"
+									 onclick="requestPay('${campingpurchase.gcode}','${campingpurchase.gname }',${totalPrice},
+									'${addselect.memail }','${addselect.mname }','${addselect.mtel }','${addselect.maddr }')"
+									class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기zz</button>
 									<input type="hidden" name="loginId" value="${sessionScope.loginId }">
 									<input type="hidden" name="addr" id="newdd" value="${addselect.maddr }">
 									<input type="hidden" name="gogcode" value="${campingpurchase.gcode }">
@@ -324,7 +244,7 @@
 			위로가기(◦'⌣'◦)</a>
 	</div>	
 	</form>
-	
+
     <!-- 주소확인 모달 시작 -->
     <div class="modal fade" id="addCheck" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true"
@@ -540,22 +460,68 @@
 		if( checkMsg.length > 0 ){
 			alert(checkMsg);
 		}
-	</script>
+	</script>	
+	<!--===============================================================================================-->
+		
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
+<script type="text/javascript">
+var IMP = window.IMP;
+IMP.init("imp10142481"); 
+function requestPay(gcode,gname,total,memail,mname,mtel,maddr) {
+	console.log("gcode :"+ gcode);
+	console.log("gname :"+ gname);
+	console.log("total :"+ total);
+	console.log("memail :"+ memail);
+	console.log("mname :"+ mname);
+	console.log("mtel :"+ mtel);
+	console.log("maddr :"+ maddr);	
+	
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({ // param
+        pg: "html5_inicis",
+        pay_method: "card",
+        merchant_uid: gcode, 
+        name: gname,
+        amount: total,
+        buyer_email: memail,
+        buyer_name: mname,
+        buyer_tel: mtel,
+        buyer_addr: maddr
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            alert("결제성공입니다.!!")
+        } else {
+        	alert("결제실패입니다.!!")
+        }
+    });/* function (rsp) { // callback
+        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+            // jQuery로 HTTP 요청
+            jQuery.ajax({
+                url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                data: {
+                    imp_uid: rsp.imp_uid,
+                    merchant_uid: rsp.merchant_uid
+                }
+            }).done(function (data) {
+              // 가맹점 서버 결제 API 성공시 로직
+            })
+          } else {
+            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+          }
+        }); */
+  }
+   
+</script>		
+		
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function() {
 			$(this).select2({
@@ -565,18 +531,13 @@
 		})
 	</script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/moment.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/slick/slick.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/slick-custom.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/slick/slick.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/slick-custom.js"></script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
 	<script>
 		$('.parallax100').parallax100();
 	</script>
@@ -756,20 +717,7 @@
 		 $(newadd).val(total);
 		 $(newdd).val(total);
 		 $("#addCheck").modal("hide");
-		 
-		
+		 	
 	 }
-	
 	</script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </html>

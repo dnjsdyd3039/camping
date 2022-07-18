@@ -3,6 +3,7 @@ package com.camily.dao;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -21,14 +22,13 @@ public interface CampingDao {
 	@Select("SELECT MAX(CACODE) FROM CAMPING")
 	String getMaxCacode();
 
-	@Select("SELECT * FROM (SELECT ROWNUM RN, CAMPING.* FROM CAMPING ORDER BY CACODE) WHERE RN BETWEEN #{startRow} AND #{endRow}")
-	ArrayList<CampingDto> getCampingList(@Param("startRow") int startRow, @Param("endRow") int endRow);
+//	@Select("SELECT * FROM (SELECT ROWNUM RN, CAMPING.* FROM CAMPING ORDER BY CACODE) WHERE RN BETWEEN #{startRow} AND #{endRow}")
+	ArrayList<CampingDto> getCampingList(@Param("startRow") int startRow, @Param("endRow") int endRow, @Param("type") String type, @Param("searchKeyword") String searchKeyword);
 
 	@Select("SELECT * FROM CAMPING WHERE CACODE = #{cacode}")
 	CampingDto campingView(String cacode);
 
-	@Select("SELECT COUNT(*) FROM CAMPING")
-	int getCampTotalCount();
+	int getCampTotalCount(@Param("type") String type, @Param("searchKeyword") String searchKeyword);
 
 	@Select("SELECT * FROM CAMPINGROOM WHERE CRCACODE = #{cacode} ORDER BY LPAD(CRNUM, 2, '0')")
 	ArrayList<CampingRoomDto> campingRoomList(String cacode);
@@ -63,6 +63,9 @@ public interface CampingDao {
 
 	@Update("UPDATE RESERVATION SET REMNAME = #{remname}, REMTEL = #{remtel}, REMEMAIL= #{rememail}, REREQUEST = #{rerequest} WHERE RECODE = #{recode}")
 	int changeReserveMsg(@Param("recode") String recode, @Param("remname") String remname, @Param("remtel") String remtel, @Param("rememail") String rememail, @Param("rerequest") String rerequest);
+
+	@Delete("DELETE FROM RESERVATION WHERE RECODE = #{recode}")
+	int cancelReservation(String recode);
 
 
 }

@@ -28,4 +28,11 @@ public class HomeController {
 		return "Main";
 	}
 	
+	@RequestMapping(value ="/admin")
+	public String adminMaingPage() {
+		
+		return "AdminMain";
+	}
+	
+	
 }

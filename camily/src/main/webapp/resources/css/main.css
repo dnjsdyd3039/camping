@@ -270,7 +270,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 [ Menu ]*/
 
 .wrap-menu-desktop {
-  position: fixed;
+  /* position: fixed; */
   z-index: 1100;
   background-color: transparent;
   width: 100%;
@@ -615,6 +615,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 [ Fixed menu desktop ]*/
 
 .fix-menu-desktop .wrap-menu-desktop {
+  position: fixed;
   height: 70px;
   background-color: rgba(255,255,255,1);
   box-shadow: 0 0px 3px 0px rgba(0,0,0,0.2);

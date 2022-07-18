@@ -7,14 +7,16 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.camily.dto.CampingDetailInformationDto;
+import com.camily.dto.CampingDto;
 import com.camily.dto.GoodsDto;
 import com.camily.dto.GoodsOrderDto;
 import com.camily.dto.MemberDto;
 
 public interface CampingShopDao {
     
-	// 캠핑 용품 페이지 이동요청 (SELECT)
-	ArrayList<GoodsDto> campingShop();
+	// 캠핑 용품 페이지 이동요청 (SELECT) 페이징 처리
+	@Select("SELECT * FROM GOODS")
+	ArrayList<GoodsDto> getCampingList2();  	
     
 	// 캠핑 용품 상세 페이지 이동 요청 (SELECT)
 	GoodsDto campingDetail(String gcode);
@@ -34,9 +36,16 @@ public interface CampingShopDao {
 			@Param("gamount") String gamount, @Param("totalPrice") String totalPrice, @Param("gname") String gname,
 			@Param("gimage") String gimage);
     
-	// 구매내역 보기 (SELECT)
-	ArrayList<GoodsOrderDto> PurchaseList(String loginId);
+	// 구매내역 보기 (SELECT) 페이징 처리
+	ArrayList<GoodsOrderDto> PurchaseList(@Param("loginId") String loginId, @Param("startRow") int startRow, @Param("endRow") int endRow);
     
+	// 구매목록 삭제하기 dao 호출 ajax (DELETE)
+	int deleteph(String gocode);
+    
+	// 구매목록페이지 페이징처리
+	@Select("SELECT COUNT(*) FROM GOODSORDER")
+	int getCampTotalCount2();
+	
 	// 캠핑 용품 (SELECT) AA
 	GoodsDto getCampingInfo(String gcode);
 	
@@ -48,6 +57,9 @@ public interface CampingShopDao {
 	// 찜목록 보기 (SELECT)
 	ArrayList<GoodsOrderDto> cartselect(String loginId);
     
+	// 찜삭제 (DELETE)
+	int calldibs(@Param("gocode") String gocode, @Param("loginId") String loginId);
+	
 	// 장바구니 추가하기 전 장바구니 안에 같은 물건이 있는지 없는지 아이디로 확인 (SELECT) ZZ
 	CampingDetailInformationDto selectdto(@Param("dicode")String dicode, @Param("loginId")String loginId);
     
@@ -68,9 +80,11 @@ public interface CampingShopDao {
     
 	// 장바구니 삭제 (DELETE)
 	int deletepoket(String dicode);
+   
     
-	// 구매목록 삭제하기 dao 호출 ajax (DELETE)
-	int deleteph(String gocode);
+
+	
+
 
 
     

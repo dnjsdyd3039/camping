@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.camily.dto.BoardDto;
+import com.camily.dto.FAQDto;
 import com.camily.dto.ReplyDto;
 
 public interface BoardDao {
@@ -22,7 +23,15 @@ public interface BoardDao {
 
 	void deleteBoard(int bocode);
 
-	
+	BoardDto selectBoard(int bocode);
 
-	
+	int updateBoard(BoardDto board);
+
+	ArrayList<FAQDto> selectFAQList();
+
+	int getFAQMaxBocode();
+
+	int insertFAQ(FAQDto faq);
+
+	FAQDto selectFAQView(int faqcode);
 }

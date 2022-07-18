@@ -62,18 +62,17 @@ public class CampingShopController {
 		
 		// 서비스 이동 아이디부터 이미지 까지
 		ModelAndView mav = csvc.goodsPurchase(ra,loginId,addr,gogcode,gamount,totalPrice
-				,gname,gimage);	
-	        
+				,gname,gimage);	        
 		return mav;
 	}
 	
-	// 구매내역 페이지 이동
+	// 구매내역 페이지 이동 페이징처리
 	@RequestMapping(value="/CampingPurchaseListPage")
-	public ModelAndView CampingPurchaseListPage() {
+	public ModelAndView CampingPurchaseListPage(String page) {
 		System.out.println("구매내역 페이지 이동요청");
 	    
 		// 서비스 이동 구매내역 페이지
-		ModelAndView mav = csvc.CampingPurchaseListPage();
+		ModelAndView mav = csvc.CampingPurchaseListPage(page);
 		
 		return mav;
 		
@@ -99,6 +98,18 @@ public class CampingShopController {
 		String cartselect = csvc.cartselect(loginId);
 		System.out.println("cartselect :"+cartselect);
 		return cartselect;
+	}
+	
+	// 찜삭제 (DELETE) ajax
+	@RequestMapping(value="/calldibs")
+	public @ResponseBody String calldibs(String gocode) {
+       System.out.println("gocode :"+ gocode);
+		
+       // 장바구니 (DELETE) 서비스 이동
+	   String calldibs = csvc.calldibs(gocode);
+	   System.out.println("calldibs :"+ calldibs);
+	   
+	   return calldibs;
 	}
 	
 	// 장바구니 클릭 장바구니에추가!
@@ -158,7 +169,7 @@ public class CampingShopController {
 	    return mav;
 	}
 	
-	// 구매목록 삭제하기 ajax
+	// 구매목록 삭제하기 ajax 
 	@RequestMapping(value="/deleteph")
 	public @ResponseBody String deleteph(String gocode) {
         System.out.println("gocode :"+ gocode);

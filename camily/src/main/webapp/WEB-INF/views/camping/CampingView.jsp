@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,46 +9,38 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/slick/slick.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+		
 	<!-- datepicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 	<style type="text/css">
@@ -81,55 +73,22 @@
 </head>
 
 <body class="animsition">
-	<!-- Header -->
-	<%@ include file="../includes/TopBar.jsp" %>
-	<%@ include file="/WEB-INF/views/includes/Member.jsp"%>
+	<!-- TopBar-->
+	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 
 	<!-- Product Detail -->
-	<section class="sec-product-detail bg0 p-t-65 p-b-60" style="margin-top: 100px;">
+	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
-						<div class="wrap-slick3 flex-sb flex-w">
-							<div class="wrap-slick3-dots"></div>
-							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="${campingInfo.caimage}">
-									<div class="wrap-pic-w pos-relative">
-										<img src="${campingInfo.caimage}" alt="캠핑장 대표 이미지">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-											href="${campingInfo.caimage}">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="">
-									<div class="wrap-pic-w pos-relative">
-										<img src="" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-											href="">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="">
-									<div class="wrap-pic-w pos-relative">
-										<img src="" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-											href="">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+						<img src="${campingInfo.caimage}" alt="캠핑장 대표 이미지" style="width: -webkit-fill-available;">
+						
 					</div>
 				</div>
 
@@ -189,7 +148,7 @@
 
 									<div class="size-204 respon6-next">
 										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="numSel" id="numSel">
+											<select class="js-select2" name="numSel" id="numSel" onchange="checkpeople()">
 												<option>객실번호 선택</option>
 											</select>
 											<div class="dropDownSelect2"></div>
@@ -208,8 +167,7 @@
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input id="people" class="mtext-104 cl3 txt-center num-product" type="number"
-											name="people" value="1">
+										<input id="people" class="mtext-104 cl3 txt-center num-product" type="number" name="people" value="1" min="0" max="6" readonly="readonly">
 											
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
@@ -244,8 +202,7 @@
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a onclick="drawMap('${campingInfo.calatitude}', '${campingInfo.calongitude}', '${campingInfo.caname}')"
-								class="nav-link" data-toggle="tab" href="#information" role="tab">캠핑장 정보</a>
+							<a class="nav-link" data-toggle="tab" href="#information" role="tab" onclick="drawMap('${campingInfo.calatitude}', '${campingInfo.calongitude}', '${campingInfo.caname}')">캠핑장 정보</a>
 						</li>
 					</ul>
 
@@ -260,19 +217,22 @@
 										<!-- Review -->
 										<c:forEach items="${campingRoomTypeList}" var="campingRoomType">
 											<div class="flex-w flex-t p-b-68">
-												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+												<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6" style="width: 200px; height: 200px;">
 													<img src="${campingRoomType.crimage}" alt="객실사진">
 												</div>
 
-												<div class="size-207">
+												<div class="size-207" style="width: calc(100% - 218px);">
 													<div class="flex-w flex-sb-m p-b-17">
-														<span class="mtext-107 cl2 p-r-20">
+														<span class="mtext-107 cl2 p-r-20 p-l-20" style="font-size: 30px;">
 															${campingRoomType.crname}
 														</span>
 													</div>
 
-													<p class="stext-102 cl6">
-														가격 : ${campingRoomType.crprice}
+													<p class="stext-102 cl6 p-l-40" style="font-size: 20px;">
+														평일가격 : <fmt:formatNumber value="${campingRoomType.crprice}" pattern=""/>원
+													</p>
+													<p class="stext-102 cl6 p-l-40" style="font-size: 20px;">
+														주말가격 : <fmt:formatNumber value="${campingRoomType.crprice * 1.2}" pattern=""/>원
 													</p>
 												</div>
 											</div>
@@ -283,7 +243,7 @@
 						</div>
 
 						<!-- - -->
-						<div class="tab-pane fade  show active" id="description" role="tabpanel">
+						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
 								<p class="stext-102 cl6">${campingInfo.cacontents}</p>
 							</div>
@@ -317,8 +277,6 @@
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -460,6 +418,11 @@
 	$(".datepicker").datepicker({
 		minDate: 0,
 		numberOfMonths: [1, 1],
+		dayNames: [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" ],
+		dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
+		monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
+		monthNamesShort: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
+		showMonthAfterYear: true,
 		beforeShowDay: function (date) {
 			var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#startday").val());
 			var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#endday").val());
@@ -528,14 +491,13 @@
 						}
 						*/
 					}
-
+					roomtype.sort();
 					console.log(roomtype);
 					var output = '<option>캠핑장 종류 선택</option>';
 					for (var i = 0; i < roomtype.length; i++) {
 						output += '<option value="' + roomtype[i] + '">' + roomtype[i] + '</option>'
 					}
 					$("#roomSel").html(output);
-
 				}
 			})
 		}
@@ -546,15 +508,25 @@
 		var roomSel = $("#roomSel").val();
 		console.log("roomSel : " + roomSel);
 		console.log(ableRoom);
-		var output = "";
+		var output = "<option>객실번호 선택</option>";
 		for (var i = 0; i < ableRoom.length; i++) {
 			console.log("ableRoom[i].crname : " + ableRoom[i].crname);
 			if (ableRoom[i].crname == roomSel) {
 				output += '<option value="' + ableRoom[i].crnum + '">' + ableRoom[i].crnum + '</option>'
 			}
 		}
+		
 		$("#numSel").html(output);
 	}
 </script>
-
+<script>
+	function checkpeople(){
+		for(var i = 0; i < ableRoom.length; i++){
+			if(ableRoom[i].crname == $("#roomSel").val() && ableRoom[i].crnum == $("#numSel").val()){
+				$("#people").attr("max", ableRoom[i].crmaxpeople);
+				alert("최대 인원은 " + ableRoom[i].crmaxpeople + "명 입니다.");
+			}
+		}
+	}
+</script>
 </html>

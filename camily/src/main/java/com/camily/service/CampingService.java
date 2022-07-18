@@ -56,14 +56,14 @@ public class CampingService {
 		
 	}
 
-	public ModelAndView campingList(String page) {
+	public ModelAndView campingList(String page, String type, String searchKeyword) {
 		System.out.println("CampingService.campingList() 호출");
 		int selPage = 1;
 		if(page != null) {
 			selPage = Integer.parseInt(page);
 		}
-		int campTotalCount = cdao.getCampTotalCount();
-		
+		int campTotalCount = cdao.getCampTotalCount(type, searchKeyword);
+		System.out.println(campTotalCount);
 		int pageCount = 20;
 		int pageNumCount = 5;
 		int startRow = 1 + (selPage - 1) * pageCount;
@@ -74,7 +74,7 @@ public class CampingService {
 		System.out.println("startRow : " + startRow);
 		System.out.println("endRow : " + endRow);
 		
-		ArrayList<CampingDto> campingList = cdao.getCampingList(startRow, endRow);
+		ArrayList<CampingDto> campingList = cdao.getCampingList(startRow, endRow, type, searchKeyword);
 		int maxPage = (int)( Math.ceil(  (double)campTotalCount/pageCount  ) );
 		
 		int startPage = (int)(( Math.ceil((double)selPage/pageNumCount)) - 1) * pageNumCount + 1;
@@ -92,7 +92,9 @@ public class CampingService {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("campingList", campingList);
+		mav.addObject("type", type);
 		mav.addObject("pageDto", pageDto);
+		mav.addObject("searchKeyword", searchKeyword);
 		mav.setViewName("camping/CampingList");
 		return mav;
 	}
@@ -151,30 +153,15 @@ public class CampingService {
 		return mav;
 	}
 	
-	public ModelAndView campingReservation(String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remname, String remtel, String rememail, String rerequest) {
+	public ModelAndView campingReservation(String recode, String recacode, String remid, String recrname, String recrnum, String startday, String endday, int repeople, String remname, String remtel, String rememail, String rerequest) {
 		System.out.println("CampingService.campingReservation() 호출");
 		ModelAndView mav = new ModelAndView();
 		String loginId = (String) session.getAttribute("loginId");
 		System.out.println("loginId : " + loginId);
 		ReservationDto reservationInfo = new ReservationDto();
-		String maxRecode = cdao.getmaxrecode();
-		String reCode = "";
-		if(maxRecode == null) {
-			reCode = "RE001";
-		}else {
-			int intMaxRecode = Integer.parseInt(maxRecode.substring(2)) + 1;
-			if(intMaxRecode < 10) {
-				reCode = "RE00" + intMaxRecode;
-			}else if(intMaxRecode < 100){
-				reCode = "RE0" + intMaxRecode;
-			}else if(intMaxRecode <1000) {
-				reCode = "RE" + intMaxRecode;
-			}else {
-				System.out.println("범위 초과");
-			}
-		}
+		
 		for (LocalDate date = LocalDate.of(Integer.parseInt(startday.substring(0,4)), Integer.parseInt(startday.substring(5,7)), Integer.parseInt(startday.substring(8,10))); date.isBefore(LocalDate.of(Integer.parseInt(endday.substring(0,4)), Integer.parseInt(endday.substring(5,7)), Integer.parseInt(endday.substring(8,10)))); date = date.plusDays(1)) {
-			reservationInfo.setRecode(reCode);
+			reservationInfo.setRecode(recode);
 			reservationInfo.setRecacode(recacode);
 			reservationInfo.setRemid(loginId);
 			reservationInfo.setRepeople(repeople);
@@ -184,10 +171,11 @@ public class CampingService {
 			reservationInfo.setRemname(remname);
 			reservationInfo.setRemtel(remtel);
 			reservationInfo.setRememail(rememail);
-			if(rerequest == null) {
+			if(rerequest.length() > 0) {
+				reservationInfo.setRerequest(rerequest);
+			}else {				
 				rerequest = "";
 			}
-			reservationInfo.setRerequest(rerequest);
 			System.out.println(date.toString());
 			
 			reservationInfo.setReday(date.toString());
@@ -285,5 +273,36 @@ public class CampingService {
 		}
 		return result;
 	}
+
+	public String getRecode() {
+		String maxRecode = cdao.getmaxrecode();
+		String reCode = "";
+		if(maxRecode == null) {
+			reCode = "RE001";
+		}else {
+			int intMaxRecode = Integer.parseInt(maxRecode.substring(2)) + 1;
+			if(intMaxRecode < 10) {
+				reCode = "RE00" + intMaxRecode;
+			}else if(intMaxRecode < 100){
+				reCode = "RE0" + intMaxRecode;
+			}else if(intMaxRecode <1000) {
+				reCode = "RE" + intMaxRecode;
+			}else {
+				System.out.println("범위 초과");
+			}
+		}
+		return reCode;
+	}
+
+	public ModelAndView cancelReservation(String recode) {
+		System.out.println("CampingService.cancelReservation() 호출");
+		ModelAndView mav = new ModelAndView();
+		int deleteResult = cdao.cancelReservation(recode);
+		if(deleteResult > 0) {
+			mav.setViewName("redirect:/myReservationList");			
+		}
+		return mav;
+	}
+
 	
 }

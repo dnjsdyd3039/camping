@@ -1,5 +1,4 @@
-z	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -59,97 +58,60 @@ z	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/AdminTopBar.jsp"%>
 	<!-- End TopBar-->
-	
-
-	<!-- <!-- Shoping Cart -->
-		<!-- <div class="container">
-			<div class="row">
-				<div class="" >
-					<div class="">
-						<div class="wrap-table-shopping-cart">
-						
-                            
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">상품정보</th>
-									<th class="column-2"></th>
-									<th class="column-3">상품가격</th>
-									<th class="column-4">상품수량</th>
-									<th class="column-5">총금액</th>
-									<th class="column-6">주문주소</th>
-									<th class="column-7"></th>
-								</tr>
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-										</div>
-									</td>
-									<td class="column-2"></td>
-									<td class="column-3"></td>
-									<td class="column-4">개</td>
-									<td class="column-5">원</td> 
-									<td class="column-6"></td>
-									<th class="column-7" > 
-									</th>
-								</tr>
-							</table>
-						</div>
-	
-					</div>
-				</div>
-
-			</div>
-		</div>		 -->
- 
-		
+			
 	<section class="section-slide" style="margin-top: 100px;">
 					<!-- Page Heading -->
-				
-
+			
 					<!-- Content Row -->
 					<div class="row" style="margin:0 auto; ">
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4" style="margin:0 auto; ">
-						<h1 class="h3 mb-0 text-gray-800">관리자 캠핑관리 페이지 - AdminCamping.jsp</h1>
+						<h1 class="h3 mb-0 text-gray-800">관리자 캠핑관리 페이지 - AdminCampingShop.jsp</h1>
 					</div>
                       <div class="card shadow mb-8 col-sm-10" style="margin:0 auto; ">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">캠핑장 리스트</h6>
-                        </div>
                         <div class="card-body" >
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                <table class="table table-bordered" id="dataTable">
+                                  <thead>
                                         <tr>
-                                            <th></th>
-                                            <th class="align-middle text-center font-weight-bold">아이디</th>
+                                            <th class="align-middle text-center font-weight-bold">상품코드</th>
+                                            <th class="align-middle text-center font-weight-bold">정보</th>
                                             <th class="align-middle text-center font-weight-bold">이름</th>
-                                            <th class="align-middle text-center font-weight-bold">생년월일</th>
-                                            <th class="align-middle text-center font-weight-bold">이메일</th>
-                                            <th></th>  
+                                            <th class="align-middle text-center font-weight-bold">가격</th>
+                                            <th class="align-middle text-center font-weight-bold">카테고리</th>
+                                            <th class="align-middle text-center font-weight-bold"></th> 
                                         </tr>
-                                    </thead>
-                                    <tfoot>
+                                   </thead>                                 
+                                    <c:forEach items="${adminCampingShopList}" var="ShopList">  
+                                  <tbody>                      
                                         <tr>
-                                            <th></th>
-                                            <th class="align-middle text-center font-weight-bold">아이디</th>
-                                            <th class="align-middle text-center font-weight-bold">이름</th>
-                                            <th class="align-middle text-center font-weight-bold">생년월일</th>
-                                            <th class="align-middle text-center font-weight-bold">이메일</th>
-                                            <th></th>  
+                                            <th class="align-middle text-center font-weight-bold">${ShopList.gcode }</th>
+                                            <th class="align-middle text-center font-weight-bold">
+                                            <img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${ShopList.gimage }" height="50px" style="text-align: center;">                                           
+                                            </th>
+                                            <th class="align-middle text-center font-weight-bold">${ShopList.gname }</th>
+                                            <th class="align-middle text-center font-weight-bold">${ShopList.gprice }</th>
+                                            <th class="align-middle text-center font-weight-bold">${ShopList.gcategory }</th>                                            
+                                            <th class="align-middle text-center font-weight-bold">
+                                            <c:choose>                                           
+                                               <c:when test="${ShopList.gstate == 1}">
+                                                  <button class="btn btn-danger p-2" onclick="shopState(this,'${ShopList.gcode}','${ShopList.gstate}')">제품비활성화</button>    
+                                               </c:when>  
+                                                                                                
+                                               <c:otherwise>
+                                                  <button class="btn btn-primary p-2" onclick="shopState(this,'${ShopList.gcode}','${ShopList.gstate}')">제품활성화</button>  
+                                               </c:otherwise>                              
+                                            </c:choose>                                                                                      
+                                            <button onclick="productmodify(this,'${ShopList.gcode}')" class="btn btn-secondary p-2">제품수정</button>                                            </th>
                                         </tr>
-                                    </tfoot>
-                                    <tbody>
-                                  
-                                          
-                    
-                                    </tbody>
+                                  </tbody>     
+                                    </c:forEach>                                                                                                                          
                                 </table>
                             </div>
                         </div>
-                    </div>	
-                    </div>	
-                    </section>
+                       </div>	
+                     </div>	
+                   </section>
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
 	<!-- End of Footer -->
@@ -282,8 +244,52 @@ z	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	</script>
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
 </body>
+<script type="text/javascript">
+ function shopState(thisVal,gcode,gstate){
+	 console.log("캠핑용품 상태변경 - ajax 클릭");
+	 console.log("thisVal :"+ thisVal);
+	 console.log("gcode :"+ gcode);
+	 console.log("gstate :"+ gstate);
+	 
+	 
+		if( $(thisVal).hasClass("btn-danger") ){
+			var gstate = '0'; // 활성화일때 상태 바꿔주기
+			// 비활성화 시켜야 하니 0 값을가지고 update문을 실행을 해줘야 1인 값이 0으로 변화하기 때문
+		} else if( $(thisVal).hasClass("btn-primary") ) {
+			var gstate = '1'; // 비활성화일때 상태 바꿔주기
+		}
+	 
+		console.log("현재상품상태"+ gstate);
+		
+		$.ajax({
+			type : "post",
+			url : "campingShopState",
+			data : {"gcode" : gcode, "gstate" : gstate },
+			success : function(result){
+				
+				if(result == 1){
+					$(thisVal).toggleClass("btn-primary");
+					$(thisVal).toggleClass("btn-danger");
+				} 
+						
+				if(gstate == 1){
+					$(thisVal).text("제품비활성화")
+				} else {
+					$(thisVal).text("제품활성화")
+				}	
+				
+			}
+				
+		});
+ }
+</script>
+	
+<script type="text/javascript">
+function productmodify(thisVal, gcode){
+	location.href = "productmodify?gcode="+gcode;
+}
 
+</script>
 		
 </html>

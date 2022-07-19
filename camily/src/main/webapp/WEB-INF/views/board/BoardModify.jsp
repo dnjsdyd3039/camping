@@ -54,7 +54,9 @@
 <!-- include summernote-ko-KR -->
 <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
 <title>글쓰기</title>
-
+<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote({
@@ -138,9 +140,7 @@ $(document).ready(function() {
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	
 	<!--===============================================================================================-->
 	<script
 		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
@@ -180,7 +180,7 @@ $(document).ready(function() {
 	</script>
 	
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 	<script>
 		function goWrite(form) {

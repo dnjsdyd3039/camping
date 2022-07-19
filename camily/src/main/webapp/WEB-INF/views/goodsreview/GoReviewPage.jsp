@@ -31,6 +31,11 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->	
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 <body class="animsition">
 	
@@ -377,10 +382,6 @@
 		</span>
 	</div>
 	
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -422,7 +423,7 @@
 		}
 	</script>
 <!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 	<script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
 </body>
 </html>

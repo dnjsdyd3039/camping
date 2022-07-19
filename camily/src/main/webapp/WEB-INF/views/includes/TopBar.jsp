@@ -54,14 +54,6 @@
 							<a href="memberLogout" class="flex-c-m trans-04 p-lr-25">로그아웃</a>
 						</c:otherwise>
 					</c:choose>
-
-					<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a> -->
 				</div>
 
 
@@ -80,37 +72,33 @@
 						<li><a href="campingList">캠핑장</a></li>
 						<li><a href="campingShopPage">캠핑용품</a></li>
 						<li><a href="#">후기</a>
-							<ul class="sub-menu">
+							<ul class="sub-menu" style="z-index: 1100">
 								<li><a href="cgreviewpage">캠핑장 후기</a></li>
 								<li><a href="goreviewpage">캠핑상품 후기</a></li>
 							</ul>
 						</li>
-
-						<li class="label1" data-label1="hot"><a href="shoping-cart.html">이벤트</a></li>
+						<li><a href="contact.html">자유게시판</a></li>
 
 						<li><a href="boardList">FAQ</a></li>
-
-						<li><a href="about.html">캠핑TIP</a></li>
-
-						<li><a href="contact.html">고객센터</a></li>
 					</ul>
 				</div>
 
 				<!-- Icon header -->
 				<div class="wrap-icon-header flex-w flex-r-m">
-
-					<a href="detailinformation" style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i
-							class="zmdi zmdi-shopping-cart"></i>
-					</a>
-
-					<button style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart"
-						onclick="cartselect('${sessionScope.loginId}')">
-						<i class="zmdi zmdi-favorite-outline"></i>
-					</button>
-
-					<a href="CampingPurchaseListPage" style="font-size: 30px"
-						class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i class="fa-brands fa-wpforms"></i>
-					</a>
+					<c:choose>
+						<c:when test="${sessionScope.loginId != null}">
+							<a href="myReservationList" style="font-size: 25px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i class="fa-solid fa-tent"></i></a>
+							<a href="detailinformation" style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i class="zmdi zmdi-shopping-cart"></i></a>
+							<button style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart" onclick="cartselect('${sessionScope.loginId}')"> <i class="zmdi zmdi-favorite-outline"></i></button>
+							<a href="CampingPurchaseListPage" style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i class="fa-brands fa-wpforms"></i></a>
+						</c:when>
+						<c:otherwise>
+							<i class="fa-solid fa-tent cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 23px; cursor: pointer;"></i>
+							<i class="zmdi zmdi-shopping-cart cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 30px; cursor: pointer;"></i>
+							<i class="zmdi zmdi-favorite-outline cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 30px; cursor: pointer;"></i>
+							<i class="fa-brands fa-wpforms cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 30px; cursor: pointer;"></i>
+						</c:otherwise>
+					</c:choose>
 
 				</div>
 			</nav>
@@ -120,25 +108,26 @@
 	<div class="wrap-header-mobile">
 		<!-- Logo moblie -->
 		<div class="logo-mobile">
-			<a href="index.html"><img src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
+			<a href="${pageContext.request.contextPath }/"><img src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
 					alt="IMG-LOGO"></a>
 		</div>
 
 		<!-- Icon header -->
 		<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-			<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-					<i class="zmdi zmdi-search"></i>
-				</div> -->
-
-			<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-				data-notify="2">
-				<i class="zmdi zmdi-shopping-cart"></i>
-			</div>
-
-			<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-				data-notify="0">
-				<i class="zmdi zmdi-favorite-outline"></i>
-			</a>
+			<c:choose>
+				<c:when test="${sessionScope.loginId != null}">
+					<a href="myReservationList" style="font-size: 25px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i class="fa-solid fa-tent"></i></a>
+					<a href="detailinformation" style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i class="zmdi zmdi-shopping-cart"></i></a>
+					<button style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart" onclick="cartselect('${sessionScope.loginId}')"> <i class="zmdi zmdi-favorite-outline"></i></button>
+					<a href="CampingPurchaseListPage" style="font-size: 30px" class="cl2 hov-cl1 trans-04 p-l-22 p-r-11"> <i class="fa-brands fa-wpforms"></i></a>
+				</c:when>
+				<c:otherwise>
+					<i class="fa-solid fa-tent cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 23px; cursor: pointer;"></i>
+					<i class="zmdi zmdi-shopping-cart cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 30px; cursor: pointer;"></i>
+					<i class="zmdi zmdi-favorite-outline cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 30px; cursor: pointer;"></i>
+					<i class="fa-brands fa-wpforms cl2 hov-cl1 trans-04 p-l-22 p-r-11" onclick="msg('로그인 후 사용가능합니다.')" style="font-size: 30px; cursor: pointer;"></i>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<!-- Button show menu -->
@@ -153,45 +142,43 @@
 	<div class="menu-mobile">
 		<ul class="topbar-mobile">
 			<li>
-				<div class="left-top-bar">sessionId님 환영합니다.</div>
-			</li>
+				<c:if test="${sessionScope.loginId != null }">
+					<div class="left-top-bar" style="float: left;">${sessionScope.loginId}님 환영합니다.</div>				
+				</c:if>
+				<div class="right-top-bar flex-w h-full" style="display: flex; justify-content: end;">
 
-			<li>
-				<div class="right-top-bar flex-w h-full">
-					<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
-						</a> -->
+					<c:choose>
+						<c:when test="${sessionScope.loginId == null }">
+							<a href="#" class="flex-c-m p-lr-10 trans-04" onclick="memberJoin();">회원가입</a>
+							<a href="#" class="flex-c-m p-lr-10 trans-04" onclick="memberLogin();">로그인</a>
+						</c:when>
 
-					<a href="#" class="flex-c-m p-lr-10 trans-04"> 내정보 보기 </a>
-
-					<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a> -->
+						<c:otherwise>
+							<a href="#" class="flex-c-m p-lr-10 trans-04"
+								onclick="memberInfo('${sessionScope.loginId}')">내정보</a>
+							<a href="memberLogout" class="flex-c-m p-lr-10 trans-04">로그아웃</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</li>
+
 		</ul>
 
 		<ul class="main-menu-m">
 			<li><a href="campingList">캠핑장</a></li>
 			<li><a href="campingShopPage">캠핑용품</a>
-			<li><a href="#">후기</a>
+			<li><a  href="#">후기</a>
 				<ul class="sub-menu-m">
 					<li><a href="cgreviewpage">캠핑장 후기</a></li>
 					<li><a href="goreviewpage">캠핑용품 후기</a></li>
 				</ul> <span class="arrow-main-menu-m"> <i class="fa fa-angle-right" aria-hidden="true"></i>
 				</span>
 			</li>
-			<li><a href="shoping-cart.html" class="label1 rs1" data-label1="hot">이벤트</a></li>
+
+			<li><a href="about.html">자유게시판</a></li>
 
 			<li><a href="boardList">FAQ</a></li>
 
-			<li><a href="about.html">캠핑TIP</a></li>
-
-			<li><a href="contact.html">고객센터</a></li>
 		</ul>
 	</div>
 
@@ -277,3 +264,15 @@ function calldibs(thisval,gocode){
 		</div>
 	</div>	
 <!-- Cart 끝 -->
+<script type="text/javascript">
+	function msg(message) {
+		var checkMsg = message;
+		console.log(message.length);
+		if (message.length > 0) {
+			alert(message);
+			if(message == "로그인 후 사용가능합니다."){
+				memberLogin()
+			}
+		}
+	}
+</script>

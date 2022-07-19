@@ -175,6 +175,7 @@ public class CampingService {
 				reservationInfo.setRerequest(rerequest);
 			}else {				
 				rerequest = "";
+				reservationInfo.setRerequest(rerequest);
 			}
 			System.out.println(date.toString());
 			
@@ -213,7 +214,7 @@ public class CampingService {
 				int totalPrice = totalPrice(startday, endday, myReservationList.get(i).getCrprice());
 				myReservationList.get(i).setTotalprice(totalPrice);
 			}
-//			System.out.println(myReservationList);
+			System.out.println(myReservationList);
 			mav.addObject("myReservationList", myReservationList);
 			mav.setViewName("member/MyReservationList");			
 		}

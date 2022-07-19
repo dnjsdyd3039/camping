@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +41,13 @@
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-		
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	
 	<!-- datepicker -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 	<style type="text/css">
 		.dp-highlight .ui-state-default {
-			background: #484;
+			background: #ff8800;
 			color: #FFF;
 		}
 
@@ -96,13 +98,6 @@
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 							${campingInfo.caname}
-							<div style="float: right;">
-								<a href="#"
-									class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-									data-tooltip="Add to Wishlist" style="font-size: 25px">
-									<i class="zmdi zmdi-favorite"></i>
-								</a>
-							</div>
 						</h4>
 
 
@@ -157,7 +152,7 @@
 								</div>
 
 								<!-- 인원선택 -->
-								<div class="flex-w flex-r-m p-b-10">
+								<div class="flex-w flex-r-m p-b-10" style="justify-content: start;">
 									<div class="size-203 flex-c-m respon6">
 										인원
 									</div>
@@ -167,7 +162,7 @@
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input id="people" class="mtext-104 cl3 txt-center num-product" type="number" name="people" value="1" min="0" max="6" readonly="readonly">
+										<input id="people" class="mtext-104 cl3 txt-center num-product" type="number" name="people" value="1" min="1" max="6" readonly="readonly">
 											
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
@@ -176,9 +171,9 @@
 								</div>
 
 								<!-- 예약하기 버튼 -->
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-204 flex-w flex-m respon6-next">
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">예약하기</button>
+								<div class="flex-w flex-r-m p-b-10" style="justify-content: center;">
+									<div class="size-204 flex-w flex-m respon6-next" style="justify-content: center;">
+										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" style="width: -webkit-fill-available;">예약하기</button>
 									</div>
 								</div>
 							</div>
@@ -374,7 +369,6 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=10d14c6ccf8a5da29debf326077676e3">
 	</script>
 	<script type="text/javascript">
@@ -411,7 +405,8 @@
 				content: iwContent
 			});
 		}
-	</script>	
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 </body>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">

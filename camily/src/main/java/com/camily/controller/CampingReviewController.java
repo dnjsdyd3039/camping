@@ -1,30 +1,66 @@
 package com.camily.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.camily.dao.CampingReviewDao;
+import com.camily.dto.CampingReviewDto;
+import com.camily.service.CampingReviewService;
 
 @Controller
 public class CampingReviewController {
+
+	@Autowired
+	private HttpSession session;
+
+	@Autowired
+	private CampingReviewService crsv;
 	
-	@RequestMapping(value="/cgreviewpage")
-	public String cgreviewpage() {
-		System.out.println("캠핑장 리뷰사이트 이동요청");
+	@Autowired
+	private CampingReviewDao crdo;
+
+	@RequestMapping(value = "/cgreviewpage")
+	public ModelAndView cgreviewpage() {
 		
-		return "campingreview/CgReviewPage";
+			System.out.println("캠핑용품 리뷰 페이지 이동 요청");
+			ModelAndView mav = crsv.CampingReviewList();
+
+			return mav;
+			
 	}
-	
-	@RequestMapping(value="/cgreviewdetailpage")
+
+	@RequestMapping(value = "/cgreviewdetailpage")
 	public String cgreviewdetailpage() {
 		System.out.println("캠핑장 리뷰 상세페이지 이동요청");
 		
 		return "campingreview/CgReviewDetailPage";
 	}
+
+	@GetMapping(value = "/cpWrite")
+	public String cpWrite(String recacode,String recode) {
+		System.out.println("캠핑장 리뷰 글쓰기 페이지 이동요청");
+
+		session.setAttribute("recacode", recacode);
+		session.setAttribute("recode", recode);
+
+		return "campingreview/CgReviewWrite";
+	}
+
+	@RequestMapping("cpWrite2")
+	public String cgWrite2(CampingReviewDto review, RedirectAttributes ra) {
+		System.out.println("CampingReviewController.cpWrite2()호출");
+		System.out.println("review :" + review);
+		
+		int insertResult = crsv.insertCampingReview(review);
+		ra.addFlashAttribute("msg", "게시글이 등록되었습니다!");
 	
-	/*
-	 * @RequestMapping(value="/cgreviewdetail") public ModelAndView cgreviewdetail()
-	 * { System.out.println("게시판 상세글 조회"); ModelAndView mav = new ModelAndView();
-	 * 
-	 * return mav; }
-	 */
+		return "redirect:/cgreviewpage";
+	}
+
 }

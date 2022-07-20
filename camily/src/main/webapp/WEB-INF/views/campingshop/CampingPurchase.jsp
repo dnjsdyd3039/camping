@@ -5,78 +5,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
+<title>Camily</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-<link rel="icon" type="image/png"
-	href="${pageContext.request.contextPath}/resources/images/icons/favicon.png" />
+<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png" />
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/slick/slick.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/util.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>	
+<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 <body class="animsition">
 
-	<!-- Topbar -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
-	<!-- End of Topbar -->
-
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
+	
 	<!-- breadcrumb 시작-->
-	<div class="container" style="margin-top: 100px">
+	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
+			<a href="#" class="stext-109 cl8 hov-cl1 trans-04">
+				상품구매
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
-
+                ${campingpurchase.gname }
 			<span class="stext-109 cl4">
-				Shoping Cart
+				
 			</span>
 		</div>
 	</div>
 	<!-- breadcrumb 끝-->
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<form class="bg0 p-t-75 p-b-85" action="goodsPurchase" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -87,14 +79,14 @@
 									<th class="column-1">상품정보</th>
 									<th class="column-2"></th>
 									<th class="column-3">상품가격</th>
-									<th class="column-4">상품갯수</th>
+									<th class="column-4">상품수량</th>
 									<th class="column-5">총금액</th>
 								</tr>
 
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="${campingpurchase.gimage }" alt="IMG">
+											<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingpurchase.gimage }" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">${campingpurchase.gname }</td>
@@ -158,7 +150,7 @@
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-									주문 갯수:
+									주문 수량:
 								</span>
 							</div>
 
@@ -182,6 +174,20 @@
 								</p>					
 							</div>
 						</div>
+						
+						<div class="flex-w flex-t p-t-27 p-b-33">
+							<div class="size-208">
+								<span class="mtext-101 cl2">
+									배송비:
+								</span>
+							</div>
+
+							<div class="size-209 p-t-1">
+								<span class="mtext-110 cl2">
+									 무료
+								</span>
+							</div>
+						</div>	
 
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
@@ -192,93 +198,114 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									${totalPrice} 원
+									 ${totalPrice} 원
 								</span>
 							</div>
-						</div>
-
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							구매완료!
-						</button>
+						</div>	
+												
 					</div>
 				</div>
 			</div>
 		</div>
-	</form>
-    <!-- Shoping Cart 끝 -->
-    
+						<div class="wrap-table-shopping-cart">
+							<table class="table-shopping-cart">
+								<tr class="table_head">
+									<th class="column-1">구매자아이디</th>
+									<th class="column-2"> 
+									<button type="button" class="cl0 size-60 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" 
+									onclick="addCheck()">주소변경</button>&nbsp;&nbsp;&nbsp; 기본주소 :&nbsp;${addselect.maddr }</th>
+									<th class="column-3"></th>
+								</tr>
+
+								<tr class="table_row">
+									<td class="column-1">${sessionScope.loginId }</td>
+									<td class="column-2"><input value="${addselect.maddr }" readonly="readonly" id="newadd" class="size-209 p-r-18 p-r-0-sm w-full-ssm"></td>
+									<td class="column-3">
+									<button type="submit" class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기!</button>
+									<button type="button"
+									 onclick="requestPay('${campingpurchase.gcode}','${campingpurchase.gname }',${totalPrice},
+									'${addselect.memail }','${addselect.mname }','${addselect.mtel }','${addselect.maddr }')"
+									class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기zz</button>
+									<input type="hidden" name="loginId" value="${sessionScope.loginId }">
+									<input type="hidden" name="addr" id="newdd" value="${addselect.maddr }">
+									<input type="hidden" name="gogcode" value="${campingpurchase.gcode }">
+									<input type="hidden" name="gamount" value="${campingpurchase.gamount }">
+									<input type="hidden" name="totalPrice" value="${totalPrice}">
+									<input type="hidden" name="gname" value="${campingpurchase.gname }">
+									<input type="hidden" name="gimage" value="${campingpurchase.gimage }">
+									</td>
+								</tr>
+							</table>
+						</div>
+						
 	<!-- Load more -->
 	<div class="flex-c-m flex-w w-full p-t-45">
 		<a href="#"
 			class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-			위로가기(◦'⌣'◦) </a>
+			위로가기(◦'⌣'◦)</a>
 	</div>	
+	</form>
+
+    <!-- 주소확인 모달 시작 -->
+    <div class="modal fade" id="addCheck" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true"
+			style="z-index: 1200">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<button class="close text-right font-weight-bold mt-2 mr-2"
+						type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x&nbsp;</span>
+					</button>
+					<div class="modal-header text-center">
+						<a class="modal-title w-100 font-weight-bold"> <img
+							src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
+							alt="IMG-LOGO" style="width:50%">
+						</a>
+						
+					</div>
+					<div class="modal-body mx-3">
+
+						<div class="row">
+							<div class="col-sm-6 md-form mb-3">
+								<input type="text" id="postcode"
+									class="form-control validate" placeholder="우편번호" name="mpostcode">
+							</div>
+							<div class="col-sm-6 md-form mb-3">
+								<input type="button" class="btn btn-dark btn-user btn-block"
+									onclick="sample6_DaumPostcode()" value="우편번호 찾기">
+							</div>
+						</div>
+						<div class="md-form mb-3">
+							<input type="text" id="address"
+								class="form-control validate" placeholder="주소" name="maddress">
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6 md-form mb-3">
+								<input type="text" id="detailAddress"
+									class="form-control validate" placeholder="상세주소" name="mdetailAddr">
+							</div>
+							<div class="col-sm-6 md-form mb-3">
+								<input type="text" id="extraAddress"
+									class="form-control validate" placeholder="참고항목" name="mextraAddr">
+							</div>
+						</div>
+						
+						<div class="md-form mb-1 text-center">
+							<button class="btn btn-dark" onclick="addChange()">주소 변경</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 주소확인 모달 끝 -->
+    
+	
 
 	<!-- Footer -->
-	<footer class="bg3 p-t-75 p-b-32">
-		<div class="container">
-			<div class="row">
-				<!-- p-b-50  : : 패팅 바텀 50px-->
-				<div class="col-sm-6 col-lg-3">
-					<a href="#" class="logo"> <img style="margin: 0 auto;"
-						src="${pageContext.request.contextPath}/resources/images/icons/logo-03.jpg"
-						alt="IMG-LOGO">
-					</a>
-				</div>
-				<div class="col-sm-6 col-lg-3 ">
-					<h4 class="stext-301 cl0 p-b-30">팀 소개</h4>
-					<h6 class="stext-301 cl0 ">팀명 및 서비스 제공 : CAMILY</h6>
-					<h6 class="stext-301 cl0 ">팀장 : 김종윤</h6>
-					<h6 class="stext-301 cl0 ">팀원 : 김두성 | 정해성 | 조항영</h6>
-					<h6 class="stext-301 cl0 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;박준범
-						| 박시환</h6>
-
-				</div>
-
-				<div class="col-sm-6 col-lg-3">
-					<h4 class="stext-301 cl0 p-b-30">회사 정보</h4>
-					<h6 class="stext-301 cl0">인천 미추홀구 매소홀로488번길 6-32 태승빌딩 5층(1층
-						홈플러스) 인천일보아카데미</h6>
-					<h6 class="stext-301 cl0">032-876-3332</h6>
-					<h6 class="stext-301 cl0">campingcamily@gmail.com</h6>
-
-
-				</div>
-
-				<div class="col-sm-6 col-lg-3 text-center">
-					<h4 class="stext-301 cl0 p-b-30">상품제휴 / 광고문의</h4>
-
-					<!-- <p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-					</p> -->
-
-					<div class="p-t-27 text-center">
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-facebook" style="font-size: 30px"></i>
-						</a> <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-instagram" style="font-size: 30px"></i>
-						</a> <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16"> <i
-							class="fa fa-pinterest-p" style="font-size: 30px"></i>
-						</a>
-					</div>
-				</div>
-
-
-			</div>
-			<br>
-			<p class="stext-107 cl6 txt-center">
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				Copyright &copy;
-				<script>
-					document.write(new Date().getFullYear());
-				</script>
-				All rights reserved | Made with <i class="fa fa-heart-o"
-					aria-hidden="true"></i> by CAMILY
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
-			</p>
-		</div>
-	</footer>
+	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
+	<!-- End of Footer -->
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
@@ -427,21 +454,75 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if( checkMsg.length > 0 ){
+			alert(checkMsg);
+		}
+	</script>	
+	<!--===============================================================================================-->
+		
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
+<script type="text/javascript">
+var IMP = window.IMP;
+IMP.init("imp10142481"); 
+function requestPay(gcode,gname,total,memail,mname,mtel,maddr) {
+	console.log("gcode :"+ gcode);
+	console.log("gname :"+ gname);
+	console.log("total :"+ total);
+	console.log("memail :"+ memail);
+	console.log("mname :"+ mname);
+	console.log("mtel :"+ mtel);
+	console.log("maddr :"+ maddr);	
+	
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({ // param
+        pg: "html5_inicis",
+        pay_method: "card",
+        merchant_uid: gcode, 
+        name: gname,
+        amount: total,
+        buyer_email: memail,
+        buyer_name: mname,
+        buyer_tel: mtel,
+        buyer_addr: maddr
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            alert("결제성공입니다.!!")
+        } else {
+        	alert("결제실패입니다.!!")
+        }
+    });/* function (rsp) { // callback
+        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+            // jQuery로 HTTP 요청
+            jQuery.ajax({
+                url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                data: {
+                    imp_uid: rsp.imp_uid,
+                    merchant_uid: rsp.merchant_uid
+                }
+            }).done(function (data) {
+              // 가맹점 서버 결제 API 성공시 로직
+            })
+          } else {
+            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+          }
+        }); */
+  }
+   
+</script>		
+		
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.js"></script>
 	<script>
 		$(".js-select2").each(function() {
 			$(this).select2({
@@ -451,18 +532,13 @@
 		})
 	</script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/moment.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.js"></script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/slick/slick.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/slick-custom.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/slick/slick.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/slick-custom.js"></script>
 	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
 	<script>
 		$('.parallax100').parallax100();
 	</script>
@@ -547,8 +623,102 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 </body>
 
+	<script type="text/javascript">
+	   
+		function addCheck(){
+			$("#addCheck").modal('show');
+		}
+		
+		</script>
+		
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
+		<!-- 다음 주소api -->
+	<script>
+		function sample6_DaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var addr = ''; // 주소 변수
+							var extraAddr = ''; // 참고항목 변수
+
+							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+								addr = data.roadAddress;
+							} else { // 사용자가 지번 주소를 선택했을 경우(J)
+								addr = data.jibunAddress;
+							}
+
+							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+							if (data.userSelectedType === 'R') {
+								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+								// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+								if (data.bname !== ''
+										&& /[동|로|가]$/g.test(data.bname)) {
+									extraAddr += data.bname;
+								}
+								// 건물명이 있고, 공동주택일 경우 추가한다.
+								if (data.buildingName !== ''
+										&& data.apartment === 'Y') {
+									extraAddr += (extraAddr !== '' ? ', '
+											+ data.buildingName
+											: data.buildingName);
+								}
+								// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+								if (extraAddr !== '') {
+									extraAddr = ' (' + extraAddr + ')';
+								}
+								// 조합된 참고항목을 해당 필드에 넣는다.
+								document.getElementById("extraAddress").value = extraAddr;
+
+							} else {
+								document.getElementById("extraAddress").value = '';
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('postcode').value = data.zonecode;
+							document.getElementById("address").value = addr;
+							// 커서를 상세주소 필드로 이동한다.
+							document.getElementById("detailAddress")
+									.focus();
+						}
+					}).open();
+		}
+	</script>		
+		
+	<script type="text/javascript">
+	
+	 function addChange(){
+		 
+		 var total = "";
+		 
+		 var postcode2 = $(postcode).val();
+		 total = total +  "(" + postcode2 + ")"; 
+		 var address2 = $(address).val();
+		 total = total + " " +address2;
+		 var detailAddress2 = $(detailAddress).val();
+		 total = total + " " + detailAddress2;
+         var extraAddress2 = $(extraAddress).val();
+         total = total + " " + extraAddress2;
+         
+		 console.log("postcode2 :"+ postcode2);
+		 console.log("address2 :"+ address2);
+		 console.log("detailAddress2 :"+ detailAddress2);
+		 console.log("extraAddress :"+ extraAddress);
+		 console.log("total :"+ total);
+		 
+		 $(newadd).val(total);
+		 $(newdd).val(total);
+		 $("#addCheck").modal("hide");
+		 	
+	 }
+	</script>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Blog Detail</title>
+	<title>캠핑용품 상세보기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -31,11 +31,27 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
+<style type="text/css">
+#bobtn {
+	text-align: right;
+}
+</style>
 </head>
 <body class="animsition">
 	
-	<!-- Header -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 
 	<!-- Content page -->
 	<section class="bg0 p-t-52 p-b-20">
@@ -43,48 +59,43 @@
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
-						
-						<h4 class="ltext-109 cl2 p-b-28">
-								남편과 1박2일 송도 국제 캠핑장 이용후기~ 
-							</h4>
-						
+
+						<h4 class="ltext-109 cl2 p-b-28"> ${gorvDetail.gorvtitle }
+						</h4>
+
+
+
 						<div class="p-t-32">
-							<span class="flex-w flex-m stext-111 cl2 p-b-19">
-								<span>
-									<span class="cl4">By</span> 조항영  
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
-								<span>
-									2022-07-01
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
-								<span>
-									송도,캠핑,서울근교  
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
-								<span>
-									3 댓글
-								</span>
-							</span>						
-							<p class="stext-117 cl6 p-b-26">
-								인천 송도국제 캠핑장은 나라에서 운영하는 캠핑장이라 일반 사설 캠핑장에 비해 이용요금도 저렴합니다.<br> 
-								이용요금도 저렴하고 시설도 아주 깨끗하게 관리가 잘 되어 있는 캠핑장 이였습니다.<br>
-								캠핑장 이용요금은 A 구역은 평일 15,000원, 주말은 20,000원 입니다.<br> 
-								성수기는 따로 없습니다.<br> 
-								B 구역은 평일 20,000원, 주말은 25,000원 입니다.<br>
-								카라반 사이트는 별도로 있는데요... 평일 20,000원, 주말 25,000원 입니다.<br>
-								추가 인원인 1인당 4,000원씩 받고 있으며 최대 6인까지 한 사이트에 입장이 가능 합니다.
-							</p>						
+							<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
+									<span class="cl4"></span><i class="fa-regular fa-user"></i>
+									${gorvDetail.gorvmid } <span class="cl12 m-l-4 m-r-6">|</span>
+							</span> <span> <i class="fa-regular fa-calendar"></i>
+									${gorvDetail.gorvdate } <span class="cl12 m-l-4 m-r-6">|</span>
+							</span> <span> <i class="fa-regular fa-eye"></i> 조회수 341<%-- ${gorvDetail.gorvhits } --%>
+							</span>
+							</span>
+							<img alt="" src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${gorvDetail.goimage }">
+							<p class="stext-116 cl4">제품명 : 🌈${gorvDetail.goname }🌈</p>
+							<div>
+								<p class="stext-115 p-b-26" style="color: black;">
+									${gorvDetail.gorvcontents }</p>
+							</div>
+							<div id="bobtn">
+								<a class="btn btn-outline-success"
+									href="goReviewModify?gorvcode=${gorvDetail.gorvcode }">수정</a> <a
+									class="btn btn-outline-success"
+									href="goreviewDelete?gorvcode=${gorvDetail.gorvcode }">삭제</a>
+							</div>
 						</div>
 
-						<div class="flex-w flex-t p-t-16">
+
+						<div class="p-t-40"></div>
+						<!-- <div class="flex-w flex-t p-t-16">
 							<span class="size-216 stext-116 cl8 p-t-4">
 								Tags
 							</span>
-
+							
+							
 							<div class="flex-w size-217">
 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
 									송도
@@ -97,11 +108,10 @@
 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
 									서울근교
 								</a>
-							</div>
-						</div>
+							</div> 
+						</div> -->
 
-						<!--  -->
-						<div class="p-t-40">
+						<!-- <div class="p-t-40">
 							<h5 class="mtext-113 cl2 p-b-12">
 								댓글
 							</h5>						
@@ -115,14 +125,14 @@
 									댓글작성
 								</button>
 							</form>
-						</div>
+						</div> -->
 					</div>
 				</div>
-			  </div>
 			</div>
-	</section>	
-	
-		
+		</div>
+	</section>
+
+
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
@@ -135,10 +145,6 @@
 		</span>
 	</div>
 
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -172,7 +178,14 @@
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if (checkMsg.length > 0) {
+			alert(checkMsg);
+		}
+	</script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,85 +13,81 @@
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/iconic/css/material-design-iconic-font.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animate/animate.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/css-hamburgers/hamburgers.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/animsition/css/animsition.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/slick/slick.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/magnific-popup.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 
 <body class="animsition">
 
-	<!-- Header -->
-	<%@ include file="../includes/TopBar.jsp" %>
-
+	<!-- TopBar-->
+	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
+	
 	<!-- Product -->
-	<div class="bg0 m-t-23 p-b-140" style="margin-top: 100px;">
+	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="campingList(null)">
 						All Products
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="campingList('glamping')">
 						글램핑
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="campingList('caravan')">
 						카라반
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="campingList('car')">
 						자동차야영장
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="campingList('site')">
 						일반야영장
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
-					</button>
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
-					<button class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4"
-						onclick="campingListInput()">값 입력</button>
-
+					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4" onclick="campingListInput()" hidden="hidden">
+						공공데이터
+					</div>
 					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
 						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
 						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
@@ -99,15 +97,17 @@
 
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
-							placeholder="Search">
-					</div>
+					<form action="campingList" method="get">
+							<div class="bor8 dis-flex p-l-15">
+								<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" id="searchCamp">
+									<i class="zmdi zmdi-search"></i>
+								</button>
+								<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="searchKeyword"
+									placeholder="Search" onkeydown="searchCamp(event)">
+							</div>
+					</form>
 				</div>
+				
 			</div>
 
 			<div class="row isotope-grid">
@@ -116,11 +116,19 @@
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic">
-								<!-- hov-img0 제거 -->
-								<a href="campingView?cacode=${campingInfo.cacode}"
-									class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									<img src="${campingInfo.caimage}" alt="캠핑장 이미지" style="width: 100%; height: 200px; object-fit: cover;  object-position: bottom;">
-								</a>
+								<!--c:set으로 이미지 파일 이름 지정 -->
+								 <c:set var="campIMG" value="${campingInfo.caimage}" />
+								 
+								<c:choose>
+									<c:when test="${campingInfo.crprice != null}">
+										<a href="campingView?cacode=${campingInfo.cacode}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+											<img src="${campingInfo.caimage}" alt="캠핑장 이미지" style="width: 100%; height: 200px; object-fit: cover;  object-position: bottom;">
+										</a>
+									</c:when>
+									<c:otherwise>
+										<img class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" src="${campingInfo.caimage}" alt="캠핑장 이미지" style="width: 100%; height: 200px; object-fit: cover;  object-position: bottom;">
+									</c:otherwise>
+								</c:choose>
 
 								<!-- <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
@@ -129,26 +137,30 @@
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="campingView?cacode=${campingInfo.cacode}"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										<span style="font-size: 20px; font-weight: bold;">${campingInfo.caname}</span>
-									</a>
+									<c:choose>
+										<c:when test="${campingInfo.crprice != null}">
+											<a href="campingView?cacode=${campingInfo.cacode}"
+												class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+												<span style="font-size: 20px; font-weight: bold;">${campingInfo.caname}</span>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" style="font-size: 20px; font-weight: bold;">${campingInfo.caname}</span>
+										</c:otherwise>
+									</c:choose>
 
 									<span class="stext-105 cl3">
-										${campingInfo.caprice}
+										<c:choose>
+											<c:when test="${campingInfo.crprice != null}">
+												${campingInfo.crprice}원 부터 ~
+											</c:when>
+											<c:otherwise>
+												준비중
+											</c:otherwise>
+										</c:choose>
 									</span>
 								</div>
 
-								<div class="block2-txt-child2 flex-r p-t-3">
-									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04"
-											src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-02.png"
-											alt="ICON">
-									</a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -157,18 +169,14 @@
 
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<!-- <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-					flex-l-m flex-w w-full p-t-10 m-lr--7
-				</a> -->
 				<!-- Pagination 시작 -->
 				<div class="flex-c-m flex-w w-full p-t-45" style="margin-top: auto; margin-right: auto;">
 					<c:choose>
 						<c:when test="${pageDto.page <= 1}">
-							<span>[이전]</span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><i class="fa-solid fa-angle-left"></i></span>
 						</c:when>
 						<c:otherwise>
-							<span><a href="campingList?page=${pageDto.page - 1}">[이전]</a></span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7" onclick="prevPage('${pageDto.page}', '${type}', '${searchKeyword}')" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i></span>
 						</c:otherwise>
 					</c:choose>
 					<c:forEach begin="${pageDto.startPage }" end="${pageDto.endPage }" var="num" step="1">
@@ -177,16 +185,16 @@
 								<span><a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">${num}</a></span>
 							</c:when>
 							<c:otherwise>
-								<span><a href="campingList?page=${num}" class="flex-c-m how-pagination1 trans-04 m-all-7">${num}</a></span>
+								<span class="flex-c-m how-pagination1 trans-04 m-all-7" onclick="selPage('${num}', '${type}', '${searchKeyword}')" style="cursor: pointer;">${num}</span>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pageDto.page > pageDto.endPage || pageDto.page == pageDto.maxPage}">
-							<span>[다음]</span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><i class="fa-solid fa-angle-right"></i></span>
 						</c:when>
 						<c:otherwise>
-							<span><a href="campingList?page=${pageDto.page + 1}">[다음]</a></span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7" onclick="nextPage('${pageDto.page}', '${type}', '${searchKeyword}')" style="cursor: pointer;"><i class="fa-solid fa-angle-right"></i></span>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -209,10 +217,7 @@
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -310,14 +315,82 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 </body>
 
-<script type="text/javascript">
+<script type="text/javascript	">
 	function campingListInput() {
-		location.href("campingListInput");
+		location.href = "campingListInput";
 	}
 </script>
+<script>
+	function campingList(campingtype){
+		var type;
+		switch(campingtype){
+			case "glamping":
+				type = "글램핑";
+				break;
+			case "caravan":
+				type = "카라반";
+				break;
+			case "car":
+				type = "자동차야영장";
+				break;
+			case "site":
+				type = "일반야영장";
+				break;
+			default:
+				type = "";
+				break;
+		}
+		console.log("type : " + type);
+		if(type.length > 0){
+			location.href = "campingList?type=" + type;
+		}else{
+			location.href = "campingList";
+		}
+	}
+</script>
+<script type="text/javascript">
+	function searchCamp(event) {
+		if(event.key === "Enter"){
+//            event.preventDefault();
+            $("#searchCamp").click();
+        }
+	}
 
+	function prevPage(page, type, searchKeyword){
+		page--;
+		var url = 'campingList?page=' + page;
+		if(type.length > 0){
+			url += '&type=' + type;
+		}
+		if(searchKeyword.length > 0){
+			url += '&searchKeyword=' + searchKeyword;
+		}
+		location.href = url;
+	}
+	function selPage(page, type, searchKeyword){
+		var url = 'campingList?page=' + page;
+		if(type.length > 0){
+			url += '&type=' + type;
+		}
+		if(searchKeyword.length > 0){
+			url += '&searchKeyword=' + searchKeyword;
+		}
+		location.href = url;
+	}
+	function nextPage(page, type, searchKeyword){
+		page++;
+		var url = 'campingList?page=' + page;
+		if(type.length > 0){
+			url += '&type=' + type;
+		}
+		if(searchKeyword.length > 0){
+			url += '&searchKeyword=' + searchKeyword;
+		}
+		location.href = url;
+	}
+</script>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Home</title>
+	<title>Camily</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -36,24 +36,32 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
+<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 <body class="animsition">
 
-	<!-- Topbar -->
-	<%@ include file="/WEB-INF/views/includes/TopBar.jsp" %>
-	<!-- End of Topbar -->
+    <!-- TopBar-->
+	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
 	
-	<!-- Product -->
-	<div class="bg0 m-t-23 p-b-140" style="margin-top: 100px">
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
+	
+<!-- Product -->
+	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 				
-                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						전체보기
-					</button>
-
+					<a class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" href="campingShopPage">전체보기</a>
+						
+					<div id="categoryList">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".tent">
 					    텐트💛타프
 					</button>
@@ -78,7 +86,7 @@
 						키친
 					</button>
 					
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".seasonalgoods">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".seasonal">
 						계절용품
 					</button>
 					
@@ -97,7 +105,7 @@
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".military">
 						밀리터리
 					</button>
-					
+					</div>
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
@@ -116,18 +124,19 @@
 							<i class="zmdi zmdi-search"></i>
 						</button>
 
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" id="search" placeholder="Search">
+						<button class="btn btn-secondary p-2" onclick="searchShop()">검색하기</button>
 					</div>	
 				</div>	
 	
 			</div>
 
-			<div class="row isotope-grid">
+			<div class="row isotope-grid" id="goodsList">
 					  <c:forEach items="${campingShop }" var="camping">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${camping.gcategory }">
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="${camping.gimage }">
+							<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${camping.gimage }">
 
 							<a href="campingDetailPage?gcode=${camping.gcode}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
 								제품 보기!
@@ -141,15 +150,18 @@
 								</a>
 
 								<span class="stext-105 cl3">
-									${camping.gprice }
+									${camping.gprice }원 					
 								</span>
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="${pageContext.request.contextPath}/resources/icon-heart1 dis-block trans-04" src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="${pageContext.request.contextPath}/resources/icon-heart2 dis-block trans-04 ab-t-l" src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-02.png" alt="ICON">
-								</a>
+	                            <c:choose>
+							       <c:when test="${sessionScope.loginId != null}">	
+								      <button id="toggle" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,'${camping.gcode}')">
+										<i class="zmdi zmdi-favorite-outline"></i>
+								      </button>   	<!--<i class="fa-thin fa-heart-circle-check"></i>  -->
+								   </c:when>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -157,121 +169,12 @@
 				</div>				
 				  </c:forEach>
 			   </div>
-			  </div>
-		   <!-- paging 시작 -->
-		   <div class="flex-c-m flex-w w-full p-t-45">			
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">1</a>
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">2</a>
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">3</a> 
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">4</a>
-		   <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">5</a>   
-		   </div>
-		   <!-- paging 종료 -->
+			  </div>			
 		</div>
-
-
+		
 	<!-- Footer -->
-	<footer class="bg3 p-t-75 p-b-32">
-		<div class="container">
-			<div class="row">
-				<!-- p-b-50  : : 패팅 바텀 50px-->
-				<div class="col-sm-6 col-lg-3 ">
-					<h4 class="stext-301 cl0 p-b-30">
-						팀 소개 <br>
-						팀장 : 김종윤
-					</h4>
-
-					 <ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박준범
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								김두성
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박시환
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								정해성
-							</a>
-						</li>
-						
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								조아용
-							</a>
-						</li>						
-						
-					</ul> 
-				</div>
-
-				<div class="col-sm-6 col-lg-3">
-					<h4 class="stext-301 cl0 p-b-30">
-						캠핑장 제휴문의
-					</h4>
-
-					<ul>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								김종윤
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박시환 
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								정해성
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								박준범
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-sm-6 col-lg-3">
-					<h4 class="stext-301 cl0 p-b-30">
-						상품제휴 / 광고문의
-					</h4>
-
-					<div class="p-t-27">
-	     				<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-facebook"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-instagram"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
-						</a>
-					</div>
-				</div>
-			<p class="stext-107 cl6 txt-center">
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-			</p>
-		</div>
-	</footer>
+	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
+	<!-- End of Footer -->
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
@@ -280,10 +183,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</span>
 	</div>
 
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if( checkMsg.length > 0 ){
+			alert(checkMsg);
+		}
+	</script>
+
+
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -380,7 +288,77 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 </body>
+
+<script type="text/javascript">
+ function cartInsert(thisval,gcode){
+	 var result = "";
+	 console.log("thisval :"+ thisval)
+	 console.log("gcode.length :"+ gcode.length);
+
+	 $.ajax({
+			type : "get",
+			url : "cartInsert",
+			data : { "gcode" :  gcode},
+			dataType : "json",
+			success : function(cartresult){
+				console.log("cartresult :"+ cartresult)
+                $("#toggle").remove();
+			}
+			
+	 });
+ }
+</script>
+
+<script type="text/javascript">
+ function searchShop(){
+	 var search = $("#search").val();
+	 console.log("search : " + search);
+	 $.ajax({
+			type : "get",
+			url : "searchShop",
+			data : {"search" : search},
+			dataType : "json",
+			success : function(result){
+				var output = "";
+				console.log(result);
+				for(var z = 0; z < result.length; z++){
+					output += '<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ' + result[z].gcategory + '">';
+					output += '<div class="block2">';
+					output += '<div class="block2-pic hov-img0">';
+					output += '<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/'+ result[z].gimage+'">';
+					output += '<a href="campingDetailPage?gcode=' + result[z].gcode + '" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">';
+					output += '제품 보기!';
+					output += '</a>';
+					output += '</div>';
+					output += '<div class="block2-txt flex-w flex-t p-t-14">';
+					output += '<div class="block2-txt-child1 flex-col-l ">';
+				    output += '<a href="campingDetailPage?gcode=' + result[z].gcode + '" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">'
+					output += result[z].gname;
+					output += '</a>';
+					output += '<span class="stext-105 cl3">';
+					output += result[z].gprice;
+					output += '</span>';
+					output += '</div>';
+					output += '<div class="block2-txt-child2 flex-r p-t-3">';
+					if('${sessionScope.loginId}' != null){
+						output += '<button id="toggle" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,\'' + result[z].gcode + '\')">';
+						output += '<i class="zmdi zmdi-favorite-outline"></i>';
+						output += '</button>';
+					}
+					output += '</div>';
+					output += '</div>';
+					output += '</div>';
+					output += '</div>';
+					$("#goodsList").html(output);
+					$("#categoryList").attr("style", "display:none");	
+				}
+			}
+			
+	 });
+
+ }
+</script>
+
 </html>

@@ -1,4 +1,3 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/Main.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/includes/LoginScript.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/includes/Member.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/includes/BotScript.jsp=UTF-8

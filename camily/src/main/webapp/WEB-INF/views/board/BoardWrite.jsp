@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>후기</title>
+<title>Camily - 게시글작성</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -49,8 +49,8 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 <!-- include summernote css/js-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
 <!-- include summernote-ko-KR -->
 <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
 <title>글쓰기</title>
@@ -58,19 +58,40 @@
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote({
- 	    	placeholder: 'content',
-	        minHeight: 370,
-	        maxHeight: null,
+ 	    	placeholder: '내용을 작성하세요',
+	        minHeight: 400,
+	        maxHeight: 400,
 	        focus: true, 
-	        lang : 'ko-KR'
+	        lang : 'ko-KR',
+	        toolbar: [
+    		    // [groupName, [list of button]]
+    		    ['fontname', ['fontname']],
+    		    ['fontsize', ['fontsize']],
+    		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+    		    ['color', ['forecolor','color']],
+    		    ['table', ['table']],
+    		    ['para', ['ul', 'ol', 'paragraph']],
+    		    ['height', ['height']],
+    		    ['insert',['picture','link','video']],
+    		    ['view', ['fullscreen', 'help']]
+    		  ],
+    	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+
 	  });
 	});
 </script>
+
+
 </head>
 <body class="animsition">
 
-	<!-- Header -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 
 
 	<!-- Title page -->
@@ -86,14 +107,14 @@ $(document).ready(function() {
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<h2 style="text-align: center;">글 작성</h2>
-					<br> <br>
-					<div style="width: 60%; margin: auto;">
-						<form method="post" action="/write">
-							<input type="text" name="writer" style="width: 20%;"
-								placeholder="작성자" /><br> <input type="text" name="title"
-								style="width: 40%;" placeholder="제목" /> <br> <br>
-							<textarea id="summernote" name="content"></textarea>
-							<input id="subBtn" type="button" value="글 작성"
+					<br> 
+					<div style="width: 100%; margin: auto;">
+						<form method="post" action="write2">
+							
+							<input type="text" name="botitle" style="width: 40%;" placeholder="제목" /> <br>
+							<textarea id="summernote" name="bocontents"></textarea>
+							<br>
+							<input id="subBtn" type="button" class="btn btn-default pull-right" value="글 작성"
 								style="float: right;" onclick="goWrite(this.form)" />
 						</form>
 					</div>
@@ -121,9 +142,6 @@ $(document).ready(function() {
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
 	<script
 		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
@@ -164,28 +182,34 @@ $(document).ready(function() {
 			})
 		});
 	</script>
+	
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 	<script>
 		function goWrite(form) {
-			var title = form.title.value;
-			var writer = form.writer.value;
-			var content = form.content.value;
+			var title = form.botitle.value;
+			var content = form.bocontents.value;
+			
 
 			if (title.trim() == '') {
 				alert("제목을 입력해주세요");
 				return false;
 			}
-			if (writer.trim() == '') {
-				alert("작성자를 입력해주세요");
-				return false;
-			}
+			
 			if (content.trim() == '') {
 				alert("내용을 입력해주세요");
 				return false;
 			}
 			form.submit();
+		}
+	</script>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if (checkMsg.length > 0) {
+			alert(checkMsg);
 		}
 	</script>
 </body>

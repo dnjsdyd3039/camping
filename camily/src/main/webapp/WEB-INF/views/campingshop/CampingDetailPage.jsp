@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Home</title>
+	<title>Camily</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -37,22 +37,30 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+
 </head>
 <body class="animsition">
 
-    <!-- Topbar -->
-	<%@ include file="/WEB-INF/views/includes/TopBar.jsp" %>
-    <!-- End of Topbar -->
-
+    <!-- TopBar-->
+	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
+	
 	<!-- breadcrumb 시작 -->
 	<div class="container" style="margin-top: 100px">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+			<a href="#" class="stext-109 cl8 hov-cl1 trans-04">
 				전체메뉴
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
-			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+			<a href="#" class="stext-109 cl8 hov-cl1 trans-04">
 				${campingDetail.gcategory }
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
@@ -133,19 +141,30 @@
 										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="gamount" value="1">
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="gamount" readonly="readonly" value="1" id="diamoubt" min="1" max="5">
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
-
+                                    <div class="row">
+                                    <button type="button" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1" 
+                                            onclick="shoppingbasket('${campingDetail.gcode }','${campingDetail.gname }','${campingDetail.gimage }',
+                                            '${campingDetail.gprice }')">
+								        장바구니
+								    </button>									
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1">
 								        구매하기
 									</button>
+									<button type="button" onclick="kakaoshare(
+									'${campingDetail.gcompanyname}','${campingDetail.gname }','${campingDetail.gprice }','${campingDetail.gimage }',
+									'${campingDetail.gcontents }','${campingDetail.gcategory }')">
+								       <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="">
+									</button>
+									</div>
 								</div>
 							</div>	
 						</div>
-								 </form>
+					 </form>
                  
 						<!--  -->
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
@@ -275,146 +294,67 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-	<!-- Modal1 -->
-	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-		<div class="overlay-modal1 js-hide-modal1"></div>
-
-		<div class="container">
-			<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-				<button class="how-pos3 hov3 trans-04 js-hide-modal1">
-					<img src="${pageContext.request.contextPath}/resources/images/icons/icon-close.png" alt="CLOSE">
-				</button>
-
-				<div class="row">
-					<div class="col-md-6 col-lg-7 p-b-30">
-						<div class="p-l-25 p-r-30 p-lr-0-lg">
-							<div class="wrap-slick3 flex-sb flex-w">
-								<div class="wrap-slick3-dots"></div>
-								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="" >
-										<div class="wrap-pic-w pos-relative">
-											<img src="${pageContext.request.contextPath}/resources/images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="${pageContext.request.contextPath}/resources/images/product-detail-02.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="${pageContext.request.contextPath}/resources/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-
-									<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-										<div class="wrap-pic-w pos-relative">
-											<img src="${pageContext.request.contextPath}/resources/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-												<i class="fa fa-expand"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-5 p-b-30">
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								상품이름 :
-							</h4>
-
-							<span class="mtext-106 cl2">
-								상품가격 :
-							</span>
-
-							<p class="stext-102 cl3 p-t-23">
-								상품설명 :
-							</p>
-							
-							<!-- 모듈 창 -->
-							<div class="p-t-33">								
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-203 flex-c-m respon6">
-										추가하기
-									</div>
-
-									<div class="size-204 respon6-next">
-										<div class="rs1-select2 bor8 bg0">
-											<select class="js-select2" name="time">
-												<option>Choose an option</option>
-												<option>Red</option>
-												<option>Blue</option>
-												<option>White</option>
-												<option>Grey</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex-w flex-r-m p-b-10">
-									<div class="size-204 flex-w flex-m respon6-next">
-										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-
-										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-											Add to cart
-										</button>
-									</div>
-								</div>	
-							</div>
-
-							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-									<i class="fa fa-facebook"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-									<i class="fa fa-twitter"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-									<i class="fa fa-google-plus"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if( checkMsg.length > 0 ){
+			alert(checkMsg);
+		}
+	</script>
 
 <!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+
+<!-- 카카오톡 공유하기 api -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+try {
+ function kakaoshare(gcompanyname,gname,gprice,gimage,gcontents,gcategory){
+	 console.log("gcompanyname :"+ gcompanyname);	
+	 console.log("gname :"+ gname);	
+	 console.log("gprice :"+ gprice);	
+	 console.log("gimage :"+ gimage);	
+	 console.log("gcontents :"+ gcontents);	
+	 console.log("gcategory :"+ gcategory);	
+	 Kakao.init('ff44da0c10c3fe434ba307170a916ce5')
+	    Kakao.Link.sendDefault({
+	      objectType: 'feed',
+	      content: {
+	        title: gname,
+	        description: gcompanyname+"#"+gprice,
+	        imageUrl:
+	        	gimage,
+	        link: {
+	          mobileWebUrl: 'https://developers.kakao.com',
+	          webUrl: 'https://developers.kakao.com',
+	        },
+	      },
+	      social: {
+	        likeCount: 286,
+	        commentCount: 45,
+	        sharedCount: 845,
+	      },
+	      buttons: [
+	        {
+	          title: '웹으로 보기',
+	          link: {
+	            mobileWebUrl: 'https://developers.kakao.com',
+	            webUrl: 'https://developers.kakao.com',
+	          },
+	        },
+	        {
+	          title: '앱으로 보기',
+	          link: {
+	            mobileWebUrl: 'https://developers.kakao.com',
+	            webUrl: 'https://developers.kakao.com',
+	          },
+	        },
+	      ],
+	    })
+	  }
+	; window.kakaoDemoCallback && window.kakaoDemoCallback() }
+	catch(e) { window.kakaoDemoException && window.kakaoDemoException(e) }
+	</script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -514,4 +454,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
+
+<script type="text/javascript">
+function shoppingbasket(dicode,diname,diimage,diprice){
+	var diamount = "";
+	diamount = $("#diamoubt").val();
+	
+	console.log("diamout :"+ diamount);
+	console.log("dicode :"+ dicode);
+	console.log("diname :"+ diname);
+	console.log("diimage :"+ diimage);
+	console.log("diprice :"+ diprice);
+	if( diamount != 0 ){
+	location.href="shoppingbasket?dicode="+dicode+"&diname="+diname+"&diimage="+diimage+"&diamount="+diamount+"&diprice="+diprice;
+	} else {
+		alert("(재고수량확인)제품은 하나 이상 구매하셔야 합니다.")
+	}
+}
+
+</script>
 </html>

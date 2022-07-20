@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -91,7 +92,7 @@ public class MemberController {
 		String loginPw = msvc.getloginPw(loginId);
 		return loginPw;
 	}
-	
+	// 비밀번호 변경
 	@RequestMapping(value ="/modifyMemberPw")
 	public @ResponseBody String modifyMemberPw(String loginId, String modifyPw) {
 		System.out.println("비밀번호 변경 요청");
@@ -99,10 +100,49 @@ public class MemberController {
 		String pwUpdateResult = msvc.modifyMemberPw(loginId,modifyPw);
 		return pwUpdateResult;
 	}
+	
+	// 내 정보 변경
+	@RequestMapping(value ="/modifyMemberInfo")
+	public ModelAndView modifyMemberInfo(MemberDto member,RedirectAttributes ra) {
+		System.out.println("내 정보 수정 요청");
+		
+		ModelAndView mav = msvc.modifyMemberInfo(member,ra);
+		return mav;
+	}
+	
+	// 회원탈퇴
 	@RequestMapping(value ="/deleteMember")
-	public ModelAndView deleteMember() {
+	public ModelAndView deleteMember(String loginId,RedirectAttributes ra) {
 		System.out.println("회원 탈퇴 요청");
-		return null;
+		
+		ModelAndView mav = msvc.deleteMember(loginId,ra);
+		return mav;
+	}
+	//아이디 찾기
+	@RequestMapping(value ="/getFindId")
+	public @ResponseBody String getFindId(String email, String name) {
+		System.out.println("아이디 찾기 요청");
+		
+		String findId = msvc.getFindId(email,name);
+		
+		return findId;
+	}
+	//비밀번호 찾기 비밀번호 변경
+	@RequestMapping(value= "/findPwModifyPw")
+	public ModelAndView findPwModifyPw(String mid, String newPw,RedirectAttributes ra) {
+		System.out.println("비밀번호 찾기 비밀번호 변경 요청");
+		
+		ModelAndView mav = msvc.findPwModifyPw(mid, newPw, ra);
+		return mav;
+	}
+	// 카카오 아이디 체크
+	@RequestMapping(value= "/kakaoidSelect")
+	public @ResponseBody String kakaoidSelect(String kakaokey){
+		System.out.println("카카오 로그인 아이디 체크 요청");
+		
+		String kakaoMember_json = msvc.getkakaoId(kakaokey);
+		
+		return kakaoMember_json;
 	}
 
 }

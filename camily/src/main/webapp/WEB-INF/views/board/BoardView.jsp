@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>BoardView</title>
+<title>Camily - 게시판상세보기</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -43,11 +43,82 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+<script src="https://kit.fontawesome.com/d70fa0d402.js"
+	crossorigin="anonymous"></script>
+<style type="text/css">
+#bobtn {
+	text-align: right;
+}
+
+.section-reply-title {
+	margin-bottom: 30px;
+}
+
+.section-reply-title h5 {
+	color: black;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+.section-reply-title h5:after {
+	position: absolute;
+	left: 0;
+	top: -6px;
+	height: 32px;
+	width: 4px;
+	background: pink;
+	content: "";
+}
+
+.reply-item {
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+.reply-item-text {
+	overflow: hidden;
+	background: #f5f5f9;
+	padding: 18px 30px 16px 20px;
+	border-radius: 10px;
+	margin-bottom: 15px;
+}
+
+.reply-item-text h6 {
+	color: black;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.reply-item-text span {
+	color: black;
+	font-weight: 700;
+}
+
+.reply-item-text p {
+	color: black;
+	line-height: 23px;
+	margin-bottom: 0;
+	font-size: 15px;
+	font-family: "Mulish", sans-serif;
+	font-weight: 500;
+	margin: 0 0 15px 0;
+}
+</style>
+
 </head>
 <body class="animsition">
 
-	<!-- Header -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 
 	<!-- Content page -->
 	<section class="bg0 p-t-52 p-b-20">
@@ -56,44 +127,63 @@
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 
-						<h4 class="ltext-109 cl2 p-b-28">게시판 테스트</h4>
+						<h4 class="ltext-109 cl2 p-b-28">${boardView.botitle }</h4>
 
 						<div class="p-t-32">
 							<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
-									<span class="cl4">${boardView.bomid }</span> <span
-									class="cl12 m-l-4 m-r-6">|</span>
-							</span> <span> ${boardView.bodate } <span
-									class="cl12 m-l-4 m-r-6">|</span>
-							</span> <span> 조회수 31 </span>
+									<span> <i class="fa-regular fa-user"></i>
+										${boardView.bomid }
+								</span> <span class="cl12 m-l-4 m-r-6">|</span>
+							</span> <span> <i class="fa-regular fa-calendar"></i>
+									${boardView.bodate } <span class="cl12 m-l-4 m-r-6">|</span>
+							</span> <span> <i class="fa-regular fa-eye"></i>
+									${boardView.bohits}
 							</span>
-							<p class="stext-117 cl6 p-b-26">${boardView.bocontents }</p>
+							</span>
+							<hr>
+							<div>
+								<p class="stext-117 cl6 p-b-26">${boardView.bocontents }</p>
+							</div>
+							<div id="bobtn">
+								<a class="btn btn-outline-secondary m-2" href="boardList">목록</a>
+								<c:if test="${sessionScope.loginId == boardView.bomid || sessionScope.loginId  == 'admin'}">
+									<a class="btn btn-outline-secondary m-2"
+										href="boardModify?bocode=${boardView.bocode }">수정</a>
+									<a class="btn btn-outline-secondary m-2"
+										href="boardDelete?bocode=${boardView.bocode }">삭제</a>
+								</c:if>
+							</div>
 						</div>
 
 						<!--  -->
 						<div class="p-t-40">
 
-							<h5 class="mtext-113 cl2 p-b-12">댓글</h5>
-							<div id="replyList">
-								<ol class="replyList">
-									<c:forEach items="${replyList }" var="reply">
-										<li>
-											<p>
-												${reply.rpmid }<br> ${reply.rpdate }
-											</p>
-
-											<p>${reply.rpcontents }</p> <br>
-											<div>
-												<button type="button" class="btn btn-outline-success"
-													id="${reply.rpcode }">수정</button>
-												<button type="button" class="btn btn-outline-success"
-													id="${reply.rpcode }" onclick="deleteReply('${reply.rpcode}','${boardView.bocode }')">삭제</button>
-											</div>
-										</li>
-									</c:forEach>
-								</ol>
-							</div>
-
 							<hr>
+							<div class="section-reply-title">
+								<h5>댓글</h5>
+							</div>
+							<div class="reply-item">
+
+								<c:forEach items="${replyList }" var="reply">
+									<div class="reply-item-text">
+										<h6>
+											<i class="fa-regular fa-user"></i> ${reply.rpmid } - <span><i
+												class="fa-regular fa-calendar"></i> ${reply.rpdate }</span>
+										</h6>
+										<p>${reply.rpcontents }</p>
+
+										<c:if
+											test="${sessionScope.loginId == reply.rpmid || sessionScope.loginId  == 'admin'}">
+											<button type="button" class="btn btn-outline-success"
+												id="${reply.rpcode }">수정</button>
+											<button type="button" class="btn btn-outline-success"
+												id="${reply.rpcode }"
+												onclick="deleteReply('${reply.rpcode}','${boardView.bocode }')">삭제</button>
+										</c:if>
+									</div>
+
+								</c:forEach>
+							</div>
 							<form method="post" action="replyWrite"
 								onsubmit="return FormCheck()">
 								<c:if test="${sessionScope.loginId != null }">
@@ -103,17 +193,9 @@
 										<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15"
 											name="rpcontents" id="contents" placeholder="댓글작성하기..."></textarea>
 									</div>
-
-									<button
-										class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
-										type="submit">댓글작성</button>
+									<button type="submit" class="btn btn-outline-secondary m-2">댓글작성</button>
 								</c:if>
 							</form>
-							<div>
-								<button type="button"
-									class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">수정</button>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -177,6 +259,16 @@
 			})
 		});
 	</script>
+	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if (checkMsg.length > 0) {
+			alert(checkMsg);
+		}
+	</script>
 
 	<script>
 		function FormCheck() {
@@ -186,15 +278,14 @@
 			}
 		}
 	</script>
-	
+
 	<script>
-		function deleteReply(delRno,bocode){
-			
-			location.href="deleteReply?delRno="+delRno+"&bocode="+bocode
+		function deleteReply(delRno, bocode) {
+
+			location.href = "deleteReply?delRno=" + delRno + "&bocode="
+					+ bocode
 		}
 	</script>
 
-	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </body>
 </html>

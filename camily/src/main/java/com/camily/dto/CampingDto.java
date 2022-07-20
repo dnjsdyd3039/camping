@@ -15,4 +15,7 @@ public class CampingDto {
 	private String caprice;
 	private String cainfo;
 	private String caimage;
+	
+	private String crprice;
+	
 }

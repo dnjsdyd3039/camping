@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>후기</title>
+	<title>켐핑장 후기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -34,8 +34,13 @@
 </head>
 <body class="animsition">
 	
-	<!-- Header -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 
 
 	<!-- Title page -->
@@ -43,65 +48,57 @@
 		<h2 class="ltext-105 cl0 txt-center">
 			캠핑장 후기 게시판
 		</h2>
-	</section> 
+	</section>	
 
 
 	<!-- Content page -->
-	<section class="bg0 p-t-62 p-b-60">
+	<section class="bg0 p-t-62 p-b-60" >
 		<div class="container">
-			<div class="row">
+			<div class="row" >
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 						<!-- item blog -->
-						<div class="p-b-63">						
-							<span class="ltext-108 cl2 hov-cl1 trans-04">NO.1</span>
-
-							<a href="cgreviewdetailpage" class="hov-img0 how-pos5-parent">
-
-								<img src="${pageContext.request.contextPath}/resources/images/캠핑1.jpg" alt="IMG-BLOG">	
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										30
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										6월 2022
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
+						
+						<c:forEach items="${campingreviewList }" var="cgrvList"> 
+						<div class="p-b-63">
+							<%-- <span class="ltext-108 cl2 hov-cl1 trans-04">NO.${goods.gorvcode }</span> --%>
+							<a href="cgreviewdetail?cgrvcode=${cgrvList.cgrvcode }" class="hov-img0 how-pos5-parent rounded">
+								<img src="${cgrvList.caimage }" alt="IMG">	
 								
-
-									<a href="cgreviewdetailpage" class="ltext-108 cl2 hov-cl1 trans-04">
-
-										인천송도 국제 캠핑장 
+							</a>
+	
+							<div class="p-t-32">
+								<!-- <h4 class="p-b-15">
+								
+									<a href="goreviewdetailpage" class="ltext-108 cl2 hov-cl1 trans-04">
+										 
 									
 									</a>
-								</h4>
+								</h4> -->
 
+								<p class="stext-117" style="color: black;">
+									제목 : ${cgrvList.cgrvtitle }
+								</p>
 								
-								<h6 class="p-b-15">															
-										남편과 1박2일 송도 국제 캠핑장 이용후기~  											
-								</h6>	
-							
+								<p class="stext-116">
+									캠핑장 이름 : 🌈${cgrvList.recrname }🌈 									
+								</p>
 
 								<div class="flex-w flex-sb-m p-t-18">
 									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
 										<span>
-											<span class="cl4">By</span> 조항영  
-											<span class="cl12 m-l-4 m-r-6">|</span>										
-										</span>	
-										
+											<span class="cl4"></span><i class="fa-regular fa-user"></i> ${cgrvList.cgrvmid } 
+											<span class="cl12 m-l-4 m-r-6">|</span>
+										</span>
 										<span>
-											3 댓글
-										</span>								 										
+											<span class="cl4"></span><i class="fa-regular fa-calendar"></i> ${cgrvList.cgrvdate }
+											<span class="cl12 m-l-4 m-r-6">|</span>
+										</span>
+										<span>
+											조회수 ${cgrvList.cgrvhits }
+										</span>
 									</span>
-
-
-									<a href="cgreviewdetailpage" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-
+									<a href="cgreviewdetail?cgrvcode=${cgrvList.cgrvcode }" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
 										상세보기
 
 										<i class="fa fa-long-arrow-right m-l-9"></i>
@@ -109,112 +106,8 @@
 								</div>
 							</div>
 						</div>
-
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/blog-05.jpg" alt="IMG-BLOG">
-
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										18
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										The Great Big List of Menâs Gifts for the Holidays 
-									</a>
-								</h4>
-
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="blog-detail.html" class="hov-img0 how-pos5-parent">
-								<img src="${pageContext.request.contextPath}/resources/images/blog-06.jpg" alt="IMG-BLOG">
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										16
-									</span>
-
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-										5 Winter-to-Spring Fashion Trends to Try Now
-									</a>
-								</h4>
-
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
+						</c:forEach> 		
+						
 						<!-- Pagination -->
 						<div class="flex-l-m flex-w w-full p-t-10 m-lr--7">
 							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
@@ -223,10 +116,24 @@
 
 							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
 								2
-							</a>					 			
+							</a>
+
+						
+			
 						</div>
 					</div>	
-				</div>				
+				</div>
+
+				<!-- <div class="col-md-4 col-lg-3 p-b-80">
+					<div class="side-menu">
+						<div class="bor17 of-hidden pos-relative">
+							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+
+							<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+								<i class="zmdi zmdi-search"></i>
+							</button>
+						</div> -->
+
 			</div>
 		</div>
 	</section>	
@@ -242,7 +149,7 @@
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
+	
 <!--===============================================================================================-->	
 	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -279,8 +186,16 @@
 			})
 		});
 	</script>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if (checkMsg.length > 0) {
+			alert(checkMsg);
+		}
+	</script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
+	<script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
 </body>
 </html>

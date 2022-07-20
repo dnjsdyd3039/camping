@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>후기</title>
+<title>Camily - 게시글작성</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -85,8 +85,13 @@ $(document).ready(function() {
 </head>
 <body class="animsition">
 
-	<!-- Header -->
+	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 
 
 	<!-- Title page -->
@@ -109,7 +114,7 @@ $(document).ready(function() {
 							<input type="text" name="botitle" style="width: 40%;" placeholder="제목" /> <br>
 							<textarea id="summernote" name="bocontents"></textarea>
 							<br>
-							<input id="subBtn" type="button" class="btn btn-info pull-right" value="글 작성"
+							<input id="subBtn" type="button" class="btn btn-default pull-right" value="글 작성"
 								style="float: right;" onclick="goWrite(this.form)" />
 						</form>
 					</div>
@@ -197,6 +202,14 @@ $(document).ready(function() {
 				return false;
 			}
 			form.submit();
+		}
+	</script>
+	
+	<script type="text/javascript">
+		var checkMsg = '${msg}';
+		console.log(checkMsg.length);
+		if (checkMsg.length > 0) {
+			alert(checkMsg);
 		}
 	</script>
 </body>

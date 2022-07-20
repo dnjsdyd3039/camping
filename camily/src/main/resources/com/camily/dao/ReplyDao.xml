@@ -5,19 +5,19 @@
 
 <mapper namespace="com.camily.dao.ReplyDao">
 
-<select id="getMaxRpcode" resultType="int">
+	<select id="getMaxRpcode" resultType="int">
 		SELECT NVL(MAX(RPCODE),0)
 		FROM REPLYS
-</select>
+	</select>
 
-<insert id="insertReplyWrite">
-	   INSERT INTO REPLYS (RPCODE, RPMID, RPBOCODE, RPDATE, RPCONTENTS)
-	   VAlUES (#{rpcode}, #{rpmid}, #{rpbocode}, SYSDATE, #{rpcontents} )
+	<insert id="insertReplyWrite">
+		INSERT INTO REPLYS (RPCODE, RPMID, RPBOCODE, RPDATE, RPCONTENTS, RPSTATE)
+		VAlUES (#{rpcode}, #{rpmid}, #{rpbocode}, SYSDATE, #{rpcontents},1 )
 
-</insert>
+	</insert>
 
-<insert id="deleteReply">
-	DELETE REPLYS WHERE RPCODE = #{delRno}
-</insert>
+	<update id="deleteReply">
+		UPDATE REPLYS SET RPSTATE = 0 WHERE RPCODE = #{delRno}
+	</update>
 
 </mapper>

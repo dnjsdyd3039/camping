@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Home</title>
+	<title>Camily</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -36,99 +36,21 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
+<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
 
-    <!-- Topbar -->
-	  <%@ include file="/WEB-INF/views/includes/TopBar.jsp" %>
-    <!-- End of Topbar -->
-
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
-
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-			
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="${pageContext.request.contextPath}/resources/images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="${pageContext.request.contextPath}/resources/images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="${pageContext.request.contextPath}/resources/images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
-				</ul>
-				
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>	
-<!-- Cart 끝 -->
+    <!-- TopBar-->
+	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<!-- End TopBar-->
+	
+	<!-- memberModal -->
+	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
+	<!-- EndmemberModal -->
 	
 <!-- Product -->
 	<div class="bg0 m-t-23 p-b-140" style="margin-top: 100px">
@@ -164,7 +86,7 @@
 						키친
 					</button>
 					
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".seasonalgoods">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".seasonal">
 						계절용품
 					</button>
 					
@@ -227,17 +149,17 @@
 								</a>
 
 								<span class="stext-105 cl3">
-									${camping.gprice }
+									${camping.gprice }						
 								</span>
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<c:choose>
-							    <c:when test="${sessionScope.loginId != null}">
-								<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,'${camping.gcode}')">
-										<img class="zmdi zmdi-shopping-cart" src="">
-								</button>
-								</c:when>
+	                            <c:choose>
+							       <c:when test="${sessionScope.loginId != null}">	
+								      <button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,'${camping.gcode}')">
+										<i id="toggle" class="zmdi zmdi-favorite-outline"></i>
+								      </button>   	<!--<i class="fa-thin fa-heart-circle-check"></i>  -->
+								   </c:when>
 								</c:choose>
 							</div>
 						</div>
@@ -246,37 +168,7 @@
 				</div>				
 				  </c:forEach>
 			   </div>
-			  </div>
-				<!-- Pagination 시작 -->
-				<div class="flex-c-m flex-w w-full p-t-45" style="margin-top: auto; margin-right: auto;">
-					<c:choose>
-						<c:when test="${pageDto.page <= 1}">
-							<span>[이전]</span>
-						</c:when>
-						<c:otherwise>
-							<span><a href="campingList?page=${pageDto.page - 1}">[이전]</a></span>
-						</c:otherwise>
-					</c:choose>
-					<c:forEach begin="${pageDto.startPage }" end="${pageDto.endPage }" var="num" step="1">
-						<c:choose>
-							<c:when test="${pageDto.page == num}">
-								<span><a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">${num}</a></span>
-							</c:when>
-							<c:otherwise>
-								<span><a href="campingList?page=${num}" class="flex-c-m how-pagination1 trans-04 m-all-7">${num}</a></span>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:choose>
-						<c:when test="${pageDto.page >= pageDto.endPage}">
-							<span>[다음]</span>
-						</c:when>
-						<c:otherwise>
-							<span><a href="campingList?page=${pageDto.page + 1}">[다음]</a></span>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<!-- Pagination 종료 -->
+			  </div>			
 		</div>
 		
 	<!-- Footer -->
@@ -299,10 +191,6 @@
 	</script>
 
 
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -412,10 +300,11 @@
 			type : "get",
 			url : "cartInsert",
 			data : { "gcode" :  gcode},
+			dataType : "json",
 			success : function(cartresult){
 				console.log("cartresult :"+ cartresult)
 				if(cartresult == 1){
-					result = ""
+				 $("#toggle").remove();
 				}
 			}
 			

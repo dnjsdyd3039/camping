@@ -71,7 +71,7 @@
 									class="cl12 m-l-4 m-r-6">|</span>
 							</span> <span> <i class="fa-regular fa-calendar"></i> ${FAQView.faqdate } <span
 									class="cl12 m-l-4 m-r-6">|</span>
-							</span> <span> <i class="fa-regular fa-eye"></i>${FAQView.faqhits } </span>
+							</span> <span> 조회수 <i class="fa-regular fa-eye"></i>  ${FAQView.faqhits } </span>
 							</span>
 							<div>
 							<p class="stext-117 cl6 p-b-26">${FAQView.faqcontents }</p>
@@ -87,7 +87,6 @@
 									href="FAQDelete?faqcode=${FAQView.faqcode }">삭제</a>
 							</c:if>
 							</div>
-
 						</div>
 
 						<!--  -->

@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.camily.dao.CampingReviewDao;
 import com.camily.dto.CampingReviewDto;
-import com.camily.dto.GoodsReviewDto;
 import com.camily.service.CampingReviewService;
 
 @Controller
@@ -22,9 +21,6 @@ public class CampingReviewController {
 
 	@Autowired
 	private CampingReviewService crsv;
-	
-	@Autowired
-	private CampingReviewDao crdo;
 
 	@RequestMapping(value = "/cgreviewpage")
 	public ModelAndView cgreviewpage() {

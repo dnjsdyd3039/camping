@@ -43,6 +43,12 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<!--===============================================================================================-->
 <script src="https://kit.fontawesome.com/d70fa0d402.js"
 	crossorigin="anonymous"></script>
 <style type="text/css">
@@ -70,7 +76,7 @@
 	top: -6px;
 	height: 32px;
 	width: 4px;
-	background: pink;
+	background: #ff8000;
 	content: "";
 }
 
@@ -107,6 +113,7 @@
 	font-weight: 500;
 	margin: 0 0 15px 0;
 }
+
 </style>
 
 </head>
@@ -115,7 +122,7 @@
 	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 	<!-- End TopBar-->
-
+	
 	<!-- memberModal -->
 	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
 	<!-- EndmemberModal -->
@@ -136,23 +143,22 @@
 								</span> <span class="cl12 m-l-4 m-r-6">|</span>
 							</span> <span> <i class="fa-regular fa-calendar"></i>
 									${boardView.bodate } <span class="cl12 m-l-4 m-r-6">|</span>
-							</span> <span> <i class="fa-regular fa-eye"></i>
-									${boardView.bohits}
+							</span> <span> <i class="fa-regular fa-eye"></i> 조회수
+									${boardView.bohits }
 							</span>
 							</span>
 							<hr>
 							<div>
 								<p class="stext-117 cl6 p-b-26">${boardView.bocontents }</p>
 							</div>
-							<div id="bobtn">
-								<a class="btn btn-outline-secondary m-2" href="boardList">목록</a>
-								<c:if test="${sessionScope.loginId == boardView.bomid || sessionScope.loginId  == 'admin'}">
-									<a class="btn btn-outline-secondary m-2"
-										href="boardModify?bocode=${boardView.bocode }">수정</a>
-									<a class="btn btn-outline-secondary m-2"
-										href="boardDelete?bocode=${boardView.bocode }">삭제</a>
-								</c:if>
-							</div>
+
+
+							  <div id="bobtn">
+								<c:if test="${boardView.bomid == sessionScope.loginId}">
+								<button class="btn btn-dark"  onclick="boardModify('${boardView.bocode }')">수정</button> 
+								<button class="btn btn-dark"  onclick="boardDelete('${boardView.bocode }')">삭제</button>
+								</c:if>	
+							 </div> 
 						</div>
 
 						<!--  -->
@@ -162,49 +168,86 @@
 							<div class="section-reply-title">
 								<h5>댓글</h5>
 							</div>
-							<div class="reply-item">
-
+							<div class="reply-item" id="replyList">
 								<c:forEach items="${replyList }" var="reply">
 									<div class="reply-item-text">
 										<h6>
-											<i class="fa-regular fa-user"></i> ${reply.rpmid } - <span><i
-												class="fa-regular fa-calendar"></i> ${reply.rpdate }</span>
+											<i class="fa-regular fa-user"></i> ${reply.rpmid } - <span>
+												<i class="fa-regular fa-calendar"></i> ${reply.rpdate }
+											</span>
 										</h6>
 										<p>${reply.rpcontents }</p>
-
-										<c:if
-											test="${sessionScope.loginId == reply.rpmid || sessionScope.loginId  == 'admin'}">
 											<button type="button" class="btn btn-outline-success"
-												id="${reply.rpcode }">수정</button>
+												id="${reply.rpcode }" onclick="replyModifyInfo('${reply.rpcode }')">수정</button>
 											<button type="button" class="btn btn-outline-success"
-												id="${reply.rpcode }"
-												onclick="deleteReply('${reply.rpcode}','${boardView.bocode }')">삭제</button>
-										</c:if>
+												id="${reply.rpcode }" onclick="replyDelete()">삭제</button>	
 									</div>
 
 								</c:forEach>
 							</div>
-							<form method="post" action="replyWrite"
-								onsubmit="return FormCheck()">
-								<c:if test="${sessionScope.loginId != null }">
-									<input type="hidden" name="rpbocode"
-										value="${boardView.bocode }">
-									<div class="bor19 m-b-20">
-										<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15"
-											name="rpcontents" id="contents" placeholder="댓글작성하기..."></textarea>
-									</div>
-									<button type="submit" class="btn btn-outline-secondary m-2">댓글작성</button>
-								</c:if>
-							</form>
+							<input type="hidden" name="rpbocode" value="${boardView.bocode }">
+							<div class="bor19 m-b-20">
+								<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15"
+									name="rpcontents" id="contents" placeholder="댓글작성하기..."></textarea>
+							</div>
+							<button type="button" class="btn btn-outline-secondary m-2"
+								onclick="replyWrite()">댓글작성</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+	<div class="modal fade" id="replyInfoModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="z-index: 1200">
+		<div class="modal-dialog" role="document">		
+				<div class="modal-content">
+					<button class="close text-right font-weight-bold mt-2 mr-2"
+						type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x&nbsp;</span>
+					</button>
+					<div class="modal-header text-center">
+						<a class="modal-title w-100 font-weight-bold"> <img
+							src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
+							alt="IMG-LOGO" style="width: 35%">
+						</a>
+					</div>
+					<div class="modal-body mx-3">
+						
+						<div class="md-form mb-3">
+							 <input class="form-control" id="rpcode" name="rpcode" type="hidden" readonly="readonly">
+						</div>
+						
+						<div class="md-form mb-3">
+							<label class="small mb-1" for="rpmid">댓글 작성자</label> <input
+								class="form-control" id="rpmid" name="rpmid" type="text"
+								readonly="readonly">
+						</div>							
+						
+						<div class="md-form mb-3">
+							<label class="small mb-1" for="rpdate">댓글 작성일</label> <input class="form-control"
+								id="rpdate" name="rpdate" type="text" readonly="readonly">
+						</div>
 
+						<div class="md-form mb-3">
+							<label class="small mb-1" for="rpcontents">댓글 내용</label> <textarea 
+								id="rpcontents" class="form-control validate" name="rpcontents"
+								readonly="readonly"></textarea>
+						</div>
 
-
+					</div>
+					
+					<div class="modal-footer d-flex justify-content-center">	
+						<button class="btn btn-dark" id="modifyFormDelete_Btn" type="button"
+							onclick="replyModify()">수정하기</button>			
+					</div>
+					
+				</div>
+		</div>
+	</div>
+	
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
 
@@ -216,12 +259,7 @@
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	
 	<!--===============================================================================================-->
 	<script
 		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
@@ -259,8 +297,9 @@
 			})
 		});
 	</script>
+	
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 	<script type="text/javascript">
 		var checkMsg = '${msg}';
@@ -269,23 +308,194 @@
 			alert(checkMsg);
 		}
 	</script>
-
-	<script>
-		function FormCheck() {
-			if ($("#contents").val().length == 0) {
-				alert("댓글 내용을 입력해주세요");
-				return false;
+	<script type="text/javascript">
+		function boardModify(bocode) {
+			var modifyCheck = confirm("게시글을 수정하시겠습니까?");
+			if (modifyCheck == true) {
+				location.href = "boardModify?bocode=${boardView.bocode }"
+			} else {
+				return;
 			}
 		}
 	</script>
 
-	<script>
-		function deleteReply(delRno, bocode) {
-
-			location.href = "deleteReply?delRno=" + delRno + "&bocode="
-					+ bocode
+	<script type="text/javascript">
+		function boardDelete(bocode) {
+			var delectCheck = confirm("게시글을 삭제하시겠습니까?");
+			if (delectCheck == true) {
+				location.href = "boardDelete?bocode=${boardView.bocode }"
+			} else {
+				return;
+			}
 		}
 	</script>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			selectReplyList();
+
+		});
+
+		function selectReplyList(bocode) {
+			console.log("selectReplyList() 호출");
+			var bocode = '${boardView.bocode}';
+			console.log("bocode : " + bocode);
+
+			$
+					.ajax({
+						type : "get",
+						url : "replyList",
+						data : {
+							"bocode" : bocode
+						},
+						dataType : "json",
+						async : false,
+						success : function(result) {
+							var output = "";
+							console.log(result);
+							for (var i = 0; i < result.length; i++) {
+								output += '<div class="reply-item">';
+								output += '<div class="reply-item-text">';
+								output += '<h6>';
+								output += '<i class="fa-regular fa-user"></i> ' + result[i].rpmid + ' -';
+								output += '<span>';
+								output += ' <i class="fa-regular fa-calendar"></i> ' + result[i].rpdate + '';
+								output += '</span>';
+								output += '</h6>';	
+								output += '<p>' + result[i].rpcontents + '</p>';
+								if (result[i].rpmid == "${sessionScope.loginId}") {
+								output += '<button type="button" class="btn btn-dark" id="' + result[i].rpcode + '" onclick="replyModifyInfo(' + result[i].rpcode + ')">수정</button>';
+								output += '<button type="button" class="btn btn-dark" id="' + result[i].rpcode + '" onclick="replyDelete(' + result[i].rpcode + ',' + result[i].bocode + ')">삭제</button>';
+								}
+								output += '</div>';
+								output += '</div>';
+							}
+
+							$("#replyList").html(output);
+						}
+					});
+
+		}
+	</script>
+
+	<script type="text/javascript">
+		function replyWrite() {
+			console.log("replyWrite() 호출");
+			var rpbocode = '${boardView.bocode}';
+			var rpmid = '${sessionScope.loginId}';
+			var rpcontents = $("#contents").val();
+
+			if (rpmid == "") {
+				alert("로그인후 이용 해주세요.");
+				return;
+			} else if (rpcontents == "") {
+				alert("내용을 입력해주시요.");
+			}
+
+			$.ajax({
+				type : "get",
+				url : "replyWrite",
+				data : {
+					"rpbocode" : rpbocode,
+					"rpmid" : rpmid,
+					"rpcontents" : rpcontents
+				},
+				async : false,
+				dataType : "json",
+				success : function(result) {
+					$("#contents").val("");
+					alert("댓글이 등록되었습니다.");
+					selectReplyList();
+				}
+
+			});
+
+		}
+	</script>
+
+
+	<script type="text/javascript">
+		function replyDelete(delRno) {
+			console.log("replyDelete() 호출");
+			console.log("delRno : " + delRno);
+			var replyDelete_check = confirm("댓글을 삭제하시겠습니까?");
+
+			if (replyDelete_check == true) {
+				$.ajax({
+					type : "get",
+					url : "replyDelete",
+					data : {
+						"delRno" : delRno
+					},
+					async : false,
+					dataType : "json",
+					success : function(result) {
+						selectReplyList();
+						alert("댓글이 삭제 되었습니다.");
+					}
+				});
+			}
+
+		}
+	</script>
+	
+	<script type="text/javascript">
+	function replyModifyInfo(rpcode){
+			console.log(rpcode);
+			
+			$.ajax({
+				url : "replyModifyInfo",
+				type : "get",
+				data : { "rpcode" : rpcode },
+				dataType : "json",
+				async:false,
+				success: function(result){
+					console.log(result);
+					$("#rpcode").attr("readonly","readonly");
+					$("#rpmid").attr("readonly","readonly");
+					$("#rpdate").attr("readonly","readonly");
+					$("#rpcontents").removeAttr("readonly");
+					$("#modifyFormDelete_Btn").addClass("btn_dNone");
+					
+					$("#rpcode").val(result.rpcode);
+					$("#rpmid").val(result.rpmid);
+					$("#rpdate").val(result.rpdate);
+					$("#rpcontents").val(result.rpcontents);
+					replyInfoVal = result;
+				}
+			});
+			$("#replyInfoModal").modal('show');
+		}
+		var replyInfoVal = "";
+		
+		function replyModify(){
+			var rpcode = $("#rpcode").val();
+			var rpmid = $("#rpmid").val();
+			var rpdate = $("#rpdate").val();
+			var rpcontents = $("#rpcontents").val();
+			console.log(rpcode);
+			console.log(rpmid);
+			console.log(rpdate);
+			console.log(rpcontents);
+			
+			
+			$.ajax({
+				url : "replyModify",
+				type : "get",
+				data : { "rpcode" : rpcode, "rpmid" : rpmid, "rpdate" : rpdate, "rpcontents" : rpcontents },
+				async:false,
+				success: function(result){
+					console.log(result);
+					replyInfoVal.rpcode = rpcode;
+					replyInfoVal.rpmid = rpmid;
+					replyInfoVal.rpdate = rpdate;
+					replyInfoVal.rpcontents = rpcontents;
+					alert("정보가 수정 되었습니다.");
+					$("#replyInfoModal").modal('hide');
+					selectReplyList();
+				}
+			});
+		}
+		</script>
 </body>
 </html>

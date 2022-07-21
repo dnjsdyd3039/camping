@@ -5,18 +5,28 @@ import lombok.Data;
 @Data
 public class GoodsOrderDto {
 
-	private String gocode;    // 주문 코드
-	private String gomid;     // 주문자 아이디
-	private String gomaddr;   // 주문 주소
-	private String gogcode;   // 주문 상품 코드
-	private String goamount;  // 주문 수량
-	private String goprice;   // 주문 상품 가격
-	private String goname;    // 상품 이름
-	private String goimage;   // 상품 이미지
+	private String gocode;    // 주문 코드    o
+	private String gomid;     // 주문자 아이디 o
+	private String gomaddr;   // 주문 주소    o
+	private String gogcode;   // 주문 상품 코드 o
+	private String goamount;  // 주문 수량 o
+	private String goprice;   // 주문 상품 가격 o
+	private String goname;    // 상품 이름   o
+	private String goimage;   // 상품 이미지 o
 	
 	private String gostate;   // 상품 상태
-    private String godate;    // 주문 일자 
-	
+    private String godate;    // 주문 일자 o  
+	    
+    
+    
+	public String getGodate() {
+		return godate;
+	}
+
+	public void setGodate(String godate) {
+		this.godate = godate;
+	}
+
 	public String getGocode() {
 		return gocode;
 	}

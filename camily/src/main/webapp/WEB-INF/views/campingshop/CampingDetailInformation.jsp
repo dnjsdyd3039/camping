@@ -42,7 +42,7 @@ z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 <body class="animsition">
 
@@ -76,7 +76,7 @@ z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 								<tr class="table_row">								
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="${information.diimage }" alt="IMG">
+											<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${information.diimage }" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">${information.diname }</td>
@@ -284,7 +284,7 @@ z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 </body>
 

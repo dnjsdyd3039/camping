@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+	
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,7 +42,53 @@
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
+<style type="text/css">
+.section-reply-title {
+	/* margin-bottom: 30px; */
+	padding-top: 40px;
+    text-align: center;
+}
+
+.section-reply-title h5 {
+	color: #000000;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+.section-reply-title h6 {
+	color: #848484;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+#aaa{
+	font-weight: bold;
+
+
+
+
+}
+
+/* .section-reply-title h5:after {
+	position: absolute;
+	left: 0;
+	top: -6px;
+	height: 32px;
+	width: 4px;
+	background: #6E6E6E;
+	content: "";
+} */
+</style>
 </head>
 <body class="animsition">
 
@@ -54,8 +100,8 @@
 	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
 	<!-- EndmemberModal -->
 	
-	<!-- breadcrumb 시작-->
-	<div class="container" style="margin-top: 100px">
+	 <!-- breadcrumb 시작-->
+	<!-- <div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
 				캠핑목록
@@ -66,61 +112,89 @@
                 구매목록					
 			</span>
 		</div>
-	</div>
-	<!-- breadcrumb 끝-->
-
-	<!-- Shoping Cart -->
-	<div class="bg0 m-t-23 p-b-140" style="margin-top: 100px;">
-		<div class="container">
-			<div class="row">
-				<div class="" >
-					<div class="">
-						<div class="wrap-table-shopping-cart">
-						
-                            <c:forEach items="${PurchaseList }" var="Purchase">
-                            
-							<table class="table-shopping-cart">
-								<tr>
-									<th colspan="7" style="font-weight: bold;">
-										<div>주문번호 : ${Purchase.gocode}</div>
-										<div>주문일자 : ${Purchase.godate}</div>
-									</th>
-								</tr>
-								<tr class="table_head">
-									<th class="column-1">상품정보</th>
-									<th class="column-2"></th>
-									<th class="column-3">상품가격</th>
-									<th class="column-4">상품수량</th>
-									<th class="column-5">총금액</th>
-									<th class="column-6">주문주소</th>
-									<th class="column-7"></th>
-								</tr>
-								<tr class="table_row" id="${Purchase.gocode}">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="${Purchase.goimage }" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">${Purchase.goname }</td>
-									<td class="column-3">${Purchase.goprice }</td>
-									<td class="column-4">총 : ${Purchase.goamount }개</td>
-									<td class="column-5">총 : ${Purchase.goprice}원</td> <!-- 총 가격 -->
-									<td class="column-6">${Purchase.gomaddr }</td>
-									<th class="column-7" > 
-									<a href="cgWrite?image=${Purchase.goimage }&gogcode=${Purchase.gogcode}&gocode=${Purchase.gocode }" style="margin-top: 100px"
-									 class="flex-c-m stext-101 cl5 size-80 bg2 bor1 hov-btn1 p-lr-15 trans-04">후기</a>
-									 <button style="margin-top: 100px" type="button"
-									 onclick="deleteph(this,'${Purchase.gocode}')" class="flex-c-m stext-101 cl5 size-80 bg2 bor1 hov-btn1 p-lr-15 trans-04">삭제</button>
-									</th>
-								</tr>
-							</table>
-								</c:forEach>
+	</div>  -->
+						<div class="section-reply-title">
+								<h5>🚚구매목록🚚</h5><h6>상품 정보나 배송상태를 확인하세요!🤏</h6>
 						</div>
+						<c:forEach items="${PurchaseList }" var="Purchase">
+						<div class="col-9" style="padding-top: 30px; margin: auto; font-family: Poppins-Bold;">
+                        <div class="bg-light rounded h-100 p-4">
+                            <div class="d-flex justify-content-between">
+	                            <div class="mb-4">주문번호 : ${Purchase.gocode}</div>
+	                            <div class="mb-4" style="text-align: end;">주문일자 : ${Purchase.godate}</div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">상품정보</th>
+                                            <th scope="col">구매상품명</th>
+                                            <th scope="col">상품가격</th>
+                                            <th scope="col">상품수량</th>
+                                            <th scope="col">총금액</th>
+                                            <th scope="col">주문주소</th>
+                                            <th scope="col">상품상태</th>
+                                            <th scope="col"></th>
+                                           
+									 
+								
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${Purchase.goimage }" alt="IMG" style="width: 60px;"></th>
+                                            <td>${Purchase.goname }</td>
+                                            <td>${Purchase.goprice }원</td>
+                                            <td>${Purchase.goamount }개</td>
+                                            <td>${Purchase.goprice}원</td>
+                                            <td>${Purchase.gomaddr }</td>
+                                            <td id="aaa">
+                                      <c:if test="${Purchase.gostate == 2 }">
+									  <p>배송준비중</p>								    
+								      <button type="button" class="btn btn-dark" onclick="PurchaseDelete('gocode')">주문취소</button>
+								    </c:if>
+								    
+								    <c:if test="${Purchase.gostate == 3 }">
+									  <p>배송중</p>				
+									  <button type="button" class="btn btn-dark">주문취소</button>				    
+								    </c:if>
+								    
+								    <c:if test="${Purchase.gostate == 4 }">
+									  <p>배송완료</p>
+									 	<button style="margin-top: 100px" type="button" onclick="phDecide('${Purchase.gocode}')"
+									    class="btn btn-dark">구매확정</button>															  															    
+								    </c:if>
+								     
+								    <c:if test="${Purchase.gostate == 5 }">
+									  <p>구매완료</p>								    
+									     <a href="cgWrite?image=${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${Purchase.goimage }&gogcode=${Purchase.gogcode}&gocode=${Purchase.gocode }"
+									     class="btn btn-dark">후기</a>	
+								    </c:if>
+								     
+								    <c:if test="${Purchase.gostate == 6 }">
+									  <p>취소처리중</p>				
+									</c:if>
+								     
+								    <c:if test="${Purchase.gostate == 7 }">
+									  <p style="font-color : red;">취소완료</p>				
+									</c:if>
+									</td>
+									<td>				 <button type="button"
+									 onclick="deleteph(this,'${Purchase.gocode}','${Purchase.gostate }')" class="btn btn-dark">삭제</button></td>
+                                        </tr>                                                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <br>
+                    </c:forEach>
+                    
+						
 	
-					</div>
-				</div>
-
-			</div>				
+								
 	<!-- Load more 시작 -->
 	<div class="flex-c-m flex-w w-full p-t-45">
 				<!-- Pagination 시작 -->
@@ -155,8 +229,7 @@
 				<!-- Pagination 종료 -->
 	          </div>	
 	          <!-- Load more 종료 -->
-			</div>
-		</div>
+			
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
 	<!-- End of Footer -->
@@ -280,19 +353,21 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 </body>
 
 <script type="text/javascript">
- function deleteph(thisval,gocode){
+ function deleteph(thisval,gocode,gostate){
 	 console.log("thisval :"+ thisval);
 	 console.log("gocode :"+ gocode);
+	 console.log("gostate :"+ gostate);
+	 location.href="deleteph?gocode="+gocode+"&gostate="+gostate;
 	 
-	 $.ajax({
+/* 	 $.ajax({
 			type : "get",
 			url : "deleteph",
-			data : { "gocode" :  gocode},
+			data : { "gocode" :  gocode, "gostate" : gostate},
 			success : function(result){					 
 			 console.log("result :"+ result);
               if(result != null){				
@@ -304,9 +379,22 @@
               }
 			}
 			
-	 });
+	 }); */
  }
-
 </script>
-		
+
+<!-- 주문취소 -->
+<script type="text/javascript">
+function PurchaseDelete(gocode){
+	location.href="PurchaseDelete?gocde="+gocode;
+}
+</script>	
+
+<!-- 구매확정 누르기 STATE = 5 -->
+<script type="text/javascript">
+function phDecide(gocode){
+	var phDecide_Check = confirm("구매확정하겠습니까?");
+	location.href="phDecide?gocode="+gocode;
+}
+</script>
 </html>

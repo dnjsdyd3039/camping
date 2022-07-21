@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +44,7 @@
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-	
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 
 <body class="animsition">
@@ -56,7 +58,7 @@
 	<!-- EndmemberModal -->
 	
 	<!-- Product -->
-	<div class="bg0 m-t-23 p-b-140" style="margin-top: 100px;">
+	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
@@ -95,15 +97,17 @@
 
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
-							placeholder="Search">
-					</div>
+					<form action="campingList" method="get">
+							<div class="bor8 dis-flex p-l-15">
+								<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" id="searchCamp">
+									<i class="zmdi zmdi-search"></i>
+								</button>
+								<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="searchKeyword"
+									placeholder="Search" onkeydown="searchCamp(event)">
+							</div>
+					</form>
 				</div>
+				
 			</div>
 
 			<div class="row isotope-grid">
@@ -112,11 +116,12 @@
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic">
-								<!-- hov-img0 제거 -->
+								<!--c:set으로 이미지 파일 이름 지정 -->
+								 <c:set var="campIMG" value="${campingInfo.caimage}" />
+								 
 								<c:choose>
 									<c:when test="${campingInfo.crprice != null}">
-										<a href="campingView?cacode=${campingInfo.cacode}"
-											class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<a href="campingView?cacode=${campingInfo.cacode}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 											<img src="${campingInfo.caimage}" alt="캠핑장 이미지" style="width: 100%; height: 200px; object-fit: cover;  object-position: bottom;">
 										</a>
 									</c:when>
@@ -156,16 +161,6 @@
 									</span>
 								</div>
 
-								<div class="block2-txt-child2 flex-r p-t-3">
-									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04"
-											src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="${pageContext.request.contextPath}/resources/images/icons/icon-heart-02.png"
-											alt="ICON">
-									</a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -174,18 +169,14 @@
 
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<!-- <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
-					flex-l-m flex-w w-full p-t-10 m-lr--7
-				</a> -->
 				<!-- Pagination 시작 -->
 				<div class="flex-c-m flex-w w-full p-t-45" style="margin-top: auto; margin-right: auto;">
 					<c:choose>
 						<c:when test="${pageDto.page <= 1}">
-							<span>[이전]</span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><i class="fa-solid fa-angle-left"></i></span>
 						</c:when>
 						<c:otherwise>
-							<span><a href="campingList?page=${pageDto.page - 1}&type=${type}">[이전]</a></span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7" onclick="prevPage('${pageDto.page}', '${type}', '${searchKeyword}')" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i></span>
 						</c:otherwise>
 					</c:choose>
 					<c:forEach begin="${pageDto.startPage }" end="${pageDto.endPage }" var="num" step="1">
@@ -194,16 +185,16 @@
 								<span><a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">${num}</a></span>
 							</c:when>
 							<c:otherwise>
-								<span><a href="campingList?page=${num}&type=${type}" class="flex-c-m how-pagination1 trans-04 m-all-7">${num}</a></span>
+								<span class="flex-c-m how-pagination1 trans-04 m-all-7" onclick="selPage('${num}', '${type}', '${searchKeyword}')" style="cursor: pointer;">${num}</span>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pageDto.page > pageDto.endPage || pageDto.page == pageDto.maxPage}">
-							<span>[다음]</span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><i class="fa-solid fa-angle-right"></i></span>
 						</c:when>
 						<c:otherwise>
-							<span><a href="campingList?page=${pageDto.page + 1}&type=${type}">[다음]</a></span>
+							<span class="flex-c-m how-pagination1 trans-04 m-all-7" onclick="nextPage('${pageDto.page}', '${type}', '${searchKeyword}')" style="cursor: pointer;"><i class="fa-solid fa-angle-right"></i></span>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -324,7 +315,7 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 </body>
 
@@ -359,6 +350,47 @@
 		}else{
 			location.href = "campingList";
 		}
+	}
+</script>
+<script type="text/javascript">
+	function searchCamp(event) {
+		if(event.key === "Enter"){
+//            event.preventDefault();
+            $("#searchCamp").click();
+        }
+	}
+
+	function prevPage(page, type, searchKeyword){
+		page--;
+		var url = 'campingList?page=' + page;
+		if(type.length > 0){
+			url += '&type=' + type;
+		}
+		if(searchKeyword.length > 0){
+			url += '&searchKeyword=' + searchKeyword;
+		}
+		location.href = url;
+	}
+	function selPage(page, type, searchKeyword){
+		var url = 'campingList?page=' + page;
+		if(type.length > 0){
+			url += '&type=' + type;
+		}
+		if(searchKeyword.length > 0){
+			url += '&searchKeyword=' + searchKeyword;
+		}
+		location.href = url;
+	}
+	function nextPage(page, type, searchKeyword){
+		page++;
+		var url = 'campingList?page=' + page;
+		if(type.length > 0){
+			url += '&type=' + type;
+		}
+		if(searchKeyword.length > 0){
+			url += '&searchKeyword=' + searchKeyword;
+		}
+		location.href = url;
 	}
 </script>
 </html>

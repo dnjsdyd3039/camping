@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>캠핑용품 상세보기</title>
+	<title>캠핑장 상세보기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -31,6 +31,12 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+
 <script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
 <style type="text/css">
 #bobtn {
@@ -115,6 +121,7 @@
 
 						<!--  -->
 						<div class="p-t-40">
+							
 							<h5 class="mtext-113 cl2 p-b-12">
 								댓글
 							</h5>						
@@ -148,10 +155,6 @@
 		</span>
 	</div>
 
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -185,8 +188,8 @@
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
+
 	<script type="text/javascript">
 		var checkMsg = '${msg}';
 		console.log(checkMsg.length);

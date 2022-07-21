@@ -54,7 +54,10 @@
 <!-- include summernote-ko-KR -->
 <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
 <title>글쓰기</title>
-
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote({
@@ -80,7 +83,45 @@ $(document).ready(function() {
 	  });
 	});
 </script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<style type="text/css">
+.section-reply-title {
+	margin-bottom: 30px;
+}
 
+.section-reply-title h5 {
+	color: #000000;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+.section-reply-title h6 {
+	color: #848484;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+
+
+.section-reply-title h5:after {
+	position: absolute;
+	left: 0;
+	top: -6px;
+	height: 32px;
+	width: 4px;
+	background: #6E6E6E;
+	content: "";
+}
+</style>
 
 </head>
 <body class="animsition">
@@ -94,11 +135,7 @@ $(document).ready(function() {
 	<!-- EndmemberModal -->
 
 
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92"
-		style="background-image: url('resources/images/bg-02.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">캠핑장 후기 게시판</h2>
-	</section>
+	
 
 
 	<!-- Content page -->
@@ -106,12 +143,14 @@ $(document).ready(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
-					<h2 style="text-align: center;">글 작성</h2>
-					<br> 
+					<div class="section-reply-title">
+								<h5>게시글 작성</h5><h6>자유게시판 글작성 페이지입니다.</h6>
+						</div> 
 					<div style="width: 100%; margin: auto;">
 						<form method="post" action="write2">
 							
 							<input type="text" name="botitle" style="width: 40%;" placeholder="제목" /> <br>
+							
 							<textarea id="summernote" name="bocontents"></textarea>
 							<br>
 							<input id="subBtn" type="button" class="btn btn-default pull-right" value="글 작성"
@@ -142,9 +181,6 @@ $(document).ready(function() {
 		</span>
 	</div>
 
-	<!--===============================================================================================-->
-	<script
-		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
 	<script
 		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
@@ -184,7 +220,7 @@ $(document).ready(function() {
 	</script>
 	
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 	<script>
 		function goWrite(form) {

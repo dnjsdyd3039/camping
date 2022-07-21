@@ -44,16 +44,56 @@
 	href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
 <script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
+
+<style type="text/css">
+.section-reply-title {
+	margin-bottom: 30px;
+}
+
+.section-reply-title h5 {
+	color: #000000;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+.section-reply-title h6 {
+	color: #848484;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+
+
+.section-reply-title h5:after {
+	position: absolute;
+	left: 0;
+	top: -6px;
+	height: 32px;
+	width: 4px;
+	background: #6E6E6E;
+	content: "";
+}
+</style>
+
+
 </head>
 <body class="animsition">
 
 	<!-- Header -->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92"
+	<!-- <section class="bg-img1 txt-center p-lr-15 p-tb-92"
 		style="background-image: url('resources/images/bg-02.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">FAQ게시판</h2>
-	</section>
+	</section> -->
 
 	<!-- Content page -->
 	<section class="bg0 p-t-52 p-b-20">
@@ -61,8 +101,11 @@
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-0-lg">
+						<div class="section-reply-title">
+								<h5>FAQ</h5><h6>자주묻는 질문과 답변</h6>
+						</div>
 						<table class="table table-hover">
-							<thead>
+							<thead style="border-top: 2px solid #6E6E6E;">
 								<tr>
 									<th>번호</th>
 									<th>제목</th>
@@ -82,8 +125,16 @@
 									</tr>
 								</c:forEach>
 							</tbody>
+							<tfoot>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</tfoot>
 						</table>
-						<hr>
 						<c:if test="${sessionScope.loginId  == 'admin'}">
 							<button class="btn btn-info pull-right"
 								onclick="location.href='/controller/FAQwrite'">글작성</button>

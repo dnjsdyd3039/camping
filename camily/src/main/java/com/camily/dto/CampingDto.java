@@ -1,5 +1,7 @@
 package com.camily.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -12,10 +14,12 @@ public class CampingDto {
 	private String catype;
 	private String cacontents;
 	private String calinecontents;
-	private String caprice;
 	private String cainfo;
 	private String caimage;
+	private int castate;
 	
 	private String crprice;
+	
+	private MultipartFile cafile;
 	
 }

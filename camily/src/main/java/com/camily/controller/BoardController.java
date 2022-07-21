@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -58,6 +59,7 @@ public class BoardController {
 		return mav;
 	}
 
+	// 게시글 수정기능
 	@RequestMapping(value = "/boardModifyForm")
 	public ModelAndView boardModifyForm(BoardDto board, RedirectAttributes ra) {
 		System.out.println("게시글 수정 기능 요청");
@@ -74,23 +76,48 @@ public class BoardController {
 		return mav;
 	}
 
-	@RequestMapping("replyWrite")
-	public String replyWrite(ReplyDto ro) {
-		System.out.println("댓글 작성 요청");
-		System.out.println(ro);
-
-		int replyReplyResult = bsvc.replyWrite(ro);
-
-		return "redirect:/boardView?bocode=" + ro.getRpbocode();
+	// 댓글리스트_ajax
+	@RequestMapping(value = "/replyList")
+	public @ResponseBody String replyList(int bocode) {
+		System.out.println("댓글 리스트 요청");
+		String replyList = bsvc.replyList(bocode);
+		return replyList;
 	}
 
-	@RequestMapping("deleteReply")
-	public String deleteReply(int delRno, int bocode) {
-		System.out.println("댓글 삭제 요청");
-		int deleteReplyResult = bsvc.replyDelte(delRno);
+	// 댓글작성_ajax
+	@RequestMapping(value = "/replyWrite")
+	public @ResponseBody String replyWrite(ReplyDto reply) {
+		System.out.println("댓글 작성 요청");
 
-		return "redirect:/boardView?bocode=" + bocode;
+		String insertReplyResult = bsvc.replyWrite(reply);
+		return insertReplyResult;
+	}
 
+	// 댓글삭제_ajax
+	@RequestMapping(value = "/replyDelete")
+	public @ResponseBody String replyDelete(int delRno) {
+		System.out.println("댓글 삭제요청");
+
+		String deleteReplyResult = bsvc.replyDelete(delRno);
+		return deleteReplyResult;
+	}
+
+	// 댓글수정정보_ajax
+	@RequestMapping(value = "/replyModifyInfo")
+	public @ResponseBody String replyModifyInfo(String rpcode) {
+		System.out.println("댓글 수정 상세정보 요청");
+
+		String replyInfo = bsvc.replyModifyInfo(rpcode);
+		return replyInfo;
+	}
+
+	// 댓글수정_ajax
+	@RequestMapping(value = "/replyModify")
+	public @ResponseBody String replyModify(ReplyDto reply) {
+		System.out.println("댓글 수정요청");
+		System.out.println("reply " + reply);
+		String updateResut = bsvc.replyModify(reply);
+		return updateResut;
 	}
 
 	// FAQ 리스트 호출
@@ -101,14 +128,14 @@ public class BoardController {
 		return mav;
 	}
 
-	// 게시글 작성 기능
+	// FAQ 작성 기능
 	@GetMapping("FAQwrite")
 	public String FAQWrite() {
 		System.out.println("BoardController.FAQwrite()호출");
 		return "faq/FAQWrite";
 	}
 
-	// 게시글 작성 기능
+	// FAQ 작성 기능
 	@RequestMapping("FAQwrite2")
 	public String FAQWrite(FAQDto faq, RedirectAttributes ra) {
 		System.out.println("BoardController.FAQwrite2()호출");
@@ -117,14 +144,14 @@ public class BoardController {
 		return "redirect:/FAQView?faqcode=" + faq.getFaqcode();
 	}
 
-	// FAQ게시판 상세보기 기능
+	// FAQ 상세보기 기능
 	@RequestMapping(value = "/FAQView")
 	public ModelAndView FAQView(int faqcode) {
 		System.out.println("게시판 상세보기 요청");
 		ModelAndView mav = bsvc.FAQView(faqcode);
 		return mav;
 	}
-	
+
 	// FAQ게시판 글 수정 페이지 이동
 	@RequestMapping(value = "/FAQModify")
 	public ModelAndView FAQModify(int faqcode) {
@@ -132,8 +159,8 @@ public class BoardController {
 		ModelAndView mav = bsvc.FAQModify(faqcode);
 		return mav;
 	}
-	
-	// FAP게시판 글 수정 기능
+
+	// FAQ 게시판 글 수정 기능
 	@RequestMapping(value = "/FAQModifyForm")
 	public ModelAndView FAQModifyForm(FAQDto faq, RedirectAttributes ra) {
 		System.out.println("FAQ 글 수정 기능 요청");
@@ -141,15 +168,13 @@ public class BoardController {
 		ModelAndView mav = bsvc.faqMoidfyForm(faq, ra);
 		return mav;
 	}
-	
-	// FAQ 글 삭제 기능
-		@RequestMapping(value = "/FAQDelete")
-		public ModelAndView FAQDelete(int faqcode, RedirectAttributes ra) {
-			System.out.println("FAQ 글 삭제 요청");
-			ModelAndView mav = bsvc.FAQDelete(faqcode, ra);
-			return mav;
-		}
-	
-	
-	
+
+	// FAQ 게시판 삭제 기능
+	@RequestMapping(value = "/FAQDelete")
+	public ModelAndView FAQDelete(int faqcode, RedirectAttributes ra) {
+		System.out.println("FAQ 글 삭제 요청");
+		ModelAndView mav = bsvc.FAQDelete(faqcode, ra);
+		return mav;
+	}
+
 }

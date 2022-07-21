@@ -39,6 +39,7 @@
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <!--===============================================================================================-->
 
 </head>
@@ -53,7 +54,7 @@
 	<!-- EndmemberModal -->
 	
 	<!-- breadcrumb 시작 -->
-	<div class="container" style="margin-top: 100px">
+	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 			<a href="#" class="stext-109 cl8 hov-cl1 trans-04">
 				전체메뉴
@@ -84,9 +85,9 @@
 
 							<div class="slick3 gallery-lb">
 							  
-								<div class="item-slick3" data-thumb="${campingDetail.gimage }">
+								<div class="item-slick3" data-thumb="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingDetail.gimage }">
 									<div class="wrap-pic-w pos-relative">
-										<img src="${campingDetail.gimage }" alt="IMG-PRODUCT">
+										<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingDetail.gimage }" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 											<i class="fa fa-expand"></i>
@@ -94,9 +95,9 @@
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="${campingDetail.gsideimage }">
+								<div class="item-slick3" data-thumb="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingDetail.gsideimage }">
 									<div class="wrap-pic-w pos-relative">
-										<img src="${campingDetail.gsideimage }" alt="IMG-PRODUCT">
+										<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingDetail.gsideimage }" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
 											<i class="fa fa-expand"></i>
@@ -104,9 +105,9 @@
 									</div>
 								</div>
 
-								<div class="item-slick3" data-thumb="${campingDetail.gbackimage }">
+								<div class="item-slick3" data-thumb="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingDetail.gbackimage }">
 									<div class="wrap-pic-w pos-relative">
-										<img src="${campingDetail.gbackimage }" alt="IMG-PRODUCT">
+										<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingDetail.gbackimage }" alt="IMG-PRODUCT">
 
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
 											<i class="fa fa-expand"></i>
@@ -120,12 +121,17 @@
 				<div class="col-md-6 col-lg-5 p-b-30">
 				 <div class="p-r-50 p-t-5 p-lr-0-lg">
 			
-						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+						<h4 class="mtext-105 cl2 js-name-detail p-b-14" style="display: inline-block;">
 						   ${campingDetail.gname }
 						</h4>
-						<span class="mtext-106 cl2">
+						<button type="button" onclick="kakaoshare(
+									'${campingDetail.gcompanyname}','${campingDetail.gname }','${campingDetail.gprice }','${campingDetail.gimage }',
+									'${campingDetail.gcontents }','${campingDetail.gcategory }')" style="float: right;">
+								       <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width: 75%">
+						</button>
+						<div class="mtext-106 cl2">
 						$: ${campingDetail.gprice }원 
-						</span>
+						</div>
 
 						<p class="stext-102 cl3 p-t-23">
 							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
@@ -146,53 +152,31 @@
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
+								</div>
+									</div>
                                     <div class="row">
+                                    <div class="col-6">
                                     <button type="button" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1" 
                                             onclick="shoppingbasket('${campingDetail.gcode }','${campingDetail.gname }','${campingDetail.gimage }',
                                             '${campingDetail.gprice }')">
 								        장바구니
 								    </button>									
+                                    </div>
+                                    <div class="col-6">
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1">
 								        구매하기
 									</button>
-									<button type="button" onclick="kakaoshare(
-									'${campingDetail.gcompanyname}','${campingDetail.gname }','${campingDetail.gprice }','${campingDetail.gimage }',
-									'${campingDetail.gcontents }','${campingDetail.gcategory }')">
-								       <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="">
-									</button>
-									</div>
-								</div>
+                                    </div>
 							</div>	
 						</div>
 					 </form>
-                 
-						<!--  -->
-						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-									<i class="zmdi zmdi-favorite"></i>
-								</a>
-							</div>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-								<i class="fa fa-facebook"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-								<i class="fa fa-twitter"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-								<i class="fa fa-google-plus"></i>
-							</a>
-						</div>
 					</div>
 				</div>
 			</div>
 
 
 			<div class="bor10 m-t-50 p-t-43 p-b-40">
-			<img src="${campingDetail.gdetailimage }" alt="" >
+			<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingDetail.gdetailimage }" alt="" >
 			</div>
 
 		</div>
@@ -206,87 +190,10 @@
 					위로가기(◦'⌣'◦)
 				</a>
 			</div>
-			
-		<!-- Pagination 시작 -->
-		  <div class="flex-l-m flex-w w-full p-t-10 m-lr--7" style="margin-left: auto;">
-			<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-				1
-			</a>
-
-			<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7" style="margin-top: auto; margin-right: auto;">
-				2
-		    </a>
-		  </div>
-		<!-- Pagination 종료 -->
-		</div>
 
 	<!-- Footer -->
-	<footer class="bg3 p-t-75 p-b-32">
-		<div class="container">
-			<div class="row">
-				<!-- p-b-50  : : 패팅 바텀 50px-->
-				<div  class="col-sm-6 col-lg-3">
-						<a href="#" class="logo">
-						<img style="margin:0 auto;" src="${pageContext.request.contextPath}/resources/images/icons/logo-03.jpg" alt="IMG-LOGO">
-					</a>				
-				</div>
-				<div class="col-sm-6 col-lg-3 ">
-					<h4 class="stext-301 cl0 p-b-30">
-						팀 소개
-					</h4>
-					<h6 class="stext-301 cl0 ">팀명 및 서비스 제공 : CAMILY</h6>
-					<h6 class="stext-301 cl0 ">팀장 : 김종윤</h6>
-					<h6 class="stext-301 cl0 ">팀원 : 김두성 | 정해성 | 조항영</h6>
-					<h6 class="stext-301 cl0 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;박준범 | 박시환</h6>
-					
-				</div>
-
-				<div class="col-sm-6 col-lg-3">
-					<h4 class="stext-301 cl0 p-b-30">
-						회사 정보
-					</h4>
-					<h6 class="stext-301 cl0">인천 미추홀구 매소홀로488번길 6-32 태승빌딩 5층(1층 홈플러스) 인천일보아카데미</h6>
-					<h6 class="stext-301 cl0">032-876-3332</h6>
-					<h6 class="stext-301 cl0">campingcamily@gmail.com</h6>
-					
-				
-				</div>
-				
-				<div class="col-sm-6 col-lg-3 text-center">
-					<h4 class="stext-301 cl0 p-b-30">
-						상품제휴 / 광고문의
-					</h4>
-
-					<!-- <p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-					</p> -->
-
-					<div class="p-t-27 text-center">
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-facebook" style="font-size:30px"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-instagram" style="font-size:30px"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p" style="font-size:30px"></i>
-						</a>
-					</div>
-				</div>
-				
-				
-			</div>
-        <br>
-			<p class="stext-107 cl6 txt-center">
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by CAMILY
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
-			</p>
-		</div>
-	</footer>
+	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
+	<!-- End of Footer -->
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">
@@ -309,13 +216,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 try {
- function kakaoshare(gcompanyname,gname,gprice,gimage,gcontents,gcategory){
+ function kakaoshare(gcompanyname,gname,gprice,gimage,gcontents,gcategory,gcode){
 	 console.log("gcompanyname :"+ gcompanyname);	
 	 console.log("gname :"+ gname);	
 	 console.log("gprice :"+ gprice);	
 	 console.log("gimage :"+ gimage);	
 	 console.log("gcontents :"+ gcontents);	
 	 console.log("gcategory :"+ gcategory);	
+	 console.log("gcode :"+ gcode);
 	 Kakao.init('ff44da0c10c3fe434ba307170a916ce5')
 	    Kakao.Link.sendDefault({
 	      objectType: 'feed',
@@ -325,8 +233,8 @@ try {
 	        imageUrl:
 	        	gimage,
 	        link: {
-	          mobileWebUrl: 'https://developers.kakao.com',
-	          webUrl: 'https://developers.kakao.com',
+	          mobileWebUrl:'http://121.65.47.77:7779/controller/campingDetailPage?gcode='+gcode,
+	          webUrl:'http://121.65.47.77:7779/controller/campingDetailPage?gcode='+gcode,
 	        },
 	      },
 	      social: {
@@ -338,15 +246,15 @@ try {
 	        {
 	          title: '웹으로 보기',
 	          link: {
-	            mobileWebUrl: 'https://developers.kakao.com',
-	            webUrl: 'https://developers.kakao.com',
+	            mobileWebUrl:'http://121.65.47.77:7779/controller/campingDetailPage?gcode='+gcode,
+	            webUrl:'http://121.65.47.77:7779/controller/campingDetailPage?gcode='+gcode,
 	          },
 	        },
 	        {
 	          title: '앱으로 보기',
 	          link: {
-	            mobileWebUrl: 'https://developers.kakao.com',
-	            webUrl: 'https://developers.kakao.com',
+	            mobileWebUrl:'http://121.65.47.77:7779/controller/campingDetailPage?gcode='+gcode,
+	            webUrl:'http://121.65.47.77:7779/controller/campingDetailPage?gcode='+gcode,
 	          },
 	        },
 	      ],
@@ -451,7 +359,7 @@ try {
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 </body>
 

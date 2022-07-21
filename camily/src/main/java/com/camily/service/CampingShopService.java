@@ -27,8 +27,7 @@ public class CampingShopService {
 	@Autowired
 	private CampingShopDao cdao;
 	
-	ArrayList<GoodsDto> cgvMvList = new ArrayList<GoodsDto>();
-		// 캠핑 용품 이동 페이지
+    // 캠핑 용품 이동 페이지
 	public ModelAndView campingShopPage() {
 		System.out.println("campingShopPage.CampingShopPage() 호출");	
 		ModelAndView mav = new ModelAndView();
@@ -39,6 +38,18 @@ public class CampingShopService {
 		mav.addObject("campingShop", campingShop);
 		mav.setViewName("campingshop/CampingShopPage");	
 		return mav;
+	}
+	
+	// 캠핑용품 검색 기능 
+	public String searchShop(String search) {
+		System.out.println("CampingShopService.searchShop() 호출");
+		System.out.println("search : " + search);
+		// 캠핑용품 검색 기능 
+		ArrayList<GoodsDto> campingShop = cdao.searchShop(search);
+        
+		Gson gson = new Gson();
+		String campingShop_json = gson.toJson(campingShop);
+        return campingShop_json;
 	}
 	
 	// 캠핑 용품 상세 페이지
@@ -139,7 +150,10 @@ public class CampingShopService {
 	    	// dao 전송 주문 코드부터 이미지 까지		
 	    	int goodsPurchase = cdao.goodsPurchase(gocode,loginId,addr,gogcode,gamount,totalPrice
 	    			,gname,gimage);	
-	    	  System.out.println("goodsPurchase :"+ goodsPurchase);
+	    	  System.out.println("goodsPurchase :"+ goodsPurchase);	    	 
+	    	// 구매가 성공 했으면 장바구니 삭제 
+	    	int shoppingbasket = cdao.shoppingbasket(loginId,gogcode);
+	    	System.out.println("shoppingbasket :"+ shoppingbasket);
 	    	  ra.addFlashAttribute("msg", "구매를 성공하셨습니다.");	        	 
 		      mav.setViewName("redirect:/CampingPurchaseListPage");
 		} catch (Exception e) {
@@ -361,7 +375,10 @@ public class CampingShopService {
 			// 장바구니 들어 있는 모든 값 insert dao호출 
 			int totalpurchase = cdao.totalpurchase(goInfo);	
 			System.out.println("totalpurchase :"+ totalpurchase);
-			if(totalpurchase == 1) {
+			if(totalpurchase == 1) {    
+			// 장바구니에 있는 값을 구입하면 해당하는 장바구니 목록 삭제
+			int totalbasket = cdao.totalbasket(goInfo);
+			System.out.println("totalbasket :"+ totalbasket);
 				count++;
 			}
 		}
@@ -386,15 +403,46 @@ public class CampingShopService {
 		return mav;
 	}
     
-	// 구매목록 삭제하기 ajax
-	public String deleteph(String gocode) {
+	// 구매목록 삭제하기 
+	public ModelAndView deleteph(RedirectAttributes ra, String gocode, String gostate) {
 		System.out.println("CampingShopService.deleteph() 호출");
+		ModelAndView mav = new ModelAndView();
 		
-		// 구매목록 삭제하기 dao 호출 ajax 
-		int deleteph = cdao.deleteph(gocode);
-				
-		return deleteph+"";
+		// 구매목록 삭제하기 dao 호출  
+		int deleteph = cdao.deleteph(gocode,gostate);
+		
+		ra.addFlashAttribute("msg", "목록을 삭제했습니다.");
+		mav.setViewName("redirect:/CampingPurchaseListPage");
+		
+		return mav;
 	}
+
+	 // 주문취소 
+	public ModelAndView PurchaseDelete(String gocode) {
+		System.out.println("CampingShopService.PurchaseDelete() 호출");
+		ModelAndView mav = new ModelAndView();
+			
+		// 주문취소 dao 호출
+	    	  		
+		return mav;
+	}
+    
+	// 구매확정 STATE = 5 
+	public ModelAndView phDecide(RedirectAttributes ra, String gocode) {
+		System.out.println("CampingShopService.phDecide() 호출");
+		ModelAndView mav = new ModelAndView();
+		
+		// 구매확정 dao 호출
+	    int phDecide = cdao.phDecide(gocode);
+		System.out.println("phDecide :"+ phDecide);
+		
+	    ra.addFlashAttribute("msg", "구매확정하였습니다.");
+		mav.setViewName("redirect:/CampingPurchaseListPage");
+	    
+		return mav;
+	}
+
+
     
 	
     

@@ -8,23 +8,28 @@
 	<select id="getMyReservationList" resultType="com.camily.dto.ReservationDto">
 		SELECT DISTINCT CANAME, CRPRICE, RECODE, RECACODE, REMID, REMNAME, REMTEL, REMEMAIL, REREQUEST, REPEOPLE, RECRNAME, RECRNUM FROM RESERVATION 
 		INNER JOIN CAMPING ON CACODE = RECACODE
-		INNER JOIN CAMPINGROOM ON CRNAME = RECRNAME AND CRNUM = RECRNUM
+		INNER JOIN CAMPINGROOM ON CRCACODE = CACODE AND CRNAME = RECRNAME AND CRNUM = RECRNUM
 		WHERE REMID = #{loginId}
 	</select>
 	
 	<select id="getMyReservationInfo" resultType="com.camily.dto.ReservationDto">
 		SELECT DISTINCT CANAME, CRPRICE, CRIMAGE, RECODE, RECACODE, REMID, REMNAME, REMTEL, REMEMAIL, REREQUEST, REPEOPLE, RECRNAME, RECRNUM FROM RESERVATION 
 		INNER JOIN CAMPING ON CACODE = RECACODE
-		INNER JOIN CAMPINGROOM ON CRNAME = RECRNAME AND CRNUM = RECRNUM
+		INNER JOIN CAMPINGROOM ON CRCACODE = CACODE AND CRNAME = RECRNAME AND CRNUM = RECRNUM
 		WHERE REMID = #{loginId}
 		AND RECODE = #{recode}
 	</select>
 	
 	<select id="getCampTotalCount" resultType="int">
 		SELECT COUNT(*) FROM CAMPING
-			<if test="type.length > 0">
-				WHERE CATYPE LIKE '%'||#{type}||'%'
-			</if>
+			<where>
+				<if test="type.length > 0">
+			    	AND CATYPE LIKE '%'||#{type}||'%'
+			    </if>
+			    <if test="searchKeyword.length > 0">
+					AND CANAME LIKE '%'||#{searchKeyword}||'%'
+				</if>
+			</where>
 	</select>
 	
 	<select id="getCampingList" resultType="com.camily.dto.CampingDto">
@@ -35,9 +40,15 @@
 		                    	FROM CAMPING C
 		              			LEFT OUTER JOIN CAMPINGROOM CR ON C.CACODE = CR.CRCACODE
 		                       	GROUP BY C.CACODE ) CA ON CAMPING.CACODE = CA.CACODE
-		            <if test="type.length > 0">
-		       		WHERE CATYPE LIKE '%'||#{type}||'%'
-		       		</if>
+		                       	WHERE CASTATE = 1
+		            <where>
+			            <if test="type.length > 0">
+			       			AND CATYPE LIKE '%'||#{type}||'%'
+			       		</if>
+			       		<if test="searchKeyword.length > 0">
+							AND CANAME LIKE '%'||#{searchKeyword}||'%'
+						</if>
+					</where>
 		      		ORDER BY CAMPING.CACODE) CAMPING)
 		WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>

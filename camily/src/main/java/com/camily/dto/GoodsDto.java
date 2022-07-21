@@ -1,5 +1,7 @@
 package com.camily.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -16,10 +18,49 @@ public class GoodsDto {
 	private String gbackimage; // 상품백이미지
 	private String gdetailimage; // 상품상세정보이미지
 
+	private MultipartFile gimagefile; //프로필 파일
+	private MultipartFile gsideimagefile; //프로필 파일
+	private MultipartFile gbackimagefile; //프로필 파일
+	private MultipartFile gdetailimagefile; //프로필 파일
+	
+	
+	
 	private String gamount; // 내가 고른 상품 갯수
     private String price2; // ajax 장바구니 담김 가격들 모음
+    private String gstate; // 상품의 상태값  
+    
+    
+	public MultipartFile getGimagefile() {
+		return gimagefile;
+	}
+	public void setGimagefile(MultipartFile gimagefile) {
+		this.gimagefile = gimagefile;
+	}
+	public MultipartFile getGsideimagefile() {
+		return gsideimagefile;
+	}
+	public void setGsideimagefile(MultipartFile gsideimagefile) {
+		this.gsideimagefile = gsideimagefile;
+	}
+	public MultipartFile getGbackimagefile() {
+		return gbackimagefile;
+	}
+	public void setGbackimagefile(MultipartFile gbackimagefile) {
+		this.gbackimagefile = gbackimagefile;
+	}
+	public MultipartFile getGdetailimagefile() {
+		return gdetailimagefile;
+	}
+	public void setGdetailimagefile(MultipartFile gdetailimagefile) {
+		this.gdetailimagefile = gdetailimagefile;
+	}
+	public String getGstate() {
+		return gstate;
+	}
+	public void setGstate(String gstate) {
+		this.gstate = gstate;
+	}
 	public String getGcode() {
-		
 		return gcode;
 	}
 	public void setGcode(String gcode) {

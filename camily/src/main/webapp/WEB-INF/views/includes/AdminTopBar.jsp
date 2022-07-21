@@ -22,7 +22,7 @@
 		width: calc(100%);
 	}
 </style>
-
+<script src="https://kit.fontawesome.com/e9a5166904.js" crossorigin="anonymous"></script> <!-- 아이콘 사용 -->
 <header>
 	<!-- Header desktop -->
 	<div class="container-menu-desktop">
@@ -75,7 +75,14 @@
 					<ul class="main-menu">
 						<li><a href="#">회원관리</a></li>
 						<li><a href="#">게시판 관리</a></li>
-						<li><a href="#">캠핑용품 관리</a></li>
+						<li>
+						<a href="#">캠핑용품관리</a>
+						    <ul class="sub-menu">
+								<li><a href="adminCampingShop">캠핑용품관리</a></li>
+								<li><a href="AdminProductInsert">캠핑용품등록</a></li>
+								<li><a href="AdminCampingSendProduckt">캠핑용품배송관리</a></li>
+							</ul>
+						</li>						
 						<li><a href="adminCamping">캠핑장 관리</a>
 						     <ul class="sub-menu">
 								<li><a href="#">캠핑장 목록</a></li>

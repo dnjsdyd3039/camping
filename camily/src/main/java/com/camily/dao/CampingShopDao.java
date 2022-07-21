@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.camily.dto.CampingDetailInformationDto;
 import com.camily.dto.CampingDto;
@@ -14,10 +15,13 @@ import com.camily.dto.MemberDto;
 
 public interface CampingShopDao {
     
-	// 캠핑 용품 페이지 이동요청 (SELECT) 페이징 처리
-	@Select("SELECT * FROM GOODS")
+	// 캠핑 용품 페이지 이동요청 (SELECT) 
+	@Select("SELECT * FROM GOODS WHERE GSTATE = 1")
 	ArrayList<GoodsDto> getCampingList2();  	
     
+	// 캠핑용품 검색 기능 
+	ArrayList<GoodsDto> searchShop(String search);
+	
 	// 캠핑 용품 상세 페이지 이동 요청 (SELECT)
 	GoodsDto campingDetail(String gcode);
     
@@ -36,11 +40,14 @@ public interface CampingShopDao {
 			@Param("gamount") String gamount, @Param("totalPrice") String totalPrice, @Param("gname") String gname,
 			@Param("gimage") String gimage);
     
+	// 구매가 성공 했으면 장바구니 삭제 (DELETE)
+	int shoppingbasket(@Param("loginId") String loginId, @Param("gogcode") String gogcode);
+	
 	// 구매내역 보기 (SELECT) 페이징 처리
 	ArrayList<GoodsOrderDto> PurchaseList(@Param("loginId") String loginId, @Param("startRow") int startRow, @Param("endRow") int endRow);
     
-	// 구매목록 삭제하기 dao 호출 ajax (DELETE)
-	int deleteph(String gocode);
+	// 구매목록 삭제하기 dao 호출 (DELETE)
+	int deleteph(@Param("gocode") String gocode, @Param("gostate") String gostate);
     
 	// 구매목록페이지 페이징처리
 	@Select("SELECT COUNT(*) FROM GOODSORDER")
@@ -67,7 +74,7 @@ public interface CampingShopDao {
 	int insertinformation(
 			@Param("loginId") String loginId, @Param("dicode") String dicode, @Param("diname") String diname, 
 			@Param("diimage") String diimage, @Param("diamount") String diamount, @Param("diaddr") String diaddr,
-			@Param("diprice") String diprice, @Param("ditotalprice") int ditotalprice);
+			@Param("diprice") String diprice, @Param("ditotalprice") int ditotalprice);    	
 
 	// 값이 있으면 해당하는 상품이 있으니까 수량만 늘려줌 (UPDATE) ZZ
 	int update(@Param("diamount") String diamount, @Param("old") String old, @Param("loginId") String loginId);
@@ -77,9 +84,21 @@ public interface CampingShopDao {
    
     // 장바구니 들어 있는 모든 값 (INSERT)
 	int totalpurchase(GoodsOrderDto goInfo);
+	
+	// 장바구니에 있는 값을 구입하면 해당하는 장바구니 목록 삭제 (DELETE)
+	int totalbasket(GoodsOrderDto goInfo);
     
 	// 장바구니 삭제 (DELETE)
 	int deletepoket(String dicode);
+    
+	// 구매확정 (UPDATE)
+	int phDecide(String gocode);
+
+	
+    
+	
+    
+	
    
     
 

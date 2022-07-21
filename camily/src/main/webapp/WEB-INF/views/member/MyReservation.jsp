@@ -38,7 +38,7 @@
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
-
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 
 <body class="animsition">
@@ -235,7 +235,7 @@
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 </body>
 <script type="text/javascript">
 	function myInfo(recode) {

@@ -14,6 +14,7 @@ import com.camily.dao.ReplyDao;
 import com.camily.dto.BoardDto;
 import com.camily.dto.FAQDto;
 import com.camily.dto.ReplyDto;
+import com.google.gson.Gson;
 
 @Service
 public class BoardService {
@@ -51,11 +52,7 @@ public class BoardService {
 		BoardDto boardView = badao.selectBoardView(bocode);
 		System.out.println(boardView);
 
-		ArrayList<ReplyDto> replyList = badao.selectReplyList(bocode);
-		System.out.println(replyList);
-
 		mav.addObject("boardView", boardView);
-		mav.addObject("replyList", replyList);
 		mav.setViewName("board/BoardView");
 		return mav;
 	}
@@ -112,40 +109,71 @@ public class BoardService {
 		mav.setViewName("redirect:/boardList");
 		return mav;
 	}
+	
+	public String replyList(int bocode) {
+		System.out.println("BoardService.replyList()호출");
+
+		ArrayList<ReplyDto> replyList = rdao.selectReplyList(bocode);
+		System.out.println(replyList);
+		
+		Gson gson = new Gson();
+		String replyList_json = gson.toJson(replyList);
+		System.out.println(replyList_json);
+		return replyList_json;
+	}
 
 	// 댓글 작성
-	public int replyWrite(ReplyDto ro) {
+	public String replyWrite(ReplyDto reply) {
 		System.out.println("BoardService.replyWrite()호출");
 
 		// 댓글 번호 조회
 		int reno = rdao.getMaxRpcode() + 1;
 		System.out.println("생성된 댓글번호 :" + reno);
-		ro.setRpcode(reno);
+		reply.setRpcode(reno);
 
 		String loginId = (String) session.getAttribute("loginId");
-		ro.setRpmid(loginId);
-		System.out.println(ro);
-
-		int replyWriteResult = rdao.insertReplyWrite(ro);
-
-		return replyWriteResult;
+		reply.setRpmid(loginId);
+		
+		int insertResult = rdao.insertReplyWrite(reply);	
+		return insertResult+"";
 	}
-
-	// 댓글 삭제
-	public int replyDelte(int delRno) {
-		System.out.println("BoardService.replyDelete()호출");
-
+	
+	public String replyDelete(int delRno) {
+		System.out.println("BoardService.replyDelete() 호출");
+		
 		int deleteReplyResult = rdao.deleteReply(delRno);
+		return deleteReplyResult+"";
+	}
+	
+	public String replyModifyInfo(String rpcode) {
+		System.out.println("BoardService.replyModifyInfo");
+		System.out.println("수정할 댓글 코드 : " + rpcode);
+		
+		ReplyDto reInfo = rdao.selectReplyInfo(rpcode);
+		
+		Gson gson = new Gson();
+		String reInfo_json = gson.toJson(reInfo);
+		System.out.println(reInfo_json);
+		return reInfo_json;
+		
+	}
+	
+	
+	public String replyModify(ReplyDto reply) {
+		System.out.println("BoardService.replyModify");
+		System.out.println("수정할 댓글 정보");
 
-		return deleteReplyResult;
+		System.out.println(reply);
+		
+		int updateResult = rdao.updateReply(reply);
+		System.out.println("updateResult " + updateResult);
+		return updateResult+"";
 	}
 
-	// 게시판 리스트 기능
+	// FAQ 리스트 기능
 	public ModelAndView FAQList() {
 		System.out.println("BoardService.FAQList() 호출");
 		ModelAndView mav = new ModelAndView();
-		
-		
 		ArrayList<FAQDto> FAQList = badao.selectFAQList();
 
 		mav.addObject("FAQList", FAQList);
@@ -173,12 +201,11 @@ public class BoardService {
 
 		public ModelAndView FAQView(int faqcode) {
 			System.out.println("BoardService.FAQView()호출");
+			
 				ModelAndView mav = new ModelAndView();
 				System.out.println("게시판코드 : " + faqcode);
-				
 				//조회수 증가
 				int hitsResult = badao.updateFAQHits(faqcode);
-				
 				FAQDto FAQView = badao.selectFAQView(faqcode);
 				System.out.println(FAQView);
 

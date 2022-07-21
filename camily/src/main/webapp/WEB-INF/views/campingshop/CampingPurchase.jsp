@@ -40,6 +40,7 @@
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>	
 <script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
 <body class="animsition">
 
@@ -52,7 +53,7 @@
 	<!-- EndmemberModal -->
 	
 	<!-- breadcrumb 시작-->
-	<div class="container" style="margin-top: 100px">
+	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 			<a href="#" class="stext-109 cl8 hov-cl1 trans-04">
 				상품구매
@@ -85,7 +86,7 @@
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="${campingpurchase.gimage }" alt="IMG">
+											<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${campingpurchase.gimage }" alt="IMG">
 										</div>
 									</td>
 									<td class="column-2">${campingpurchase.gname }</td>
@@ -622,7 +623,7 @@ function requestPay(gcode,gname,total,memail,mname,mtel,maddr) {
 		});
 	</script>
 	<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
 
 </body>
 

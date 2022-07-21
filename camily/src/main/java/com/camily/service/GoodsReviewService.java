@@ -36,7 +36,7 @@ public class GoodsReviewService {
 	
 	// 캠핑용품 후기 상세보기
 	public ModelAndView goreviewdetail(int gorvcode) {
-		System.out.println("GoodsReviewService.goreviewdetail() 호출");
+		System.out.println("GoodsReviewService.goreviewdetailpage() 호출");
 		ModelAndView mav = new ModelAndView();
 		System.out.println("상품리뷰 코드 : " + gorvcode);
 		
@@ -99,7 +99,7 @@ public class GoodsReviewService {
 		return mav;
 	}
 
-	public ModelAndView goReviewDelete(int gorvcode, RedirectAttributes ra) {
+	public ModelAndView goreviewDelete(int gorvcode, RedirectAttributes ra) {
 		System.out.println("GoodsReviewService.cgreviewDelete() 호출");
 		ModelAndView mav = new ModelAndView();
 		System.out.println("삭제할 캠핑용품 후기 게시글 : " + gorvcode);

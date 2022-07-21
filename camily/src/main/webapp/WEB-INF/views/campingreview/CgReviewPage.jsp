@@ -31,6 +31,52 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+
+<style type="text/css">
+.section-reply-title {
+	margin-bottom: 30px;
+}
+
+.section-reply-title h5 {
+	color: #000000;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+.section-reply-title h6 {
+	color: #848484;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+
+
+.section-reply-title h5:after {
+	position: absolute;
+	left: 0;
+	top: -6px;
+	height: 32px;
+	width: 4px;
+	background: #6E6E6E;
+	content: "";
+}
+</style>
+
+
+
 </head>
 <body class="animsition">
 	
@@ -43,30 +89,26 @@
 	<!-- EndmemberModal -->
 
 
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('resources/images/bg-02.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">
-			캠핑장 후기 게시판
-		</h2>
-	</section>	
+	
 
 
 	<!-- Content page -->
-	<section class="bg0 p-t-62 p-b-60" >
+	<section class="bg0 p-t-62 p-b-60">
 		<div class="container">
-			<div class="row" >
+			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
-						<!-- item blog -->
+						<div class="section-reply-title">
+								<h5>캠핑장 REVIEW</h5><h6>캠핑장에서의 좋은 경험을 남겨보세요.</h6>
+						</div>
 						
 						<c:forEach items="${campingreviewList }" var="cgrvList"> 
-						<div class="p-b-63">
-							<%-- <span class="ltext-108 cl2 hov-cl1 trans-04">NO.${goods.gorvcode }</span> --%>
+						<div class="p-b-63">			
 							<a href="cgreviewdetail?cgrvcode=${cgrvList.cgrvcode }" class="hov-img0 how-pos5-parent rounded">
 								<img src="${cgrvList.caimage }" alt="IMG">	
 								
 							</a>
-	
+
 							<div class="p-t-32">
 								<!-- <h4 class="p-b-15">
 								
@@ -149,11 +191,7 @@
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-	
-<!--===============================================================================================-->	
-	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -195,7 +233,7 @@
 		}
 	</script>
 <!--===============================================================================================-->
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-	<script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
+
 </body>
 </html>

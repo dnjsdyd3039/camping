@@ -11,7 +11,8 @@
 		TO_CHAR(BODATE,
 		'YYYY-MM-DD')AS BODATE, BOSTATE, BOHITS
 		FROM BOARDS
-		WHERE BOSTATE = 1
+		WHERE BOSTATE
+		= 1
 		ORDER BY BOCODE
 	</select>
 
@@ -23,16 +24,6 @@
 		FROM BOARDS
 		WHERE BOCODE
 		= #{bocode}
-	</select>
-
-	<select id="selectReplyList"
-		resultType="com.camily.dto.ReplyDto">
-		SELECT RPCODE, RPMID, RPBOCODE, TO_CHAR(RPDATE, 'YYYY-MM-DD
-		HH24:MI')AS
-		RPDATE, RPCONTENTS
-		FROM REPLYS
-		WHERE RPBOCODE = #{bocode}
-		AND RPSTATE = 1
 	</select>
 
 	<insert id="insertBoard">

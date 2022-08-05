@@ -59,8 +59,8 @@
 				상품구매
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
-                ${campingpurchase.gname }
 			<span class="stext-109 cl4">
+                ${campingpurchase.gname }
 				
 			</span>
 		</div>
@@ -68,7 +68,7 @@
 	<!-- breadcrumb 끝-->
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" action="goodsPurchase" method="post">
+	<form class="bg0 p-t-75 p-b-85" action="goodsPurchase" method="post" id="goodsform">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -92,24 +92,12 @@
 									<td class="column-2">${campingpurchase.gname }</td>
 									<td class="column-3">${campingpurchase.gprice }</td>
 									<td class="column-4">${campingpurchase.gamount }개</td>
-									<td class="column-5" >${totalPrice}</td> <!-- 총 가격 -->
+									<td class="column-5" >${campingpurchase.gformatter }원</td> <!-- 총 가격 -->
 								</tr>
 							</table>
 						</div>
 
-						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
-									
-								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-									Apply coupon
-								</div>
-							</div>
-
-							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart
-							</div>
-						</div>
+						
 					</div>
 				</div>
 
@@ -122,7 +110,7 @@
 						<div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
-									가격:
+									가격  :
 								</span>
 							</div>
 
@@ -136,13 +124,13 @@
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-									배송기간:
+									배송기간  :
 								</span>
 							</div>
 
 							<div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
 								<p class="stext-111 cl6 p-t-2">
-									이 제품은 중국산이여서 3일정도 걸립니다.
+									결제후 2 ~ 5일 정도 소요될 예정입니다.
 								</p>					
 							</div>
 						</div>
@@ -150,7 +138,7 @@
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-									주문 수량:
+									주문 수량  :
 								</span>
 							</div>
 
@@ -164,7 +152,7 @@
 						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-									상품 소재:
+									상품 소재  :
 								</span>
 							</div>
 
@@ -178,7 +166,7 @@
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
 								<span class="mtext-101 cl2">
-									배송비:
+									배송비  :
 								</span>
 							</div>
 
@@ -192,13 +180,13 @@
 						<div class="flex-w flex-t p-t-27 p-b-33">
 							<div class="size-208">
 								<span class="mtext-101 cl2">
-									Total:
+									총금액  :
 								</span>
 							</div>
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									 ${totalPrice} 원
+								   ${campingpurchase.gformatter }원
 								</span>
 							</div>
 						</div>	
@@ -207,8 +195,12 @@
 				</div>
 			</div>
 		</div>
-						<div class="wrap-table-shopping-cart">
-							<table class="table-shopping-cart">
+		
+						<div class="col-9" style="padding-top: 30px; margin: auto; font-family: Poppins-Bold;">
+                         <div class="bg-light rounded p-4">                       
+                          <div class="table-responsive">
+							<table class="table">
+								<thead>
 								<tr class="table_head">
 									<th class="column-1">구매자아이디</th>
 									<th class="column-2"> 
@@ -216,16 +208,19 @@
 									onclick="addCheck()">주소변경</button>&nbsp;&nbsp;&nbsp; 기본주소 :&nbsp;${addselect.maddr }</th>
 									<th class="column-3"></th>
 								</tr>
-
+								</thead>
+								
+								<tbody>
 								<tr class="table_row">
 									<td class="column-1">${sessionScope.loginId }</td>
-									<td class="column-2"><input value="${addselect.maddr }" readonly="readonly" id="newadd" class="size-209 p-r-18 p-r-0-sm w-full-ssm"></td>
+									<td class="column-2"><input value="${addselect.maddr }" style="background-color:#f8f9fa;" readonly="readonly" id="newadd" class="size-209 p-r-18 p-r-0-sm w-full-ssm"></td>
 									<td class="column-3">
-									<button type="submit" class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기!</button>
 									<button type="button"
 									 onclick="requestPay('${campingpurchase.gcode}','${campingpurchase.gname }',${totalPrice},
 									'${addselect.memail }','${addselect.mname }','${addselect.mtel }','${addselect.maddr }')"
-									class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">결제하기zz</button>
+									class="cl0 size-100 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+									<i class="fa-solid fa-credit-card"></i>
+									</button>
 									<input type="hidden" name="loginId" value="${sessionScope.loginId }">
 									<input type="hidden" name="addr" id="newdd" value="${addselect.maddr }">
 									<input type="hidden" name="gogcode" value="${campingpurchase.gcode }">
@@ -235,16 +230,12 @@
 									<input type="hidden" name="gimage" value="${campingpurchase.gimage }">
 									</td>
 								</tr>
+								</tbody>								
 							</table>
-						</div>
-						
-	<!-- Load more -->
-	<div class="flex-c-m flex-w w-full p-t-45">
-		<a href="#"
-			class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-			위로가기(◦'⌣'◦)</a>
-	</div>	
-	</form>
+                           </div>
+                          </div>                       
+                         </div>
+	                 </form>
 
     <!-- 주소확인 모달 시작 -->
     <div class="modal fade" id="addCheck" tabindex="-1" role="dialog"
@@ -493,8 +484,10 @@ function requestPay(gcode,gname,total,memail,mname,mtel,maddr) {
     }, function (rsp) { // callback
         if (rsp.success) {
             alert("결제성공입니다.!!")
+            $("#goodsform").submit();
         } else {
         	alert("결제실패입니다.!!")
+        	//$("#goodsform").submit();
         }
     });/* function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우

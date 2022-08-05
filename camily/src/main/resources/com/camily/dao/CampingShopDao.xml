@@ -5,6 +5,24 @@
   
 <mapper namespace="com.camily.dao.CampingShopDao" >
 
+ <!-- index 화면 new item (SELECT) -->
+ <select id="homeList" resultType="com.camily.dto.GoodsDto">
+  SELECT*
+  FROM GOODS
+  ORDER BY GCODE DESC
+ </select>
+
+ <!-- index 화면 new camping (SELECT) -->
+ <select id="homeList2" resultType="com.camily.dto.CampingDto">
+  SELECT C.*, RCCOUNT.RESERVECOUNT
+  FROM CAMPING C
+  INNER JOIN (SELECT RECOUNT.RECACODE, COUNT(*) AS RESERVECOUNT
+            FROM (  SELECT DISTINCT RECACODE, RECODE
+                    FROM RESERVATION) RECOUNT
+            GROUP BY RECACODE) RCCOUNT ON RCCOUNT.RECACODE = C.CACODE
+            WHERE C.CASTATE = 1
+     ORDER BY RCCOUNT.RESERVECOUNT DESC 
+ </select>
  <!-- 캠핑 용품 상세 페이지 이동 요청 (SELECT) -->
  <select id="campingDetail" resultType="com.camily.dto.GoodsDto">
   SELECT* 
@@ -56,19 +74,40 @@
  <select id="PurchaseList" resultType="com.camily.dto.GoodsOrderDto">
  	SELECT * 
 	FROM (	SELECT ROWNUM RN, GOODSORDER.*
+	      	FROM (	SELECT * 
+	            	FROM GOODSORDER 
+                    WHERE GOSTATE BETWEEN 2 AND 7
+                    OR GOSTATE = 9
+	            	ORDER BY GODATE DESC) GOODSORDER
+	      	WHERE GOMID = #{loginId})
+	WHERE RN BETWEEN #{startRow} AND #{endRow}
+ 
+
+ 	<!-- SELECT * 
+	FROM (	SELECT ROWNUM RN, GOODSORDER.*
 	      		FROM (	SELECT * 
 	            			FROM GOODSORDER 
 	            			ORDER BY GODATE DESC) GOODSORDER
 	      		WHERE GOMID = #{loginId})
-	WHERE GOSTATE BETWEEN 2 AND 5
-	AND RN BETWEEN #{startRow} AND #{endRow}
+	WHERE GOSTATE BETWEEN 2 AND 7
+	OR GOSTATE = 9
+	AND RN BETWEEN #{startRow} AND #{endRow} -->
+	
+<!-- ORDER BY GODATE DESC -->
  </select>
  
- <!-- 구매목록 삭제하기 dao 호출 (DELETE) -->
+ <!-- 구매목록페이지 페이징처리 -->
+ <select id="getCampTotalCount2" resultType="int">
+    SELECT COUNT(*)
+	FROM GOODSORDER 
+    WHERE (GOMID = #{loginId} AND GOSTATE BETWEEN 2 AND 7)
+    OR (GOSTATE = 9 AND GOMID = #{loginId})
+ </select>
+ 
+ <!-- 구매목록 삭제하기 dao 호출 (UPDATE) -->
  <delete id="deleteph">
-  DELETE FROM GOODSORDER
-  WHERE GOCODE = #{gocode}
-  AND GOSTATE = #{gostate}
+  UPDATE GOODSORDER SET GOSTATE = 8 <!-- 8은 삭제 했을때 값 안보여주기위해서 참조키때문 -->
+  WHERE GOCODE = #{gocode} AND GOSTATE = #{gostate}
  </delete>
  
  <!-- 캠핑 용품 (SELECT) AA -->
@@ -91,7 +130,7 @@
   WHERE GOMID = #{loginId} AND GOSTATE = 1
  </select>
  
- <!-- 찜삭제 (DELETE) -->
+ <!-- 찜삭제 (UPDATE) -->
  <delete id="calldibs">
   DELETE FROM GOODSORDER
   WHERE GOMID = #{loginId} AND GOCODE = #{gocode} AND GOSTATE = 1
@@ -112,15 +151,19 @@
   
  <!-- 값이 있으면 해당하는 상품이 있으니까 수량만 늘려줌 (UPDATE) ZZ -->
  <update id="update">
-  UPDATE DETAILINFORMATION SET DIAMOUNT = #{diamount} + #{old}
+  UPDATE DETAILINFORMATION 
+  SET DIAMOUNT = DIAMOUNT + #{diamount},
+  DITOTALPRICE = DITOTALPRICE + #{ditotalprice2}
   WHERE DIMID = #{loginId} 
+  AND DICODE = #{dicode}
  </update>
   
  <!-- 장바구니 목록 페이지 출력 (SELECT) -->
  <select id="detailinformation" resultType="com.camily.dto.CampingDetailInformationDto">
-  SELECT*
-  FROM DETAILINFORMATION
-  WHERE DIMID = #{loginId} 
+   SELECT DI.*, G.GSTATE
+   FROM DETAILINFORMATION DI
+   INNER JOIN GOODS G ON G.GCODE = DI.DICODE
+   WHERE DIMID = #{loginId}
  </select>
   
  <!-- 장바구니 들어 있는 모든 값 (INSERT) -->
@@ -147,6 +190,68 @@
   UPDATE GOODSORDER SET GOSTATE = 5
   WHERE GOCODE = #{gocode}
  </update>
+ 
+ <!-- 주문 취소 (DELETE) -->
+ <delete id="PurchaseDelete">
+  DELETE FROM GOODSORDER
+  WHERE GOCODE = #{gocode}
+ </delete>
+ 
+ <!-- 취소요청 하기 STATE 6 관리자 기달리기 (UPDATE) -->
+ <update id="cancelreasonput">
+  UPDATE GOODSORDER SET 
+  GOSTATE = 6,
+  GOCANCEL = #{gocancel}
+  WHERE GOCODE = #{gocode}
+ </update>
+ 
+ <select id="getGoodsQnATotalCount" resultType="int">
+ 	SELECT COUNT(*) FROM GOODSQUESTION
+ </select>
+ 
+ <select id="goodsQuestionList" resultType="com.camily.dto.GoodsQnADto">
+	<!-- SELECT GQ.*, GW.*
+	FROM GOODSQUESTION GQ  
+	LEFT OUTER JOIN GOODSANSWER GW ON
+	GQ.GQCODE = GW.GWGQCODE AND GQ.GQGCODE = #{gcode}
+	ORDER BY GQ.GQDATE DESC -->
+	SELECT *
+	FROM (	SELECT ROWNUM RN, QNA.* 
+		       	FROM (	SELECT GQ.*, GW.*
+							FROM GOODSQUESTION GQ  
+							LEFT OUTER JOIN GOODSANSWER GW ON GQ.GQCODE = GW.GWGQCODE 
+							WHERE GQ.GQGCODE = #{gcode}
+							ORDER BY GQ.GQDATE DESC) QNA )
+	WHERE RN BETWEEN #{startRow} AND #{endRow}
+ </select>
+ 
+ <select id="getMaxGqcode" resultType="string">
+  SELECT MAX(GQCODE) 
+  FROM GOODSQUESTION
+ </select>
+ 
+ <insert id="goodsQuestionWrite">
+  INSERT INTO GOODSQUESTION(GQCODE,GQGCODE,GQMID,GQCONTENTS,GQDATE,GQSTATE)
+  VALUES (#{gqcode}, #{gqgcode}, #{gqmid}, #{gqcontents}, SYSDATE, 1)
+ </insert>
+ 
+ <update id="goodsQuestionModify">
+  UPDATE GOODSQUESTION 
+  SET GQCONTENTS = #{gqcontents}
+  WHERE GQCODE = #{gqcode}
+ </update>
+ 
+ <select id="getGoodsQuestionInfo" resultType="com.camily.dto.GoodsQnADto">
+  SELECT * 
+  FROM GOODSQUESTION
+  WHERE GQCODE = #{gqcode}
+ </select>
+ 
+  <update id="modifyGoodsQuestionState">
+  UPDATE GOODSQUESTION
+  SET GQSTATE = 0
+  WHERE GQCODE = #{gqcode}
+  </update>
 </mapper>
 
     

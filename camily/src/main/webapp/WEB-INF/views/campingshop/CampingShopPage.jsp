@@ -42,6 +42,13 @@
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<style type="text/css">
+		.grid{
+			display: grid;
+			grid-template-columns: 1fr 80px
+		}
+	</style>
+
 </head>
 <body class="animsition">
 
@@ -74,7 +81,7 @@
 						퍼니처
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".writing">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".lighting">
 						라이팅
 					</button>
 
@@ -113,7 +120,7 @@
 					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
 						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
 						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						물건검색
+					      상품검색
 					</div>
 				</div>
 				
@@ -124,8 +131,9 @@
 							<i class="zmdi zmdi-search"></i>
 						</button>
 
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" id="search" placeholder="Search">
-						<button class="btn btn-secondary p-2" onclick="searchShop()">검색하기</button>
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" id="search" placeholder="Search" onkeydown="searchShopEvent(event)">
+						<button id="searchShop" class="btn btn-success p-2" onclick="searchShop()">검색하기</button>
+
 					</div>	
 				</div>	
 	
@@ -138,31 +146,38 @@
 						<div class="block2-pic hov-img0">
 							<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${camping.gimage }">
 
-							<a href="campingDetailPage?gcode=${camping.gcode}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
-								제품 보기!
+							<a href="campingDetailPage?gcode=${camping.gcode}" class="block2-btn flex-c-m stext-103 cl0 size-102 bg1 bor2 hov-btn1 p-lr-15 trans-04 ">
+								제품 보기
 							</a>
 						</div>
                     
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="campingDetailPage?gcode=${camping.gcode}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									${camping.gname }
 								</a>
-
+								
+								<c:if test="${camping.gstaravg != null}">
+								<div>
+									<span style="text-align: end;">⭐ <span style="font-weight: bold;">${camping.gstaravg}</span> / 5</span>
+								</div>
+								</c:if>
+								
 								<span class="stext-105 cl3">
-									${camping.gprice }						
+									${camping.gprice }원
 								</span>
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
 	                            <c:choose>
 							       <c:when test="${sessionScope.loginId != null}">	
-								      <button id="toggle" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,'${camping.gcode}')">
+								      <button id="toggle_${camping.gcode}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,'${camping.gcode}')">
 										<i class="zmdi zmdi-favorite-outline"></i>
 								      </button>   	<!--<i class="fa-thin fa-heart-circle-check"></i>  -->
 								   </c:when>
 								</c:choose>
 							</div>
+					
 						</div>
 					</div>
 				  <!-- Block2 종료 -->
@@ -304,7 +319,7 @@
 			dataType : "json",
 			success : function(cartresult){
 				console.log("cartresult :"+ cartresult)
-                $("#toggle").remove();
+                $("#toggle_"+gcode).remove();
 			}
 			
 	 });
@@ -343,7 +358,7 @@
 					output += '</div>';
 					output += '<div class="block2-txt-child2 flex-r p-t-3">';
 					if('${sessionScope.loginId}' != null){
-						output += '<button id="toggle" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,\'' + result[z].gcode + '\')">';
+						output += '<button id="toggle_' + result[z].gcode + '" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" onclick="cartInsert(this,\'' + result[z].gcode + '\')">';
 						output += '<i class="zmdi zmdi-favorite-outline"></i>';
 						output += '</button>';
 					}
@@ -358,6 +373,11 @@
 			
 	 });
 
+ }
+ function searchShopEvent(event){
+	if(event.key === "Enter"){
+		$("#searchShop").click();
+	}
  }
 </script>
 

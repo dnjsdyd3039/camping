@@ -74,7 +74,7 @@
 						<li><a href="#">후기</a>
 							<ul class="sub-menu" style="z-index: 1100">
 								<li><a href="cgreviewpage">캠핑장 후기</a></li>
-								<li><a href="goreviewpage">캠핑상품 후기</a></li>
+								<li><a href="goreviewpage">캠핑용품 후기</a></li>
 							</ul>
 						</li>
 						<li><a href="boardList">자유게시판</a></li>
@@ -239,6 +239,68 @@ function calldibs(thisval,gocode){
 	  
 }
 </script>
+<!-- Channel Plugin Scripts -->
+<script type="text/javascript">
+var uid = '${sessionScope.loginId}';
+if( uid.length > 0){
+	
+
+
+/* $(document).ready(function(){
+	console.log("loginId : " + '${sessionScope.loginId}');
+	console.log('${sessionScope.loginId}'.length); */
+
+console.log(uid);
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "c6b0ebce-628a-468b-97ca-ce77ecbdb593", //please fill with your plugin key
+    "memberId": uid, //fill with user id
+    "profile": {
+        "name": uid //fill with user name
+/*       "mobileNumber": "010-2305-3935", //fill with user phone number
+      "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
+      "CUSTOM_VALUE_2": "VALUE_2"    */
+    } 
+  });
+/* })
+ */
+}
+</script>
+
 <!-- Cart -->
   <div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -271,7 +333,7 @@ function calldibs(thisval,gocode){
 		if (message.length > 0) {
 			alert(message);
 			if(message == "로그인 후 사용가능합니다."){
-				memberLogin()
+				memberLogin();
 			}
 		}
 	}

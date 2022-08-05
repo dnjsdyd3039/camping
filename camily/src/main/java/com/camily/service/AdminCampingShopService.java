@@ -2,8 +2,11 @@ package com.camily.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,9 @@ public class AdminCampingShopService {
     
 	@Autowired
 	AdminCampingShopDao acdao;
+	
+	@Autowired
+	private HttpSession session;
 	
 	// 관리자 캠핑 용품 페이지 이동 요청 
 	public ModelAndView adminCampingShop() {
@@ -42,7 +48,7 @@ public class AdminCampingShopService {
 		
 		// ajax 클릭시 gstate값 변경
 		int campingShopState = acdao.campingShopState(gcode,gstate);
-				
+		
 		return campingShopState+"";
 	}
     
@@ -61,7 +67,7 @@ public class AdminCampingShopService {
 	}
 	
 	//2. 저장경로 설정
-	private String savePath ="D:\\camily\\src\\main\\webapp\\resources\\campingShopfileUpLoad";		
+	private String savePath ="C:\\Users\\user\\Desktop\\git\\camily\\src\\main\\webapp\\resources\\campingShopfileUpLoad";		
 	
 	// 관리자 캠핑 용품 수정
 	public ModelAndView modifyUpdate(RedirectAttributes ra, GoodsDto goods) throws IllegalStateException, IOException {
@@ -144,6 +150,24 @@ public class AdminCampingShopService {
 	    System.out.println("AdminCampingShopService.modifyUpdate()호출");
 	    ModelAndView mav = new ModelAndView();
 		
+		//1. 구매 코드 생성 (select)
+	    String produckAddmaxgoCode = acdao.produckAddmaxgoCode(); // 구매 코드 최대값 생성
+	    String gocode = "GO";
+	    if(produckAddmaxgoCode == null) {
+	    	gocode = gocode + "001";
+	    } else {    
+	    	produckAddmaxgoCode = produckAddmaxgoCode.substring(2); 
+	    	int codeNum = Integer.parseInt(produckAddmaxgoCode) + 1;
+	    	if( codeNum < 10) {
+	    		gocode = gocode + "00" + codeNum;
+	    	} else if(codeNum < 100) {
+	    		gocode = gocode + "0" + codeNum;
+	    	} else {
+	    		gocode = gocode + codeNum;
+	    	}
+	    }
+	    goods.setGcode(gocode); // 자동코드 goods.set
+	    
 		// 상품이미지 프로파일 넣기
 		MultipartFile gimagefile = goods.getGimagefile();
 		String gimage = "";
@@ -156,7 +180,7 @@ public class AdminCampingShopService {
 			gimagefile.transferTo(  new File(savePath, gimage)   );
 		} 
 		System.out.println("gimage : " + gimage);		
-		goods.setGimage(gimage);
+		goods.setGimage(gimage); // 새로운 이미지 goods.set
 		
 		// 상품 사이드 이미지 프로파일 넣기
 		MultipartFile gsideimagefile = goods.getGsideimagefile();
@@ -171,7 +195,7 @@ public class AdminCampingShopService {
 			gsideimagefile.transferTo(  new File(savePath, gsideimage)   );
 		} 
 		System.out.println("gsideimage : " + gsideimage);		
-		goods.setGsideimage(gsideimage);
+		goods.setGsideimage(gsideimage); // 새로운 이미지 goods.set
 		
 		// 상품 백이미지 이미지 프로파일 넣기
 		MultipartFile gbackimagefile = goods.getGbackimagefile();
@@ -186,7 +210,7 @@ public class AdminCampingShopService {
 			gbackimagefile.transferTo(  new File(savePath, gbackimage)   );
 		} 
 		System.out.println("gbackimage : " + gbackimage);		
-		goods.setGbackimage(gbackimage);
+		goods.setGbackimage(gbackimage); // 새로운 이미지 goods.set
 		
 		// 상품 상세정보 이미지 이미지 프로파일 넣기
 		MultipartFile gdetailimagefile = goods.getGdetailimagefile();
@@ -201,7 +225,7 @@ public class AdminCampingShopService {
 			gdetailimagefile.transferTo(  new File(savePath, gdetailimage)   );
 		} 
 		System.out.println("gdetailimage : " + gdetailimage);		
-		goods.setGdetailimage(gdetailimage);
+		goods.setGdetailimage(gdetailimage); // 새로운 이미지 goods.set
 		
 		// 상품 등록 처리 dao (INSERT)
 		int produckAdd = acdao.produckAdd(goods);
@@ -222,7 +246,21 @@ public class AdminCampingShopService {
 	    // 관리자 캠핑 용품 페이지 이동 요청 
 	 	ArrayList<GoodsOrderDto> AdminCampingSendProduckt = acdao.AdminCampingSendProduckt();
 	    System.out.println("AdminCampingSendProduckt :"+ AdminCampingSendProduckt);
-	 	
+        
+	    String ditotalprice = "";
+	    String divisionsum = "";
+	    for(int z = 0; z < AdminCampingSendProduckt.size(); z++) {
+	    	
+	    	  // 상품가격 / 상품수량		 			  
+			  ditotalprice = AdminCampingSendProduckt.get(z).getGoprice();	 	  
+              int format = Integer.parseInt(ditotalprice); // int형태 변환
+              
+			  // 상품가격 콤마표시
+			  DecimalFormat formatter = new DecimalFormat("###,###");			
+			  divisionsum = formatter.format(format); // 장바구니 가격모음 , 추가하기
+			  AdminCampingSendProduckt.get(z).setGoformatter2(divisionsum);
+	    }
+	    
 		mav.addObject("AdminCampingSendProduckt", AdminCampingSendProduckt);
 		mav.setViewName("admin/AdminCampingSendProduckt");
 		return mav;
@@ -254,9 +292,98 @@ public class AdminCampingShopService {
 		String sendNum = "";
 		if(sendtake > 0) {
 			sendNum = gocode;
-		}
+		}	
 		return sendNum;
 	}
+    
+	// 관리자 캠핑 용품 취소관리 페이지 
+	public ModelAndView AdminCampingCancel() {
+		System.out.println("AdminCampingShopService.AdminCampingCancel()호출");
+	    ModelAndView mav = new ModelAndView();
+	    
+	    // 관리자 캠핑 용품 취소관리 페이지 
+	    ArrayList<GoodsOrderDto> AdminCampingCancel = acdao.AdminCampingCancel();
+	    System.out.println("AdminCampingCancel :"+ AdminCampingCancel);
+	    
+	    String ditotalprice = "";
+	    String divisionsum = "";
+	    for(int z = 0; z < AdminCampingCancel.size(); z++) {
+	    	
+	    	  // 상품가격 / 상품수량		 			  
+			  ditotalprice = AdminCampingCancel.get(z).getGoprice();	 	  
+              int format = Integer.parseInt(ditotalprice); // int형태 변환
+              
+			  // 상품가격 콤마표시
+			  DecimalFormat formatter = new DecimalFormat("###,###");			
+			  divisionsum = formatter.format(format); // 장바구니 가격모음 , 추가하기
+			  AdminCampingCancel.get(z).setGoformatter2(divisionsum);
+	    }
+	    
+	    mav.addObject("AdminCampingCancel", AdminCampingCancel);
+		mav.setViewName("admin/AdminCampingCancel");
+	    
+		return mav;
+	}
+    
+	// 관리자 취소승인 ajax
+	public String cancelOk(String gocode) {
+		System.out.println("AdminCampingShopService.cancelOk()호출");
+		
+		    // 관리자 취소승인으로 변경 dao 호출
+			int cancelOk = acdao.cancelOk(gocode);
+			System.out.println("cancelOk :"+ cancelOk);
+				
+			String cancelOkNum = "";
+			if(cancelOk > 0) {
+			  cancelOkNum = gocode;
+			}	
+		return cancelOkNum;
+	}
+
+	// 관리자 취소거절 ajax
+	public String cancelNo(String gocode) {
+		System.out.println("AdminCampingShopService.cancelNo()호출");
+		
+		    // 관리자 취소승인으로 변경 dao 호출
+			int cancelNo = acdao.cancelNo(gocode);
+			System.out.println("cancelNo :"+ cancelNo);
+				
+			String cancelNoNum = "";
+			if(cancelNo > 0) {
+				cancelNoNum = gocode;
+			}	
+		return cancelNoNum;
+	}
+    
+	// 관리자 취소목록 
+	public ModelAndView AdminCampingCancelList() {
+		System.out.println("AdminCampingShopService.AdminCampingCancel()호출");
+	    ModelAndView mav = new ModelAndView();
+	    
+	    // 관리자 취소목록 페이지 
+	    ArrayList<GoodsOrderDto> AdminCampingCancelList = acdao.AdminCampingCancelList();
+	    System.out.println("AdminCampingCancelList :"+ AdminCampingCancelList);
+	    
+	    String ditotalprice = "";
+	    String divisionsum = "";
+	    for(int z = 0; z < AdminCampingCancelList.size(); z++) {
+	    	
+	    	  // 상품가격 / 상품수량		 			  
+			  ditotalprice = AdminCampingCancelList.get(z).getGoprice();	 	  
+              int format = Integer.parseInt(ditotalprice); // int형태 변환
+              
+			  // 상품가격 콤마표시
+			  DecimalFormat formatter = new DecimalFormat("###,###");			
+			  divisionsum = formatter.format(format); // 장바구니 가격모음 , 추가하기
+			  AdminCampingCancelList.get(z).setGoformatter2(divisionsum);
+	    }
+	    
+	    mav.addObject("AdminCampingCancelList", AdminCampingCancelList);
+		mav.setViewName("admin/AdminCampingCancelList");
+	    
+		return mav;
+	}
+
 
 	
 	

@@ -76,7 +76,7 @@ public class MemberService {
 		/* 이메일 보내기 */
 		String setFrom = "campingcamily@gmail.com";
 		String toMail = email;
-		String title = "(CAMILY)회원가입 인증 이메일 입니다.";
+		String title = "(CAMILY)인증 이메일 입니다.";
 		String content = "CAMILY 홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
 				+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
 
@@ -230,10 +230,10 @@ public class MemberService {
 		
 		ModelAndView mav = new ModelAndView();
 		int updateResult = mdao.findPwModifyPw(mid,newPw,ra);
-		if(updateResult > 0) {
-			System.out.println("실행");
-			mav.setViewName("redirect:/");
-		} 
+		
+		ra.addFlashAttribute("msg", "비밀번호가 변경되었습니다.");
+		mav.setViewName("redirect:/"); 
+			
 		return mav;
 	}
 	// 카카오 아이디 체크

@@ -40,7 +40,10 @@
 <script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
 <style type="text/css">
 #bobtn {
-	text-align: right;
+	text-align: center;
+}
+.fa-star{
+    color:#f9ba48
 }
 </style>
 </head>
@@ -58,90 +61,78 @@
 	<section class="bg0 p-t-52 p-b-20">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-lg-9 p-b-80">
+				<div class="col-md-8 col-lg-9 p-b-80">	
 					<div class="p-r-45 p-r-0-lg">
-						
+					<div style="text-align: center;">
 						<h4 class="ltext-109 cl2 p-b-28">
-								제목 : ${CampingReview.cgrvtitle } 
+								${cgrvDetail.cgrvtitle } 
 							</h4>
 						
 							
 						
 						<div class="p-t-32">
-							<span class="flex-w flex-m stext-111 cl2 p-b-19">
+							<span class="flex-w flex-m stext-111 cl2 p-b-19" style="justify-content: center;">
 								<span>
-									<span class="cl4"></span><i class="fa-regular fa-user"></i> ${CampingReview.cgrvmid }  
+									<span class="cl4"></span><i class="fa-regular fa-user"></i> ${cgrvDetail.cgrvmid }  
 									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
 
 								<span>
-									<i class="fa-regular fa-calendar"></i> ${CampingReview.cgrvdate }
+									<i class="fa-regular fa-calendar"></i> ${cgrvDetail.cgrvdate }
 									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
-								<span> <i class="fa-regular fa-eye"></i> 조회수 ${CampingReview.cgrvhits }</span>
+								<span> <i class="fa-regular fa-eye"></i> 조회수 ${cgrvDetail.cgrvhits }</span>
 							</span>	
-							
-							<p class="stext-116 cl4">
-								제품명 : ${CampingReview.recrname}
+							<hr>
+							<div>
+							<img src="${cgrvDetail.caimage }" style="height: 30%; width: 30%;">
+							<p class="stext-117" style="color: black;">
+								캠핑장 : <a href="campingView?cacode=${cgrvDetail.cgrvcacode }">🌈${cgrvDetail.caname}🌈</a>
 							</p>
+							
+							<p class="mt-1" style="color: black;"> 별점 : 
+								   <c:if test="${cgrvDetail.cgrvstarating == 1 }">
+								   <i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${cgrvDetail.cgrvstarating == 2 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${cgrvDetail.cgrvstarating == 3 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${cgrvDetail.cgrvstarating == 4 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${cgrvDetail.cgrvstarating == 5 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								</p>
+							</div>
+							
 							<div>					
-							<p class="stext-115 p-b-26" style="color: black;">
-								${CampingReview.cgrvcontents }
+							<p class="stext-115 p-b-26 p-t-26" style="color: black;">
+								${cgrvDetail.cgrvcontents }
 							
 							</p>
 							</div>	
+							<hr>
 							<div id="bobtn">
-								<a class="btn btn-outline-success" href="cgreviewpage">목록</a> 
-							<c:if test="${sessionScope.loginId == CampingReview.cgrvmid || sessionScope.loginId  == 'admin'}">
-								<a class="btn btn-outline-success" href="cgReviewModify?cgrvcode=${CampingReview.cgrvcode }">수정</a> 
-								<a class="btn btn-outline-success" href="cgReviewDelete?cgrvcode=${CampingReview.cgrvcode }">삭제</a>
+								<a class="btn btn-success" href="cgreviewpage">목록</a> 
+							<c:if test="${sessionScope.loginId == cgrvDetail.cgrvmid}">
+								<button class="btn btn-info" onclick="cgreviewModify('${cgrvDetail.cgrvcode }')">수정</button> 
+								<button class="btn btn-danger" onclick="cgreviewDelete('${cgrvDetail.cgrvcode }')">삭제</button>
 							</c:if>				
 							</div>
 						</div>
-
-						<div class="flex-w flex-t p-t-16">
-							<span class="size-216 stext-116 cl8 p-t-4">
-								Tags
-							</span>
-
-							<div class="flex-w size-217">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									송도
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									캠핑
-								</a>
-								
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									서울근교
-								</a>
-							</div>
 						</div>
-
-						<!--  -->
-						<div class="p-t-40">
-							
-							<h5 class="mtext-113 cl2 p-b-12">
-								댓글
-							</h5>						
-
-							<form>																					
-								<div class="bor19 m-b-20">
-									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="댓글작성하기..."></textarea>
-								</div>
-
-								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
-									댓글작성
-								</button>
-							</form>
-						</div>
-					</div>
+					</div>		
 				</div>
 			  </div>
 			</div>
 	</section>	
-	
+	<br>
+	<br>
+	<br>
 		
 
 	<!-- Footer -->
@@ -195,6 +186,28 @@
 		console.log(checkMsg.length);
 		if (checkMsg.length > 0) {
 			alert(checkMsg);
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function cgreviewModify(cgrvcode) {
+			var modifyCheck = confirm("캠핑장 리뷰를 수정하시겠습니까?");
+			if (modifyCheck == true) {
+				location.href = "cgreviewModify?cgrvcode=${cgrvDetail.cgrvcode }"
+			} else {
+				return;
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function cgreviewDelete(cgrvcode) {
+			var delectCheck = confirm("게시글을 삭제하시겠습니까?");
+			if (delectCheck == true) {
+				location.href = "cgreviewDelete?cgrvcode=${cgrvDetail.cgrvcode }"
+			} else {
+				return;
+			}
 		}
 	</script>
 </body>

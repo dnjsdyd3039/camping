@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Camily</title>
+<title>Admin | Camily</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -90,7 +90,7 @@
                                             <img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${ShopList.gimage }" height="50px" style="text-align: center;">                                           
                                             </th>
                                             <th class="align-middle text-center font-weight-bold">${ShopList.gname }</th>
-                                            <th class="align-middle text-center font-weight-bold">${ShopList.gprice }</th>
+                                            <th class="align-middle text-center font-weight-bold">${ShopList.gprice }원</th>
                                             <th class="align-middle text-center font-weight-bold">${ShopList.gcategory }</th>                                            
                                             <th class="align-middle text-center font-weight-bold">
                                             <c:choose>                                           

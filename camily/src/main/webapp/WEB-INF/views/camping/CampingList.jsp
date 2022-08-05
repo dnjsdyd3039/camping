@@ -7,7 +7,7 @@
 <html lang="en">
 
 <head>
-	<title>Home</title>
+	<title>캠핑장 목록</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -45,6 +45,15 @@
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<style type="text/css">
+		.grid{
+			display: grid;
+			grid-template-columns: 1fr 80px
+		}
+		input:checked + label {
+            background-color: #ff880088;
+        }
+	</style>
 </head>
 
 <body class="animsition">
@@ -63,7 +72,7 @@
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="campingList(null)">
-						All Products
+						모든 캠핑장
 					</button>
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="campingList('glamping')">
@@ -98,13 +107,37 @@
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<form action="campingList" method="get">
-							<div class="bor8 dis-flex p-l-15">
-								<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" id="searchCamp">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-								<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="searchKeyword"
-									placeholder="Search" onkeydown="searchCamp(event)">
-							</div>
+						<div style="display: flex;">
+							<input type="checkbox" name="info" id="elect" value="elect" style="display: none;">
+							<label for="elect" class="btn btn-light p-2 mr-3" style="font-weight: bold;">전기</label>
+							<input type="checkbox" name="info" id="wifi" value="wifi" style="display: none;">
+							<label for="wifi" class="btn btn-light p-2 mr-3" style="font-weight: bold;">무선인터넷</label>
+							<input type="checkbox" name="info" id="firewood" value="firewood" style="display: none;">
+							<label for="firewood" class="btn btn-light p-2 mr-3" style="font-weight: bold;">장작판매</label>
+							<input type="checkbox" name="info" id="hotwater" value="hotwater" style="display: none;">
+							<label for="hotwater" class="btn btn-light p-2 mr-3" style="font-weight: bold;">온수</label>
+							<input type="checkbox" name="info" id="playground" value="playground" style="display: none;">
+							<label for="playground" class="btn btn-light p-2 mr-3" style="font-weight: bold;">놀이터</label>
+							<input type="checkbox" name="info" id="waterpool" value="waterpool" style="display: none;">
+							<label for="waterpool" class="btn btn-light p-2 mr-3" style="font-weight: bold;">물놀이장</label>
+							<input type="checkbox" name="info" id="boardwalk" value="boardwalk" style="display: none;">
+							<label for="boardwalk" class="btn btn-light p-2 mr-3" style="font-weight: bold;">산책로</label>
+							<input type="checkbox" name="info" id="trampoline" value="trampoline" style="display: none;">
+							<label for="trampoline" class="btn btn-light p-2 mr-3" style="font-weight: bold;">트렘폴린</label>
+							<input type="checkbox" name="info" id="playfield" value="playfield" style="display: none;">
+							<label for="playfield" class="btn btn-light p-2 mr-3" style="font-weight: bold;">운동장</label>
+							<input type="checkbox" name="info" id="exercise" value="exercise" style="display: none;">
+							<label for="exercise" class="btn btn-light p-2 mr-3" style="font-weight: bold;">운동시설</label>
+							<input type="checkbox" name="info" id="mart" value="mart" style="display: none;">
+							<label for="mart" class="btn btn-light p-2 mr-3" style="font-weight: bold;">마트</label>
+						</div>
+						<div class="bor8 dis-flex p-l-15">
+							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" id="searchCamp">
+								<i class="zmdi zmdi-search"></i>
+							</button>
+							<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="searchKeyword" placeholder="Search" onkeydown="searchCamp(event)">
+							<button type="submit" class="p-2 flex-c-m stext-101 cl0 bg1 hov-btn1 p-lr-15 trans-04" style="border-radius: 3px; width: 100px">검색하기</button>
+						</div>
 					</form>
 				</div>
 				
@@ -135,7 +168,7 @@
 								</a> -->
 							</div>
 
-							<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt flex-w flex-t p-t-14 grid">
 								<div class="block2-txt-child1 flex-col-l ">
 									<c:choose>
 										<c:when test="${campingInfo.crprice != null}">
@@ -148,11 +181,14 @@
 											<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" style="font-size: 20px; font-weight: bold;">${campingInfo.caname}</span>
 										</c:otherwise>
 									</c:choose>
-
+																		
+										
+									
 									<span class="stext-105 cl3">
 										<c:choose>
 											<c:when test="${campingInfo.crprice != null}">
-												${campingInfo.crprice}원 부터 ~
+												${campingInfo.cformatter}원 부터 ~
+												<%-- ${campingInfo.crprice} --%>
 											</c:when>
 											<c:otherwise>
 												준비중
@@ -160,16 +196,20 @@
 										</c:choose>
 									</span>
 								</div>
-
+								<c:if test="${campingInfo.castaravg != null}">
+								<div>
+									<span style="text-align: end;">⭐ <span style="font-weight: bold;">${campingInfo.castaravg}</span> / 5</span>
+								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
 
-			<!-- Load more -->
+			
+			<!-- Pagination 시작 -->
 			<div class="flex-c-m flex-w w-full p-t-45">
-				<!-- Pagination 시작 -->
 				<div class="flex-c-m flex-w w-full p-t-45" style="margin-top: auto; margin-right: auto;">
 					<c:choose>
 						<c:when test="${pageDto.page <= 1}">
@@ -198,8 +238,8 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<!-- Pagination 종료 -->
 			</div>
+			<!-- Pagination 종료 -->
 		</div>
 	</div>
 

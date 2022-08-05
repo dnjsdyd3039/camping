@@ -1,14 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Camily</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/resources/images/icons/favicon.png" />
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -43,9 +42,7 @@
 <!--===============================================================================================-->
 <script src="https://kit.fontawesome.com/e9a5166904.js" crossorigin="anonymous"></script>
 <!--===============================================================================================-->
-<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
-<script src="https://kit.fontawesome.com/e9a5166904.js" crossorigin="anonymous"></script>
 <style type="text/css">
 .section-reply-title {
 	margin-bottom: 30px;
@@ -70,11 +67,22 @@
 	background: #ff8000;
 	content: "";
 }
+
+.section-reply-title h5:after {
+	position: absolute;
+	left: 0;
+	top: -6px;
+	height: 32px;
+	width: 4px;
+	background: #ff8000;
+	content: "";
+}
+
 </style>
 
 </head>
 <body class="animsition">
-
+	
 	<!-- TopBar-->
 	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
 	<!-- End TopBar-->
@@ -87,284 +95,196 @@
 	<section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1"
-					style="background-image: url(https://img.campingtalk.me/camp/1/16481846836431269_L.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false"
-								data-appear="fadeInDown" data-delay="0">
-								<span class="ltext-101 cl2 respon2"
-									style="color: white; text-shadow: 1px 1px 1px #000;"> 이제
-									대새는 차박! </span>
-							</div>
-
-							<div class="layer-slick1 animated visible-false"
-								data-appear="fadeInUp" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1"
-									style="color: white; text-shadow: 1px 1px 1px #000;">대한민국
-									차박캠핑장</h2>
-							</div>
-
-							<div class="layer-slick1 animated visible-false"
-								data-appear="zoomIn" data-delay="1600">
-								<a href="product.html"
-									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									보러가기 </a>
+				<c:forEach items="${bannerList}" var="bannerInfo">
+					<div id="${bannerInfo.bncode}">
+						<div class="item-slick1" style="background-image: url(${pageContext.request.contextPath}/resources/bannerUpload/${bannerInfo.bnimage});">
+							<div class="container h-full">
+								<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
+									<div class="layer-slick1 animated visible-false" data-appear="${bannerInfo.bntitleeffect}" data-delay="0">
+										<span class="ltext-101 cl2 respon2" style="color: white; text-shadow: 1px 1px 1px #000;">${bannerInfo.bntitle}</span>
+									</div>
+		
+									<div class="layer-slick1 animated visible-false" data-appear="${bannerInfo.bncontentseffect}" data-delay="800">
+										<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" style="color: white; text-shadow: 1px 1px 1px #000;">${bannerInfo.bncontents}</h2>
+									</div>
+		
+									<div class="layer-slick1 animated visible-false" data-appear="${bannerInfo.bnlinkeffect}" data-delay="1600">
+										<a href="${bannerInfo.bnlink}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">보러가기</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="item-slick1"
-					style="background-image: url(https://img.campingtalk.me/camp/1/16481847793309434_L.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false"
-								data-appear="rollIn" data-delay="0">
-								<span class="ltext-101 cl2 respon2"
-									style="color: white; text-shadow: 1px 1px 1px #000;">
-									먼곳은 힘들어, 그렇다면? </span>
-							</div>
-
-							<div class="layer-slick1 animated visible-false"
-								data-appear="lightSpeedIn" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1"
-									style="color: white; text-shadow: 1px 1px 1px #000;">서울근교
-									캠핑장</h2>
-							</div>
-
-							<div class="layer-slick1 animated visible-false"
-								data-appear="slideInUp" data-delay="1600">
-								<a href="product.html"
-									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									보러가기 </a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick1"
-					style="background-image: url(https://img.campingtalk.me/camp/1/16369629664355194_L.jpg);">
-					<div class="container h-full">
-						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-							<div class="layer-slick1 animated visible-false"
-								data-appear="rotateInDownLeft" data-delay="0">
-								<span class="ltext-101 cl2 respon2"
-									style="color: white; text-shadow: 1px 1px 1px #000;">
-									캠핑은 처음이라.. 잘 모른다면? </span>
-							</div>
-
-							<div class="layer-slick1 animated visible-false"
-								data-appear="rotateInUpRight" data-delay="800">
-								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1"
-									style="color: white; text-shadow: 1px 1px 1px #000;">몸만 가면
-									되는 글램핑</h2>
-							</div>
-
-							<div class="layer-slick1 animated visible-false"
-								data-appear="rotateIn" data-delay="1600">
-								<a href="product.html"
-									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									보러가기 </a>
-							</div>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
 
 
-	<section>
 
 
 		<!-- Banner -->
+	<section>
 		<div class="sec-banner bg0 p-t-80 p-b-50">
 			<div class="container">
 				<div class="section-reply-title">
-								<h5>New item</h5>
+					<h5>New item</h5>
+				</div>
+				 <div class="row">
+
+					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+						<!-- Block1 -->
+						<div class="block1 wrap-pic-w">
+							<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${homeList[0].gimage }">
+							<div class="flex-col-c-m bg9 how-pos5" style="width: 50px; height: 50px;">
+								<span class="mtext-106 cl2 txt-center"">NEW</span>
 							</div>
-				<div class="row">
-
-					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-						<!-- Block1 -->
-
-
-						<div class="block1 wrap-pic-w">
-							<img
-								src="https://www.ocamall.com/shopimages/ocamall/024003000202.jpg?1657085888"
-								alt="IMG-BANNER"> <a href="product.html"
-								class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-								<div class="block1-txt-child1 flex-col-l">
-
-									<span class="block1-name ltext-102 trans-04 p-b-8"> 텐트 </span>
-									<span class="block1-info stext-102 trans-04"> 추천합니다! </span>
-								</div>
-
+						     <a href="campingDetailPage?gcode=${homeList[0].gcode }"class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 								<div class="block1-txt-child2 p-b-4 trans-05">
-									<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
+									<div class="block1-link stext-101 cl0 trans-09">${homeList[0].gname }</div>
 								</div>
-							</a>
+							 </a>
 						</div>
 					</div>
 
 					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 						<!-- Block1 -->
 						<div class="block1 wrap-pic-w">
-							<img
-								src="http://img.autocamping.co.kr/produck/durango/shelter6001.jpg"
-								alt="IMG-BANNER"> <a href="product.html"
-								class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-								<div class="block1-txt-child1 flex-col-l">
-									<span class="block1-name ltext-102 trans-04 p-b-8"> Men
-									</span> <span class="block1-info stext-102 trans-04"> Spring
-										2018 </span>
-								</div>
-
+							<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${homeList[1].gimage }">
+						     <div class="flex-col-c-m bg9 how-pos5" style="width: 50px; height: 50px;">
+								<span class="mtext-106 cl2 txt-center">NEW</span>
+							</div>
+						     <a href="campingDetailPage?gcode=${homeList[1].gcode }"class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 								<div class="block1-txt-child2 p-b-4 trans-05">
-									<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
+									<div class="block1-link stext-101 cl0 trans-09">${homeList[1].gname }</div>
 								</div>
-							</a>
+							 </a>
 						</div>
 					</div>
 
 					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 						<!-- Block1 -->
 						<div class="block1 wrap-pic-w">
-							<img
-								src="http://img.autocamping.co.kr/produck/durango/shelter6004.jpg"
-								alt="IMG-BANNER"> <a href="product.html"
-								class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-								<div class="block1-txt-child1 flex-col-l">
-									<span class="block1-name ltext-102 trans-04 p-b-8">
-										Accessories </span> <span class="block1-info stext-102 trans-04">
-										New Trend </span>
-								</div>
-
+							<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${homeList[2].gimage }">
+						    <div class="flex-col-c-m bg9 how-pos5" style="width: 50px; height: 50px;">
+								<span class="mtext-106 cl2 txt-center">NEW</span>
+							</div>
+						     <a href="campingDetailPage?gcode=${homeList[2].gcode }"class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 								<div class="block1-txt-child2 p-b-4 trans-05">
-									<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
+									<div class="block1-link stext-101 cl0 trans-09">${homeList[2].gname }</div>
 								</div>
-							</a>
+							 </a>
 						</div>
 					</div>
+					
 				</div>
 			</div>
-
+          </div>
 
 			<!-- Banner2 -->
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-						<!-- Block1 -->
-
-						<div class="block1 wrap-pic-w">
-							<img
-								src="https://www.ocamall.com/shopimages/ocamall/024012000150.jpg?1495674127"
-								alt="IMG-BANNER"> <a href="product.html"
-								class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-								<div class="block1-txt-child1 flex-col-l">
-									<span class="block1-name ltext-102 trans-04 p-b-8">
-										Women </span> <span class="block1-info stext-102 trans-04">
-										Spring 2018 </span>
-								</div>
-
-								<div class="block1-txt-child2 p-b-4 trans-05">
-									<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
-								</div>
-							</a>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-						<!-- Block1 -->
-						<div class="block1 wrap-pic-w">
-							<img
-								src="https://www.ocamall.com/shopimages/ocamall/024012002194.jpg?1537434203"
-								alt="IMG-BANNER"> <a href="product.html"
-								class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-								<div class="block1-txt-child1 flex-col-l">
-									<span class="block1-name ltext-102 trans-04 p-b-8"> Men
-									</span> <span class="block1-info stext-102 trans-04"> Spring
-										2018 </span>
-								</div>
-
-								<div class="block1-txt-child2 p-b-4 trans-05">
-									<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
-								</div>
-							</a>
-						</div>
-					</div>
-
-					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-						<!-- Block1 -->
-						<div class="block1 wrap-pic-w">
-							<img
-								src="https://www.ocamall.com/shopimages/ocamall/024005000588.jpg?1617761678"
-								alt="IMG-BANNER"> <a href="product.html"
-								class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-								<div class="block1-txt-child1 flex-col-l">
-									<span class="block1-name ltext-102 trans-04 p-b-8">
-										Accessories </span> <span class="block1-info stext-102 trans-04">
-										New Trend </span>
-								</div>
-
-								<div class="block1-txt-child2 p-b-4 trans-05">
-									<div class="block1-link stext-101 cl0 trans-09">Shop Now</div>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	
-	<section>
-	<div class="sec-banner bg0 p-t-80 p-b-50">
+		<div class="sec-banner bg0 p-t-80 p-b-50"> 	
 			<div class="container">
 				<div class="section-reply-title">
-								<h5>캠핑TIP</h5>
+					<h5>Hot Camping</h5>
+				</div>
+				 <div class="row">
+						
+					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+						<!-- Block1 -->
+						<div class="block1 wrap-pic-w">
+						
+					     <c:if test="${homeList2[0].cacode == null}">
+					         <p>아직 HOT한 예약 목록이 없습니다.</p>
+						 </c:if>
+						 
+						 <c:if test="${homeList2[0].cacode != null}">						
+							<img src="${homeList2[0].caimage }">
+							<div class="flex-col-c-m bg9 how-pos5" style="width: 50px; height: 50px; ">
+								<span class="mtext-106 cl2 txt-center">1</span>
 							</div>
+						     <a href="campingView?cacode=${homeList2[0].cacode }"class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+								<div class="block1-txt-child2 p-b-4 trans-05">
+									<div class="block1-link stext-101 cl0 trans-09">${homeList2[0].caname }</div>
+								</div>
+							 </a>
+					     </c:if>		 
+					  </div>
+					</div>
+
+					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+						<!-- Block1 -->
+						<div class="block1 wrap-pic-w">
+						
+						 <c:if test="${homeList2[1].cacode == null}">
+					         <p>아직 HOT한 예약 목록이 없습니다.</p>
+						 </c:if>
+						    
+						 <c:if test="${homeList2[1].cacode != null}">
+							<img src="${homeList2[1].caimage }">
+							<div class="flex-col-c-m bg9 how-pos5" style="width: 50px; height: 50px;">
+								<span class="mtext-106 cl2 txt-center">2</span>
+							</div>
+						     <a href="campingView?cacode=${homeList2[1].cacode }"class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+								<div class="block1-txt-child2 p-b-4 trans-05">
+									<div class="block1-link stext-101 cl0 trans-09">${homeList2[1].caname }</div>
+								</div>
+							 </a>
+						  </c:if>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+						<!-- Block1 -->
+						<div class="block1 wrap-pic-w">
+						
+						 <c:if test="${homeList2[2].cacode == null}">
+					         <p>아직 HOT한 예약 목록이 없습니다.</p>
+						 </c:if>
+						 
+						  <c:if test="${homeList2[2].cacode != null}">
+							<img src="${homeList2[2].caimage }">
+							<div class="flex-col-c-m bg9 how-pos5" style="width: 50px; height: 50px;">
+								<span class="mtext-106 cl2 txt-center">3</span>
+							</div>
+						     <a href="campingView?cacode=${homeList2[2].cacode }"class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+								<div class="block1-txt-child2 p-b-4 trans-05">
+									<div class="block1-link stext-101 cl0 trans-09">${homeList2[2].caname }</div>
+								</div>
+							 </a>
+						  </c:if>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div> 	
+
+	 <div class="sec-banner bg0 p-t-80 p-b-50">
+			<div class="container">
+				<div class="section-reply-title">
+					<h5>캠핑TIP</h5>
+				</div>
+				
 				<div class="row">
 
 					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-						<!-- Block1 -->
-
-
-						
-							
-							<iframe width="368" height="368" src="https://www.youtube.com/embed/4aru6TnPDfY" title="캠핑카, 카라반 캠핑 안전상식~!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-							
-							
-							
-
-								
-							
-						
+						<!-- Block1 -->							
+							<iframe width="100%" height="300px"  src="https://www.youtube.com/embed/4aru6TnPDfY" title="캠핑카, 카라반 캠핑 안전상식~!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>									
 					</div>
 
 					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-						<!-- Block1 -->
-						
-							<iframe width="368" height="368" src="https://www.youtube.com/embed/gNC-n32JyHI" title="캠핑장 사고예방 안전수칙 함께 알아볼까요?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						
+						<!-- Block1 -->						
+							<iframe width="100%" height="300px" src="https://www.youtube.com/embed/gNC-n32JyHI" title="캠핑장 사고예방 안전수칙 함께 알아볼까요?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>						
 					</div>
 
 					<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-						<!-- Block1 -->
-						
-							<iframe width="368" height="368" src="https://www.youtube.com/embed/NQt_Mem-S6Y" title="과태료가 300만 원? 과태료 피하면서 캠핑하는 방법" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						
+						<!-- Block1 -->						
+							<iframe width="100%" height="300px" src="https://www.youtube.com/embed/NQt_Mem-S6Y" title="과태료가 300만 원? 과태료 피하면서 캠핑하는 방법" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>						
 					</div>
+					
 				</div>
 			</div>
-	
-	
-	
-	
-	
-	
-	
+         </div>
 	</section>
 	
 	

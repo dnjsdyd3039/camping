@@ -71,22 +71,15 @@
 	font-family: "Oswald", sans-serif;
 }
 
-#aaa{
-	font-weight: bold;
-
-
-
-
+.grid{
+	display: grid;
+	grid-template-columns: 1fr 80px
 }
 
-/* .section-reply-title h5:after {
-	position: absolute;
-	left: 0;
-	top: -6px;
-	height: 32px;
-	width: 4px;
-	background: #6E6E6E;
-	content: "";
+/* .aclass{
+ position: relative;
+ animation-fill-mode: both;
+
 } */
 </style>
 </head>
@@ -99,76 +92,72 @@
 	<!-- memberModal -->
 	<%@ include file="/WEB-INF/views/member/memberModal.jsp"%>
 	<!-- EndmemberModal -->
-	
-	 <!-- breadcrumb 시작-->
-	<!-- <div class="container">
-		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-				캠핑목록
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<span class="stext-109 cl4">
-                구매목록					
-			</span>
-		</div>
-	</div>  -->
 						<div class="section-reply-title">
-								<h5>🚚구매목록🚚</h5><h6>상품 정보나 배송상태를 확인하세요!🤏</h6>
+								<h5>구매목록🚚</h5><h6>상품 정보나 배송상태를 확인하세요!</h6>
 						</div>
 						<c:forEach items="${PurchaseList }" var="Purchase">
 						<div class="col-9" style="padding-top: 30px; margin: auto; font-family: Poppins-Bold;">
                         <div class="bg-light rounded h-100 p-4">
                             <div class="d-flex justify-content-between">
 	                            <div class="mb-4">주문번호 : ${Purchase.gocode}</div>
-	                            <div class="mb-4" style="text-align: end;">주문일자 : ${Purchase.godate}</div>
+	                            <div class="mb-4">주문일자 : ${Purchase.godate}</div>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">
+                                <colgroup>
+									<col style="width: 10%">
+									<col style="width: 15%">
+									<col style="width: 10%">
+									<col style="width: 15%">
+									<col style="width: 10%">
+									<col style="width: 20%">
+								</colgroup>
                                     <thead>
                                         <tr>
-                                            <th scope="col">상품정보</th>
-                                            <th scope="col">구매상품명</th>
-                                            <th scope="col">상품가격</th>
-                                            <th scope="col">상품수량</th>
-                                            <th scope="col">총금액</th>
-                                            <th scope="col">주문주소</th>
-                                            <th scope="col">상품상태</th>
-                                            <th scope="col"></th>
-                                           
-									 
-								
+                                            <th class="align-middle text-center font-weight-bold">상품정보</th>
+                                            <th class="align-middle text-center font-weight-bold">구매상품명</th>
+                                            <th class="align-middle text-center font-weight-bold">상품가격</th>
+                                            <th class="align-middle text-center font-weight-bold">상품수량</th>
+                                            <th class="align-middle text-center font-weight-bold">총금액</th>
+                                            <th class="align-middle text-center font-weight-bold">주문주소</th>
+                                            <th class="align-middle text-center font-weight-bold">상품상태</th>
+                                            <th class="align-middle text-center font-weight-bold"></th>                                         									 								
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row"><img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${Purchase.goimage }" alt="IMG" style="width: 60px;"></th>
-                                            <td>${Purchase.goname }</td>
-                                            <td>${Purchase.goprice }원</td>
-                                            <td>${Purchase.goamount }개</td>
-                                            <td>${Purchase.goprice}원</td>
-                                            <td>${Purchase.gomaddr }</td>
-                                            <td id="aaa">
+                                            <th class="align-middle text-center font-weight-bold"><img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${Purchase.goimage }" alt="IMG" style="width: 60px;"></th>
+                                             <td class="align-middle text-center font-weight-bold">
+                                             <a href="campingDetailPage?gcode=${Purchase.gogcode}" class="aclass">
+                                            ${Purchase.goname }
+                                             </a>
+                                             </td>
+                                            <td class="align-middle text-center font-weight-bold">${Purchase.divisionsum }원</td>
+                                            <td class="align-middle text-center font-weight-bold">${Purchase.goamount }개</td>
+                                            <td class="align-middle text-center font-weight-bold">${Purchase.goformatter}원</td>
+                                            <td class="align-middle text-center font-weight-bold">${Purchase.gomaddr }</td>
+                                            <td class="align-middle text-center font-weight-bold">
                                       <c:if test="${Purchase.gostate == 2 }">
 									  <p>배송준비중</p>								    
-								      <button type="button" class="btn btn-dark" onclick="PurchaseDelete('gocode')">주문취소</button>
+								      <button type="button" class="btn btn-dark" onclick="PurchaseDelete('${Purchase.gocode }')">주문취소</button>
 								    </c:if>
 								    
 								    <c:if test="${Purchase.gostate == 3 }">
 									  <p>배송중</p>				
-									  <button type="button" class="btn btn-dark">주문취소</button>				    
+									  <button type="button" class="btn btn-dark" onclick="PurchaseCancel()">취소문의</button>	
+									  <input type="hidden" value="${Purchase.gocode }" id="cancelGocode">			    
 								    </c:if>
 								    
 								    <c:if test="${Purchase.gostate == 4 }">
 									  <p>배송완료</p>
-									 	<button style="margin-top: 100px" type="button" onclick="phDecide('${Purchase.gocode}')"
+									 	<button type="button" onclick="phDecide('${Purchase.gocode}')"
 									    class="btn btn-dark">구매확정</button>															  															    
 								    </c:if>
 								     
 								    <c:if test="${Purchase.gostate == 5 }">
 									  <p>구매완료</p>								    
 									     <a href="cgWrite?image=${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${Purchase.goimage }&gogcode=${Purchase.gogcode}&gocode=${Purchase.gocode }"
-									     class="btn btn-dark">후기</a>	
+									     class="btn btn-dark">후기작성</a>	
 								    </c:if>
 								     
 								    <c:if test="${Purchase.gostate == 6 }">
@@ -178,9 +167,23 @@
 								    <c:if test="${Purchase.gostate == 7 }">
 									  <p style="font-color : red;">취소완료</p>				
 									</c:if>
+									
+								    <c:if test="${Purchase.gostate == 9 }">
+									  <p style="font-color : red;">취소거절 관리자 1대1 문의 바람</p>				
+									</c:if>
+									
 									</td>
-									<td>				 <button type="button"
-									 onclick="deleteph(this,'${Purchase.gocode}','${Purchase.gostate }')" class="btn btn-dark">삭제</button></td>
+									<td>
+									<c:if test="${Purchase.gostate == 7 || Purchase.gostate == 5 }">							 
+								     <button class="close text-right font-weight-bold mt-2 mr-2"
+									type="button">
+									<span aria-hidden="true" onclick="deleteph(this,'${Purchase.gocode}','${Purchase.gostate }')">x&nbsp;</span>
+									</button>
+								     
+								     <%-- <button type="button"
+									 onclick="deleteph(this,'${Purchase.gocode}','${Purchase.gostate }')" class="btn btn-dark">내역삭제</button> --%>
+									 </c:if>
+									 </td>
                                         </tr>                                                                       
                                     </tbody>
                                 </table>
@@ -189,44 +192,67 @@
                         
                     </div>
                     
-                    <br>
+                
                     </c:forEach>
-                    
-						
-	
+                    					
+	<!-- 배송중 주문취소 모달 -->
+	<div class="modal fade" id="PurchaseCancelModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="z-index: 1200">
+		<div class="modal-dialog" role="document">
+			
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<a class="modal-title w-100 font-weight-bold"> <img
+							src="${pageContext.request.contextPath}/resources/images/icons/logo-01.png"
+							alt="IMG-LOGO" style="width: 35%">
+						</a>
+					</div>
+						<select id="cancelreason" class="">
+							<option value="">취소사유를 선택해주세요</option>
+							<option value="구매 의사 취소" class="">구매의사취소</option>							
+							<option value="다른 상품 잘못 주문" class="">다른 상품 잘못 주문</option>
+							<option value="서비스 불만족" class="">서비스 불만족</option>
+							<option value="상품정보 상이" class="">상품정보 상이</option>
+						</select>
+						<button style="margin-top: 100px" class="btn btn-dark" onclick="cancelreasonput()">주문취소요청</button>
+				</div>
+		</div>
+	</div>
+	<!-- 배송중 주문취소 모달 끝 -->
 								
 	<!-- Load more 시작 -->
 	<div class="flex-c-m flex-w w-full p-t-45">
 				<!-- Pagination 시작 -->
-				<div class="flex-c-m flex-w w-full p-t-45" style="margin-top: auto; margin-right: auto;">
-					<c:choose>
-						<c:when test="${pageDto.page <= 1}">
-							<span>[이전]</span>
-						</c:when>
-						<c:otherwise>
-							<span><a href="CampingPurchaseListPage?page=${pageDto.page - 1}">[이전]</a></span>
-						</c:otherwise>
-					</c:choose>
-					<c:forEach begin="${pageDto.startPage }" end="${pageDto.endPage }" var="num" step="1">
-						<c:choose>
-							<c:when test="${pageDto.page == num}">
-								<span><a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">${num}</a></span>
-							</c:when>
-							<c:otherwise>
-								<span><a href="CampingPurchaseListPage?page=${num}" class="flex-c-m how-pagination1 trans-04 m-all-7">${num}</a></span>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:choose>
-						<c:when test="${pageDto.page > pageDto.endPage || pageDto.page == pageDto.maxPage}">
-							<span>[다음]</span>
-						</c:when>
-						<c:otherwise>
-							<span><a href="CampingPurchaseListPage?page=${pageDto.page + 1}">[다음]</a></span>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<!-- Pagination 종료 -->
+								<div class="flex-c-m flex-w w-full p-t-45" style="margin-top: auto; margin-right: auto;">
+									<c:choose>
+										<c:when test="${pageDto.page <= 1}">
+											<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><i class="fa-solid fa-angle-left"></i></span>
+										</c:when>
+										<c:otherwise>
+											<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><a href="CampingPurchaseListPage?page=${pageDto.page - 1}"><i class="fa-solid fa-angle-left" style="color: white;"></i></a></span>
+										</c:otherwise>
+									</c:choose>
+									<c:forEach begin="${pageDto.startPage }" end="${pageDto.endPage }" var="num" step="1">
+										<c:choose>
+											<c:when test="${pageDto.page == num}">
+												<span><a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">${num}</a></span>
+											</c:when>
+											<c:otherwise>
+												<span><a href="CampingPurchaseListPage?page=${num}" class="flex-c-m how-pagination1 trans-04 m-all-7">${num}</a></span>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${pageDto.page > pageDto.endPage || pageDto.page == pageDto.maxPage}">
+											<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><i class="fa-solid fa-angle-right"></i></span>
+										</c:when>
+										<c:otherwise>
+											<span class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><a href="CampingPurchaseListPage?page=${pageDto.page + 1}"><i class="fa-solid fa-angle-right" style="color: white;"></i></a></span>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							<!-- Pagination 종료 -->
 	          </div>	
 	          <!-- Load more 종료 -->
 			
@@ -386,7 +412,8 @@
 <!-- 주문취소 -->
 <script type="text/javascript">
 function PurchaseDelete(gocode){
-	location.href="PurchaseDelete?gocde="+gocode;
+	 console.log("gocode :"+ gocode);
+	 location.href="PurchaseDelete?gocode="+gocode;
 }
 </script>	
 
@@ -395,6 +422,26 @@ function PurchaseDelete(gocode){
 function phDecide(gocode){
 	var phDecide_Check = confirm("구매확정하겠습니까?");
 	location.href="phDecide?gocode="+gocode;
+}
+</script>
+
+<!-- 구매취소 모달 -->
+<script type="text/javascript">
+function PurchaseCancel(){
+			$("#PurchaseCancelModal").modal('show');
+		}
+</script>
+
+<!-- 취소요청 -->
+<script type="text/javascript">
+function cancelreasonput(){
+	var cancelGocode = $("#cancelGocode").val();  // 취소할코드
+	var cancelreason = $("#cancelreason").val(); // 취소사유
+	
+	console.log("cancelGocode :"+ cancelGocode);
+	console.log("cancelreason :"+ cancelreason);
+	
+	location.href="cancelreasonput?gocode="+cancelGocode+"&gocancel="+cancelreason;
 }
 </script>
 </html>

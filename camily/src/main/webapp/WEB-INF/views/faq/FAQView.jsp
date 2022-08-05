@@ -62,33 +62,39 @@
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
-
+						<div style="text-align: center;">
 						<h4 class="ltext-109 cl2 p-b-28">${FAQView.faqtitle }</h4>
 
 						<div class="p-t-32">
-							<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
+							<span class="flex-w flex-m stext-111 cl2 p-b-19" style="justify-content: center;"> <span>
 									<span> <i class="fa-regular fa-user"></i> ${FAQView.faqmid }</span> <span
 									class="cl12 m-l-4 m-r-6">|</span>
 							</span> <span> <i class="fa-regular fa-calendar"></i> ${FAQView.faqdate } <span
 									class="cl12 m-l-4 m-r-6">|</span>
 							</span> <span> 조회수 <i class="fa-regular fa-eye"></i>  ${FAQView.faqhits } </span>
 							</span>
+							<hr>
 							<div>
 							<p class="stext-117 cl6 p-b-26">${FAQView.faqcontents }</p>
 							</div>
+							</div>
+							<hr>
+							<div class="p-t-40">
 							
-							<a class="btn btn-outline-success"
-									href="FAQList">목록</a>
 							<div id="bobtn">
+							<a class="btn btn-success"
+									href="FAQList">목록</a>
 							<c:if test="${sessionScope.loginId  == 'admin'}">
-								<a class="btn btn-outline-success"
+								<a class="btn btn-success"
 									href="FAQModify?faqcode=${FAQView.faqcode }">수정</a> <a
-									class="btn btn-outline-success"
+									class="btn btn-danger"
 									href="FAQDelete?faqcode=${FAQView.faqcode }">삭제</a>
 							</c:if>
+							
 							</div>
+							
 						</div>
-
+						</div>
 						<!--  -->
 						
 					</div>
@@ -96,8 +102,9 @@
 			</div>
 		</div>
 	</section>
-
-
+	<br>
+	<br>
+	<br>
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>

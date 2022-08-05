@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <%@ page import="java.util.Date" %>
 
 <!DOCTYPE html>
@@ -61,21 +63,28 @@
 						</div>
 						<div class="row">
 							<div class="col-xl-5 m-lr-auto m-b-50">
-								<img src="${myReservationInfo.crimage}" alt="캠핑장 이미지" width="100%">
+								<c:choose>
+									<c:when test="${fn:substring(myReservationInfo.crimage,0,4) == 'http'}">
+										<img src="${myReservationInfo.crimage}" alt="캠핑장 이미지" width="100%">
+									</c:when>
+									<c:otherwise>
+										<img src="${pageContext.request.contextPath}/resources/caimageUpload/${myReservationInfo.crimage}" alt="캠핑장 이미지" width="100%">
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="col-xl-7 m-lr-auto m-b-50">
-								<div style="font-size: 25px; font-weight: bold;">${myReservationInfo.recrname}</div>
-								<div style="font-size: 20px;">${myReservationInfo.recrnum}</div>
-								<div style="font-size: 20px;"><span>${myReservationInfo.startday}</span> ~
+								<div style="font-size: 25px; font-weight: bold;">${myReservationInfo.recrname} - ${myReservationInfo.recrnum}</div>
+								<div style="font-size: 20px;">예약일자 : <span>${myReservationInfo.startday}</span> ~
 									<span>${myReservationInfo.endday}</span></div>
-								<div style="font-size: 20px;">${myReservationInfo.repeople}명</div>
+								<div style="font-size: 20px;">예약인원 :  ${myReservationInfo.repeople}명</div>
 							</div>
 						</div>
 						<hr>
 						<div class="mtext-110 cl2 p-b-30">
 							<span style="font-weight: bold;">예약자 정보</span>
-							<button class="btn btn-danger" type="button" onclick="myInfo('${myReservationInfo.recode}')"
-								style="float: right; font-size: 15px;" value="1" id="changeInfo">수정하기</button>
+							<c:if test="${myReservationInfo.restate != 0 && myReservationInfo.startday > now}">
+								<button class="btn btn-danger" type="button" onclick="myInfo('${myReservationInfo.recode}')" style="float: right; font-size: 15px;" value="1" id="changeInfo">수정하기</button>
+							</c:if>
 						</div>
 						<div>
 							<span>예약자 이름</span>
@@ -171,17 +180,37 @@
 
 						<div class="size-209 p-t-1">
 							<span class="mtext-110 cl2">
-								${myReservationInfo.totalprice}원
+						    	<%-- ${myReservationInfo.totalprice}원  --%>
+								${myReservationInfo.myformatter}원
 							</span>
 						</div>
 					</div>
-
-					<form action="cancelReservation" method="post" class="bg0 p-t-75 p-b-85">
-						<input type="hidden" name="recode" value="${myReservationInfo.recode}">
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							예약 취소하기
-						</button>
-					</form>
+					<c:set var="today" value="<%=new java.util.Date()%>" />
+					<fmt:formatDate var="now" value="${today}" pattern="yyyy-MM-dd"/>
+					<c:choose>
+						<c:when test="${myReservationInfo.restate == 0}">
+							<span class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+								취소된 예약입니다.
+							</span>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${myReservationInfo.startday > now}">
+									<form action="cancelReservation" method="post" class="bg0 p-t-75 p-b-85">
+										<input type="hidden" name="recode" value="${myReservationInfo.recode}">									
+										<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+											예약 취소하기
+										</button>										
+									</form>
+								</c:when>
+								<c:otherwise>
+									<span class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+										숙박 완료
+									</span>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
@@ -191,7 +220,7 @@
 
 
 	<!-- Footer -->
-	<%@ include file="/WEB-INF/views/includes/TopBar.jsp"%>
+	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
 
 	<!-- Back to top -->
 	<div class="btn-back-to-top" id="myBtn">

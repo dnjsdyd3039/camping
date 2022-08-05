@@ -1,4 +1,9 @@
-<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main2.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.js"></script>
 <script>
 	$(".js-select2").each(function() {
 		$(this).select2({
@@ -7,10 +12,19 @@
 		});
 	})
 </script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/moment.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/slick/slick.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
 <script>
 	$('.parallax100').parallax100();
 </script>
 <!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <script>
 	$('.gallery-lb').each(function() { // the containers for all your galleries
 		$(this).magnificPopup({
@@ -23,6 +37,10 @@
 		});
 	});
 </script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/isotope/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/sweetalert/sweetalert.min.js"></script>
 <script>
 	$('.js-addwish-b2').on('click', function(e) {
 		e.preventDefault();
@@ -62,6 +80,8 @@
 				});
 			});
 </script>
+<!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
 	$('.js-pscroll').each(function() {
 		$(this).css('position', 'relative');
@@ -76,13 +96,4 @@
 			ps.update();
 		})
 	});
-</script>
-
-<!-- 경고창 표시 -->
-<script type="text/javascript">
-	var checkMsg = '${msg}';
-	console.log(checkMsg.length);
-	if (checkMsg.length > 0) {
-		alert(checkMsg);
-	}
 </script>

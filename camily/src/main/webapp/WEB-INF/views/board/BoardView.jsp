@@ -132,12 +132,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
-					<div class="p-r-45 p-r-0-lg">
-
+					<div class="p-r-45 p-r-0-lg" >
+						<div style="text-align: center;">
 						<h4 class="ltext-109 cl2 p-b-28">${boardView.botitle }</h4>
 
 						<div class="p-t-32">
-							<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
+							<span class="flex-w flex-m stext-111 cl2 p-b-19"  style="justify-content: center;"> <span>
 									<span> <i class="fa-regular fa-user"></i>
 										${boardView.bomid }
 								</span> <span class="cl12 m-l-4 m-r-6">|</span>
@@ -146,21 +146,15 @@
 							</span> <span> <i class="fa-regular fa-eye"></i> 조회수
 									${boardView.bohits }
 							</span>
+							
 							</span>
 							<hr>
 							<div>
 								<p class="stext-117 cl6 p-b-26">${boardView.bocontents }</p>
 							</div>
-
-
-							  <div id="bobtn">
-								<c:if test="${boardView.bomid == sessionScope.loginId}">
-								<button class="btn btn-dark"  onclick="boardModify('${boardView.bocode }')">수정</button> 
-								<button class="btn btn-dark"  onclick="boardDelete('${boardView.bocode }')">삭제</button>
-								</c:if>	
-							 </div> 
+					  
 						</div>
-
+						</div>
 						<!--  -->
 						<div class="p-t-40">
 
@@ -177,10 +171,10 @@
 											</span>
 										</h6>
 										<p>${reply.rpcontents }</p>
-											<button type="button" class="btn btn-outline-success"
+											<button type="button" class="btn btn-info"
 												id="${reply.rpcode }" onclick="replyModifyInfo('${reply.rpcode }')">수정</button>
-											<button type="button" class="btn btn-outline-success"
-												id="${reply.rpcode }" onclick="replyDelete()">삭제</button>	
+											<button type="button" class="btn btn-danger"
+												id="${reply.rpcode }" onclick="replyDelete(delRno)">삭제</button>	
 									</div>
 
 								</c:forEach>
@@ -191,7 +185,15 @@
 									name="rpcontents" id="contents" placeholder="댓글작성하기..."></textarea>
 							</div>
 							<button type="button" class="btn btn-outline-secondary m-2"
-								onclick="replyWrite()">댓글작성</button>
+								onclick="replyWrite()">댓글작성</button>		
+							<div style="float: right;">
+								<a class="btn btn-success"
+									href="boardList">목록</a>
+								<c:if test="${boardView.bomid == sessionScope.loginId}">
+								<button class="btn btn-info"  onclick="boardModify('${boardView.bocode }')">수정</button> 
+								<button class="btn btn-danger"  onclick="boardDelete('${boardView.bocode }')">삭제</button>
+								</c:if>									
+							 </div> 							
 						</div>
 					</div>
 				</div>
@@ -227,8 +229,8 @@
 						</div>							
 						
 						<div class="md-form mb-3">
-							<label class="small mb-1" for="rpdate">댓글 작성일</label> <input class="form-control"
-								id="rpdate" name="rpdate" type="text" readonly="readonly">
+							<input class="form-control"
+								id="rpdate" name="rpdate" type="hidden" readonly="readonly">
 						</div>
 
 						<div class="md-form mb-3">
@@ -240,14 +242,14 @@
 					</div>
 					
 					<div class="modal-footer d-flex justify-content-center">	
-						<button class="btn btn-dark" id="modifyFormDelete_Btn" type="button"
+						<button class="btn btn-info" type="button"
 							onclick="replyModify()">수정하기</button>			
 					</div>
 					
 				</div>
 		</div>
-	</div>
-	
+	</div>		
+		
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/includes/Footer.jsp"%>
 
@@ -364,8 +366,10 @@
 								output += '</h6>';	
 								output += '<p>' + result[i].rpcontents + '</p>';
 								if (result[i].rpmid == "${sessionScope.loginId}") {
-								output += '<button type="button" class="btn btn-dark" id="' + result[i].rpcode + '" onclick="replyModifyInfo(' + result[i].rpcode + ')">수정</button>';
-								output += '<button type="button" class="btn btn-dark" id="' + result[i].rpcode + '" onclick="replyDelete(' + result[i].rpcode + ',' + result[i].bocode + ')">삭제</button>';
+								output += '<div id="bobtn">'	
+								output += '<button type="button" class="btn btn-info " id="' + result[i].rpcode + '" onclick="replyModifyInfo(' + result[i].rpcode + ')">수정</button>';
+								output += '<button type="button" class="btn btn-danger" id="' + result[i].rpcode + '" onclick="replyDelete(' + result[i].rpcode + ',' + result[i].bocode + ')">삭제</button>';
+								output += '</div>'
 								}
 								output += '</div>';
 								output += '</div>';
@@ -442,7 +446,9 @@
 	<script type="text/javascript">
 	function replyModifyInfo(rpcode){
 			console.log(rpcode);
+			var replyModify_check = confirm("댓글을 수정하시겠습니까?");
 			
+			if (replyModify_check == true) {
 			$.ajax({
 				url : "replyModifyInfo",
 				type : "get",
@@ -465,6 +471,7 @@
 				}
 			});
 			$("#replyInfoModal").modal('show');
+			}
 		}
 		var replyInfoVal = "";
 		
@@ -497,5 +504,6 @@
 			});
 		}
 		</script>
+		
 </body>
 </html>

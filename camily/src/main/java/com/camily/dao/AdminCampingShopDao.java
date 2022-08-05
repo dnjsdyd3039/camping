@@ -21,7 +21,10 @@ public interface AdminCampingShopDao {
 	// 관리자 캠핑 용품 수정 (UPDATE)
 	int modifyUpdate(GoodsDto goods);
     
-	// 관리자 상품 등록 처리 dao (INSERT)
+	// 등록하기 전 구매 코드 생성 (select) C
+	String produckAddmaxgoCode();
+	
+	// 관리자 상품 등록 처리 dao (INSERT) C
 	int produckAdd(GoodsDto goods);
     
 	// 관리자 캠핑 용품 배송 관리 페이지 이동 요청 (SELECT)
@@ -32,5 +35,19 @@ public interface AdminCampingShopDao {
     
 	// 관리자 캠핑 용품 배송완료 변경 ajax (UPDATE)
 	int sendtake(String gocode);
+    
+	// 관리자 캠핑 용품 취소관리 페이지 이동요청 (SLELCT)
+	ArrayList<GoodsOrderDto> AdminCampingCancel();
+   
+	// 관리자 취소승인으로 변경 dao 호출 ajax (UPDATE)
+	int cancelOk(String gocode);
+    
+	// 관리자 취소거절로 변경 dao 호출 ajax (UPDATE)
+	int cancelNo(String gocode);
+    
+	// 관리자 취소목록 페이지 
+	ArrayList<GoodsOrderDto> AdminCampingCancelList();
+    
+
 
 }

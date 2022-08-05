@@ -39,7 +39,10 @@
 <script src="https://kit.fontawesome.com/d70fa0d402.js" crossorigin="anonymous"></script>
 <style type="text/css">
 #bobtn {
-	text-align: right;
+	text-align: center;
+}
+.fa-star{
+    color:#f9ba48
 }
 </style>
 </head>
@@ -59,14 +62,14 @@
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
-
+						<div style="text-align: center;">
 						<h4 class="ltext-109 cl2 p-b-28"> ${gorvDetail.gorvtitle }
 						</h4>
 
 
 
 						<div class="p-t-32">
-							<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
+							<span class="flex-w flex-m stext-111 cl2 p-b-19" style="justify-content: center;"> <span>
 									<span class="cl4"></span><i class="fa-regular fa-user"></i>
 									${gorvDetail.gorvmid } <span class="cl12 m-l-4 m-r-6">|</span>
 							</span> <span> <i class="fa-regular fa-calendar"></i>
@@ -74,64 +77,57 @@
 							</span> <span> <i class="fa-regular fa-eye"></i> 조회수 ${gorvDetail.gorvhits }
 							</span>
 							</span>
-							<img alt="" src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${gorvDetail.goimage }">
-							<p class="stext-116 cl4">제품명 : 🌈${gorvDetail.goname }🌈</p>
+							<hr>
+							<div>
+							<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${gorvDetail.goimage }" style="height: 30%; width: 30%;">
+							<p class="stext-117" style="color: black;">제품명 : <a href="campingDetailPage?gcode=${gorvDetail.gorvgcode }">🌈${gorvDetail.goname }🌈</a></p>
+							
+							<p class="mt-1" style="color: black;"> 별점 : 
+								   <c:if test="${gorvDetail.gorvstarating == 1 }">
+								   <i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${gorvDetail.gorvstarating == 2 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${gorvDetail.gorvstarating == 3 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${gorvDetail.gorvstarating == 4 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								   <c:if test="${gorvDetail.gorvstarating == 5 }">
+								   <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+								   </c:if>
+								</p>
+								</div>							
 							<div>
 								<p class="stext-115 p-b-26" style="color: black;">
 									${gorvDetail.gorvcontents }</p>
 							</div>
+							
+							<hr>
 							<div id="bobtn">
-								<a class="btn btn-outline-success"
-									href="goReviewModify?gorvcode=${gorvDetail.gorvcode }">수정</a> <a
-									class="btn btn-outline-success"
-									href="goreviewDelete?gorvcode=${gorvDetail.gorvcode }">삭제</a>
+								<a class="btn btn-success" href="goreviewpage">목록</a>
+								<c:if test="${sessionScope.loginId == gorvDetail.gorvmid}">
+								<button class="btn btn-info"
+									onclick="goreviewModify('${gorvDetail.gorvcode }')">수정</button> <button
+									class="btn btn-danger"
+									onclick="goreviewDelete'${gorvDetail.gorvcode }')">삭제</button>
+								</c:if>
 							</div>
 						</div>
 
 
-						<div class="p-t-40"></div>
-						<!-- <div class="flex-w flex-t p-t-16">
-							<span class="size-216 stext-116 cl8 p-t-4">
-								Tags
-							</span>
-							
-							
-							<div class="flex-w size-217">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									송도
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									캠핑
-								</a>
-								
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									서울근교
-								</a>
-							</div> 
-						</div> -->
-
-						<!-- <div class="p-t-40">
-							<h5 class="mtext-113 cl2 p-b-12">
-								댓글
-							</h5>						
-
-							<form>																					
-								<div class="bor19 m-b-20">
-									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="댓글작성하기..."></textarea>
-								</div>
-
-								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
-									댓글작성
-								</button>
-							</form>
-						</div> -->
+						
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
+	<br>
+	<br>
+	<br>
 
 
 	<!-- Footer -->
@@ -185,6 +181,28 @@
 		console.log(checkMsg.length);
 		if (checkMsg.length > 0) {
 			alert(checkMsg);
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function goreviewModify(gorvcode) {
+			var modifyCheck = confirm("캠핑용품 리뷰를 수정하시겠습니까?");
+			if (modifyCheck == true) {
+				location.href = "goreviewModify?gorvcode=${gorvDetail.gorvcode }"
+			} else {
+				return;
+			}
+		}
+	</script>
+
+	<script type="text/javascript">
+		function goreviewDelete(gorvcode) {
+			var delectCheck = confirm("게시글을 삭제하시겠습니까?");
+			if (delectCheck == true) {
+				location.href = "goreviewDelete?gorvcode=${gorvDetail.gorvcode }"
+			} else {
+				return;
+			}
 		}
 	</script>
 </body>

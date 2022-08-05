@@ -1,5 +1,5 @@
-z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,6 +43,35 @@ z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<script src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<style type="text/css">
+.section-reply-title {
+	/* margin-bottom: 30px; */
+    text-align: center;
+}
+
+.section-reply-title h5 {
+	color: #000000;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+.section-reply-title h6 {
+	color: #848484;
+	font-weight: 600;
+	line-height: 21px;
+	text-transform: uppercase;
+	padding-left: 20px;
+	position: relative;
+	font-family: "Oswald", sans-serif;
+}
+
+
+</style>
+
 </head>
 <body class="animsition">
 
@@ -55,58 +84,111 @@ z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<!-- EndmemberModal -->
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" action="totalpurchase" method="post">
-			<div class="container">
-				  	 <div class="wrap-table-shopping-cart">
-			          
+	<form class="bg0 p-t-35 p-b-85" action="totalpurchase" method="post" id="goobsform">
+			          <div class="section-reply-title">
+								<h5>장바구니🛒</h5><h6>구매하고싶은 상품 여러개를 장바구니에 넣어보세요!</h6>
+						</div>
 			          <c:forEach items="${detailinformation }" var="information">
-							<table class="table-shopping-cart">
-								<tr class="table_head">
-									<th class="column-1">상품정보</th>
-									<th class="column-2"></th>
-									<th class="column-3">상품가격</th>
-									<th class="column-4">상품수량</th>
-									<th class="column-5">총금액</th>
-									<th class="column-6">주문주소 
-									<button type="button" class="cl0 size-60 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" 
-									onclick="addCheck('${information.dicode}')">주소변경</button>
-									</th>
-									<th class="column-7"></th>
-								</tr>
-								<tr class="table_row">								
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${information.diimage }" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">${information.diname }</td>
-									<td class="column-3" >${information.diprice }</td>
-									<td class="column-4" >${information.diamount }</td>
-									<td class="column-5" >${information.ditotalprice }</td>
-									<td class="column-6">		
-										<div style="white-space: nowrap" class="size-209 p-r-18 p-r-0-sm w-full-ssm" id="${information.dicode}1">${information.diaddr }</div>
-									</td>
-									<th class="column-7">
-									<a href="deletepoket?dicode=${information.dicode }" class="flex-c-m stext-20 cl5 size-20 bg2 bor1 hov-btn1 p-lr-15 trans-04">삭제하기</a>
-									</th>								
-									<th>
-									 <input type="hidden" value="${sessionScope.loginId }"     name="dimid">
-									 <input type="hidden" value="${information.diaddr }" id="${information.dicode}2" name="diaddr">
-									 <input type="hidden" value="${information.dicode }"       name="dicode">
-									 <input type="hidden" value="${information.diamount }"     name="diamount">
-									 <input type="hidden" value="${information.ditotalprice }" name="ditotalprice">
-									 <input type="hidden" value="${information.diname }"       name="diname">
-									 <input type="hidden" value="${information.diimage }"      name="diimage">
-									</th>
-								 </tr>
-							</table>
-						   </c:forEach>
-			              </div>
-		                 </div>		
-	<!-- Load more -->
+		                <div class="col-9" style="padding-top: 30px; margin: auto; font-family: Poppins-Bold;">
+                        <div class="bg-light rounded p-4">                       
+                            <div class="table-responsive">
+                                <table class="table">
+                                <colgroup>
+									<col style="width: 10%">
+									<col style="width: 15%">
+									<col style="width: 10%">
+									<col style="width: 15%">
+									<col style="width: 10%">
+									<col style="width: 30%">
+								</colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="border-top : none;">상품정보</th>
+                                            <th scope="col" style="border-top : none;">구매상품명</th>
+                                            <th scope="col" style="border-top : none;">상품가격</th>
+                                            <th scope="col" style="border-top : none;">상품수량</th>
+                                            <th scope="col" style="border-top : none;">총금액</th>
+                                            <th scope="col" style="border-top : none;">주문주소
+                                            <button type="button" class="cl0 size-60 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" onclick="addCheck('${information.dicode}')">주소변경</button>
+                                            </th>
+                                            <th scope="col" style="border-top : none;"></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                             <a href="campingDetailPage?gcode=${information.dicode}">  
+                                              <img src="${pageContext.request.contextPath}/resources/campingShopfileUpLoad/${information.diimage }" alt="IMG" style="width: 60px;">
+                                             </a>
+                                            </th>
+                                             <c:choose>
+                                              <c:when test="${information.gstate == 0}">
+                                                 <td>
+                                                   <a href="campingDetailPage?gcode=${information.dicode}">                                                
+                                                      ${information.diname }
+                                                   </a>
+                                                   <br>[판매중지 상품입니다.]
+                                                 </td>
+                                              </c:when>
+                                               <c:otherwise>
+                                                <td>
+                                                <a href="campingDetailPage?gcode=${information.dicode}">
+                                                ${information.diname }
+                                                </a>
+                                                </td>                                              
+                                               </c:otherwise>
+                                             </c:choose>
+                                            <td>${information.diprice }원</td>
+                                            <td>${information.diamount }개</td>
+                                            <td>${information.formatter }원</td>
+                                            <td id="${information.dicode}1">${information.diaddr }</td>                                        	
+                                           	<td>
+                                           	<a class="close text-right font-weight-bold mt-2 mr-2"
+											 href="deletepoket?dicode=${information.dicode }">
+											<span aria-hidden="true">x&nbsp;</span>
+											</a>                                  	
+                                           	<%-- <a href="deletepoket?dicode=${information.dicode }" class="btn btn-dark">삭제하기</a> --%>                                          	
+                                           	</td>
+                                           	<th>
+                                            <c:if test="${information.gstate == 1}">                                       
+										 	   <input type="hidden" value="${sessionScope.loginId }"     name="dimid">
+									 		   <input type="hidden" value="${information.diaddr }" id="${information.dicode}2" name="diaddr">
+									 		   <input type="hidden" value="${information.dicode }"       name="dicode">
+									 		   <input type="hidden" value="${information.diamount }"     name="diamount">
+									 		   <input type="hidden" value="${information.ditotalprice }" name="ditotalprice" id="ditotal">
+									 		   <input type="hidden" value="${information.diname }"       name="diname" id="diname">
+									 		   <input type="hidden" value="${information.diimage }"      name="diimage">
+									 		   <input type="hidden" value="${sumTotal }" id="sumTotal">
+									 	     </c:if>
+											</th>
+									     </tr>  
+									                                                                
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>                      
+                      </div>
+
+                    </c:forEach>			        
+		<br>
+		<br>
+		<br>			
+	 <c:if test="${fn:length(detailinformation) == 0}">
+						<p style="text-align: center;">장바구니 내역이 존재하지않습니다!</p>
+	  </c:if> 	                 
+    <!-- Load more --> 
+   <c:if test="${fn:length(detailinformation) > 0}">
 	<div class="flex-c-m flex-w w-full p-t-45" >
-		<button class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" type="submit">주문하기</button>
-	</div>	
+		<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn1 p-lr-15 trans-04" type="button" 
+		onclick="requestPay()">주문하기</button> 
+	</div>	                   			       		    
+   </c:if>                       
+	<!-- Load more -->
+	<br>
+	<br>
+	<br>
+	
+	
 	</form>
 	
     <!-- 주소확인 모달 시작 -->
@@ -386,9 +468,39 @@ z<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 		 $("#addCheck").modal("hide");
 		 
 		
-	 }
+	 }	
+</script>
 	
-	</script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
+<!-- 이니시스 결제창 -->
+<script type="text/javascript">
+var IMP = window.IMP;
+IMP.init("imp10142481"); 
+function requestPay() {
+	var ditotal = $("#ditotal").val();
+	var diname = $("#diname").val();
+	
+	console.log("ditotal :"+ ditotal);
+	console.log("diname :"+ diname);
+	
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({ // param
+        pg: "html5_inicis",
+        pay_method: "card",
+        name: diname,
+        amount: ditotal
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            alert("결제성공입니다.");
+            $("#goobsform").submit();
+        } else {
+        	alert("결제실패입니다.");
+        	//$("#goobsform").submit();
+        }
+    });	
+}
+</script>
 	
 </html>

@@ -51,10 +51,16 @@ UPDATE GOODS
 WHERE GCODE = #{gcode}
 </update>
 
-<!-- 관리자 상품 등록 처리 dao (INSERT) -->
+<!-- 등록하기 전 구매 코드 생성 (select) C --> 
+<select id="produckAddmaxgoCode" resultType="String">
+   SELECT MAX(GCODE) 
+   FROM GOODS
+</select>
+
+<!-- 관리자 상품 등록 처리 dao (INSERT) C -->
 <insert id="produckAdd">
-INSERT INTO GOODS(GCODE, GCOMPANYNAME, GPRICE, GCATEGORY, GCONTENTS, GIMAGE, GNAME, GSIDEIMAGE, GBACKIMAGE, GDETAILIMAGE, GSTATE)
-VALUES(#{gcode}, #{gcompanyname}, #{gprice}, #{gcategory}, #{gcontents}, #{gimage},  #{gname}, #{gsideimage}, #{gbackimage}, #{gdetailimage}, 1)
+INSERT INTO GOODS(GCODE, GCOMPANYNAME, GPRICE, GCATEGORY, GCONTENTS, GIMAGE, GNAME, GSIDEIMAGE, GBACKIMAGE, GDETAILIMAGE, GSTATE, GDATE)
+VALUES(#{gcode}, #{gcompanyname}, #{gprice}, #{gcategory}, #{gcontents}, #{gimage},  #{gname}, #{gsideimage}, #{gbackimage}, #{gdetailimage}, 1, SYSDATE)
 </insert>
 
 <!-- 관리자 캠핑 용품 배송 관리 페이지 이동 요청 (SELECT) -->
@@ -62,6 +68,7 @@ VALUES(#{gcode}, #{gcompanyname}, #{gprice}, #{gcategory}, #{gcontents}, #{gimag
 SELECT*
 FROM GOODSORDER
 WHERE GOSTATE BETWEEN 2 AND 5
+ORDER BY GOCODE DESC
 </select>
 
 <!-- 관리자 캠핑 용품 배송중으로 변경 ajax (UPDATE)  -->
@@ -75,4 +82,35 @@ WHERE GOCODE = #{gocode}
 UPDATE GOODSORDER SET GOSTATE = 4
 WHERE GOCODE = #{gocode}
 </update>
+
+<!-- 관리자 캠핑 용품 취소관리 페이지 이동요청 (SLELCT) -->
+<select id="AdminCampingCancel" resultType="com.camily.dto.GoodsOrderDto">
+ SELECT*
+ FROM GOODSORDER
+ WHERE GOSTATE BETWEEN 6 AND 7 <!-- 6 = 취소 대기중 -->
+ OR GOSTATE = 9
+ ORDER BY GOCODE DESC
+</select>
+
+<!-- 관리자 취소승인으로 변경 dao 호출 ajax (UPDATE) -->
+<update id="cancelOk">
+UPDATE GOODSORDER SET GOSTATE = 7 <!-- 취소승인 -->
+WHERE GOCODE = #{gocode}
+</update>
+
+<!-- 관리자 취소거절로 변경 dao 호출 ajax (UPDATE) -->
+<update id="cancelNo">
+UPDATE GOODSORDER SET GOSTATE = 9 <!-- 취소거절 -->
+WHERE GOCODE = #{gocode}
+</update>
+
+<!-- 관리자 취소목록 페이지 -->
+<select id="AdminCampingCancelList" resultType="com.camily.dto.GoodsOrderDto">
+ SELECT*
+ FROM GOODSORDER
+ WHERE GOSTATE = 7
+ ORDER BY GOCODE DESC
+</select>
+
+
 </mapper>

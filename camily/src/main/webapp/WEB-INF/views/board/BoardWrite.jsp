@@ -73,14 +73,15 @@ $(document).ready(function() {
     		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
     		    ['color', ['forecolor','color']],
     		    ['table', ['table']],
-    		    ['para', ['ul', 'ol', 'paragraph']],
+    		    ['para', ['paragraph']],
     		    ['height', ['height']],
     		    ['insert',['picture','link','video']],
-    		    ['view', ['fullscreen', 'help']]
     		  ],
-    	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-
+    	fontNames: ['바탕체','궁서','굴림체','굴림','돋움체','맑은고딕'],
+    	fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+	    
 	  });
+	  $('#summernote').summernote('fontName', '바탕체');
 	});
 </script>
 <!--===============================================================================================-->
@@ -149,20 +150,23 @@ $(document).ready(function() {
 					<div style="width: 100%; margin: auto;">
 						<form method="post" action="write2">
 							
-							<input type="text" name="botitle" style="width: 40%;" placeholder="제목" /> <br>
+							<input type="text" name="botitle" style="width: 40%;
+    border-bottom: 1px solid;
+    border-color: #ddd;" placeholder="제목" /> <br>
 							
 							<textarea id="summernote" name="bocontents"></textarea>
 							<br>
 							<input id="subBtn" type="button" class="btn btn-default pull-right" value="글 작성"
-								style="float: right;" onclick="goWrite(this.form)" />
+							 onclick="goWrite(this.form)" />
 						</form>
 					</div>
 
-
-					<div class="p-r-45 p-r-0-lg">
-						<!-- item blog -->
+					<a class="btn btn-info"
+									href="boardList">목록</a>
+					<!-- <div class="p-r-45 p-r-0-lg">
+						item blog
 						<div class="p-b-63"></div>
-					</div>
+					</div> -->
 				</div>
 
 			</div>
